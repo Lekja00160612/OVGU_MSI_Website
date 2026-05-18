@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "home": "Trang Chủ",
+    "potential_candidates": "Ứng Viên Tiềm Năng",
+    "program_structure": "Chương Trình Học",
+    "academic_activities": "Trải Nghiệm Học Thuật",
+    "partners_lecturers": "Đối Tác & Giảng Viên",
+    "tuition_scholarships": "Học Phí & Học Bổng",
+    "laboratories_research": "Thiết Bị & Nghiên Cứu",
+    "student_life": "Đời Sống Sinh Viên"
+  },
+  "footer": {
+    "subtitle": "Chương trình liên kết giữa Trường Đại học Việt Đức (VGU) và Đại học Otto von Guericke Magdeburg (OVGU).",
+    "quick_links": "Liên Kết Nhanh",
+    "contact": "Liên Hệ"
+  }
+}

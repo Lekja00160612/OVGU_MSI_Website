@@ -1,0 +1,128 @@
+<script setup lang="ts">
+const { locale } = useI18n()
+
+// Fetch localized page content
+const pagePath = locale.value === 'vi' ? '/vi/partners-lecturers' : '/partners-lecturers'
+const { data: pageData } = await useAsyncData(`partners-page-${locale.value}`, () =>
+  queryCollection('content').path(pagePath).first()
+)
+
+// Fallback to EN if VI doesn't exist
+const finalPageData = computed(() => pageData.value)
+const page = computed(() => finalPageData.value?.meta ?? {})
+
+// Helper to get initials if image is missing
+const getInitials = (name: string) => {
+  if (!name) return 'L'
+  const parts = name.replace(/^(Dr\.|Prof\.|apl\.|Ing\.|rer\.|nat\.|habil\.|h\. c\.|mult\.|Mr\.)\s*/gi, '').trim().split(' ')
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+  }
+  return parts[0][0].toUpperCase()
+}
+</script>
+
+<template>
+  <div class="page-partners">
+    <!-- Header -->
+    <div class="header-banner">
+      <div class="container text-center">
+        <h1 class="page-title">{{ page.headline || 'Partners & Lecturers' }}</h1>
+        <p class="page-subtitle">A powerful collaboration of premier research institutes.</p>
+      </div>
+    </div>
+    
+    <!-- Intro -->
+    <div class="container intro-section text-center">
+      <p class="intro-text">
+        {{ page.intro }}
+      </p>
+    </div>
+
+    <!-- Groups -->
+    <div v-if="page.groups" class="container content-section">
+      <div v-for="group in page.groups" :key="group.id" class="faculty-group">
+        <h2 class="group-title">{{ group.title }}</h2>
+        <p v-if="group.description" class="group-desc">{{ group.description }}</p>
+
+        <!-- Direct Members -->
+        <div v-if="group.members && group.members.length > 0" class="faculty-grid mt-6">
+          <div v-for="member in group.members" :key="member.name" class="faculty-card">
+            <div class="faculty-avatar">
+              <img v-if="member.image" :src="member.image" :alt="member.name" class="avatar-img" />
+              <div v-else class="avatar-placeholder">{{ getInitials(member.name) }}</div>
+            </div>
+            <div class="faculty-info">
+              <h3 class="faculty-name">{{ member.name }}</h3>
+              <span v-if="member.institution" class="faculty-inst">{{ member.institution }}</span>
+              <p class="faculty-roles">{{ member.roles }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subgroups (Chairs) -->
+        <div v-if="group.subgroups && group.subgroups.length > 0" class="subgroups-container mt-8">
+          <div v-for="subgroup in group.subgroups" :key="subgroup.title" class="subgroup-block">
+            <div class="subgroup-header">
+              <h3 class="subgroup-title">{{ subgroup.title }}</h3>
+              <a v-if="subgroup.link" :href="subgroup.link" target="_blank" class="subgroup-link">Visit Institute &rarr;</a>
+            </div>
+            <div class="faculty-grid">
+              <div v-for="member in subgroup.members" :key="member.name" class="faculty-card">
+                <div class="faculty-avatar">
+                  <img v-if="member.image" :src="member.image" :alt="member.name" class="avatar-img" />
+                  <div v-else class="avatar-placeholder">{{ getInitials(member.name) }}</div>
+                </div>
+                <div class="faculty-info">
+                  <h3 class="faculty-name">{{ member.name }}</h3>
+                  <span v-if="member.institution" class="faculty-inst">{{ member.institution }}</span>
+                  <p class="faculty-roles">{{ member.roles }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<style scoped>
+.page-partners { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 5rem; }
+.header-banner { background: var(--color-primary-dark); padding: 5rem 1.5rem; color: #fff; margin-bottom: 3rem; }
+.page-title { font-size: 3rem; font-family: var(--font-display); font-weight: 800; margin-bottom: 1rem;  background-color: var(--color-accent); padding: 0rem 0.5rem; display: inline-block;}
+.page-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.8); }
+
+.intro-section { max-width: 900px; margin: 0 auto 5rem auto; }
+.intro-text { font-size: 1.15rem; color: var(--color-gray-700); line-height: 1.8; margin-bottom: 2.5rem; }
+
+.content-section { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 4rem; }
+
+.faculty-group { background: #fff; border-radius: var(--radius-xl); padding: 3rem; box-shadow: var(--shadow-md); border: 1px solid var(--color-gray-200); }
+.group-title { font-size: 2rem; font-weight: 800; color: var(--color-primary-dark); border-bottom: 3px solid var(--color-accent); padding-bottom: 0.5rem; display: inline-block; margin-bottom: 1rem; }
+.group-desc { font-size: 1.05rem; color: var(--color-gray-600); margin-bottom: 2rem; max-width: 800px; }
+
+.subgroups-container { display: flex; flex-direction: column; gap: 3rem; }
+.subgroup-block { background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); padding: 2rem; }
+.subgroup-header { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-gray-200); padding-bottom: 1rem; }
+@media (min-width: 768px) { .subgroup-header { flex-direction: row; justify-content: space-between; align-items: center; } }
+.subgroup-title { font-size: 1.4rem; font-weight: 700; color: var(--color-primary); }
+.subgroup-link { color: var(--color-accent); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+.subgroup-link:hover { text-decoration: underline; }
+
+.faculty-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 768px) { .faculty-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.faculty-card { display: flex; align-items: flex-start; gap: 1.25rem; background: #fff; padding: 1.5rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--color-gray-200); transition: transform 200ms, box-shadow 200ms; }
+.faculty-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--color-gray-300); }
+
+.faculty-avatar { width: 70px; height: 70px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: var(--color-gray-100); border: 2px solid var(--color-gray-200); display: flex; align-items: center; justify-content: center; }
+.avatar-img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-placeholder { font-size: 1.5rem; font-weight: 800; color: var(--color-gray-400); font-family: var(--font-display); }
+
+.faculty-info { display: flex; flex-direction: column; gap: 0.35rem; }
+.faculty-name { font-size: 1.15rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; }
+.faculty-inst { display: inline-block; font-size: 0.75rem; font-weight: 700; color: #fff; background: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); align-self: flex-start; }
+.faculty-roles { font-size: 0.9rem; color: var(--color-gray-600); line-height: 1.5; margin-top: 0.25rem; }
+</style>

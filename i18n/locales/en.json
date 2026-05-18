@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "home": "Home",
+    "potential_candidates": "Potential Candidates",
+    "program_structure": "Program Structure",
+    "academic_activities": "Academic Activities",
+    "partners_lecturers": "Partners & Lecturers",
+    "tuition_scholarships": "Tuition & Scholarships",
+    "laboratories_research": "Laboratories & Research",
+    "student_life": "Student Life"
+  },
+  "footer": {
+    "subtitle": "A joint program between Vietnamese-German University (VGU) and Otto von Guericke University Magdeburg (OVGU).",
+    "quick_links": "Quick Links",
+    "contact": "Contact"
+  }
+}
