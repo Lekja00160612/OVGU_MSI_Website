@@ -9,6 +9,19 @@
     "laboratories_research": "Laboratories & Research",
     "student_life": "Student Life"
   },
+  "home": {
+    "degree1": "Degree 1",
+    "degree2": "Degree 2",
+    "degree1_value": "M.Sc. — Otto von Guericke University Magdeburg",
+    "degree2_value": "M.Sc. — Vietnamese-German University",
+    "academic_hours": "Academic Hours / Week",
+    "explore_all": "Explore All Academic Activities",
+    "loading": "Loading content...",
+    "explore_program": "Explore the Program",
+    "explore_full_program": "Explore the full Program",
+    "view_scholarships": "View Scholarships",
+    "view_feature": "View {title}"
+  },
   "footer": {
     "subtitle": "A joint program between Vietnamese-German University (VGU) and Otto von Guericke University Magdeburg (OVGU).",
     "quick_links": "Quick Links",

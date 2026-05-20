@@ -1,13 +1,16 @@
 <script setup lang="ts">
+const { locale, t } = useI18n()
 const localePath = useLocalePath()
 
-const { data: raw } = await useAsyncData('msi-home-page', () =>
-  queryCollection('content').path('/').first()
+const pathPrefix = computed(() => locale.value === 'en' ? '/' : `/${locale.value}`)
+
+const { data: raw } = await useAsyncData(`msi-home-page-${locale.value}`, () =>
+  queryCollection('content').path(pathPrefix.value).first()
 )
-const { data: allActivities } = await useAsyncData('msi-all-activities', () =>
+const { data: allActivities } = await useAsyncData(`msi-all-activities-${locale.value}`, () =>
   queryCollection('activities').all()
 )
-const { data: allModules } = await useAsyncData('msi-all-modules', () =>
+const { data: allModules } = await useAsyncData(`msi-all-modules-${locale.value}`, () =>
   queryCollection('modules').all()
 )
 // @nuxt/content v3: rich frontmatter (non-standard fields) is in .meta
@@ -64,8 +67,8 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
           <img src="/Logo/OVGU_Logo_Transparent.svg" alt="OVGU" class="hero-uni-logo" />
         </div>
         <div class="hero-actions animate-fade-in-up delay-300">
-          <NuxtLink :to="localePath('/future-students')" class="btn btn-primary">Explore the Program →</NuxtLink>
-          <NuxtLink :to="localePath('/tuition-scholarships')" class="btn btn-outline-white">View Scholarships</NuxtLink>
+          <NuxtLink :to="localePath('/future-students')" class="btn btn-primary">{{ t('home.explore_program') }} →</NuxtLink>
+          <NuxtLink :to="localePath('/tuition-scholarships')" class="btn btn-outline-white">{{ t('home.view_scholarships') }}</NuxtLink>
         </div>
       </div>
     </section>
@@ -88,16 +91,16 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
               <div class="degree-item">
                 <div class="degree-dot degree-dot--blue" />
                 <div>
-                  <div class="degree-label">Degree 1</div>
-                  <div class="degree-value">M.Sc. — Otto von Guericke University Magdeburg</div>
+                  <div class="degree-label">{{ t('home.degree1') }}</div>
+                  <div class="degree-value">{{ t('home.degree1_value') }}</div>
                 </div>
               </div>
               <div class="degree-divider" />
               <div class="degree-item">
                 <div class="degree-dot degree-dot--orange" />
                 <div>
-                  <div class="degree-label">Degree 2</div>
-                  <div class="degree-value">M.Sc. — Vietnamese-German University</div>
+                  <div class="degree-label">{{ t('home.degree2') }}</div>
+                  <div class="degree-value">{{ t('home.degree2_value') }}</div>
                 </div>
               </div>
             </div>
@@ -114,7 +117,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
           <p class="section-subtitle">{{ page.whyChoose?.subtitle }}</p>
         </div>
         <div class="features-grid">
-          <div v-for="f in page.whyChoose?.features" :key="f.id" class="feature-card card">
+          <div v-for="f in page.whyChoose?.features" :key="f.id" class="feature-card card" :class="{ 'feature-card--featured': f.featured }">
             <div class="feature-icon-wrap">
               <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path :d="iconMap[f.icon] ?? iconMap.diploma" />
@@ -122,7 +125,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
             </div>
             <h3 class="feature-title">{{ f.title }}</h3>
             <p class="feature-desc">{{ f.description }}</p>
-            <NuxtLink v-if="f.link" :to="localePath(f.link)" class="feature-link">View {{ f.title }} &rarr;</NuxtLink>
+            <NuxtLink v-if="f.link" :to="localePath(f.link)" class="feature-link" :class="{ 'feature-link--featured': f.featured }">{{ t('home.view_feature', { title: f.title }) }} &rarr;</NuxtLink>
           </div>
         </div>
       </div>
@@ -137,18 +140,20 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
         </div>
 
         <!-- Semester Tabs -->
-        <div v-if="semesters.length" class="sem-tabs">
-          <button
-            v-for="(s, i) in semesters"
-            :key="s.number"
-            class="sem-tab"
-            :class="{ 'sem-tab--active': activeTab === i }"
-            :style="activeTab === i ? { borderColor: s.color, color: s.color } : {}"
-            @click="activeTab = i"
-          >
-            <span class="sem-tab-num">{{ s.label }}</span>
-            <span class="sem-tab-theme">{{ s.theme }}</span>
-          </button>
+        <div v-if="semesters.length" class="sem-tabs-container scroll-x">
+          <div class="sem-tabs">
+            <button
+              v-for="(s, i) in semesters"
+              :key="s.number"
+              class="sem-tab"
+              :class="{ 'sem-tab--active': activeTab === i }"
+              :style="activeTab === i ? { borderColor: s.color, color: s.color } : {}"
+              @click="activeTab = i"
+            >
+              <span class="sem-tab-num">{{ s.label }}</span>
+              <span class="sem-tab-theme">{{ s.theme }}</span>
+            </button>
+          </div>
         </div>
 
         <!-- Semester Panel -->
@@ -175,13 +180,17 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
                   {{ mod.title }}
                 </li>
               </ul>
-              
-              <div class="mt-8 mb-6 text-center">
-                <NuxtLink :to="localePath('/program-structure')" class="btn btn-curriculum" :style="{ '--semester-color': currentSemester.color }">Explore Detailed Program Structure</NuxtLink>
-              </div>
             </div>
           </div>
         </Transition>
+
+        <div class="curriculum-actions">
+          <NuxtLink :to="localePath('/program-structure')" class="btn btn-primary">
+            {{ t('home.explore_full_program') }} →
+          </NuxtLink>
+        </div>
+
+
       </div>
     </section>
 
@@ -189,7 +198,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
     <section class="section activities-section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">{{ page.activities?.headline || 'Academic Activities' }}</h2>
+          <h2 class="section-title">{{ page.activities?.headline || t('nav.academic_activities') }}</h2>
         </div>
         
         <div v-if="recentActivities?.length" class="bento-grid">
@@ -235,9 +244,9 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
           </div>
         </div>
 
-        <div class="text-center mt-10">
-          <NuxtLink :to="localePath('/academic-activities')" class="btn btn-primary px-8 py-3.5">
-            Explore All Academic Activities &rarr;
+        <div class="activities-actions">
+          <NuxtLink :to="localePath('/academic-activities')" class="btn btn-primary">
+            {{ t('home.explore_all') }} &rarr;
           </NuxtLink>
         </div>
       </div>
@@ -261,7 +270,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
           <div class="hybrid-schedule">
             <div class="schedule-total">
               <span class="schedule-total-num">20</span>
-              <span class="schedule-total-label">Academic Hours / Week</span>
+              <span class="schedule-total-label">{{ t('home.academic_hours') }}</span>
             </div>
             <div class="schedule-rows">
               <div
@@ -311,7 +320,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
 
   </div>
   <div v-else class="container section" style="min-height:60vh;display:flex;align-items:center;justify-content:center">
-    <p style="color:var(--color-gray-500)">Loading content…</p>
+    <p style="color:var(--color-gray-500)">{{ t('home.loading') }}</p>
   </div>
 </template>
 
@@ -351,13 +360,13 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
   gap: 1.25rem;
   padding: 3.5rem 1rem;
 }
-@media (min-width: 900px) {
-  .hero-content {
-    gap: 1.5rem;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+  @media (min-width: 900px) {
+    .hero-content {
+      gap: 1rem; /* tighter hero content */
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
   }
-}
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5.5vw, 4.5rem);
@@ -391,7 +400,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
 .about-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 2rem; /* reduced from 4rem */
   align-items: center;
 }
 @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; } }
@@ -453,12 +462,22 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
 .features-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: 1rem; /* tighter feature grid */
 }
 @media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2,1fr); } }
 @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3,1fr); } }
 
 .feature-card { padding: 1.75rem; }
+@media (max-width: 640px) {
+  .feature-card { 
+    padding: 1.25rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
 .feature-icon-wrap {
   width: 48px; height: 48px;
   border-radius: var(--radius-md);
@@ -468,12 +487,39 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
   color: var(--color-primary);
   transition: background 250ms;
 }
+@media (max-width: 640px) {
+  .feature-icon-wrap { 
+    width: 40px; height: 40px; 
+    margin-bottom: 0.75rem; 
+  }
+  .feature-icon-svg { width: 20px; height: 20px; }
+}
+
 .feature-card:hover .feature-icon-wrap { background: var(--color-primary); color: #fff; }
 .feature-icon-svg { width: 24px; height: 24px; }
 .feature-title { font-size: 1rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.625rem; }
+@media (max-width: 640px) {
+  .feature-title { font-size: 0.95rem; margin-bottom: 0.5rem; }
+}
 .feature-desc { font-size: 0.875rem; color: var(--color-gray-600); line-height: 1.65; margin-bottom: 1rem; }
-.feature-link { font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-decoration: none; }
+@media (max-width: 640px) {
+  .feature-desc { font-size: 0.825rem; margin-bottom: 0.75rem; line-height: 1.5; }
+}
+.feature-link { font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-decoration: none; transition: all 200ms; }
 .feature-link:hover { text-decoration: underline; color: var(--color-ovgu-blue); }
+.feature-link--featured {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  margin-top: 0.5rem;
+}
+.feature-link--featured:hover {
+  background: var(--color-accent);
+  text-decoration: none;
+  transform: translateX(4px);
+}
 
 /* ══ CURRICULUM ══ */
 .curriculum-section { background: #fff; }
@@ -483,6 +529,20 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
   gap: 1rem;
   margin-bottom: 2.5rem;
   justify-content: center;
+  width: max-content;
+  min-width: 100%;
+}
+.sem-tabs-container {
+  overflow-x: auto;
+  padding-bottom: 0rem;
+  margin-bottom: 0rem;
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+@media (min-width: 900px) {
+  .sem-tabs-container {
+    mask-image: none;
+    overflow: visible;
+  }
 }
 .sem-tab {
   display: flex;
@@ -560,8 +620,8 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
 .bento-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
-  min-height: 500px;
+  gap: 1rem; /* tighter bento grid */
+  min-height: 450px;
 }
 .bento-grid a {
   text-decoration: none !important;
@@ -679,7 +739,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
 .hybrid-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2rem; /* reduced from 3rem */
   align-items: start;
 }
 @media (min-width: 900px) { .hybrid-grid { grid-template-columns: 1fr 1fr; } }
@@ -714,6 +774,20 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
   border: 1px solid var(--color-gray-200);
   border-left: 4px solid;
   transition: box-shadow 200ms;
+}
+@media (max-width: 639px) {
+  .schedule-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .schedule-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--color-gray-100);
+    padding-top: 0.5rem;
+    margin-top: 0.25rem;
+  }
 }
 .schedule-row:hover { box-shadow: var(--shadow-sm); }
 .schedule-row--online  { border-left-color: var(--color-ovgu-blue); }

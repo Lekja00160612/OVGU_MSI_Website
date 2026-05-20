@@ -6,14 +6,15 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   colorMode: { preference: 'light' },
   i18n: {
+    langDir: 'locales',
     locales: [
-      { code: 'en', language: 'en-US', name: 'English' },
-      { code: 'vi', language: 'vi-VN', name: 'Tiếng Việt' }
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'vi', language: 'vi-VN', name: 'Tiếng Việt', file: 'vi.json' }
     ],
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
     detectBrowserLanguage: false,
-    vueI18n: './i18n.config.ts'
+    restructureDir: 'i18n'
   },
   mdc: {
     headings: {

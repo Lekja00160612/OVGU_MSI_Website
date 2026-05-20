@@ -9,6 +9,19 @@
     "laboratories_research": "Thiết Bị & Nghiên Cứu",
     "student_life": "Đời Sống Sinh Viên"
   },
+  "home": {
+    "degree1": "Bằng 1",
+    "degree2": "Bằng 2",
+    "degree1_value": "Thạc sĩ — Đại học Otto von Guericke Magdeburg",
+    "degree2_value": "Thạc sĩ — Đại học Việt Đức",
+    "academic_hours": "Tiết học / Tuần",
+    "explore_all": "Khám phá tất cả hoạt động",
+    "loading": "Đang tải nội dung...",
+    "explore_program": "Khám phá Chương trình",
+    "explore_full_program": "Khám phá toàn bộ Chương trình",
+    "view_scholarships": "Xem Học bổng",
+    "view_feature": "Xem {title}"
+  },
   "footer": {
     "subtitle": "Chương trình liên kết giữa Trường Đại học Việt Đức (VGU) và Đại học Otto von Guericke Magdeburg (OVGU).",
     "quick_links": "Liên Kết Nhanh",

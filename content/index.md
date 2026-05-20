@@ -28,6 +28,7 @@ whyChoose:
     - id: 3
       icon: "faculty"
       title: "German Academic Faculty"
+      featured: true
       description: "Learn directly from OVGU professors and researchers who travel to Vietnam to deliver in-person instruction, maintaining full German academic quality."
       link: "/partners-lecturers"
     - id: 4
