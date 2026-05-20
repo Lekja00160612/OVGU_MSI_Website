@@ -25,6 +25,15 @@ const electiveModules = computed(() => {
 
 const selectedModule = ref<any | null>(null)
 const isDrawerOpen = ref(false)
+const isDetailModalOpen = ref(false)
+
+function getImages(mod: any) {
+  return mod?.images || mod?.meta?.images || []
+}
+
+function getPdfs(mod: any) {
+  return mod?.pdfs || mod?.meta?.pdfs || []
+}
 
 watch(selectedModule, (newVal) => {
   isDrawerOpen.value = !!newVal
@@ -145,7 +154,17 @@ const getSemesterColor = (sem: number | string) => {
                 <ContentRenderer v-if="selectedModule.body" :value="selectedModule" />
                 <p v-else>{{ selectedModule.description }}</p>
               </div>
-              <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-outline mt-6">{{ page.view_handbook || t('program.view_in_handbook') }}</a>
+              <div class="module-actions">
+                <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="action-btn">{{ page.view_handbook || t('program.view_in_handbook') }}</a>
+                <button
+                  v-if="getImages(selectedModule).length || getPdfs(selectedModule).length"
+                  class="more-detail-btn"
+                  @click="isDetailModalOpen = true"
+                >
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                  <span>{{ t('program.more_detail') }}</span>
+                </button>
+              </div>
             </div>
             <div v-else class="module-details-empty fade-in">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="empty-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.671zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-5.407l-1.59-1.59" /></svg>
@@ -181,9 +200,19 @@ const getSemesterColor = (sem: number | string) => {
             <ContentRenderer v-if="selectedModule.body" :value="selectedModule" />
             <p v-else class="text-sm mb-3 font-medium text-gray-700">{{ selectedModule.description }}</p>
           </div>
-          <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-outline w-full mt-6 text-center justify-center">
-            {{ t('program.view_in_handbook') }} &rarr;
-          </a>
+          <div class="module-actions">
+            <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="action-btn shrink-0">
+              {{ t('program.view_in_handbook') }} &rarr;
+            </a>
+            <button
+              v-if="getImages(selectedModule).length || getPdfs(selectedModule).length"
+              class="more-detail-btn"
+              @click="isDetailModalOpen = true"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+              <span>{{ t('program.more_detail') }}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -313,10 +342,77 @@ const getSemesterColor = (sem: number | string) => {
       </div>
     </div>
 
+    <!-- ── Media Detail Modal (Native Implementation) ── -->
+    <Teleport to="body">
+      <Transition name="modal-fade">
+        <div v-if="isDetailModalOpen" class="custom-modal-overlay" @click.self="isDetailModalOpen = false">
+          <div class="custom-modal-content">
+            <!-- Header -->
+            <div class="custom-modal-header">
+              <h3 class="custom-modal-title">
+                {{ selectedModule?.title }} - Materials
+              </h3>
+              <button @click="isDetailModalOpen = false" class="custom-modal-close" title="Close">
+                &times;
+              </button>
+            </div>
+
+            <!-- Body -->
+            <div class="custom-modal-body">
+              <!-- Gallery -->
+              <div v-if="getImages(selectedModule).length" class="gallery-section">
+                <h4 class="section-label">Image Gallery</h4>
+                <div class="gallery-scroll">
+                  <div 
+                    v-for="(img, idx) in getImages(selectedModule)" 
+                    :key="idx"
+                    class="gallery-item"
+                  >
+                    <img :src="img" draggable="false" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Documents -->
+              <div v-if="getPdfs(selectedModule).length" class="documents-section">
+                <h4 class="section-label">Documents</h4>
+                <div class="doc-list">
+                  <a
+                    v-for="(pdf, idx) in getPdfs(selectedModule)"
+                    :key="idx"
+                    :href="pdf.url"
+                    target="_blank"
+                    class="doc-link"
+                  >
+                    <div class="doc-icon">
+                      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:24px;height:24px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <span class="doc-title">{{ pdf.title }}</span>
+                    <svg class="w-5 h-5 doc-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:20px;height:20px;margin-left:auto;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
 <style scoped>
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
 .page-structure { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 5rem; }
 
 .intro-section { max-width: 800px; margin: 0 auto 3rem auto; }
@@ -711,5 +807,230 @@ const getSemesterColor = (sem: number | string) => {
 .mobile-mod-detail-content {
   color: var(--color-gray-600);
   line-height: 1.6;
+}
+
+/* Module Action Row */
+.module-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Custom Action Button */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary-light);
+  border: 1.5px solid var(--color-primary-100);
+  border-radius: var(--radius-full);
+  background: var(--color-primary-50);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s var(--ease-out);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.action-btn:hover {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(30, 58, 95, 0.25);
+}
+
+.more-detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-accent-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--color-accent-50);
+  border: 1.5px solid rgba(232, 119, 34, 0.25);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  transition: all 0.25s var(--ease-out);
+  margin-left: auto;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  position: relative;
+}
+.more-detail-btn::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-accent);
+  opacity: 0;
+  animation: detailPulse 2s ease-in-out infinite;
+}
+@keyframes detailPulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.04); }
+}
+.more-detail-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(232, 119, 34, 0.35);
+}
+.more-detail-btn:hover::before {
+  animation: none;
+  opacity: 0;
+}
+
+/* Custom CSS Modal Overlay */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 34, 64, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+.custom-modal-content {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 650px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
+  animation: modalScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.custom-modal-header {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--color-gray-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+.custom-modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin: 0;
+}
+.custom-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-gray-500);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+.custom-modal-close:hover {
+  background: var(--color-gray-100);
+  color: var(--color-gray-900);
+}
+.custom-modal-body {
+  padding: 1.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--color-gray-500);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.gallery-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.75rem;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery-item {
+  scroll-snap-align: center;
+  flex: 0 0 100%;
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+  overflow: hidden;
+}
+.gallery-item img {
+  width: 100%;
+  height: 350px;
+  object-fit: contain;
+  display: block;
+}
+
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.doc-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+  text-decoration: none;
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  transition: all 0.2s;
+}
+.doc-link:hover {
+  background: var(--color-primary-50);
+  border-color: var(--color-primary-100);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.doc-icon {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 0.6rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.doc-title {
+  flex: 1;
+}
+.doc-arrow {
+  color: var(--color-gray-400);
+  transition: transform 0.2s;
+}
+.doc-link:hover .doc-arrow {
+  color: var(--color-primary);
+  transform: translateX(4px);
 }
 </style>

@@ -5,6 +5,7 @@ const { page, coreModules, electiveModules } = inject('pageData') as any
 
 const selectedModule = ref<any>(null)
 const isDrawerOpen = ref(false)
+const isDetailModalOpen = ref(false)
 const activeMobileModule = ref<string | null>(null)
 
 function getSemesterColor(sem: number): string {
@@ -19,6 +20,14 @@ function getSemesterLabel(sem: number): string {
   if (sem === 2) return 'Semester 2'
   if (sem === 3) return 'Semester 3'
   return `Semester ${sem}`
+}
+
+function getImages(mod: any) {
+  return mod?.images || mod?.meta?.images || []
+}
+
+function getPdfs(mod: any) {
+  return mod?.pdfs || mod?.meta?.pdfs || []
 }
 
 const allModules = computed(() => {
@@ -55,9 +64,9 @@ const semesters = [1, 2, 3, 4]
         <span class="legend-dot" :style="{ backgroundColor: getSemesterColor(sem) }"></span>
         {{ getSemesterLabel(sem) }}
       </span>
-      <span class="german-prof-badge">
-        <span class="pulse-dot"></span>
-        Taught by Visiting German Professors
+      <span class="legend-item bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm inline-flex items-center text-sm font-medium">
+        <span class="w-3 h-3 rounded-full bg-green-500 mr-2 shadow-[0_0_0_2px_rgba(34,197,94,0.3)]"></span>
+        Taught by German Lecturer
       </span>
     </div>
 
@@ -127,7 +136,17 @@ const semesters = [1, 2, 3, 4]
             </div>
 
             <template #footer>
-              <div class="detail-footer">
+              <div class="detail-footer" style="gap: 0.5rem; flex-wrap: wrap;">
+                <UButton
+                  v-if="getImages(selectedModule).length || getPdfs(selectedModule).length"
+                  icon="i-heroicons-eye"
+                  color="primary"
+                  variant="outline"
+                  size="sm"
+                  @click="isDetailModalOpen = true"
+                >
+                  {{ t('program.more_detail') }}
+                </UButton>
                 <UButton
                   v-if="selectedModule.handbook_url || page?.handbook_url"
                   :to="selectedModule.handbook_url || page?.handbook_url"
@@ -190,8 +209,19 @@ const semesters = [1, 2, 3, 4]
             </div>
             <ContentRenderer v-if="mod.body" :value="mod" class="prose accordion-prose" />
             <p v-else-if="mod.description" class="accordion-description">{{ mod.description }}</p>
-            <div v-if="mod.handbook_url || page?.handbook_url" class="accordion-footer">
+            <div v-if="(mod.handbook_url || page?.handbook_url) || getImages(mod).length || getPdfs(mod).length" class="accordion-footer" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
               <UButton
+                v-if="getImages(mod).length || getPdfs(mod).length"
+                icon="i-heroicons-eye"
+                color="primary"
+                variant="outline"
+                size="sm"
+                @click="selectModule(mod); isDetailModalOpen = true"
+              >
+                {{ t('program.more_detail') }}
+              </UButton>
+              <UButton
+                v-if="mod.handbook_url || page?.handbook_url"
                 :to="mod.handbook_url || page?.handbook_url"
                 target="_blank"
                 icon="i-heroicons-arrow-down-tray"
@@ -206,6 +236,54 @@ const semesters = [1, 2, 3, 4]
         </Transition>
       </div>
     </div>
+
+    <!-- ── Media Detail Modal ── -->
+    <UModal v-model="isDetailModalOpen" prevent-close>
+      <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+        <template #header>
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              {{ selectedModule?.title }} - Materials
+            </h3>
+            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isDetailModalOpen = false" />
+          </div>
+        </template>
+
+        <div class="media-content space-y-6">
+          <div v-if="getImages(selectedModule).length" class="gallery-section">
+            <h4 class="text-sm font-medium text-gray-700 mb-3">Image Gallery</h4>
+            <UCarousel
+              :items="getImages(selectedModule)"
+              :ui="{ item: 'basis-full' }"
+              class="rounded-lg overflow-hidden border border-gray-200 bg-gray-50"
+              arrows
+              indicators
+            >
+              <template #default="{ item }">
+                <img :src="item" class="w-full h-auto object-contain max-h-[400px] mx-auto" draggable="false">
+              </template>
+            </UCarousel>
+          </div>
+
+          <div v-if="getPdfs(selectedModule).length" class="documents-section">
+            <h4 class="text-sm font-medium text-gray-700 mb-3">Documents</h4>
+            <div class="flex flex-col gap-2">
+              <a
+                v-for="(pdf, idx) in getPdfs(selectedModule)"
+                :key="idx"
+                :href="pdf.url"
+                target="_blank"
+                class="flex items-center gap-3 p-3 rounded-md border border-gray-200 hover:bg-gray-50 transition-colors"
+              >
+                <UIcon name="i-heroicons-document-text" class="w-5 h-5 text-red-500" />
+                <span class="text-sm font-medium text-primary-600 hover:text-primary-700 flex-1">{{ pdf.title }}</span>
+                <UIcon name="i-heroicons-arrow-top-right-on-square" class="w-4 h-4 text-gray-400" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </UCard>
+    </UModal>
   </div>
 </template>
 

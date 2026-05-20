@@ -56,7 +56,14 @@ export default defineContentConfig({
         german_lecturer: z.boolean().default(false),
         is_elective: z.boolean().default(false),
         description: z.string().optional(),
-        lecturers: z.array(z.enum(lecturerNames)).default([])
+        lecturers: z.array(z.enum(lecturerNames)).default([]),
+        images: z.array(z.string()).optional(),
+        pdfs: z.array(
+          z.object({
+            title: z.string(),
+            url: z.string()
+          })
+        ).optional()
       })
     }),
     equipments: defineCollection({

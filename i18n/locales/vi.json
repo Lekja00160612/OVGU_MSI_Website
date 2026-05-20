@@ -25,7 +25,7 @@
   "program": {
     "handbook_btn": "Khám phá danh mục môn học",
     "core_title": "Các môn học cốt lõi",
-    "german_indicator_legend": "Được giảng dạy bởi Giáo sư Đức",
+    "german_indicator_legend": "Được giảng dạy bởi Giảng viên Đức",
     "german_badge": "Giảng viên từ Đức",
     "select_module": "Chọn một môn học để xem chi tiết",
     "view_in_handbook": "Xem trong sổ tay",
@@ -36,7 +36,8 @@
     "compact_view": "Dạng danh sách",
     "prev": "Trước",
     "next": "Sau",
-    "semester_long": "Học kỳ"
+    "semester_long": "Học kỳ",
+    "more_detail": "Thêm chi tiết"
   },
   "footer": {
     "subtitle": "Chương trình liên kết giữa Trường Đại học Việt Đức (VGU) và Đại học Otto von Guericke Magdeburg (OVGU).",
