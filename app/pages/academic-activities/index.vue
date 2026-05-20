@@ -1,16 +1,19 @@
 <script setup lang="ts">
+const { locale, t } = useI18n()
 const localePath = useLocalePath()
 
 const { data: activities } = await useAsyncData('all-activities', () =>
   queryCollection('activities').order('date', 'DESC').all()
 )
 
-const { data: rawPage } = await useAsyncData('home-page-for-activities', () =>
-  queryCollection('content').path('/').first()
+const homePath = locale.value === 'vi' ? '/vi' : '/'
+const { data: rawPage } = await useAsyncData(`home-page-for-activities-${locale.value}`, () =>
+  queryCollection('content').path(homePath).first()
 )
 
-const { data: pageData } = await useAsyncData('activities-page', () =>
-  queryCollection('content').path('/academic-activities').first()
+const activitiesPath = locale.value === 'vi' ? '/vi/academic-activities' : '/academic-activities'
+const { data: pageData } = await useAsyncData(`activities-page-${locale.value}`, () =>
+  queryCollection('content').path(activitiesPath).first()
 )
 
 const highlightsList = computed(() => rawPage.value?.meta?.activities?.highlights || [])
@@ -22,12 +25,13 @@ const highlightedActivities = computed(() => {
 provide('pageData', {
   activities,
   highlightedActivities,
-  localePath
+  localePath,
+  pageData
 })
 
 useSeoMeta({
-  title: 'Academic Activities | MSI',
-  description: 'Explore seminars, industry visits, and campus events at the MSI program.'
+  title: computed(() => `${t('nav.academic_activities')} | MSI`),
+  description: computed(() => pageData.value?.description || t('activities.subtitle'))
 })
 </script>
 

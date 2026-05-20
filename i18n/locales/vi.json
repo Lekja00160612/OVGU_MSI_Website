@@ -43,5 +43,21 @@
     "subtitle": "Chương trình liên kết giữa Trường Đại học Việt Đức (VGU) và Đại học Otto von Guericke Magdeburg (OVGU).",
     "quick_links": "Liên Kết Nhanh",
     "contact": "Liên Hệ"
+  },
+  "activities": {
+    "title": "Trải Nghiệm Học Thuật",
+    "subtitle": "Khám phá các buổi hội thảo khoa học, chuyến đi thực tế doanh nghiệp và sự kiện nổi bật.",
+    "featured": "Điểm Nhấn Hoạt Động",
+    "search_placeholder": "Tìm kiếm hoạt động...",
+    "no_results": "Không tìm thấy hoạt động nào phù hợp với bộ lọc.",
+    "clear_filters": "Xóa Bộ Lọc",
+    "back_to_activities": "Quay lại Hoạt động",
+    "prev": "Trước",
+    "next": "Sau",
+    "cat_all": "Tất cả",
+    "cat_academic_lectures": "Bài giảng Học thuật",
+    "cat_industry_adventures": "Trải nghiệm Doanh nghiệp",
+    "cat_lab_works": "Thực hành Phòng Lab",
+    "cat_other_activities": "Hoạt động Khác"
   }
 }

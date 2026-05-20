@@ -43,5 +43,21 @@
     "subtitle": "A joint program between Vietnamese-German University (VGU) and Otto von Guericke University Magdeburg (OVGU).",
     "quick_links": "Quick Links",
     "contact": "Contact"
+  },
+  "activities": {
+    "title": "Academic Activities",
+    "subtitle": "Explore our latest seminars, industry visits, and campus events.",
+    "featured": "Featured Highlights",
+    "search_placeholder": "Search activities...",
+    "no_results": "No activities found matching your criteria.",
+    "clear_filters": "Clear Filters",
+    "back_to_activities": "Back to Activities",
+    "prev": "Prev",
+    "next": "Next",
+    "cat_all": "All",
+    "cat_academic_lectures": "Academic Lectures",
+    "cat_industry_adventures": "Industry Adventures",
+    "cat_lab_works": "Lab Works",
+    "cat_other_activities": "Other Activities"
   }
 }
