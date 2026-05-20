@@ -111,15 +111,48 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 0.85rem;
 }
 @media (min-width: 768px) { .container { padding: 0 2rem; } }
 @media (min-width: 1280px) { .container { padding: 0 2.5rem; } }
 
+/* ── Common Header Banner ── */
+.header-banner {
+  background: var(--color-primary-dark);
+  padding: 4rem 1rem;
+  color: #fff;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .header-banner {
+    padding: 5rem 1.5rem;
+  }
+}
+.page-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-family: var(--font-display);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background-color: var(--color-accent);
+  padding: 0rem 0.5rem;
+  display: inline-block;
+}
+.page-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.8);
+}
+
 /* ── Section spacing ── */
-.section    { padding: 5rem 0; }
-.section-sm { padding: 3rem 0; }
-.section-lg { padding: 7rem 0; }
+.section    { padding: 2.5rem 0; }
+.section-sm { padding: 1.5rem 0; }
+.section-lg { padding: 3.5rem 0; }
+
+@media (min-width: 768px) {
+  .section    { padding: 5rem 0; }
+  .section-sm { padding: 3rem 0; }
+  .section-lg { padding: 7rem 0; }
+}
 
 /* ── Badge ── */
 .badge {
@@ -149,52 +182,83 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid rgba(255,255,255,0.3);
 }
 
-/* ── Buttons ── */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-family: var(--font-sans);
-  font-size: 0.925rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  border: none;
-  cursor: pointer;
-  transition: all var(--duration-base) var(--ease-out);
-  text-decoration: none;
-  white-space: nowrap;
-  border-radius: var(--radius-full);
-  padding: 0.7rem 1.75rem;
-}
-.btn-primary {
-  background: var(--color-accent);
-  color: #fff;
-  box-shadow: var(--shadow-accent);
-}
-.btn-primary:hover {
-  background: var(--color-accent-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(232,119,34,.35);
-}
-.btn-outline-white {
-  background: transparent;
-  color: #fff;
-  border: 2px solid rgba(255,255,255,0.6);
-}
-.btn-outline-white:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.9);
-}
-.btn-outline-primary {
-  background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-}
-.btn-outline-primary:hover {
-  background: var(--color-primary);
-  color: #fff;
-  transform: translateY(-2px);
+/* ── Buttons — wrapped in @layer components to win over Tailwind utilities ── */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    font-family: var(--font-sans);
+    font-size: 0.925rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--duration-base) cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none !important;
+    white-space: nowrap;
+    border-radius: var(--radius-full);
+    padding: 0.75rem 1.85rem;
+    line-height: 1.2;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.98);
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #FFA055 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
+    background-size: 150% 150%;
+    background-position: 0% 50%;
+    color: #fff !important;
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(232, 119, 34, 0.25);
+  }
+  .btn-primary:hover {
+    background-position: 100% 50%;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(232, 119, 34, 0.45);
+  }
+  .btn-outline-white {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff !important;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .btn-outline-white:hover {
+    background: #ffffff;
+    color: var(--color-primary-dark) !important;
+    border-color: #ffffff;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(255, 255, 255, 0.35);
+  }
+  .btn-outline-primary {
+    background: transparent;
+    color: var(--color-primary) !important;
+    border: 2px solid var(--color-primary);
+  }
+  .btn-outline-primary:hover {
+    background: var(--color-primary);
+    color: #fff !important;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(30, 58, 95, 0.25);
+  }
+  /* Generic outlined — inherits border color from inline :style */
+  .btn-outline {
+    background: transparent;
+    color: var(--color-primary) !important;
+    border: 2px solid var(--color-primary);
+  }
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: #fff !important;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(30, 58, 95, 0.2);
+  }
 }
 
 /* ── Card ── */
@@ -265,3 +329,39 @@ h1, h2, h3, h4, h5, h6 {
 .delay-300 { animation-delay:300ms; }
 .delay-400 { animation-delay:400ms; }
 .delay-500 { animation-delay:500ms; }
+
+/* ── Header Brand Logo Styles ── */
+.brand-link { flex-shrink: 0; display:flex; align-items:center; text-decoration: none; }
+.brand-logo-wrapper {
+  background: #fff;
+  padding: 0.15rem 0.5rem;
+  border: 2px solid var(--color-primary-100);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: all 250ms ease;
+  margin-top: -22px;
+  margin-bottom: -22px;
+  z-index: 105;
+}
+.brand-logo-wrapper:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 32px rgba(232, 119, 34, 0.12);
+}
+.brand-logo { height: 78px; width: auto; object-fit:contain; display:block; filter: none; }
+
+/* Responsive Header Logo sizing for Mobile & Tablet viewports (under 1100px) */
+@media (max-width: 1099px) {
+  .brand-logo-wrapper {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    padding: 0.1rem 0.3rem;
+    border-radius: var(--radius-sm);
+  }
+  .brand-logo {
+    height: 52px;
+  }
+}

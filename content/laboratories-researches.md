@@ -1,5 +1,5 @@
 ---
-title: "Laboratories & Research"
+title: "Laboratories & Researches"
 description: "Explore our state-of-the-art facilities and the innovative research happening within them."
 ---
 

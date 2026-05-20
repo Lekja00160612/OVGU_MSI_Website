@@ -18,8 +18,8 @@ const recentActivities = computed(() => {
   if (highlights && Array.isArray(highlights) && highlights.length > 0) {
     return highlights.map(p => allActivities.value?.find(a => a.path === p)).filter(Boolean)
   }
-  // Fallback to latest 3 if highlights not set
-  return allActivities.value?.slice(0, 3) || []
+  // Fallback to latest 4 if highlights not set
+  return allActivities.value?.slice(0, 4) || []
 })
 
 
@@ -64,7 +64,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
           <img src="/Logo/OVGU_Logo_Transparent.svg" alt="OVGU" class="hero-uni-logo" />
         </div>
         <div class="hero-actions animate-fade-in-up delay-300">
-          <NuxtLink :to="localePath('/potential-candidates')" class="btn btn-primary">Explore the Program →</NuxtLink>
+          <NuxtLink :to="localePath('/future-students')" class="btn btn-primary">Explore the Program →</NuxtLink>
           <NuxtLink :to="localePath('/tuition-scholarships')" class="btn btn-outline-white">View Scholarships</NuxtLink>
         </div>
       </div>
@@ -177,7 +177,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
               </ul>
               
               <div class="mt-8 mb-6 text-center">
-                <NuxtLink :to="localePath('/program-structure')" class="btn btn-outline" :style="{ borderColor: currentSemester.color, color: currentSemester.color }">Explore Detailed Program Structure</NuxtLink>
+                <NuxtLink :to="localePath('/program-structure')" class="btn btn-curriculum" :style="{ '--semester-color': currentSemester.color }">Explore Detailed Program Structure</NuxtLink>
               </div>
             </div>
           </div>
@@ -224,16 +224,21 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
                 </div>
               </NuxtLink>
               
-              <NuxtLink :to="localePath('/academic-activities')" class="bento-explore card">
-                <div class="bento-explore-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+              <NuxtLink v-if="recentActivities[3]" :to="localePath(recentActivities[3].path.replace('/_activities', '/academic-activities'))" class="bento-card">
+                <NuxtImg :src="recentActivities[3].meta?.image || recentActivities[3].image" class="bento-img" loading="lazy" />
+                <div class="bento-overlay bento-overlay--light" />
+                <div class="bento-content bento-content--bottom">
+                  <h3 class="bento-title bento-title--small">{{ recentActivities[3].title }}</h3>
                 </div>
-                <h3>Explore More</h3>
-                <p>View our full gallery of student life, research projects, and campus events.</p>
-                <span class="btn btn-outline" style="margin-top: 1rem; padding: 0.5rem 1rem;">Go to Gallery</span>
               </NuxtLink>
             </div>
           </div>
+        </div>
+
+        <div class="text-center mt-10">
+          <NuxtLink :to="localePath('/academic-activities')" class="btn btn-primary px-8 py-3.5">
+            Explore All Academic Activities &rarr;
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -314,12 +319,17 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
 /* ══ HERO ══ */
 .hero {
   position: relative;
-  min-height: 88vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
+}
+@media (min-width: 900px) {
+  .hero {
+    min-height: 88vh;
+  }
 }
 .hero-overlay {
   position: absolute;
@@ -338,9 +348,15 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.5rem;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  gap: 1.25rem;
+  padding: 3.5rem 1rem;
+}
+@media (min-width: 900px) {
+  .hero-content {
+    gap: 1.5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
 }
 .hero-title {
   font-family: var(--font-display);
@@ -562,12 +578,18 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 220px;
+  min-height: 160px;
   flex: 1;
   background: var(--color-gray-100);
 }
-.bento-card--large { min-height: 400px; }
-.bento-card--wide { min-height: 240px; }
+.bento-card--large { min-height: 260px; }
+.bento-card--wide { min-height: 180px; }
+
+@media (min-width: 900px) {
+  .bento-card { min-height: 220px; }
+  .bento-card--large { min-height: 400px; }
+  .bento-card--wide { min-height: 240px; }
+}
 .bento-img {
   position: absolute;
   inset: 0;
@@ -747,4 +769,17 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
 /* Transition */
 .fade-enter-active, .fade-leave-active { transition: opacity 200ms; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
+
+.btn-curriculum {
+  border: 2px solid var(--semester-color) !important;
+  color: var(--semester-color) !important;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.btn-curriculum:hover {
+  background: var(--semester-color) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 28px var(--semester-color);
+  transform: translateY(-3px) scale(1.02);
+}
 </style>

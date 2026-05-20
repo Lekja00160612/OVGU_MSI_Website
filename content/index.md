@@ -95,6 +95,7 @@ activities:
     - "/_activities/01-bosch-visit"
     - "/_activities/02-sem-training"
     - "/_activities/03-guest-seminar"
+    - "/_activities/crawled-0-international-colloquium-on-advanced-smart-materials"
   items:
     - title: "Visit to Bosch Manufacturing Plant"
       tag: "INDUSTRY EXCURSION"

@@ -5,12 +5,12 @@ const { t, locale, setLocale } = useI18n({
     en: {
       nav: {
         home: 'Home',
-        potential_candidates: 'Potential Candidates',
+        potential_candidates: 'Future Students Guide',
         program_structure: 'Program Structure',
         academic_activities: 'Academic Activities',
         partners_lecturers: 'Partners & Lecturers',
         tuition_scholarships: 'Tuition & Scholarships',
-        laboratories_research: 'Laboratories & Research',
+        laboratories_research: 'Laboratories & Researches',
         student_life: 'Student Life'
       },
       footer: {
@@ -22,7 +22,7 @@ const { t, locale, setLocale } = useI18n({
     vi: {
       nav: {
         home: 'Trang Chủ',
-        potential_candidates: 'Ứng Viên Tiềm Năng',
+        potential_candidates: 'Hành trình Học viên Tương lai',
         program_structure: 'Chương Trình Học',
         academic_activities: 'Trải Nghiệm Học Thuật',
         partners_lecturers: 'Đối Tác & Giảng Viên',
@@ -43,12 +43,12 @@ const route = useRoute()
 const mobileMenuOpen = ref(false)
 
 const navLinks = computed(() => [
-  { label: t('nav.potential_candidates'), to: localePath('/potential-candidates') },
+  { label: t('nav.potential_candidates'), to: localePath('/future-students') },
   { label: t('nav.program_structure'), to: localePath('/program-structure') },
   { label: t('nav.academic_activities'), to: localePath('/academic-activities') },
   { label: t('nav.partners_lecturers'), to: localePath('/partners-lecturers') },
   { label: t('nav.tuition_scholarships'), to: localePath('/tuition-scholarships') },
-  { label: t('nav.laboratories_research'), to: localePath('/laboratories-research') },
+  { label: t('nav.laboratories_research'), to: localePath('/laboratories-researches') },
   { label: t('nav.student_life'), to: localePath('/student-life') },
 ])
 
@@ -74,8 +74,8 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
               src="/Logo/LOGO_MSI_Full_color.png"
               alt="MSI – Materials Science Program"
               class="brand-logo"
-              width="160"
-              height="56"
+              width="210"
+              height="78"
             />
           </div>
         </NuxtLink>
@@ -169,11 +169,10 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
 
     <!-- FOOTER -->
     <footer class="site-footer">
+      <div class="footer-watermark"></div>
       <div class="footer-top container">
 
         <div class="footer-brand">
-          <NuxtImg src="/Logo/LOGO_MSI_Bright.png" alt="MSI Program" class="footer-logo" width="160" height="56" />
-
           <p class="footer-tagline">{{ t('footer.subtitle') }}</p>
           <div class="footer-uni-logos">
             <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU" class="footer-uni-logo footer-uni-logo--ovgu" width="140" height="auto" />
@@ -240,26 +239,6 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
-
-/* Brand */
-.brand-link { flex-shrink: 0; display:flex; align-items:center; text-decoration: none; }
-.brand-logo-wrapper {
-  background: transparent;
-  padding: 0.4rem 1rem;
-  border: 1.5px solid rgba(30, 58, 95, 0.15);
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: all 250ms ease;
-}
-.brand-logo-wrapper:hover { 
-  transform: translateY(-2px); 
-  border-color: rgba(30, 58, 95, 0.4);
-  box-shadow: 0 6px 16px rgba(30, 58, 95, 0.08); 
-}
-.brand-logo { height: 48px; width: auto; object-fit:contain; display:block; filter: none; }
 
 /* Desktop Nav */
 .desktop-nav {
@@ -380,9 +359,25 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
 .site-main { flex:1; }
 
 /* ═══════════════ FOOTER ═══════════════ */
-.site-footer { background: var(--color-primary-dark); color: #e2e8f0; }
+.site-footer { position: relative; background: var(--color-primary-dark); color: #e2e8f0; overflow: hidden; }
+
+.footer-watermark {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/Logo/LOGO_MSI_Dark.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 1;
+}
 
 .footer-top {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem;
@@ -392,9 +387,7 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
 @media (min-width: 640px) { .footer-top { grid-template-columns: repeat(2,1fr); } }
 @media (min-width: 1024px) { .footer-top { grid-template-columns: 2fr 2fr 1.5fr; } }
 
-.footer-logo { height:72px; width:auto; object-fit:contain; margin-bottom:1rem; }
-
-.footer-tagline { font-size:0.875rem; color:rgba(255,255,255,.55); line-height:1.65; margin-bottom:1.25rem; max-width:260px; }
+.footer-tagline { font-size:0.875rem; color:rgba(255,255,255,.55); line-height:1.65; margin-bottom:1.25rem; max-width:260px; z-index: 2; }
 
 .footer-uni-logos {
   display: flex;

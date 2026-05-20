@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { locale } = useI18n()
+const localePath = useLocalePath()
 
 // Fetch localized page content
 const pagePath = locale.value === 'vi' ? '/vi/partners-lecturers' : '/partners-lecturers'
@@ -7,9 +8,10 @@ const { data: pageData } = await useAsyncData(`partners-page-${locale.value}`, (
   queryCollection('content').path(pagePath).first()
 )
 
-// Fallback to EN if VI doesn't exist
-const finalPageData = computed(() => pageData.value)
-const page = computed(() => finalPageData.value?.meta ?? {})
+// Fetch all modules to build lecturers associations
+const { data: allModules } = await useAsyncData('partners-modules', () =>
+  queryCollection('modules').all()
+)
 
 // Helper to get initials if image is missing
 const getInitials = (name: string) => {
@@ -20,6 +22,18 @@ const getInitials = (name: string) => {
   }
   return parts[0][0].toUpperCase()
 }
+
+// Find modules taught by a specific lecturer
+const getLecturerModules = (lecturerName: string) => {
+  if (!allModules.value) return []
+  return allModules.value.filter(mod => {
+    const list = mod.lecturers || mod.meta?.lecturers || []
+    return list.some((l: string) => l.toLowerCase().trim() === lecturerName.toLowerCase().trim())
+  })
+}
+
+// @nuxt/content v3: rich frontmatter properties (headline, intro, groups) live in .meta
+const page = computed(() => pageData.value?.meta ?? {})
 </script>
 
 <template>
@@ -56,6 +70,21 @@ const getInitials = (name: string) => {
               <h3 class="faculty-name">{{ member.name }}</h3>
               <span v-if="member.institution" class="faculty-inst">{{ member.institution }}</span>
               <p class="faculty-roles">{{ member.roles }}</p>
+              
+              <!-- Taught Modules -->
+              <div v-if="getLecturerModules(member.name).length > 0" class="lecturer-modules mt-2">
+                <span class="modules-lbl">Lecturer of:</span>
+                <div class="modules-links">
+                  <NuxtLink 
+                    v-for="mod in getLecturerModules(member.name)" 
+                    :key="mod.path" 
+                    :to="localePath('/program-structure')" 
+                    class="mod-tag-link"
+                  >
+                    {{ mod.title }}
+                  </NuxtLink>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -77,6 +106,21 @@ const getInitials = (name: string) => {
                   <h3 class="faculty-name">{{ member.name }}</h3>
                   <span v-if="member.institution" class="faculty-inst">{{ member.institution }}</span>
                   <p class="faculty-roles">{{ member.roles }}</p>
+                  
+                  <!-- Taught Modules -->
+                  <div v-if="getLecturerModules(member.name).length > 0" class="lecturer-modules mt-2">
+                    <span class="modules-lbl">Lecturer of:</span>
+                    <div class="modules-links">
+                      <NuxtLink 
+                        v-for="mod in getLecturerModules(member.name)" 
+                        :key="mod.path" 
+                        :to="localePath('/program-structure')" 
+                        class="mod-tag-link"
+                      >
+                        {{ mod.title }}
+                      </NuxtLink>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -125,4 +169,10 @@ const getInitials = (name: string) => {
 .faculty-name { font-size: 1.15rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; }
 .faculty-inst { display: inline-block; font-size: 0.75rem; font-weight: 700; color: #fff; background: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); align-self: flex-start; }
 .faculty-roles { font-size: 0.9rem; color: var(--color-gray-600); line-height: 1.5; margin-top: 0.25rem; }
+
+.lecturer-modules { display: flex; flex-direction: column; gap: 0.25rem; }
+.modules-lbl { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--color-gray-400); letter-spacing: 0.05em; }
+.modules-links { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.mod-tag-link { font-size: 0.75rem; font-weight: 600; color: var(--color-primary); background: var(--color-primary-50); border: 1px solid var(--color-primary-100); padding: 0.15rem 0.5rem; border-radius: var(--radius-sm); text-decoration: none; transition: all 150ms; }
+.mod-tag-link:hover { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
 </style>

@@ -1,6 +1,28 @@
 ---
 title: "Student Life"
 description: "Experience a vibrant, international campus community in Binh Duong."
+daad_steps:
+  - step: 1
+    title: "1. Obtain Admission & Visa"
+    desc: "Receive your official admission letter from OVGU/VGU and submit your German Student Visa application."
+  - step: 2
+    title: "2. Open Blocked Account"
+    desc: "Set up your financial proof (Sperrkonto) with €11,904 to satisfy the embassy's living cost criteria."
+  - step: 3
+    title: "3. Health Insurance Setup"
+    desc: "Acquire mandatory statutory (TK/AOK) or private travel insurance to cover you from day one."
+  - step: 4
+    title: "4. Travel & Arrival"
+    desc: "Book your flights to Frankfurt or Berlin, then take the ICE train direct to Magdeburg Main Station."
+  - step: 5
+    title: "5. Find Accommodation"
+    desc: "Apply early for OVGU student dorms (Studentenwerk) or look for shared flats (WG-Gesucht)."
+  - step: 6
+    title: "6. Register City Address"
+    desc: "Register your address at the local Citizens' Office (Bürgerbüro) to obtain your registration certificate (Meldebestätigung)."
+  - step: 7
+    title: "7. University Enrollment"
+    desc: "Complete your physical enrollment at OVGU, pay the semester fee, and receive your student ID card."
 ---
 
 ## A Vibrant Campus

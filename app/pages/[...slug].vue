@@ -46,28 +46,6 @@ const { data: page } = await useAsyncData('page-' + route.path, () =>
   padding-bottom: 5rem;
 }
 
-.header-banner {
-  background: var(--color-primary-dark);
-  padding: 5rem 1.5rem;
-  color: #fff;
-  margin-bottom: 4rem;
-}
-
-.page-title {
-  font-size: 3rem;
-  font-family: var(--font-display);
-  font-weight: 800;
-  margin-bottom: 1rem;
-  background-color: var(--color-accent);
-  padding: 0rem 0.5rem;
-  display: inline-block;
-}
-
-.page-subtitle {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.8);
-}
-
 .content-section {
   max-width: 900px;
   margin: 0 auto;
