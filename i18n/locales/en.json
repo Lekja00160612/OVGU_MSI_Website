@@ -22,6 +22,22 @@
     "view_scholarships": "View Scholarships",
     "view_feature": "View {title}"
   },
+  "program": {
+    "handbook_btn": "Explore Full Module Handbook",
+    "core_title": "Core Modules",
+    "german_indicator_legend": "Taught by Visiting German Professors",
+    "german_badge": "Taught by German Lecturer",
+    "select_module": "Select a module to view details",
+    "view_in_handbook": "View in Handbook",
+    "sem": "Sem",
+    "lecturer": "Lecturer(s)",
+    "electives_title": "Elective Courses",
+    "carousel_view": "Carousel View",
+    "compact_view": "Compact Titles",
+    "prev": "Prev",
+    "next": "Next",
+    "semester_long": "Semester"
+  },
   "footer": {
     "subtitle": "A joint program between Vietnamese-German University (VGU) and Otto von Guericke University Magdeburg (OVGU).",
     "quick_links": "Quick Links",

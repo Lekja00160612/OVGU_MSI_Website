@@ -1,10 +1,11 @@
 ---
 title: "Polymers"
 semester: 2
-german_lecturer: false
-description: "Comprehensive study of polymer chemistry, synthesis, physical properties, and industrial applications of macromolecular materials."
+german_lecturer: true
+is_elective: false
+description: "• Structure and properties of polymers  • Structure of macromolecules  • Constitution, Configuration, Conformation, Bonds,  Synthesis, Molecular weight distribution  • Morphology (amorph, crystalline, blends)  • Mechanical properties (elasticity, pla..."
 lecturers:
   - "Dr. rer. nat. Sven Henning"
 ---
 
-This module dives deep into the world of plastics, elastomers, and advanced polymers. It covers polymerization mechanisms, structure-property relationships, and modern polymer processing techniques.
+• Structure and properties of polymers  • Structure of macromolecules  • Constitution, Configuration, Conformation, Bonds,  Synthesis, Molecular weight distribution  • Morphology (amorph, crystalline, blends)  • Mechanical properties (elasticity, plasticity, viscoelasticity)  • Thermal properties  • Electrical properties  • Theoretical modelling  • Applications

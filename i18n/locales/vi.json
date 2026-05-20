@@ -22,6 +22,22 @@
     "view_scholarships": "Xem Học bổng",
     "view_feature": "Xem {title}"
   },
+  "program": {
+    "handbook_btn": "Khám phá danh mục môn học",
+    "core_title": "Các môn học cốt lõi",
+    "german_indicator_legend": "Được giảng dạy bởi Giáo sư Đức",
+    "german_badge": "Giảng viên từ Đức",
+    "select_module": "Chọn một môn học để xem chi tiết",
+    "view_in_handbook": "Xem trong sổ tay",
+    "sem": "Học kỳ",
+    "lecturer": "Giảng viên",
+    "electives_title": "Các môn học tự chọn",
+    "carousel_view": "Dạng trình chiếu",
+    "compact_view": "Dạng danh sách",
+    "prev": "Trước",
+    "next": "Sau",
+    "semester_long": "Học kỳ"
+  },
   "footer": {
     "subtitle": "Chương trình liên kết giữa Trường Đại học Việt Đức (VGU) và Đại học Otto von Guericke Magdeburg (OVGU).",
     "quick_links": "Liên Kết Nhanh",

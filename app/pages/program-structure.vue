@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const localePath = useLocalePath()
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 
 // Fetch localized page content
 const pagePath = locale.value === 'vi' ? '/vi/program-structure' : '/program-structure'
@@ -40,7 +40,7 @@ const electiveViewMode = ref('carousel') // 'carousel' or 'compact'
 const carouselIndex = ref(0)
 
 const maxCarouselIndex = computed(() => {
-  return Math.max(0, electiveModules.value.length - 2)
+  return Math.max(0, electiveModules.value.length - 1)
 })
 
 const prevElectives = () => {
@@ -52,8 +52,22 @@ const prevElectives = () => {
 const nextElectives = () => {
   if (carouselIndex.value < maxCarouselIndex.value) {
     carouselIndex.value++
+  } else {
+    carouselIndex.value = 0 // loop back
   }
 }
+
+// Auto-play interval
+let autoplayTimer: any = null
+onMounted(() => {
+  autoplayTimer = setInterval(() => {
+    nextElectives()
+  }, 4000)
+})
+
+onUnmounted(() => {
+  if (autoplayTimer) clearInterval(autoplayTimer)
+})
 
 // Mobile Accordion & Styling Helpers
 const activeMobileModule = ref<string | null>(null)
@@ -63,10 +77,10 @@ const toggleMobileModule = (path: string) => {
 
 const getSemesterColor = (sem: number | string) => {
   const s = Number(sem)
-  if (s === 1) return '#E87722'
-  if (s === 2) return '#1E3A5F'
-  if (s === 3) return '#10B981'
-  return '#8B5CF6'
+  if (s === 1) return 'var(--color-primary)'
+  if (s === 2) return 'var(--color-primary-light)'
+  if (s === 3) return 'var(--color-accent)'
+  return 'var(--color-accent-dark)'
 }
 </script>
 
@@ -83,23 +97,23 @@ const getSemesterColor = (sem: number | string) => {
       <p class="intro-text">
         {{ page.intro_text }}
       </p>
-      <div class="cta-wrapper">
+      <div class="cta-wrapper mt-12 mb-16">
         <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-primary cta-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-          {{ page.cta_handbook || 'Explore Full Module Handbook' }}
+          {{ page.cta_handbook || t('program.handbook_btn') }}
         </a>
       </div>
     </div>
 
     <!-- CORE MODULES -->
     <div class="container modules-container">
-      <h2 class="section-title text-center mb-4">{{ page.core_title || 'Core Modules' }}</h2>
+      <h2 class="section-title text-center mb-4">{{ page.core_title || t('program.core_title') }}</h2>
       
       <!-- German Lecturer Legend -->
-      <div class="legend-container text-center mb-8">
+      <div class="legend-container text-center mb-26">
         <span class="legend-item legend-item--highlighted bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm inline-flex items-center text-sm font-semibold">
           <span class="german-indicator-dot-legend mr-2" />
-          Taught by Visiting German Professors
+          {{ t('program.german_indicator_legend') }}
         </span>
       </div>
 
@@ -112,6 +126,7 @@ const getSemesterColor = (sem: number | string) => {
               :key="mod.path" 
               class="module-card"
               :class="{ 'module-card--active': selectedModule?.path === mod.path }"
+              :style="{ '--mod-color': getSemesterColor(mod.semester || mod.meta?.semester || 1) }"
               @click="selectedModule = mod"
             >
               <span class="mod-name">{{ mod.title }}</span>
@@ -124,71 +139,51 @@ const getSemesterColor = (sem: number | string) => {
             <div v-if="selectedModule" class="module-details-inner fade-in">
               <div class="mod-details-header">
                 <h3 class="mod-details-title">{{ selectedModule.title }}</h3>
-                <span v-if="selectedModule.meta?.german_lecturer || selectedModule.german_lecturer" class="badge-german">🟢 Taught by German Lecturer</span>
+                <span v-if="selectedModule.meta?.german_lecturer || selectedModule.german_lecturer" class="badge-german">🟢 {{ t('program.german_badge') }}</span>
               </div>
               <div class="mod-details-content prose max-w-none">
-                <ContentRenderer :value="selectedModule" />
+                <ContentRenderer v-if="selectedModule.body" :value="selectedModule" />
+                <p v-else>{{ selectedModule.description }}</p>
               </div>
-              <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-outline mt-6">{{ page.view_handbook || 'View in Handbook &rarr;' }}</a>
+              <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-outline mt-6">{{ page.view_handbook || t('program.view_in_handbook') }}</a>
             </div>
             <div v-else class="module-details-empty fade-in">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="empty-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.671zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-5.407l-1.59-1.59" /></svg>
-              <span>Select a module to view details</span>
+              <span>{{ t('program.select_module') }}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- MOBILE MODULES LAYOUT (CUSTOM PREMIUM ACCORDION) -->
+      <!-- MOBILE MODULES LAYOUT (COMPACT SCROLLABLE) -->
       <div class="mobile-only w-full">
-        <div class="mobile-accordion-list">
-          <div 
-            v-for="mod in coreModules" 
-            :key="mod.path"
-            class="mobile-accordion-card"
-            :class="{ 'mobile-accordion-card--active': activeMobileModule === mod.path }"
-            :style="{ borderLeft: `5px solid ${getSemesterColor(mod.semester || mod.meta?.semester || 1)}` }"
-          >
-            <div class="mobile-accordion-header" @click="toggleMobileModule(mod.path)">
-              <div class="mobile-accordion-header-left">
-                <span class="mobile-sem-badge">Sem {{ mod.semester || mod.meta?.semester || 1 }}</span>
-                <span class="mobile-accordion-title">{{ mod.title }}</span>
-                <span v-if="mod.meta?.german_lecturer || mod.german_lecturer" class="german-indicator-dot-accordion ml-2" />
-              </div>
-              <span class="mobile-chevron-icon" :class="{ 'mobile-chevron-icon--rotated': activeMobileModule === mod.path }">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-              </span>
-            </div>
-
-            <!-- Detail expansion -->
-            <div v-show="activeMobileModule === mod.path" class="mobile-accordion-content fade-in">
-              <div class="mobile-detail-inner mt-3">
-                <!-- German Lecturer Indicator -->
-                <div v-if="mod.meta?.german_lecturer || mod.german_lecturer" class="badge-german mb-3 inline-block">
-                  🟢 Taught by Visiting German Professors
-                </div>
-
-                <!-- Lecturers names -->
-                <div v-if="mod.lecturers || mod.meta?.lecturers" class="mobile-lecturers-info mb-4">
-                  <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Lecturer(s)</h4>
-                  <p class="text-sm font-semibold text-primary-dark">
-                    {{ Array.isArray(mod.lecturers || mod.meta?.lecturers) ? (mod.lecturers || mod.meta?.lecturers).join(', ') : (mod.lecturers || mod.meta?.lecturers) }}
-                  </p>
-                </div>
-
-                <!-- Course Description -->
-                <div class="mobile-module-desc prose prose-sm max-w-none text-gray-600">
-                  <p class="text-sm mb-3 font-medium text-gray-700">{{ mod.description }}</p>
-                  <ContentRenderer :value="mod" />
-                </div>
-
-                <!-- Download handbook CTA -->
-                <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-outline w-full mt-4 text-center justify-center">
-                  View in Handbook &rarr;
-                </a>
-              </div>
-            </div>
+        <div class="mobile-modules-scroll-container mb-6">
+          <div class="mobile-modules-rows">
+            <button
+              v-for="mod in coreModules"
+              :key="mod.path"
+              class="mobile-mod-chip"
+              :class="{ 'mobile-mod-chip--active': selectedModule?.path === mod.path }"
+              :style="{ '--mod-color': getSemesterColor(mod.semester || mod.meta?.semester || 1) }"
+              @click="selectedModule = mod"
+            >
+              {{ mod.title }}
+            </button>
           </div>
+        </div>
+
+        <div v-if="selectedModule" class="mobile-mod-detail-box fade-in">
+          <div class="mobile-mod-detail-header" :style="{ borderBottomColor: getSemesterColor(selectedModule.semester || selectedModule.meta?.semester || 1) }">
+            <h3 class="mobile-mod-detail-title">{{ selectedModule.title }}</h3>
+            <span v-if="selectedModule.meta?.german_lecturer || selectedModule.german_lecturer" class="badge-german text-[10px]">🟢 {{ t('program.german_badge') }}</span>
+          </div>
+          <div class="mobile-module-desc prose prose-sm max-w-none text-gray-600 mt-4">
+            <ContentRenderer v-if="selectedModule.body" :value="selectedModule" />
+            <p v-else class="text-sm mb-3 font-medium text-gray-700">{{ selectedModule.description }}</p>
+          </div>
+          <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-outline w-full mt-6 text-center justify-center">
+            {{ t('program.view_in_handbook') }} &rarr;
+          </a>
         </div>
       </div>
     </div>
@@ -197,7 +192,7 @@ const getSemesterColor = (sem: number | string) => {
     <div v-if="electiveModules.length > 0" class="container electives-container">
       <div class="electives-header flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
         <div class="text-center sm:text-left">
-          <h2 class="section-title mb-2">{{ page.electives_title || 'Elective Courses' }}</h2>
+          <h2 class="section-title mb-2">{{ page.electives_title || t('program.electives_title') }}</h2>
           <p class="text-gray-600 text-sm max-w-xl">{{ page.electives_intro }}</p>
         </div>
         
@@ -209,7 +204,7 @@ const getSemesterColor = (sem: number | string) => {
             :class="{ 'toggle-btn--active': electiveViewMode === 'carousel' }"
             @click="electiveViewMode = 'carousel'"
           >
-            <span>🎠 Carousel View</span>
+            <span>🎠 {{ t('program.carousel_view') }}</span>
           </button>
           <button 
             type="button"
@@ -217,7 +212,7 @@ const getSemesterColor = (sem: number | string) => {
             :class="{ 'toggle-btn--active': electiveViewMode === 'compact' }"
             @click="electiveViewMode = 'compact'"
           >
-            <span>📋 Compact Titles</span>
+            <span>📋 {{ t('program.compact_view') }}</span>
           </button>
         </div>
       </div>
@@ -225,39 +220,46 @@ const getSemesterColor = (sem: number | string) => {
       <!-- VIEW 1: CAROUSEL VIEW -->
       <div v-if="electiveViewMode === 'carousel'" class="carousel-view-wrapper relative">
         <div class="electives-carousel-grid">
-          <!-- Slide item 1 -->
-          <div 
-            v-if="electiveModules[carouselIndex]" 
-            class="elective-card-slide fade-in"
-          >
-            <div class="elective-content">
-              <span class="elective-card-sem-badge">Sem {{ electiveModules[carouselIndex].semester || 3 }}</span>
-              <h3 class="elective-title">{{ electiveModules[carouselIndex].title }}</h3>
-              <div class="prose elective-desc-body">
-                <p class="text-sm font-medium text-gray-700 mb-3">{{ electiveModules[carouselIndex].description }}</p>
-                <ContentRenderer :value="electiveModules[carouselIndex]" />
+          <Transition name="carousel-slide" mode="out-in">
+            <div 
+              :key="carouselIndex"
+              class="carousel-pair-container"
+            >
+              <!-- Slide item 1 -->
+              <div 
+                v-if="electiveModules[carouselIndex]" 
+                class="elective-card-slide"
+              >
+                <div class="elective-content">
+                  <span class="elective-card-sem-badge">{{ t('program.sem') }} {{ electiveModules[carouselIndex].semester || 3 }}</span>
+                  <h3 class="elective-title">{{ electiveModules[carouselIndex].title }}</h3>
+                  <div class="prose elective-desc-body">
+                    <ContentRenderer v-if="electiveModules[carouselIndex].body" :value="electiveModules[carouselIndex]" />
+                    <p v-else class="text-sm font-medium text-gray-700 mb-3">{{ electiveModules[carouselIndex].description }}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Slide item 2 (if available and screened is wide enough) -->
+              <div 
+                v-if="electiveModules[carouselIndex + 1]" 
+                class="elective-card-slide desktop-only-inline"
+              >
+                <div class="elective-content">
+                  <span class="elective-card-sem-badge">{{ t('program.sem') }} {{ electiveModules[carouselIndex + 1].semester || 3 }}</span>
+                  <h3 class="elective-title">{{ electiveModules[carouselIndex + 1].title }}</h3>
+                  <div class="prose elective-desc-body">
+                    <ContentRenderer v-if="electiveModules[carouselIndex + 1].body" :value="electiveModules[carouselIndex + 1]" />
+                    <p v-else class="text-sm font-medium text-gray-700 mb-3">{{ electiveModules[carouselIndex + 1].description }}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          
-          <!-- Slide item 2 -->
-          <div 
-            v-if="electiveModules[carouselIndex + 1]" 
-            class="elective-card-slide fade-in"
-          >
-            <div class="elective-content">
-              <span class="elective-card-sem-badge">Sem {{ electiveModules[carouselIndex + 1].semester || 3 }}</span>
-              <h3 class="elective-title">{{ electiveModules[carouselIndex + 1].title }}</h3>
-              <div class="prose elective-desc-body">
-                <p class="text-sm font-medium text-gray-700 mb-3">{{ electiveModules[carouselIndex + 1].description }}</p>
-                <ContentRenderer :value="electiveModules[carouselIndex + 1]" />
-              </div>
-            </div>
-          </div>
+          </Transition>
         </div>
 
-        <!-- Carousel navigation buttons at bottom -->
-        <div class="carousel-nav-controls mt-6 flex justify-between items-center max-w-xs mx-auto">
+        <!-- Carousel navigation controls at bottom -->
+        <div class="carousel-nav-controls mt-16 flex justify-between items-center w-full">
           <button 
             type="button"
             class="carousel-nav-btn"
@@ -265,7 +267,7 @@ const getSemesterColor = (sem: number | string) => {
             @click="prevElectives"
             :style="{ opacity: carouselIndex === 0 ? 0.35 : 1, cursor: carouselIndex === 0 ? 'not-allowed' : 'pointer' }"
           >
-            &larr; Prev
+            &larr; {{ t('program.prev') }}
           </button>
           
           <div class="carousel-bullets">
@@ -285,7 +287,7 @@ const getSemesterColor = (sem: number | string) => {
             @click="nextElectives"
             :style="{ opacity: carouselIndex >= maxCarouselIndex ? 0.35 : 1, cursor: carouselIndex >= maxCarouselIndex ? 'not-allowed' : 'pointer' }"
           >
-            Next &rarr;
+            {{ t('program.next') }} &rarr;
           </button>
         </div>
       </div>
@@ -299,7 +301,7 @@ const getSemesterColor = (sem: number | string) => {
             class="compact-elective-card"
           >
             <div class="compact-elective-info">
-              <span class="compact-semester-tag">Semester {{ mod.semester || 3 }}</span>
+              <span class="compact-semester-tag">{{ t('program.semester_long') }} {{ mod.semester || 3 }}</span>
               <h3 class="compact-elective-title">{{ mod.title }}</h3>
             </div>
             <!-- Handdrawn styling detail view or simple info -->
@@ -317,13 +319,13 @@ const getSemesterColor = (sem: number | string) => {
 <style scoped>
 .page-structure { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 5rem; }
 
-.intro-section { max-width: 800px; margin: 0 auto 5rem auto; }
-.intro-text { font-size: 1.1rem; color: var(--color-gray-700); line-height: 1.8; margin-bottom: 2.5rem; }
-.cta-wrapper { display: flex; justify-content: center; width: 100%; margin: 3rem 0; }
-.cta-btn { padding: 1rem 2rem; font-size: 1.1rem; }
+.intro-section { max-width: 800px; margin: 0 auto 3rem auto; }
+.intro-text { font-size: 1.05rem; color: var(--color-gray-700); line-height: 1.75; margin-bottom: 2rem; }
+.cta-wrapper { display: flex; justify-content: center; width: 100%; margin: 2rem 0; }
+.cta-btn { padding: 0.85rem 1.75rem; font-size: 1rem; }
 .btn-icon { width: 22px; height: 22px; margin-right: 10px; display: inline-block; vertical-align: middle; }
 
-.modules-container { margin-bottom: 5rem; }
+.modules-container { margin-bottom: 3rem; }
 .modules-layout {
   display: flex;
   flex-direction: column;
@@ -341,26 +343,38 @@ const getSemesterColor = (sem: number | string) => {
 }
 
 .module-card {
-  background: var(--color-accent);
-  color: #fff;
-  padding: 1.25rem 1rem;
+  background: #fff;
+  color: var(--color-primary);
+  padding: 1rem;
   border-radius: var(--radius-md);
-  border: 2px solid transparent;
+  border: 1px solid var(--color-gray-200);
+  border-left: 5px solid var(--mod-color); /* use semester color */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  transition: all 200ms;
+  transition: all 300ms var(--ease-out);
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  min-height: 110px;
+  box-shadow: var(--shadow-sm);
+  min-height: 100px;
   position: relative;
 }
-.module-card:hover { transform: translateY(-4px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); border-color: #fff; }
-.module-card--active { background: var(--color-primary); box-shadow: 0 0 0 2px var(--color-gray-50), 0 0 0 4px var(--color-primary); }
+.module-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: var(--shadow-md); 
+  border-color: var(--mod-color); 
+}
+.module-card--active { 
+  background: var(--color-gray-50); 
+  border-color: var(--mod-color); 
+  border-width: 2px;
+  border-left-width: 8px; /* Extra strong emphasize */
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  transform: scale(1.02);
+}
 
-.mod-name { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.3; }
+.mod-name { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.3; }
 
 .german-indicator-dot {
   position: absolute;
@@ -421,10 +435,11 @@ const getSemesterColor = (sem: number | string) => {
   flex-direction: column;
   justify-content: flex-start;
   background: #fff;
-  border: 1px solid var(--color-gray-200);
+  border: 1px solid var(--color-primary-100);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
-  height: 550px;
+  min-height: 480px;
+  max-height: 80vh;
   position: sticky;
   top: 100px;
   overflow-y: auto;
@@ -477,30 +492,44 @@ const getSemesterColor = (sem: number | string) => {
 
 /* Slide Styles */
 .electives-carousel-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
-}
-@media (min-width: 768px) {
-  .electives-carousel-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 .elective-card-slide {
   background: #ffffff;
   padding: 2.25rem 2rem;
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-gray-200);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--color-gray-100);
+  transition: all 0.4s var(--ease-out);
   display: flex;
   flex-direction: column;
   position: relative;
+  flex: 1;
+  height: 420px; /* Fix height */
+  overflow-y: auto; /* Scrollable content */
 }
-.elective-card-slide:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-primary-light);
+.carousel-pair-container {
+  display: flex;
+  gap: 2rem; /* more space between elective cards */
+  width: 100%;
+}
+.desktop-only-inline { display: none; }
+@media (min-width: 1024px) { .desktop-only-inline { display: flex; } }
+
+/* Modern Carousel Slide Animation */
+.carousel-slide-enter-active,
+.carousel-slide-leave-active {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.carousel-slide-enter-from {
+  opacity: 0;
+  transform: translateX(40px) scale(0.98);
+}
+.carousel-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-40px) scale(0.98);
 }
 .elective-card-sem-badge {
   font-size: 0.65rem;
@@ -529,18 +558,27 @@ const getSemesterColor = (sem: number | string) => {
 
 /* Carousel Nav Controls */
 .carousel-nav-controls {
-  padding: 1rem 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--color-gray-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap; /* Keep on one line */
+  gap: 0.5rem;
 }
 .carousel-nav-btn {
-  padding: 0.5rem 1.25rem;
+  padding: 0.75rem 1rem; /* slightly less padding for tighter fit on mobile */
   background: #ffffff;
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-full);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-primary);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 300ms var(--ease-out);
+  box-shadow: var(--shadow-sm);
+  min-width: 90px;
+  text-align: center;
 }
 .carousel-nav-btn:hover:not(:disabled) {
   background: var(--color-primary);
@@ -549,7 +587,10 @@ const getSemesterColor = (sem: number | string) => {
 }
 .carousel-bullets {
   display: flex;
+  flex-wrap: wrap; /* allow dots to wrap on small screens (doubles) */
+  justify-content: center;
   gap: 0.5rem;
+  max-width: 140px; /* constrain width to force wrapping before pushing buttons */
 }
 .carousel-bullet {
   width: 8px;
@@ -610,88 +651,64 @@ const getSemesterColor = (sem: number | string) => {
   color: var(--color-primary-dark);
 }
 
-/* MOBILE ACCORDION CARD STYLES */
-.mobile-accordion-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-  margin-top: 1.5rem;
+/* MOBILE SCROLLABLE CHIPS (2 ROWS) */
+.mobile-modules-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0 1rem 0;
 }
-.mobile-accordion-card {
-  background: #ffffff;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--color-gray-200);
-  padding: 1.25rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.mobile-accordion-card--active {
-  box-shadow: var(--shadow-md);
-  background: #ffffff;
-}
-.mobile-accordion-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-}
-.mobile-accordion-header-left {
-  display: flex;
-  align-items: center;
+.mobile-modules-rows {
+  display: grid;
+  grid-template-rows: repeat(2, auto); /* Strictly 2 rows */
+  grid-auto-flow: column;
   gap: 0.75rem;
-  flex: 1;
+  width: max-content;
+  padding-right: 2rem;
 }
-.mobile-sem-badge {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: #fff;
-  background: var(--color-primary-dark);
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-}
-.mobile-accordion-card:nth-child(even) .mobile-sem-badge {
-  background: var(--color-primary);
-}
-.mobile-accordion-title {
-  font-size: 0.95rem;
+.mobile-mod-chip {
+  padding: 0.75rem 1.25rem;
+  background: #fff;
+  border: 1px solid var(--color-gray-200);
+  border-left: 4px solid var(--mod-color);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem; /* Larger, more visible chips */
   font-weight: 700;
   color: var(--color-primary-dark);
-  line-height: 1.35;
+  white-space: nowrap;
+  transition: all 200ms;
+  text-align: left;
 }
-.mobile-chevron-icon {
-  color: var(--color-gray-400);
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
+.mobile-mod-chip--active {
+  background: var(--mod-color);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
-.mobile-chevron-icon--rotated {
-  transform: rotate(180deg);
-  color: var(--color-accent);
+
+.mobile-mod-detail-box {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  border: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-md);
+  max-height: 45vh; /* Fix height for single length of phone view */
+  overflow-y: auto;
 }
-.mobile-accordion-content {
-  border-top: 1px solid var(--color-gray-100);
-  margin-top: 1rem;
-  padding-top: 1rem;
-}
-.mobile-detail-inner {
+.mobile-mod-detail-header {
+  border-bottom: 2px solid;
+  padding-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
-.mobile-lecturers-info h4 {
-  font-size: 0.65rem;
+.mobile-mod-detail-title {
+  font-size: 1.25rem;
   font-weight: 800;
-  color: var(--color-gray-400);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-.mobile-lecturers-info p {
-  font-size: 0.85rem;
-  font-weight: 700;
   color: var(--color-primary-dark);
+  line-height: 1.2;
 }
-.mobile-module-desc {
-  font-size: 0.85rem;
+.mobile-mod-detail-content {
   color: var(--color-gray-600);
   line-height: 1.6;
 }
