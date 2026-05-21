@@ -18,7 +18,10 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links: []
+links:
+  - title: "MSI Students Conclude Fracture Mechanics Course with Presentations and Insightful Discussions"
+    url: "/academic-activities/msi-students-conclude-fracture-mechanics-course-with-presentations-and-insightful-discussions"
+    description: "Activity from 2025-05-16"
 ---
 
 - Elasticity

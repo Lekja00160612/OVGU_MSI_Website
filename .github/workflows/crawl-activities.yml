@@ -1,0 +1,43 @@
+name: Crawl VGU Academic Activities
+
+on:
+  schedule:
+    - cron: '0 0 * * 0,4' # Sunday and Thursday at midnight (twice a week)
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Crawler
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/crawl_activities.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/_activities/ public/images/academic_activities/ scripts/activities_cache.json content/_modules/
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: auto-sync vgu academic activities [skip ci]"
+            git push origin main
+          fi

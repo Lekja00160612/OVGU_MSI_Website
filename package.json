@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "prebuild": "python scripts/crawl_activities.py || py scripts/crawl_activities.py || true",
+    "prebuild": "node scripts/crawl_activities.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",

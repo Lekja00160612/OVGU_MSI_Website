@@ -19,7 +19,13 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links: []
+links:
+  - title: "MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour"
+    url: "/academic-activities/msi-students-dive-deep-into-materials-characterization-with-sem-and-xrd-lab-tour"
+    description: "Activity from 2026-03-30"
+  - title: "Exploring Materials at the Micro and Nano Scale – MSI Course Highlight"
+    url: "/academic-activities/exploring-materials-at-the-micro-and-nano-scale-msi-course-highlight"
+    description: "Activity from 2026-03-11"
 ---
 
 - Introduction of micro/nanotechnology

@@ -408,8 +408,8 @@ const getSemesterColor = (sem: number | string) => {
                   <a
                     v-for="(link, idx) in getLinks(selectedModule)"
                     :key="idx"
-                    :href="link.url"
-                    target="_blank"
+                    :href="link.url.startsWith('/') ? localePath(link.url) : link.url"
+                    :target="link.url.startsWith('/') ? undefined : '_blank'"
                     rel="noopener"
                     class="doc-link doc-link--link"
                   >

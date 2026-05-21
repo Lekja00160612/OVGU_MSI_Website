@@ -21,7 +21,10 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links: []
+links:
+  - title: "MSI Students Dive Into Hands-On Learning in Research Labs"
+    url: "/academic-activities/msi-students-dive-into-hands-on-learning-in-research-labs"
+    description: "Activity from 2025-06-10"
 ---
 
 - Introduction to different materials labs e.g.

@@ -15,7 +15,10 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links: []
+links:
+  - title: "Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael"
+    url: "/academic-activities/engineering-ceramics-advanced-materials-science-with-prof-scheffler-michael"
+    description: "Activity from 2026-03-03"
 ---
 
 - Theory of chemical bonds and properties correlations such as density, melting behavior, thermal, mechanical, optical, chemical properties
