@@ -1,13 +1,23 @@
 ---
 title: "Engineering Ceramics"
-semester: 3
+semester: 2
 german_lecturer: true
-is_elective: true
-description: "Content of the module:  • theory of chemical bonds and properties correlations such  as density, melting behavior, thermal, mechanical, optical,  chemical properties;  • manufacturing: shaping of ceramic parts, structure  consolidation by sintering,..."
+is_elective: false
+description: |
+  • Theory of chemical bonds and properties correlations such as density, melting behavior, thermal, mechanical, optical, chemical properties
+  • Manufacturing: shaping of ceramic parts, structure consolidation by sintering, resulting properties for applications
+  • Selected material systems: aspects of manufacturing/most relevant manufacturing processes; examples for applications (this includes silicate ceramics, refractories and selected functional materials such as ZrO2)
 lecturers:
+  - "Prof. Dr. rer. nat. Michael Scheffler"
   - "Dr. rer. nat. Ulf Betke"
   - "Prof. Dr. Franziska Scheffler"
-  - "Prof. Dr. rer. nat. Michael Scheffler"
+images: []
+pdfs:
+  - title: "Module Handbook (PDF)"
+    url: "/Documents/MODULE CATALOGUE MSI.pdf"
+links: []
 ---
 
-Content of the module:  • theory of chemical bonds and properties correlations such  as density, melting behavior, thermal, mechanical, optical,  chemical properties;  • manufacturing: shaping of ceramic parts, structure  consolidation by sintering, resulting properties for  applications;  selected material systems: aspects of manufacturing/most  relevant manufacturing processes; examples for  applications (this includes silicate ceramics, refractories  and selected functional materials such as ZrO2)
+- Theory of chemical bonds and properties correlations such as density, melting behavior, thermal, mechanical, optical, chemical properties
+- Manufacturing: shaping of ceramic parts, structure consolidation by sintering, resulting properties for applications
+- Selected material systems: aspects of manufacturing/most relevant manufacturing processes; examples for applications (this includes silicate ceramics, refractories and selected functional materials such as ZrO2)
