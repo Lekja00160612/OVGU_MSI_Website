@@ -35,6 +35,10 @@ function getPdfs(mod: any) {
   return mod?.pdfs || mod?.meta?.pdfs || []
 }
 
+function getLinks(mod: any) {
+  return mod?.links || mod?.meta?.links || []
+}
+
 watch(selectedModule, (newVal) => {
   isDrawerOpen.value = !!newVal
 })
@@ -157,7 +161,7 @@ const getSemesterColor = (sem: number | string) => {
               <div class="module-actions">
                 <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="action-btn">{{ page.view_handbook || t('program.view_in_handbook') }}</a>
                 <button
-                  v-if="getImages(selectedModule).length || getPdfs(selectedModule).length"
+                  v-if="getImages(selectedModule).length || getPdfs(selectedModule).length || getLinks(selectedModule).length"
                   class="more-detail-btn"
                   @click="isDetailModalOpen = true"
                 >
@@ -205,7 +209,7 @@ const getSemesterColor = (sem: number | string) => {
               {{ t('program.view_in_handbook') }} &rarr;
             </a>
             <button
-              v-if="getImages(selectedModule).length || getPdfs(selectedModule).length"
+              v-if="getImages(selectedModule).length || getPdfs(selectedModule).length || getLinks(selectedModule).length"
               class="more-detail-btn"
               @click="isDetailModalOpen = true"
             >
@@ -391,6 +395,34 @@ const getSemesterColor = (sem: number | string) => {
                     </div>
                     <span class="doc-title">{{ pdf.title }}</span>
                     <svg class="w-5 h-5 doc-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:20px;height:20px;margin-left:auto;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Links -->
+              <div v-if="getLinks(selectedModule).length" class="documents-section">
+                <h4 class="section-label">{{ t('program.links_label') || 'Related Links' }}</h4>
+                <div class="doc-list">
+                  <a
+                    v-for="(link, idx) in getLinks(selectedModule)"
+                    :key="idx"
+                    :href="link.url"
+                    target="_blank"
+                    rel="noopener"
+                    class="doc-link doc-link--link"
+                  >
+                    <div class="doc-icon doc-icon--link">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:22px;height:22px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                      </svg>
+                    </div>
+                    <div class="link-body-text">
+                      <span class="doc-title">{{ link.title }}</span>
+                      <span v-if="link.description" class="link-sub">{{ link.description }}</span>
+                    </div>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="doc-arrow" style="width:18px;height:18px;margin-left:auto;">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </a>
@@ -1032,5 +1064,30 @@ const getSemesterColor = (sem: number | string) => {
 .doc-link:hover .doc-arrow {
   color: var(--color-primary);
   transform: translateX(4px);
+}
+
+/* Link row variant */
+.doc-link--link:hover {
+  background: var(--color-accent-50);
+  border-color: rgba(232, 119, 34, 0.25);
+}
+.doc-icon--link {
+  background: var(--color-accent-50);
+  color: var(--color-accent);
+}
+.doc-link--link:hover .doc-arrow {
+  color: var(--color-accent);
+}
+.link-body-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+}
+.link-sub {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  font-weight: 400;
 }
 </style>

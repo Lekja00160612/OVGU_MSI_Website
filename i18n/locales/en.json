@@ -37,7 +37,8 @@
     "prev": "Prev",
     "next": "Next",
     "semester_long": "Semester",
-    "more_detail": "More details"
+    "more_detail": "More details",
+    "links_label": "Related Links"
   },
   "footer": {
     "subtitle": "A joint program between Vietnamese-German University (VGU) and Otto von Guericke University Magdeburg (OVGU).",
@@ -59,5 +60,21 @@
     "cat_industry_adventures": "Industry Adventures",
     "cat_lab_works": "Lab Works",
     "cat_other_activities": "Other Activities"
+  },
+  "labs": {
+    "title": "Laboratories & Research",
+    "subtitle": "State-of-the-art equipment and research infrastructure for Materials Science.",
+    "filter_all": "All",
+    "search_placeholder": "Search equipment...",
+    "no_results": "No equipment found matching your filters.",
+    "clear_filters": "Clear Filters",
+    "prev": "Prev",
+    "next": "Next",
+    "view_details": "View Details",
+    "modal_gallery": "Image Gallery",
+    "modal_documents": "Documents",
+    "modal_links": "Related Links",
+    "modal_activities": "Involved Academic Activities",
+    "modal_materials": "Equipment Details"
   }
 }

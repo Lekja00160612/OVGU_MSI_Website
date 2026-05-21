@@ -63,6 +63,13 @@ export default defineContentConfig({
             title: z.string(),
             url: z.string()
           })
+        ).optional(),
+        links: z.array(
+          z.object({
+            title: z.string(),
+            url: z.string(),
+            description: z.string().optional()
+          })
         ).optional()
       })
     }),
@@ -75,7 +82,20 @@ export default defineContentConfig({
         room: z.string(),
         category: z.string(),
         description: z.string().optional(),
-        images: z.array(z.string()).default([])
+        images: z.array(z.string()).default([]),
+        pdfs: z.array(
+          z.object({
+            title: z.string(),
+            url: z.string()
+          })
+        ).optional(),
+        links: z.array(
+          z.object({
+            title: z.string(),
+            url: z.string(),
+            description: z.string().optional()
+          })
+        ).optional()
       })
     })
   }

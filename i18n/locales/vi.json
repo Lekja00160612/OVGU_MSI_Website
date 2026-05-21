@@ -37,7 +37,8 @@
     "prev": "Trước",
     "next": "Sau",
     "semester_long": "Học kỳ",
-    "more_detail": "Thêm chi tiết"
+    "more_detail": "Thêm chi tiết",
+    "links_label": "Liên Kết Liên Quan"
   },
   "footer": {
     "subtitle": "Chương trình liên kết giữa Trường Đại học Việt Đức (VGU) và Đại học Otto von Guericke Magdeburg (OVGU).",
@@ -59,5 +60,21 @@
     "cat_industry_adventures": "Trải nghiệm Doanh nghiệp",
     "cat_lab_works": "Thực hành Phòng Lab",
     "cat_other_activities": "Hoạt động Khác"
+  },
+  "labs": {
+    "title": "Phòng Lab & Nghiên Cứu",
+    "subtitle": "Trang thiết bị hiện đại và cơ sở hạ tầng nghiên cứu cho Khoa học Vật liệu.",
+    "filter_all": "Tất cả",
+    "search_placeholder": "Tìm kiếm thiết bị...",
+    "no_results": "Không tìm thấy thiết bị nào phù hợp.",
+    "clear_filters": "Xóa Bộ Lọc",
+    "prev": "Trước",
+    "next": "Sau",
+    "view_details": "Xem Chi Tiết",
+    "modal_gallery": "Thư Viện Ảnh",
+    "modal_documents": "Tài Liệu",
+    "modal_links": "Liên Kết Liên Quan",
+    "modal_activities": "Hoạt Động Học Thuật Liên Quan",
+    "modal_materials": "Chi Tiết Thiết Bị"
   }
 }

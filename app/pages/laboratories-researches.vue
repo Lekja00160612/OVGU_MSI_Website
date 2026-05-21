@@ -1,98 +1,123 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 
-// Fetch localized intro/header data
+// ── Nuxt Content fetches ──────────────────────────────────────────────────────
 const pagePath = '/laboratories-researches'
 const { data: pageData } = await useAsyncData(`labs-page-${locale.value}`, () =>
   queryCollection('content').path(pagePath).first()
 )
 
-// Fetch all structured equipments
 const { data: equipments } = await useAsyncData('all-equipments', () =>
   queryCollection('equipments').all()
 )
 
-// Fetch all academic activities for dynamic reference matching
 const { data: activities } = await useAsyncData('labs-activities', () =>
   queryCollection('activities').all()
 )
 
+// ── State ────────────────────────────────────────────────────────────────────
 const activeCategory = ref('All')
-const selectedMachine = ref<any | null>(null)
-const activeImageIndex = ref(0)
-const isDrawerOpen = ref(false)
+const currentPage = ref(1)
+const itemsPerPage = 6
+const gridRef = ref<HTMLElement | null>(null)
 
-// Lightbox states
+const isDetailModalOpen = ref(false)
+const selectedMachine = ref<any | null>(null)
+
+// Search
+const searchQuery = ref('')
+
+// Lightbox (inside modal)
 const lightboxOpen = ref(false)
 const lightboxImages = ref<string[]>([])
 const lightboxActiveIndex = ref(0)
 
-const openLightbox = (imgs: string[], idx: number) => {
-  lightboxImages.value = imgs
-  lightboxActiveIndex.value = idx
-  lightboxOpen.value = true
-}
-
-const nextLightboxImage = () => {
-  if (lightboxImages.value.length === 0) return
-  lightboxActiveIndex.value = (lightboxActiveIndex.value + 1) % lightboxImages.value.length
-}
-
-const prevLightboxImage = () => {
-  if (lightboxImages.value.length === 0) return
-  lightboxActiveIndex.value = (lightboxActiveIndex.value - 1 + lightboxImages.value.length) % lightboxImages.value.length
-}
-
-watch(selectedMachine, (newVal) => {
-  isDrawerOpen.value = !!newVal
-})
-watch(isDrawerOpen, (newVal) => {
-  if (!newVal) {
-    selectedMachine.value = null
-  }
-})
-
+// ── Category helpers ─────────────────────────────────────────────────────────
 const categories = computed(() => {
   if (!equipments.value) return ['All']
-  const unique = new Set(equipments.value.map(e => e.category))
+  const unique = new Set(equipments.value.map((e: any) => e.category))
   return ['All', ...Array.from(unique)]
 })
 
-const filteredEquipments = computed(() => {
-  if (!equipments.value) return []
-  let list = equipments.value
-  if (activeCategory.value !== 'All') {
-    list = list.filter(e => e.category === activeCategory.value)
-  }
-  return list
+// Reset to page 1 on filter/search change & scroll to grid
+watch([activeCategory, searchQuery], () => {
+  currentPage.value = 1
+  nextTick(() => {
+    if (gridRef.value) {
+      const top = gridRef.value.getBoundingClientRect().top + window.scrollY - 24
+      window.scrollTo({ top, behavior: 'smooth' })
+    }
+  })
 })
 
-const getRelatedActivities = (machine: any) => {
+// ── Filtered + paginated list ────────────────────────────────────────────────
+const filteredEquipments = computed(() => {
+  if (!equipments.value) return []
+  return equipments.value.filter((e: any) => {
+    const matchCat = activeCategory.value === 'All' || e.category === activeCategory.value
+    if (!matchCat) return false
+    const q = searchQuery.value.trim().toLowerCase()
+    if (!q) return true
+    const inName = (e.name || '').toLowerCase().includes(q)
+    const inDesc = (e.description || '').toLowerCase().includes(q)
+    return inName || inDesc
+  })
+})
+
+const totalPages = computed(() =>
+  Math.ceil(filteredEquipments.value.length / itemsPerPage)
+)
+
+const paginatedEquipments = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage
+  return filteredEquipments.value.slice(start, start + itemsPerPage)
+})
+
+// ── Modal helpers ────────────────────────────────────────────────────────────
+function openModal(machine: any) {
+  selectedMachine.value = machine
+  isDetailModalOpen.value = true
+}
+
+function getImages(m: any) { return m?.images || [] }
+function getPdfs(m: any)   { return m?.pdfs   || [] }
+function getLinks(m: any)  { return m?.links   || [] }
+
+function getRelatedActivities(machine: any) {
   if (!activities.value || !machine) return []
-  return activities.value.filter(act => {
-    const titleMatch = act.title?.toLowerCase().includes(machine.name.toLowerCase()) || 
+  return activities.value.filter((act: any) => {
+    const titleMatch = act.title?.toLowerCase().includes(machine.name.toLowerCase()) ||
                        act.title?.toLowerCase().includes(machine.id.toLowerCase())
-    const descMatch = (act.meta?.description || act.description || '').toLowerCase().includes(machine.name.toLowerCase()) ||
-                      (act.meta?.description || act.description || '').toLowerCase().includes(machine.id.toLowerCase())
+    const descMatch  = (act.meta?.description || act.description || '').toLowerCase().includes(machine.name.toLowerCase()) ||
+                       (act.meta?.description || act.description || '').toLowerCase().includes(machine.id.toLowerCase())
     return titleMatch || descMatch
   })
 }
 
-const selectMachine = (machine: any) => {
-  selectedMachine.value = machine
-  activeImageIndex.value = 0
+// Lightbox
+function openLightbox(imgs: string[], idx: number) {
+  lightboxImages.value = imgs
+  lightboxActiveIndex.value = idx
+  lightboxOpen.value = true
+}
+function nextLightboxImage() {
+  if (!lightboxImages.value.length) return
+  lightboxActiveIndex.value = (lightboxActiveIndex.value + 1) % lightboxImages.value.length
+}
+function prevLightboxImage() {
+  if (!lightboxImages.value.length) return
+  lightboxActiveIndex.value = (lightboxActiveIndex.value - 1 + lightboxImages.value.length) % lightboxImages.value.length
 }
 
-// Research slides data for OVGU Chairs
+// ── Research slides (OVGU Chairs) ───────────────────────────────────────────
 const activeSlideIndex = ref(0)
 const ovguChairs = [
   {
     id: 'comp-mech',
     title: 'Chair of Computational Mechanics',
     head: 'Prof. Dr.-Ing. Daniel Juhre',
-    themeColor: 'var(--color-primary)',
     bgGradient: 'linear-gradient(135deg, #1e3a5f 0%, #2e5280 100%)',
     icon: '⚙️',
     topics: [
@@ -107,7 +132,6 @@ const ovguChairs = [
     id: 'solid-state',
     title: 'Chair of Solid State Physics',
     head: 'Prof. Dr. rer. nat. Jürgen Christen',
-    themeColor: 'var(--color-ovgu-blue)',
     bgGradient: 'linear-gradient(135deg, #009fdf 0%, #007bb5 100%)',
     icon: '⚛️',
     topics: [
@@ -122,7 +146,6 @@ const ovguChairs = [
     id: 'hi-temp',
     title: 'Chair of High Temperature Materials',
     head: 'Prof. Dr.-Ing. Mania Krüger',
-    themeColor: 'var(--color-accent)',
     bgGradient: 'linear-gradient(135deg, #e87722 0%, #c95e0a 100%)',
     icon: '🔥',
     topics: [
@@ -137,7 +160,6 @@ const ovguChairs = [
     id: 'metallic',
     title: 'Chair of Metallic Materials',
     head: 'Prof. Dr.-Ing. Thorsten Halle',
-    themeColor: '#495057',
     bgGradient: 'linear-gradient(135deg, #495057 0%, #212529 100%)',
     icon: '🔩',
     topics: [
@@ -152,7 +174,6 @@ const ovguChairs = [
     id: 'non-metallic',
     title: 'Chair of Non-Metallic Materials',
     head: 'Prof. Dr. rer. nat. Michael Scheffler',
-    themeColor: '#0b5229',
     bgGradient: 'linear-gradient(135deg, #0b5229 0%, #1e703f 100%)',
     icon: '🏺',
     topics: [
@@ -167,7 +188,6 @@ const ovguChairs = [
     id: 'eng-mechanics',
     title: 'Chair of Engineering Mechanics',
     head: 'Prof. Dr.-Ing. habil. Holm Altenbach (Emeritus)',
-    themeColor: '#7b1fa2',
     bgGradient: 'linear-gradient(135deg, #7b1fa2 0%, #4a148c 100%)',
     icon: '📐',
     topics: [
@@ -180,322 +200,682 @@ const ovguChairs = [
   }
 ]
 
-const nextSlide = () => {
-  activeSlideIndex.value = (activeSlideIndex.value + 1) % ovguChairs.length
-}
-const prevSlide = () => {
-  activeSlideIndex.value = (activeSlideIndex.value - 1 + ovguChairs.length) % ovguChairs.length
-}
+const nextSlide = () => { activeSlideIndex.value = (activeSlideIndex.value + 1) % ovguChairs.length }
+const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 + ovguChairs.length) % ovguChairs.length }
 </script>
 
 <template>
   <div class="page-labs">
-    <!-- Header -->
+
+    <!-- ── Header Banner ── -->
     <div class="header-banner">
-      <div class="container text-center">
-        <h1 class="page-title">{{ pageData?.title || 'Laboratories & Researches' }}</h1>
-        <p class="page-subtitle">{{ pageData?.description || 'Explore our state-of-the-art facilities and scientific equipment.' }}</p>
+      <div class="banner-inner">
+        <h1 class="page-title">{{ pageData?.title || t('labs.title') }}</h1>
+        <p class="page-subtitle">{{ pageData?.description || t('labs.subtitle') }}</p>
       </div>
     </div>
 
-    <!-- Intro -->
-    <div class="container intro-section text-center prose">
-      <p class="intro-text">
-        The Vietnamese-German University boasts some of the most advanced materials science laboratories in Southeast Asia. Our students have direct access to equipment that is typically restricted to PhD researchers or industry professionals.
-      </p>
-    </div>
+    <!-- ── Search + Filter Bar ── -->
+    <div class="container filter-bar">
+      <!-- Search box -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input
+          v-model="searchQuery"
+          type="text"
+          :placeholder="t('labs.search_placeholder')"
+          class="search-input"
+        />
+        <button
+          v-if="searchQuery"
+          class="search-clear"
+          @click="searchQuery = ''"
+          aria-label="Clear search"
+        >✕</button>
+      </div>
 
-    <!-- Category Filters -->
-    <div class="container filter-container">
+      <!-- Category pills -->
       <div class="category-filters">
-        <button 
-          v-for="cat in categories" 
-          :key="cat" 
+        <button
+          v-for="cat in categories"
+          :key="cat"
           class="cat-btn"
           :class="{ 'cat-btn--active': activeCategory === cat }"
           @click="activeCategory = cat"
         >
-          {{ cat }}
+          {{ cat === 'All' ? t('labs.filter_all') : cat }}
         </button>
       </div>
     </div>
 
-    <!-- Split Page Layout -->
-    <div class="container labs-layout-wrapper">
-      <div class="labs-layout" :class="{ 'labs-layout--split': selectedMachine !== null }">
-        
-        <!-- Left: Equipment Grid -->
-        <div class="equipment-section">
-          <div class="equipment-grid">
-            <div 
-              v-for="machine in filteredEquipments" 
-              :key="machine.id" 
-              class="equipment-card"
-              :class="{ 'equipment-card--active': selectedMachine?.id === machine.id }"
-              @click="selectMachine(machine)"
-            >
-              <div class="card-img-wrap">
-                <img 
-                  v-if="machine.images && machine.images.length > 0" 
-                  :src="machine.images[0]" 
-                  :alt="machine.name" 
-                  class="card-img" 
-                />
-                <div v-else class="img-placeholder">🔬</div>
-                <span class="card-room">{{ machine.room }}</span>
-              </div>
-              <div class="card-body">
-                <h3 class="card-name">{{ machine.name }}</h3>
-                <span class="card-cat">{{ machine.category }}</span>
-                <p v-if="machine.description" class="card-desc">{{ machine.description.substring(0, 100) }}...</p>
-              </div>
-            </div>
-          </div>
+    <!-- ── Equipment Grid ── -->
+    <div ref="gridRef" class="container equipment-grid">
+      <div
+        v-for="machine in paginatedEquipments"
+        :key="machine.id"
+        class="equipment-card"
+        @click="openModal(machine)"
+      >
+        <!-- Image area -->
+        <div class="card-img-wrap">
+          <img
+            v-if="machine.images && machine.images.length > 0"
+            :src="machine.images[0]"
+            :alt="machine.name"
+            class="card-img"
+          />
+          <div v-else class="img-placeholder">🔬</div>
+          <span class="card-room">📍 {{ machine.room }}</span>
+          <span class="card-category-badge">{{ machine.category }}</span>
         </div>
 
-        <!-- Right: Desktop Sticky Details Panel (renders only when machine selected) -->
-        <div v-if="selectedMachine" class="details-section desktop-only">
-          <div class="details-panel-card fade-in">
-            <div class="panel-header">
-              <span class="detail-room">📍 {{ selectedMachine.room }}</span>
-              <button class="panel-close" @click="selectedMachine = null">✕ Close Details</button>
-            </div>
-            
-            <h3 class="detail-title">{{ selectedMachine.name }}</h3>
-            <span class="detail-cat mb-4 block inline-block bg-primary-50 text-primary px-2.5 py-1 rounded text-xs font-bold">{{ selectedMachine.category }}</span>
-
-            <!-- Google Image / Masonry View Gallery -->
-            <div v-if="selectedMachine.images && selectedMachine.images.length > 0" class="machine-image-gallery mb-6">
-              <div 
-                class="gallery-grid" 
-                :class="'gallery-grid--' + selectedMachine.images.length"
-              >
-                <div 
-                  v-for="(img, idx) in selectedMachine.images" 
-                  :key="idx" 
-                  class="gallery-image-wrapper"
-                  :class="{ 'gallery-image-wrapper--featured': idx === 0 && selectedMachine.images.length > 1 }"
-                  @click="openLightbox(selectedMachine.images, idx)"
-                >
-                  <img :src="img" class="gallery-image" alt="Equipment image" />
-                  <div class="gallery-image-overlay">
-                    <span class="zoom-icon">🔍 View Large</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Content details -->
-            <div class="detail-body-text prose">
-              <p>{{ selectedMachine.description }}</p>
-              <ContentRenderer :value="selectedMachine" />
-            </div>
-
-            <!-- Dynamic Related Activities -->
-            <div v-if="getRelatedActivities(selectedMachine).length > 0" class="related-activities-box mt-6">
-              <h4 class="related-title text-sm font-bold text-gray-900 mb-2">Involved Academic Activities</h4>
-              <ul class="related-list space-y-1.5 text-xs text-primary font-semibold">
-                <li v-for="act in getRelatedActivities(selectedMachine)" :key="act.path">
-                  <NuxtLink :to="act.path.replace('/_activities', '/academic-activities')" class="hover:underline">
-                    🔗 {{ act.title }} ({{ act.meta?.date || act.date }})
-                  </NuxtLink>
-                </li>
-              </ul>
-            </div>
+        <!-- Card body: name + fixed-height scrollable description -->
+        <div class="card-body">
+          <h3 class="card-name">{{ machine.name }}</h3>
+          <div class="card-desc-scroll">
+            <p class="card-desc">{{ machine.description }}</p>
           </div>
+          <button class="card-cta" @click.stop="openModal(machine)">
+            <svg class="cta-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            {{ t('labs.view_details') }}
+          </button>
         </div>
-
       </div>
     </div>
 
-    <!-- Mobile Drawer Overlay Details View using Nuxt UI USlideover -->
-    <USlideover v-model="isDrawerOpen" side="bottom" class="mobile-only-slideover">
-      <div class="drawer-scroll-body p-6 overflow-y-auto max-h-[80vh]">
-        <div class="flex justify-between items-start mb-4">
-          <h3 class="drawer-title text-xl font-bold">{{ selectedMachine?.name }}</h3>
-          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1.5" @click="isDrawerOpen = false" />
-        </div>
-        <span class="detail-room mb-2 block text-sm font-semibold text-gray-500">📍 {{ selectedMachine?.room }}</span>
-        <span class="detail-cat mb-4 inline-block bg-primary-50 text-primary px-2.5 py-1 rounded text-xs font-bold">{{ selectedMachine?.category }}</span>
-        
-        <!-- Gallery inside Mobile slideover using UCarousel -->
-        <div v-if="selectedMachine?.images && selectedMachine.images.length > 0" class="mobile-gallery-carousel mb-4">
-          <UCarousel
-            v-slot="{ item }"
-            :items="selectedMachine.images"
-            :ui="{ item: 'basis-full' }"
-            class="rounded-lg overflow-hidden shadow"
-            arrows
-            indicators
-          >
-            <img :src="item" class="w-full h-48 object-cover cursor-pointer" drag-value="false" @click="openLightbox(selectedMachine.images, selectedMachine.images.indexOf(item))" />
-          </UCarousel>
-        </div>
+    <!-- ── No Results ── -->
+    <div v-if="filteredEquipments.length === 0" class="container no-results">
+      <p class="no-results-text">{{ t('labs.no_results') }}</p>
+      <button class="clear-btn" @click="activeCategory = 'All'; searchQuery = ''">{{ t('labs.clear_filters') }}</button>
+    </div>
 
-        <div class="prose max-w-none text-sm text-gray-600 leading-relaxed">
-          <p>{{ selectedMachine?.description }}</p>
-          <ContentRenderer v-if="selectedMachine" :value="selectedMachine" />
-        </div>
-
-        <!-- Dynamic Related Activities in Mobile -->
-        <div v-if="selectedMachine && getRelatedActivities(selectedMachine).length > 0" class="related-activities-box mt-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
-          <h4 class="related-title text-sm font-bold text-gray-900 mb-2">Involved Academic Activities</h4>
-          <ul class="related-list space-y-1.5 text-xs text-primary font-semibold">
-            <li v-for="act in getRelatedActivities(selectedMachine)" :key="act.path">
-              <NuxtLink :to="act.path.replace('/_activities', '/academic-activities')" class="hover:underline">
-                🔗 {{ act.title }} ({{ act.meta?.date || act.date }})
-              </NuxtLink>
-            </li>
-          </ul>
-        </div>
+    <!-- ── Pagination Bar ── -->
+    <div v-if="totalPages > 1" class="container pagination-container">
+      <div class="pagination-bar">
+        <button class="pag-btn" :disabled="currentPage === 1" @click="currentPage--">
+          &larr; {{ t('labs.prev') }}
+        </button>
+        <button
+          v-for="p in totalPages"
+          :key="p"
+          class="pag-num"
+          :class="{ 'pag-num--active': currentPage === p }"
+          @click="currentPage = p"
+        >
+          {{ p }}
+        </button>
+        <button class="pag-btn" :disabled="currentPage === totalPages" @click="currentPage++">
+          {{ t('labs.next') }} &rarr;
+        </button>
       </div>
-    </USlideover>
+    </div>
 
-    <!-- OVGU CHAIRS RESEARCH SLIDES SECTION -->
+    <!-- ── OVGU Research Slides ── -->
     <div class="container section-lg researches-section">
       <div class="section-header text-center">
         <span class="badge badge-primary">OVGU Collaboration</span>
         <h2 class="section-title mt-2">Research Areas at Partner Chairs (OVGU)</h2>
         <p class="section-subtitle max-w-2xl mx-auto">
-          Explore the focus areas of the 6 partner Chairs at Otto von Guericke University Magdeburg. These represent pathways for thesis topics, projects, and German semester collaborations.
+          Explore the focus areas of the 6 partner Chairs at Otto von Guericke University Magdeburg.
         </p>
       </div>
-
-      <!-- Slides Carousel Visual Guide -->
       <div class="slides-carousel-wrapper">
         <div class="slides-container">
-          <div 
-            class="slide-card" 
-            :style="{ background: ovguChairs[activeSlideIndex].bgGradient }"
-          >
+          <div class="slide-card" :style="{ background: ovguChairs[activeSlideIndex].bgGradient }">
             <div class="slide-badge">{{ activeSlideIndex + 1 }} / {{ ovguChairs.length }}</div>
             <div class="slide-icon">{{ ovguChairs[activeSlideIndex].icon }}</div>
             <h3 class="slide-chair-title">{{ ovguChairs[activeSlideIndex].title }}</h3>
             <span class="slide-chair-head">Head: {{ ovguChairs[activeSlideIndex].head }}</span>
-            
             <div class="slide-topics-box">
               <h4>Core Research Focus Areas:</h4>
               <ul>
-                <li v-for="(topic, idx) in ovguChairs[activeSlideIndex].topics" :key="idx">
-                  ✓ {{ topic }}
-                </li>
+                <li v-for="(topic, idx) in ovguChairs[activeSlideIndex].topics" :key="idx">✓ {{ topic }}</li>
               </ul>
             </div>
-            
             <div class="slide-footer-meta">
               <span><strong>Sample Projects:</strong> {{ ovguChairs[activeSlideIndex].projects }}</span>
             </div>
           </div>
         </div>
-
-        <!-- Controls -->
         <div class="carousel-controls">
-          <button class="control-btn" @click="prevSlide" aria-label="Previous slide">←</button>
+          <button class="control-btn" @click="prevSlide" aria-label="Previous">←</button>
           <div class="carousel-dots">
-            <span 
-              v-for="(chair, idx) in ovguChairs" 
+            <span
+              v-for="(chair, idx) in ovguChairs"
               :key="chair.id"
               class="carousel-dot"
               :class="{ 'carousel-dot--active': idx === activeSlideIndex }"
               @click="activeSlideIndex = idx"
             />
           </div>
-          <button class="control-btn" @click="nextSlide" aria-label="Next slide">→</button>
+          <button class="control-btn" @click="nextSlide" aria-label="Next">→</button>
         </div>
       </div>
     </div>
 
-    <!-- Lightbox Modal for Large Image View -->
-    <UModal v-model="lightboxOpen" class="lightbox-modal">
-      <div class="relative p-2 bg-black rounded-lg overflow-hidden flex flex-col items-center">
-        <button class="absolute top-4 right-4 text-white text-2xl font-bold z-50 bg-black/50 w-10 h-10 rounded-full flex items-center justify-center hover:bg-black" @click="lightboxOpen = false">✕</button>
-        <img v-if="lightboxImages.length > 0" :src="lightboxImages[lightboxActiveIndex]" class="max-w-full max-h-[80vh] object-contain rounded" />
-        <div class="flex justify-between w-full mt-4 px-4 text-white font-semibold text-sm">
-          <span>Image {{ lightboxActiveIndex + 1 }} of {{ lightboxImages.length }}</span>
-          <div class="flex gap-4">
-            <button v-if="lightboxImages.length > 1" @click="prevLightboxImage" class="hover:text-accent">&larr; Prev</button>
-            <button v-if="lightboxImages.length > 1" @click="nextLightboxImage" class="hover:text-accent">Next &rarr;</button>
+    <!-- ── Equipment Detail Modal ── -->
+    <Teleport to="body">
+      <Transition name="modal-fade">
+        <div
+          v-if="isDetailModalOpen && selectedMachine"
+          class="modal-overlay"
+          @click.self="isDetailModalOpen = false"
+        >
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <div class="modal-header-info">
+                <span class="modal-room">📍 {{ selectedMachine.room }}</span>
+                <h3 class="modal-title">{{ selectedMachine.name }}</h3>
+                <span class="modal-cat-badge">{{ selectedMachine.category }}</span>
+              </div>
+              <button class="modal-close" @click="isDetailModalOpen = false" title="Close">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+              <!-- Gallery -->
+              <div v-if="getImages(selectedMachine).length" class="modal-section">
+                <h4 class="section-label">{{ t('labs.modal_gallery') }}</h4>
+                <div class="gallery-scroll">
+                  <div
+                    v-for="(img, idx) in getImages(selectedMachine)"
+                    :key="idx"
+                    class="gallery-item"
+                    @click="openLightbox(getImages(selectedMachine), idx)"
+                  >
+                    <img :src="img" :alt="selectedMachine.name + ' image ' + (idx+1)" draggable="false" />
+                    <div class="gallery-item-overlay">
+                      <span class="zoom-label">🔍 View Large</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Full description + body content -->
+              <div class="modal-section modal-desc">
+                <h4 class="section-label">{{ t('labs.modal_materials') }}</h4>
+                <p class="desc-text">{{ selectedMachine.description }}</p>
+                <ContentRenderer v-if="selectedMachine.body" :value="selectedMachine" class="prose-content" />
+              </div>
+
+              <!-- Documents / PDFs -->
+              <div v-if="getPdfs(selectedMachine).length" class="modal-section">
+                <h4 class="section-label">{{ t('labs.modal_documents') }}</h4>
+                <div class="doc-list">
+                  <a
+                    v-for="(pdf, idx) in getPdfs(selectedMachine)"
+                    :key="idx"
+                    :href="pdf.url"
+                    target="_blank"
+                    rel="noopener"
+                    class="doc-link"
+                  >
+                    <div class="doc-icon">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <span class="doc-title">{{ pdf.title }}</span>
+                    <svg class="doc-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Links -->
+              <div v-if="getLinks(selectedMachine).length" class="modal-section">
+                <h4 class="section-label">{{ t('labs.modal_links') }}</h4>
+                <div class="links-list">
+                  <a
+                    v-for="(link, idx) in getLinks(selectedMachine)"
+                    :key="idx"
+                    :href="link.url"
+                    target="_blank"
+                    rel="noopener"
+                    class="link-item"
+                  >
+                    <div class="link-icon">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                      </svg>
+                    </div>
+                    <div class="link-body">
+                      <span class="link-title">{{ link.title }}</span>
+                      <span v-if="link.description" class="link-desc">{{ link.description }}</span>
+                    </div>
+                    <svg class="link-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Related Activities -->
+              <div v-if="getRelatedActivities(selectedMachine).length" class="modal-section">
+                <h4 class="section-label">{{ t('labs.modal_activities') }}</h4>
+                <div class="activity-list">
+                  <NuxtLink
+                    v-for="act in getRelatedActivities(selectedMachine)"
+                    :key="act.path"
+                    :to="act.path.replace('/_activities', '/academic-activities')"
+                    class="activity-link"
+                    @click="isDetailModalOpen = false"
+                  >
+                    <span class="activity-link-icon">🔗</span>
+                    <span class="activity-link-text">{{ act.title }}</span>
+                    <span v-if="act.meta?.date || act.date" class="activity-link-date">{{ act.meta?.date || act.date }}</span>
+                  </NuxtLink>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
-      </div>
-    </UModal>
+      </Transition>
+    </Teleport>
+
+    <!-- ── Lightbox ── -->
+    <Teleport to="body">
+      <Transition name="modal-fade">
+        <div v-if="lightboxOpen" class="lightbox-overlay" @click.self="lightboxOpen = false">
+          <button class="lightbox-close" @click="lightboxOpen = false">✕</button>
+          <img v-if="lightboxImages.length > 0" :src="lightboxImages[lightboxActiveIndex]" class="lightbox-img" />
+          <div class="lightbox-controls">
+            <span class="lightbox-counter">{{ lightboxActiveIndex + 1 }} / {{ lightboxImages.length }}</span>
+            <div class="lightbox-nav">
+              <button v-if="lightboxImages.length > 1" @click="prevLightboxImage" class="lightbox-nav-btn">&larr; Prev</button>
+              <button v-if="lightboxImages.length > 1" @click="nextLightboxImage" class="lightbox-nav-btn">Next &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
 
   </div>
 </template>
 
 <style scoped>
-.page-labs { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 5rem; }
-
-.intro-section { max-width: 800px; margin: 0 auto 3rem auto; }
-.intro-text { font-size: 1.15rem; color: var(--color-gray-700); line-height: 1.8; }
-
-.filter-container { display: flex; justify-content: center; margin-bottom: 3rem; }
-.category-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
-.cat-btn { padding: 0.6rem 1.25rem; background: #fff; border: 1px solid var(--color-gray-200); border-radius: var(--radius-full); font-size: 0.9rem; font-weight: 600; color: var(--color-gray-600); cursor: pointer; transition: all 200ms; }
-.cat-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
-.cat-btn--active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
-
-/* Layout grid configuration */
-.labs-layout-wrapper { max-width: var(--container); margin: 0 auto; }
-.labs-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; transition: grid-template-columns 300ms cubic-bezier(0.16, 1, 0.3, 1); }
-
-@media (min-width: 900px) {
-  .labs-layout--split { grid-template-columns: 1.4fr 1.2fr; align-items: start; }
+/* ── Page ── */
+.page-labs {
+  min-height: 80vh;
+  background: var(--color-gray-50);
+  padding-bottom: 5rem;
 }
 
-.equipment-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+/* ── Header Banner ── */
+.header-banner {
+  background: var(--color-primary-dark);
+  padding: 3.5rem 1.5rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.banner-inner { max-width: 1200px; margin: 0 auto; }
+.page-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-family: var(--font-display, inherit);
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  color: #fff;
+  display: inline-block;
+}
+.page-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--color-accent);
+  margin: 0.5rem auto 0;
+  border-radius: var(--radius-full);
+}
+.page-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ── Container ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ── Filter Bar ── */
+.filter-bar {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .filter-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Search box */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 340px;
+}
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--color-gray-400);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  padding: 0.65rem 2.5rem 0.65rem 2.5rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--color-gray-800);
+  background: #fff;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-full);
+  outline: none;
+  transition: border-color 250ms, box-shadow 250ms;
+}
+.search-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+}
+.search-clear {
+  position: absolute;
+  right: 0.85rem;
+  background: var(--color-gray-200);
+  border: none;
+  color: var(--color-gray-600);
+  font-size: 0.75rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 150ms;
+  line-height: 1;
+}
+.search-clear:hover { background: var(--color-gray-300); color: var(--color-gray-900); }
+
+/* Category filters */
+.category-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+.category-filters::-webkit-scrollbar { display: none; }
+@media (min-width: 768px) {
+  .category-filters { flex-wrap: wrap; overflow-x: visible; padding-bottom: 0; justify-content: flex-end; }
+}
+.cat-btn {
+  white-space: nowrap;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-gray-700);
+  background: #fff;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 200ms;
+}
+.cat-btn:hover { color: var(--color-primary); border-color: var(--color-primary); }
+.cat-btn--active {
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  border-color: var(--color-primary) !important;
+}
+
+
+/* ── Equipment Grid ── */
+.equipment-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
 @media (min-width: 640px) { .equipment-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .equipment-grid { grid-template-columns: repeat(3, 1fr); } }
 
-.equipment-card { background: #fff; border: 1px solid var(--color-gray-200); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: all 250ms; cursor: pointer; display: flex; flex-direction: column; }
-.equipment-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--color-primary-100); }
-.equipment-card--active { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-accent-50); }
-
-.card-img-wrap { position: relative; height: 180px; overflow: hidden; background: var(--color-gray-100); display: flex; align-items: center; justify-content: center; }
-.card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 300ms; }
-.equipment-card:hover .card-img { transform: scale(1.04); }
-.img-placeholder { font-size: 3rem; opacity: 0.6; }
-.card-room { position: absolute; bottom: 0.75rem; left: 0.75rem; background: rgba(15, 34, 64, 0.85); color: #fff; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm); backdrop-filter: blur(4px); }
-
-.card-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
-.card-name { font-size: 1.1rem; font-weight: 700; color: var(--color-primary-dark); margin-bottom: 0.3rem; line-height: 1.3; }
-.card-cat { font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--color-accent); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-.card-desc { font-size: 0.85rem; color: var(--color-gray-600); line-height: 1.5; }
-
-/* Right Details Panel */
-.details-section { position: sticky; top: 100px; z-index: 10; max-height: calc(100vh - 120px); overflow-y: auto; padding-right: 0.5rem; }
-.details-panel-card { background: #fff; border: 1px solid var(--color-gray-200); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-md); }
-.panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
-.panel-close { background: none; border: none; color: var(--color-gray-500); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: color 150ms; }
-.panel-close:hover { color: var(--color-accent); }
-
-.detail-room { font-size: 0.75rem; font-weight: 700; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.05em; }
-.detail-title { font-size: 1.6rem; font-weight: 800; color: var(--color-primary-dark); line-height: 1.25; margin-bottom: 0.25rem; }
-.detail-cat { font-size: 0.8rem; color: var(--color-gray-500); font-weight: 600; margin-bottom: 1.25rem; }
-
-.detail-body-text { font-size: 0.95rem; color: var(--color-gray-700); line-height: 1.6; }
-
-.related-activities-box { border-top: 1px solid var(--color-gray-200); padding-top: 1.25rem; }
-.related-title { font-size: 0.85rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
-.related-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-
-/* Responsive overlays / drawers */
-.mobile-only { display: block; }
-.desktop-only { display: none; }
-@media (min-width: 900px) {
-  .mobile-only { display: none; }
-  .desktop-only { display: block; }
-  /* Hide mobile bottom-sheet on desktop */
-  .mobile-only-slideover { display: none !important; }
+/* ── Equipment Card ── */
+.equipment-card {
+  background: #fff;
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.equipment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gray-200);
 }
 
-.drawer-scroll-body { overflow-y: auto; padding: 1.5rem; flex: 1; }
-.drawer-title { font-size: 1.5rem; font-weight: 800; color: var(--color-primary-dark); margin-bottom: 0.25rem; line-height: 1.3; }
+/* Card image area */
+.card-img-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: var(--color-gray-100);
+  flex-shrink: 0;
+}
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+.equipment-card:hover .card-img { transform: scale(1.04); }
+.img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; opacity: 0.4; }
+.card-room {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  background: rgba(15, 34, 64, 0.85);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(4px);
+}
+.card-category-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
-/* OVGU Research Slides Styles */
+/* Card body */
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  transition: color 200ms;
+}
+.equipment-card:hover .card-name { color: var(--color-accent); }
+
+/* Fixed-height scrollable description */
+.card-desc-scroll {
+  height: 80px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-300) transparent;
+  margin-bottom: 1rem;
+  padding-right: 0.25rem;
+}
+.card-desc-scroll::-webkit-scrollbar { width: 4px; }
+.card-desc-scroll::-webkit-scrollbar-thumb { background: var(--color-gray-300); border-radius: 4px; }
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--color-gray-600);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CTA button */
+.card-cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--color-accent-dark);
+  background: var(--color-accent-50);
+  border: 1.5px solid rgba(232, 119, 34, 0.25);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.25s;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+.card-cta:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(232, 119, 34, 0.3);
+}
+.cta-icon { width: 16px; height: 16px; }
+
+/* ── No Results ── */
+.no-results { padding: 3rem 1.5rem; text-align: center; }
+.no-results-text { font-size: 1rem; color: var(--color-gray-600); margin-bottom: 1.25rem; }
+.clear-btn {
+  padding: 0.55rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-primary);
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 250ms;
+}
+.clear-btn:hover { color: #fff; background: var(--color-primary); }
+
+/* ── Pagination ── */
+.pagination-container { display: flex; justify-content: center; margin-top: 1rem; }
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #fff;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-gray-200);
+}
+.pag-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-gray-600);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: all 200ms;
+}
+.pag-btn:hover:not(:disabled) { color: var(--color-primary); background: var(--color-gray-100); }
+.pag-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.pag-num {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-gray-700);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.pag-num:hover:not(.pag-num--active) { background: var(--color-gray-100); color: var(--color-primary); }
+.pag-num--active {
+  background: var(--color-accent) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 6px rgba(232, 119, 34, 0.3);
+}
+
+/* ── Research Slides ── */
 .researches-section { border-top: 1px solid var(--color-gray-200); margin-top: 5rem; }
-.slides-carousel-wrapper { max-width: 800px; margin: 3rem auto 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
-.slides-container { perspective: 1000px; }
-.slide-card { border-radius: var(--radius-xl); padding: 3rem; color: #fff; box-shadow: var(--shadow-lg); position: relative; min-height: 380px; display: flex; flex-direction: column; transition: all 400ms var(--ease-out); }
+.section-header { margin-bottom: 2rem; }
+.section-title { font-size: 1.75rem; font-weight: 800; color: var(--color-primary-dark); margin-bottom: 0.5rem; }
+.section-subtitle { font-size: 1rem; color: var(--color-gray-600); line-height: 1.6; }
+.badge-primary {
+  display: inline-block;
+  padding: 0.25rem 0.85rem;
+  background: var(--color-primary-50);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.5rem;
+}
+.slides-carousel-wrapper { max-width: 800px; margin: 2rem auto 0; display: flex; flex-direction: column; gap: 1.5rem; }
+.slide-card {
+  border-radius: var(--radius-xl);
+  padding: 3rem;
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  transition: all 400ms var(--ease-out);
+}
 .slide-badge { position: absolute; top: 1.5rem; right: 2rem; font-size: 0.8rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); backdrop-filter: blur(4px); }
 .slide-icon { font-size: 3rem; margin-bottom: 1rem; }
 .slide-chair-title { font-size: 1.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; }
@@ -505,7 +885,6 @@ const prevSlide = () => {
 .slide-topics-box ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
 .slide-topics-box li { font-size: 1rem; line-height: 1.5; color: rgba(255,255,255,0.95); }
 .slide-footer-meta { margin-top: auto; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1.25rem; font-size: 0.9rem; color: rgba(255,255,255,0.85); }
-
 .carousel-controls { display: flex; align-items: center; justify-content: space-between; max-width: 320px; margin: 0 auto; }
 .control-btn { background: #fff; border: 1px solid var(--color-gray-200); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow-sm); transition: all 200ms; color: var(--color-primary); }
 .control-btn:hover { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
@@ -513,80 +892,270 @@ const prevSlide = () => {
 .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-gray-300); cursor: pointer; transition: all 200ms; }
 .carousel-dot--active { background: var(--color-primary); width: 24px; border-radius: 4px; }
 
-.fade-in { animation: fadeIn 300ms ease forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+/* ── Modal Transition ── */
+.modal-fade-enter-active, .modal-fade-leave-active { transition: opacity 0.3s ease; }
+.modal-fade-enter-from, .modal-fade-leave-to { opacity: 0; }
 
-/* Google Image Style Gallery grid */
-.machine-image-gallery {
+/* ── Detail Modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 34, 64, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.modal-content {
+  background: #fff;
+  border-radius: var(--radius-xl);
   width: 100%;
-}
-.gallery-grid {
-  display: grid;
-  gap: 0.5rem;
-  border-radius: var(--radius-lg);
+  max-width: 680px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.22);
   overflow: hidden;
+  animation: modalScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.gallery-grid--1 {
-  grid-template-columns: 1fr;
-}
-.gallery-grid--2 {
-  grid-template-columns: repeat(2, 1fr);
-  height: 250px;
-}
-.gallery-grid--3 {
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: repeat(2, 120px);
-  height: 248px;
-}
-.gallery-grid--3 .gallery-image-wrapper--featured {
-  grid-row: span 2;
-  height: 248px;
-}
-.gallery-grid--4 {
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: repeat(3, 80px);
-  height: 248px;
-}
-.gallery-grid--4 .gallery-image-wrapper--featured {
-  grid-row: span 3;
-  height: 248px;
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: scale(0.95) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.gallery-image-wrapper {
-  position: relative;
+/* Modal header */
+.modal-header {
+  padding: 1.5rem 1.75rem 1.25rem;
+  border-bottom: 1px solid var(--color-gray-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  background: #fff;
+}
+.modal-header-info { display: flex; flex-direction: column; gap: 0.35rem; flex: 1; min-width: 0; }
+.modal-room { font-size: 0.72rem; font-weight: 700; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.05em; }
+.modal-title { font-size: 1.35rem; font-weight: 800; color: var(--color-primary-dark); line-height: 1.25; margin: 0; }
+.modal-cat-badge {
+  display: inline-block;
+  background: var(--color-primary-50);
+  color: var(--color-primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
   cursor: pointer;
+  color: var(--color-gray-500);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.modal-close:hover { background: var(--color-gray-100); color: var(--color-gray-900); }
+
+/* Modal body */
+.modal-body {
+  padding: 1.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 1;
+}
+
+/* Section label */
+.section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--color-gray-400);
+  letter-spacing: 0.07em;
+  margin-bottom: 0.75rem;
+}
+
+/* Modal description */
+.modal-desc {}
+.desc-text { font-size: 0.95rem; color: var(--color-gray-700); line-height: 1.7; margin: 0 0 0.75rem; }
+.prose-content { font-size: 0.95rem; color: var(--color-gray-600); line-height: 1.7; }
+
+/* Gallery in modal */
+.gallery-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.75rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-300) transparent;
+}
+.gallery-scroll::-webkit-scrollbar { height: 4px; }
+.gallery-scroll::-webkit-scrollbar-thumb { background: var(--color-gray-300); border-radius: 4px; }
+.gallery-item {
+  position: relative;
+  scroll-snap-align: center;
+  flex: 0 0 100%;
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
   overflow: hidden;
-  height: 100%;
+  cursor: pointer;
 }
-.gallery-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 300ms ease;
-}
-.gallery-image-wrapper:hover .gallery-image {
-  transform: scale(1.05);
-}
-.gallery-image-overlay {
+.gallery-item img { width: 100%; height: 300px; object-fit: contain; display: block; }
+.gallery-item-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(30, 58, 95, 0.4);
+  background: rgba(30, 58, 95, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 250ms ease;
+  transition: opacity 250ms;
 }
-.gallery-image-wrapper:hover .gallery-image-overlay {
-  opacity: 1;
-}
-.zoom-icon {
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.zoom-label {
   color: #fff;
   font-size: 0.85rem;
   font-weight: 700;
   background: var(--color-accent);
-  padding: 0.35rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
 }
+
+/* Documents */
+.doc-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.doc-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+  text-decoration: none;
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  transition: all 0.2s;
+}
+.doc-link:hover { background: var(--color-primary-50); border-color: var(--color-primary-100); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.doc-icon { background: #fee2e2; color: #dc2626; padding: 0.6rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.doc-icon svg { width: 22px; height: 22px; }
+.doc-title { flex: 1; font-size: 0.9rem; }
+.doc-arrow { width: 18px; height: 18px; color: var(--color-gray-400); transition: transform 0.2s; }
+.doc-link:hover .doc-arrow { color: var(--color-primary); transform: translateX(4px); }
+
+/* Links */
+.links-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+  text-decoration: none;
+  color: var(--color-primary-dark);
+  transition: all 0.2s;
+}
+.link-item:hover { background: var(--color-accent-50); border-color: rgba(232,119,34,0.25); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.link-icon { background: var(--color-accent-50); color: var(--color-accent); padding: 0.6rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.link-icon svg { width: 22px; height: 22px; }
+.link-body { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; min-width: 0; }
+.link-title { font-size: 0.9rem; font-weight: 700; color: var(--color-primary-dark); }
+.link-desc { font-size: 0.78rem; color: var(--color-gray-500); }
+.link-arrow { width: 18px; height: 18px; color: var(--color-gray-400); flex-shrink: 0; transition: transform 0.2s; }
+.link-item:hover .link-arrow { color: var(--color-accent); transform: translateX(4px); }
+
+/* Related activities */
+.activity-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.activity-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+  text-decoration: none;
+  color: var(--color-primary-dark);
+  transition: all 0.2s;
+}
+.activity-link:hover { background: var(--color-primary-50); border-color: var(--color-primary-100); transform: translateX(4px); }
+.activity-link-icon { font-size: 1rem; flex-shrink: 0; }
+.activity-link-text { flex: 1; font-size: 0.9rem; font-weight: 600; }
+.activity-link-date { font-size: 0.75rem; color: var(--color-gray-500); white-space: nowrap; }
+
+/* ── Lightbox ── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 10001;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.3); }
+.lightbox-img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: var(--radius-lg); }
+.lightbox-controls {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.lightbox-counter { color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 600; }
+.lightbox-nav { display: flex; gap: 1rem; }
+.lightbox-nav-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lightbox-nav-btn:hover { background: rgba(255,255,255,0.25); }
+
+/* Utility */
+.text-center { text-align: center; }
+.mt-2 { margin-top: 0.5rem; }
+.max-w-2xl { max-width: 42rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.section-lg { padding: 4rem 0 2rem; }
+.mt-12 { margin-top: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
 </style>

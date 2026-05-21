@@ -20,6 +20,10 @@ pdfs:
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
   - title: "Continuum Mechanics Detailed Syllabus (from Handbook)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
+links:
+  - title: "Related Lab Activity: Nano Crystal Seminar"
+    url: "/academic-activities/06-seminar-nano-crystals"
+    description: "Students used SEM for nanostructure characterization"
 ---
 
 • Tensor calculus (algebra, analysis)  • Kinematical relations  • Stresses, etc.  • Balances  • Constitutive equations
