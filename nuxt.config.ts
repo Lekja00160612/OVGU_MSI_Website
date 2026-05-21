@@ -61,8 +61,8 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare_pages',
     prerender: {
-      crawlLinks: true,
-      routes: ['/', '/vi'],
+      // crawlLinks: true,
+      // routes: ['/', '/vi'],
       autoSubfolderIndex: false,
     },
     cloudflare: {
