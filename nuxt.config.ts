@@ -62,7 +62,22 @@ export default defineNuxtConfig({
     preset: 'cloudflare_pages',
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/vi']
+      routes: ['/', '/vi'],
+      autoSubfolderIndex: false,
+    },
+    cloudflare: {
+      pages: {
+        routes: {
+          exclude: [
+            '/Documents/*',
+            '/Logo/*',
+            '/Thumbnail/*',
+            '/images/*',
+            '/Hybrid_Learning/*',
+            '/OVGU_Campus/*'
+          ]
+        }
+      }
     }
   },
 })
