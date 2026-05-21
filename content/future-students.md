@@ -7,77 +7,159 @@ The Master in Materials Science and Innovation (MSI) is designed for graduates w
 
 ::interactive-pathway
 ---
-layout: "horizontal"
-tabs:
-  - id: "direct_route"
-    label: "Direct Relevant Background"
-    nodes:
-      - id: "direct_dossier"
-        label: "Submit Dossier"
-        sub: "Degree & IELTS 6.0"
-        color: "#1E3A5F"
-        arrowColor: "#E87722"
-        arrowType: "dashed"
-        desc: "Submit your Bachelor degree certificate, transcripts, and IELTS 6.0 (or equivalent English test) to the VGU admission portal.\n\n- Verify university accreditation.\n- Upload official transcripts.\n- Submit valid English certificate."
-        todoText: "Submit complete dossier to the VGU portal."
-        link: "https://vgu.edu.vn/"
-      - id: "direct_interview"
-        label: "Academic Review"
-        sub: "Technical Interview"
-        color: "#1E3A5F"
-        arrowColor: "#E87722"
-        arrowType: "dashed"
-        desc: "The MSI Academic Committee conducts a technical interview (online or offline) covering fundamental mathematics, physics, and basic thermodynamics.\n\n- Review core physics & calculus concepts.\n- Discuss your academic interests and career goals.\n- Prepare to explain your undergraduate thesis project."
-        todoText: "Schedule and complete the academic technical interview."
-        link: "#"
-      - id: "direct_offer"
-        label: "Admission Offer"
-        sub: "VGU/OVGU Enrollment"
-        color: "#1E3A5F"
-        arrowColor: "#E87722"
-        arrowType: "dashed"
-        desc: "Receive your official admission offer from VGU and OVGU Magdeburg. Accept the offer, pay the first semester tuition fee, and prepare for enrollment.\n\n- Sign and return the Offer Acceptance Form.\n- Pay the initial tuition installment.\n- Attend the student orientation sessions."
-        todoText: "Accept the admission offer and enroll."
-        link: "#"
-  - id: "indirect_route"
-    label: "In-Direct Relevant Background"
-    nodes:
-      - id: "indirect_motivation"
-        label: "Submit Motivation Letter"
-        sub: "Prior Approval Stage"
-        color: "#1E3A5F"
-        arrowColor: "#E87722"
-        arrowType: "solid"
-        desc: "Candidates with an indirect background (such as civil engineering, computer science, biology, etc.) must first submit a Motivation Letter to the academic coordinator for preliminary review.\n\n- Explain your interest in Materials Science.\n- Detail your relevant coursework (math, physics, chemistry) and self-study efforts.\n- Obtain preliminary academic approval before submitting a full application."
-        todoText: "Draft and submit the Motivation Letter for academic approval."
-        link: "#"
-      - id: "indirect_dossier"
-        label: "Submit Dossier"
-        sub: "Degree & IELTS 6.0"
-        color: "#1E3A5F"
-        arrowColor: "#E87722"
-        arrowType: "dashed"
-        desc: "Once your motivation letter is approved, proceed to submit your Bachelor degree certificate, transcript, and English test to the VGU admission portal.\n\n- Include the motivation approval document.\n- Upload official transcripts and syllabus for credit mapping.\n- Submit valid English certificate (IELTS 6.0+)."
-        todoText: "Submit complete dossier to the VGU portal."
-        link: "https://vgu.edu.vn/"
-      - id: "indirect_interview"
-        label: "Academic Review"
-        sub: "Technical Interview"
-        color: "#1E3A5F"
-        arrowColor: "#E87722"
-        arrowType: "dashed"
-        desc: "Participate in a customized technical interview. The committee will assess your capability to bridge into advanced materials science topics and engineering calculus.\n\n- Review fundamentals and bridging syllabus.\n- Demonstrate analytical problem-solving skills.\n- Discuss the bridging timeline and expectations."
-        todoText: "Schedule and complete the customized technical interview."
-        link: "#"
-      - id: "indirect_offer"
-        label: "Admission Offer"
-        sub: "Conditional Enrollment"
-        color: "#1E3A5F"
-        arrowColor: "#E87722"
-        arrowType: "dashed"
-        desc: "Receive your admission offer. For indirect background candidates, enrollment may be conditional upon passing 1-2 bridging courses during your first year.\n\n- Sign the bridging and conditional enrollment agreement.\n- Pay the initial tuition installment.\n- Register for the assigned bridging modules."
-        todoText: "Accept the conditional offer and register for bridging modules."
-        link: "#"
+nodes:
+  - id: direct_dossier
+    tabId: direct_route
+    tabLabel: Direct Relevant Background
+    label: Submit Dossier
+    sub: Degree & IELTS 6.0
+    color: "#1E3A5F"
+    arrowColor: "#E87722"
+    arrowType: dashed
+    desc: >-
+      Submit your Bachelor degree certificate, transcripts, and IELTS 6.0 (or
+      equivalent English test) to the VGU admission portal.
+
+      
+
+      - Verify university accreditation.
+
+      - Upload official transcripts.
+
+      - Submit valid English certificate.
+    todoText: Submit complete dossier to the VGU portal.
+    link: https://vgu.edu.vn/
+  - id: direct_interview
+    tabId: direct_route
+    tabLabel: Direct Relevant Background
+    label: Academic Review
+    sub: Technical Interview
+    color: "#1E3A5F"
+    arrowColor: "#E87722"
+    arrowType: dashed
+    desc: >-
+      The MSI Academic Committee conducts a technical interview (online or
+      offline) covering fundamental mathematics, physics, and basic
+      thermodynamics.
+
+      
+
+      - Review core physics & calculus concepts.
+
+      - Discuss your academic interests and career goals.
+
+      - Prepare to explain your undergraduate thesis project.
+    todoText: Schedule and complete the academic technical interview.
+    link: "#"
+  - id: direct_offer
+    tabId: direct_route
+    tabLabel: Direct Relevant Background
+    label: Admission Offer
+    sub: VGU/OVGU Enrollment
+    color: "#1E3A5F"
+    arrowColor: "#E87722"
+    arrowType: dashed
+    desc: >-
+      Receive your official admission offer from VGU and OVGU Magdeburg. Accept
+      the offer, pay the first semester tuition fee, and prepare for enrollment.
+
+      
+
+      - Sign and return the Offer Acceptance Form.
+
+      - Pay the initial tuition installment.
+
+      - Attend the student orientation sessions.
+    todoText: Accept the admission offer and enroll.
+    link: "#"
+  - id: indirect_motivation
+    tabId: indirect_route
+    tabLabel: In-Direct Relevant Background
+    label: Submit Motivation Letter
+    sub: Prior Approval Stage
+    color: "#1E3A5F"
+    arrowColor: "#E87722"
+    arrowType: solid
+    desc: >-
+      Candidates with an indirect background (such as civil engineering,
+      computer science, biology, etc.) must first submit a Motivation Letter to
+      the academic coordinator for preliminary review.
+
+      
+
+      - Explain your interest in Materials Science.
+
+      - Detail your relevant coursework (math, physics, chemistry) and self-study efforts.
+
+      - Obtain preliminary academic approval before submitting a full application.
+    todoText: Draft and submit the Motivation Letter for academic approval.
+    link: "#"
+  - id: indirect_dossier
+    tabId: indirect_route
+    tabLabel: In-Direct Relevant Background
+    label: Submit Dossier
+    sub: Degree & IELTS 6.0
+    color: "#1E3A5F"
+    arrowColor: "#E87722"
+    arrowType: dashed
+    desc: >-
+      Once your motivation letter is approved, proceed to submit your Bachelor
+      degree certificate, transcript, and English test to the VGU admission
+      portal.
+
+      
+
+      - Include the motivation approval document.
+
+      - Upload official transcripts and syllabus for credit mapping.
+
+      - Submit valid English certificate (IELTS 6.0+).
+    todoText: Submit complete dossier to the VGU portal.
+    link: https://vgu.edu.vn/
+  - id: indirect_interview
+    tabId: indirect_route
+    tabLabel: In-Direct Relevant Background
+    label: Academic Review
+    sub: Technical Interview
+    color: "#1E3A5F"
+    arrowColor: "#E87722"
+    arrowType: dashed
+    desc: >-
+      Participate in a customized technical interview. The committee will assess
+      your capability to bridge into advanced materials science topics and
+      engineering calculus.
+
+      
+
+      - Review fundamentals and bridging syllabus.
+
+      - Demonstrate analytical problem-solving skills.
+
+      - Discuss the bridging timeline and expectations.
+    todoText: Schedule and complete the customized technical interview.
+    link: "#"
+  - id: indirect_offer
+    tabId: indirect_route
+    tabLabel: In-Direct Relevant Background
+    label: Admission Offer
+    sub: Conditional Enrollment
+    color: "#1E3A5F"
+    arrowColor: "#E87722"
+    arrowType: dashed
+    desc: >-
+      Receive your admission offer. For indirect background candidates,
+      enrollment may be conditional upon passing 1-2 bridging courses during your
+      first year.
+
+      
+
+      - Sign the bridging and conditional enrollment agreement.
+
+      - Pay the initial tuition installment.
+
+      - Register for the assigned bridging modules.
+    todoText: Accept the conditional offer and register for bridging modules.
+    link: "#"
 ---
 ::
 

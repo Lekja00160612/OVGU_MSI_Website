@@ -3,6 +3,8 @@ import { ref, computed, watch, useId } from 'vue'
 
 interface PathwayNode {
   id: string
+  tabId: string
+  tabLabel: string
   label: string
   sub?: string
   desc: string
@@ -13,18 +15,10 @@ interface PathwayNode {
   arrowType?: 'solid' | 'dashed'
 }
 
-interface PathwayTab {
-  id: string
-  label: string
-  nodes: PathwayNode[]
-}
-
 const props = withDefaults(defineProps<{
-  tabs?: PathwayTab[]
-  layout?: 'horizontal' | 'vertical' | 'zigzag'
+  nodes?: PathwayNode[]
 }>(), {
-  tabs: () => [],
-  layout: 'zigzag'
+  nodes: () => []
 })
 
 const { locale } = useI18n()
@@ -36,8 +30,22 @@ const selectedNodeIndex = ref(0)
 // Unique filter ID to avoid conflicts when rendering multiple components and ensure valid characters for SVG IDs
 const componentId = 'pathway-filter-' + useId().replace(/[^a-zA-Z0-9-_]/g, '')
 
+// Compute tabs dynamically by grouping nodes by tabId
+const computedTabs = computed(() => {
+  const map = new Map<string, { id: string; label: string; nodes: PathwayNode[] }>()
+  props.nodes.forEach((node) => {
+    const tabId = node.tabId || 'default'
+    const tabLabel = node.tabLabel || tabId
+    if (!map.has(tabId)) {
+      map.set(tabId, { id: tabId, label: tabLabel, nodes: [] })
+    }
+    map.get(tabId)!.nodes.push(node)
+  })
+  return Array.from(map.values())
+})
+
 // Initialize/Sync active tab
-watch(() => props.tabs, (newTabs) => {
+watch(() => computedTabs.value, (newTabs) => {
   if (newTabs && newTabs.length > 0) {
     if (!activeTabId.value || !newTabs.some(t => t.id === activeTabId.value)) {
       activeTabId.value = newTabs[0].id
@@ -51,7 +59,7 @@ watch(activeTabId, () => {
 
 // Computed properties
 const activeTab = computed(() => {
-  return props.tabs.find(tab => tab.id === activeTabId.value) || props.tabs[0] || null
+  return computedTabs.value.find(tab => tab.id === activeTabId.value) || computedTabs.value[0] || null
 })
 
 const currentNodes = computed<PathwayNode[]>(() => {
@@ -122,31 +130,33 @@ function parseMarkdown(text: string): string {
   return processedLines.join('\n')
 }
 
-// SVG layout parameters (always horizontal)
+// SVG layout parameters (zigzag circles with titles on top)
 const svgWidth = computed(() => {
   if (currentNodes.value.length === 0) return 300
-  return currentNodes.value.length * 290 + 20
+  // Standard gap is 240px. Plus padding at the start (100px) and end (100px).
+  return (currentNodes.value.length - 1) * 240 + 200
 })
 
 const svgHeight = computed(() => {
-  return 170
+  return 210 // More compact height for the zigzag pathway
 })
 
 const layoutNodes = computed(() => {
+  const r = 28 // Circle radius
+  const xGap = 240 // Horizontal gap
+  const yTop = 70 // Top row Y coordinate
+  const yBottom = 150 // Bottom row Y coordinate
+
   return currentNodes.value.map((node, i) => {
-    const w = 240
-    const h = 110
-    const gap = 290
-    const x = 20 + i * gap
-    const y = 30
-    const cx = x + 35
-    const cy = y + 55
-    const r = 18
+    const cx = 100 + i * xGap
+    const cy = i % 2 === 0 ? yTop : yBottom
 
     return {
       ...node,
       index: i,
-      x, y, w, h, cx, cy, r
+      cx,
+      cy,
+      r
     }
   })
 })
@@ -154,31 +164,56 @@ const layoutNodes = computed(() => {
 const layoutArrows = computed(() => {
   const arrows = []
   const nodes = layoutNodes.value
+  const markerOffset = 8 // Space before circle boundary for the arrow marker
 
   for (let i = 0; i < nodes.length - 1; i++) {
     const fromNode = nodes[i]
     const toNode = nodes[i + 1]
-    
-    const startX = fromNode.x + fromNode.w
-    const startY = fromNode.y + fromNode.h / 2
-    const endX = toNode.x
-    const endY = toNode.y + toNode.h / 2
 
-    const d = `M ${startX} ${startY} L ${endX} ${endY}`
+    const dx = toNode.cx - fromNode.cx
+    const dy = toNode.cy - fromNode.cy
+    const dist = Math.sqrt(dx * dx + dy * dy)
 
-    arrows.push({
-      d,
-      color: fromNode.arrowColor || fromNode.color || 'var(--color-primary)',
-      type: fromNode.arrowType || 'dashed'
-    })
+    if (dist > 0) {
+      const ux = dx / dist
+      const uy = dy / dist
+
+      // Start at fromNode boundary
+      const startX = fromNode.cx + fromNode.r * ux
+      const startY = fromNode.cy + fromNode.r * uy
+
+      // End at toNode boundary (taking markerOffset into account)
+      const endX = toNode.cx - (toNode.r + markerOffset) * ux
+      const endY = toNode.cy - (toNode.r + markerOffset) * uy
+
+      // Calculate control point for organic curvature
+      const mx = (startX + endX) / 2
+      const my = (startY + endY) / 2
+      const px = -uy
+      const py = ux
+      
+      // Alternate curvature to create a beautiful flowing wave
+      const curveOffset = i % 2 === 0 ? -25 : 25
+      const controlX = mx + px * curveOffset
+      const controlY = my + py * curveOffset
+
+      const d = `M ${startX} ${startY} Q ${controlX} ${controlY} ${endX} ${endY}`
+
+      arrows.push({
+        d,
+        color: fromNode.arrowColor || fromNode.color || 'var(--color-primary)',
+        type: fromNode.arrowType || 'dashed'
+      })
+    }
   }
 
   return arrows
 })
+
 </script>
 
 <template>
-  <div class="interactive-pathway-widget" v-if="tabs && tabs.length > 0">
+  <div class="interactive-pathway-widget" v-if="nodes && nodes.length > 0">
     <!-- Pathway Guide Header -->
     <div class="guide-header-card">
       <h3 class="guide-title">
@@ -195,9 +230,9 @@ const layoutArrows = computed(() => {
     </div>
 
     <!-- Custom Tab Switcher Grid -->
-    <div class="tabs-grid" :style="{ '--tabs-count': tabs.length }">
+    <div class="tabs-grid" :style="{ '--tabs-count': computedTabs.length }">
       <button
-        v-for="tab in tabs"
+        v-for="tab in computedTabs"
         :key="tab.id"
         type="button"
         class="tab-btn"
@@ -213,12 +248,6 @@ const layoutArrows = computed(() => {
     <div class="workspace-layout">
       <!-- 1. Visual SVG Pathway (Horizontal & Scrollable) -->
       <div class="pathway-visualizer">
-        <div class="visualizer-header">
-          <span class="visualizer-hint">
-            {{ locale === 'vi' ? '👉 Click vào các bước để xem hướng dẫn chi tiết' : '👉 Click steps to inspect details & guidance' }}
-          </span>
-        </div>
-        
         <div class="svg-scroll-container">
           <svg :viewBox="`0 0 ${svgWidth} ${svgHeight}`" class="excalidraw-svg" :style="{ width: svgWidth + 'px', height: svgHeight + 'px' }">
             <defs>
@@ -259,46 +288,43 @@ const layoutArrows = computed(() => {
               style="cursor: pointer;"
               @click="selectedNodeIndex = node.index"
             >
-              <!-- Box -->
-              <rect
-                :x="node.x" :y="node.y" :width="node.w" :height="node.h"
-                rx="14"
-                fill="#ffffff"
-                :stroke="selectedNodeIndex === node.index ? 'var(--color-accent)' : (node.color || 'var(--color-primary)')"
-                :stroke-width="selectedNodeIndex === node.index ? 3.5 : 2.5"
-                :filter="componentId ? `url(#${componentId})` : 'none'"
-                class="node-rect-elem"
-              />
-              
-              <!-- Circle Number Index -->
+              <!-- Node Circle -->
               <circle
                 :cx="node.cx" :cy="node.cy" :r="node.r"
                 :fill="selectedNodeIndex === node.index ? 'var(--color-accent)' : (node.color || 'var(--color-primary)')"
+                :stroke="selectedNodeIndex === node.index ? 'var(--color-accent-dark, #C95E0A)' : 'transparent'"
+                stroke-width="3.5"
                 :filter="componentId ? `url(#${componentId})` : 'none'"
+                class="node-circle-elem"
               />
               
+              <!-- Number Index -->
               <text
-                :x="node.cx" :y="node.cy + 5"
+                :x="node.cx" :y="node.cy + 6"
                 fill="#ffffff"
-                font-size="12"
-                font-weight="800"
+                font-size="16"
+                font-weight="900"
                 text-anchor="middle"
               >{{ node.index + 1 }}</text>
 
-              <!-- Node Labels text -->
+              <!-- Node Labels (centered on top of the circle) -->
               <text
-                :x="node.cx + node.r + 12" :y="node.cy - 5"
+                :x="node.cx" :y="node.cy - node.r - 20"
                 :fill="selectedNodeIndex === node.index ? 'var(--color-accent-dark)' : 'var(--color-primary-dark)'"
-                font-size="13"
+                font-size="12.5"
                 font-weight="800"
+                text-anchor="middle"
+                class="node-label-title"
               >{{ node.label }}</text>
               
               <text
-                :x="node.cx + node.r + 12" :y="node.cy + 13"
+                :x="node.cx" :y="node.cy - node.r - 6"
                 fill="var(--color-gray-500)"
-                font-size="10.5"
-                font-weight="500"
+                font-size="10"
+                font-weight="600"
+                text-anchor="middle"
                 v-if="node.sub"
+                class="node-label-sub"
               >{{ node.sub }}</text>
             </g>
           </svg>
@@ -540,12 +566,21 @@ const layoutArrows = computed(() => {
   flex-shrink: 0;
 }
 
-.node-rect-elem {
+.node-circle-elem {
   transition: all var(--duration-fast) ease;
 }
 
-.svg-node-group:hover .node-rect-elem {
-  stroke-width: 4px;
+.svg-node-group:hover .node-circle-elem {
+  stroke-width: 4.5px;
+  r: 30px;
+}
+
+.node-label-title, .node-label-sub {
+  transition: fill var(--duration-fast) ease;
+}
+
+.svg-node-group:hover .node-label-title {
+  fill: var(--color-accent, #E87722);
 }
 
 /* Detail Panel (Fixed Height & Scrollable Vertically) */
@@ -555,7 +590,7 @@ const layoutArrows = computed(() => {
   border-radius: var(--radius-xl, 16px);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
-  height: 380px;
+  height: 480px;
   display: flex;
   flex-direction: column;
   width: 100%;

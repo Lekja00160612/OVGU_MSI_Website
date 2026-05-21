@@ -74,7 +74,7 @@ export default defineNuxtConfig({
             '/Thumbnail/*',
             '/images/*',
             '/Hybrid_Learning/*',
-            '/OVGU_Campus/*'
+            '/OVGU_Campus/*',
           ]
         }
       }
