@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxt/ui', '@nuxt/image', '@nuxtjs/i18n'],
+  modules: ['@nuxt/content', '@nuxt/ui', '@nuxt/image', '@nuxtjs/i18n', 'nuxt-studio'],
   css: ['~/assets/css/main.css'],
   colorMode: { preference: 'light' },
   i18n: {
@@ -49,6 +49,14 @@ export default defineNuxtConfig({
       api: 'https://api.nuxt.studio'
     }
   },
+  studio: {
+    repository: {
+      provider: 'github',
+      owner: 'Lekja00160612',
+      repo: 'OVGU_MSI_Website',
+      branch: 'main'
+    }
+  },
   nitro: {
     preset: 'cloudflare_pages',
     prerender: {
@@ -57,8 +65,3 @@ export default defineNuxtConfig({
     }
   },
 })
-
-
-
-
-
