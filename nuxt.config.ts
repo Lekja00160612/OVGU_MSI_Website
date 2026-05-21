@@ -44,18 +44,19 @@ export default defineNuxtConfig({
       }
     }
   },
-  content: {
-    preview: {
-      api: 'https://api.nuxt.studio'
-    }
-  },
   studio: {
     repository: {
       provider: 'github',
       owner: 'Lekja00160612',
       repo: 'OVGU_MSI_Website',
       branch: 'main'
-    }
+    },
+    auth: {
+      github: {
+        clientId: process.env.STUDIO_GITHUB_CLIENT_ID || '',
+        clientSecret: process.env.STUDIO_GITHUB_CLIENT_SECRET || ''
+      }
+    },
   },
   nitro: {
     preset: 'cloudflare_pages',
