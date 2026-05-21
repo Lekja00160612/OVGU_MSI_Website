@@ -9,17 +9,17 @@ const activeCategory = ref('All')
 const searchQuery = ref('')
 const currentPage = ref(1)
 const itemsPerPage = 6
-const gridRef = ref<HTMLElement | null>(null)
+const filterBarRef = ref<HTMLElement | null>(null)
 
 // Reset page on filter changes & scroll to grid
 watch([activeCategory, searchQuery], () => {
   currentPage.value = 1
 })
 
-function scrollToGrid() {
+function scrollToStart() {
   nextTick(() => {
-    if (gridRef.value) {
-      const top = gridRef.value.getBoundingClientRect().top + window.scrollY - 24
+    if (filterBarRef.value) {
+      const top = filterBarRef.value.getBoundingClientRect().top + window.scrollY - 96
       window.scrollTo({ top, behavior: 'smooth' })
     }
   })
@@ -27,9 +27,7 @@ function scrollToGrid() {
 
 function selectCategory(cat: string) {
   activeCategory.value = cat
-  if (cat !== 'All') {
-    scrollToGrid()
-  }
+  scrollToStart()
 }
 
 const filteredActivities = computed(() => {
@@ -81,6 +79,7 @@ const showHighlights = computed(
 function clearFilters() {
   activeCategory.value = 'All'
   searchQuery.value = ''
+  scrollToStart()
 }
 </script>
 
@@ -121,7 +120,7 @@ function clearFilters() {
     </div>
 
     <!-- ── Search + Filter Bar ── -->
-    <div class="container filter-bar" :class="{ 'mt-lg': showHighlights }">
+    <div ref="filterBarRef" class="container filter-bar" :class="{ 'mt-lg': showHighlights }">
       <div class="search-box">
         <span class="search-icon">🔍</span>
         <input

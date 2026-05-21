@@ -22,6 +22,7 @@ const activeCategory = ref('All')
 const currentPage = ref(1)
 const itemsPerPage = 6
 const gridRef = ref<HTMLElement | null>(null)
+const filterBarRef = ref<HTMLElement | null>(null)
 
 const isDetailModalOpen = ref(false)
 const selectedMachine = ref<any | null>(null)
@@ -41,16 +42,30 @@ const categories = computed(() => {
   return ['All', ...Array.from(unique)]
 })
 
-// Reset to page 1 on filter/search change & scroll to grid
+// Reset to page 1 on filter/search change
 watch([activeCategory, searchQuery], () => {
   currentPage.value = 1
+})
+
+function scrollToStart() {
   nextTick(() => {
-    if (gridRef.value) {
-      const top = gridRef.value.getBoundingClientRect().top + window.scrollY - 24
+    if (filterBarRef.value) {
+      const top = filterBarRef.value.getBoundingClientRect().top + window.scrollY - 96
       window.scrollTo({ top, behavior: 'smooth' })
     }
   })
-})
+}
+
+function selectCategory(cat: string) {
+  activeCategory.value = cat
+  scrollToStart()
+}
+
+function clearFilters() {
+  activeCategory.value = 'All'
+  searchQuery.value = ''
+  scrollToStart()
+}
 
 // ── Filtered + paginated list ────────────────────────────────────────────────
 const filteredEquipments = computed(() => {
@@ -216,7 +231,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
     </div>
 
     <!-- ── Search + Filter Bar ── -->
-    <div class="container filter-bar">
+    <div ref="filterBarRef" class="container filter-bar">
       <!-- Search box -->
       <div class="search-box">
         <span class="search-icon">🔍</span>
@@ -241,7 +256,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
           :key="cat"
           class="cat-btn"
           :class="{ 'cat-btn--active': activeCategory === cat }"
-          @click="activeCategory = cat"
+          @click="selectCategory(cat)"
         >
           {{ cat === 'All' ? t('labs.filter_all') : cat }}
         </button>
@@ -291,7 +306,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
     <!-- ── No Results ── -->
     <div v-if="filteredEquipments.length === 0" class="container no-results">
       <p class="no-results-text">{{ t('labs.no_results') }}</p>
-      <button class="clear-btn" @click="activeCategory = 'All'; searchQuery = ''">{{ t('labs.clear_filters') }}</button>
+      <button class="clear-btn" @click="clearFilters">{{ t('labs.clear_filters') }}</button>
     </div>
 
     <!-- ── Pagination Bar ── -->

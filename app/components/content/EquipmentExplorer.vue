@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, ref, computed } from 'vue'
+import { inject, ref, computed, nextTick } from 'vue'
 
 const { pageData, equipments, activities, localePath } = inject('pageData') as any
 
@@ -8,6 +8,21 @@ const activeCategory = ref('All')
 const selectedMachine = ref<any | null>(null)
 const activeImageIndex = ref(0)
 const isModalOpen = ref(false)
+const filterBarRef = ref<HTMLElement | null>(null)
+
+function scrollToStart() {
+  nextTick(() => {
+    if (filterBarRef.value) {
+      const top = filterBarRef.value.getBoundingClientRect().top + window.scrollY - 96
+      window.scrollTo({ top, behavior: 'smooth' })
+    }
+  })
+}
+
+function selectCategory(cat: string) {
+  activeCategory.value = cat
+  scrollToStart()
+}
 
 // --- Category filter ---
 const categories = computed<string[]>(() => {
@@ -64,7 +79,7 @@ const getRelatedActivities = (machine: any) => {
   <div class="equipment-explorer">
 
     <!-- Category Filter Pills -->
-    <div class="filter-bar">
+    <div ref="filterBarRef" class="filter-bar">
       <UButton
         v-for="cat in categories"
         :key="cat"
@@ -72,7 +87,7 @@ const getRelatedActivities = (machine: any) => {
         color="primary"
         size="sm"
         class="cat-pill"
-        @click="activeCategory = cat"
+        @click="selectCategory(cat)"
       >
         {{ cat }}
       </UButton>

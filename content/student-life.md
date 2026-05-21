@@ -1,6 +1,6 @@
 ---
-title: "Student Life"
-description: "Experience a vibrant, international campus community in Binh Duong."
+title: Student Life
+description: Experience a vibrant, international campus community in Binh Duong.
 ---
 
 ## Life At VGU
@@ -33,7 +33,7 @@ nodes:
       Graduates of All Disciplines**. It covers monthly stipends, health
       insurance, and travel allowance.
 
-      
+
 
       - Visit the official DAAD portal to check criteria.
 
@@ -55,7 +55,7 @@ nodes:
       comprehensive research proposal aligning with your target OVGU research
       chair interests.
 
-      
+
 
       - Approach 2 professors early.
 
@@ -77,7 +77,7 @@ nodes:
       application window typically closes in October/November of the preceding
       year.
 
-      
+
 
       - Upload all certificates & proposals.
 
@@ -99,7 +99,7 @@ nodes:
       Admission (Zulassungsbescheid)**. Vietnam applicants must obtain academic
       verification (APS) from the German Embassy Hanoi.
 
-      
+
 
       - Receive physical Admission Letter.
 
@@ -121,7 +121,7 @@ nodes:
       statutory living cost guarantee amount (currently **€11,904**) to obtain a
       confirmation certificate.
 
-      
+
 
       - Register via Expatrio or Fintiba.
 
@@ -143,7 +143,7 @@ nodes:
       Admission, Blocked Account confirmation, APS, and biometrics. Processing
       takes 4-6 weeks.
 
-      
+
 
       - Book visa slot early.
 
@@ -164,7 +164,7 @@ nodes:
       Register with a German public health insurance provider (TK/AOK). They
       will send a digital clearance notice direct to OVGU for enrollment.
 
-      
+
 
       - Complete online registration.
 
@@ -186,7 +186,7 @@ nodes:
       account coordinates. This funds student services, cafeteria, and local
       public transit support.
 
-      
+
 
       - Complete bank wire transfer.
 
@@ -206,7 +206,7 @@ nodes:
       at the Bürgerbüro city registry. You will need your landlord certificate
       (**Wohnungsgeberbestätigung**).
 
-      
+
 
       - Receive landlord certificate.
 
@@ -225,10 +225,10 @@ nodes:
     arrowType: dashed
     desc: >-
       Visit the OVGU Student Secretariat in person. Submit physical copies of
-      bachelor certificates, German translations, health insurance clearance, and
-      semester fee receipt.
+      bachelor certificates, German translations, health insurance clearance,
+      and semester fee receipt.
 
-      
+
 
       - Present original documents.
 
