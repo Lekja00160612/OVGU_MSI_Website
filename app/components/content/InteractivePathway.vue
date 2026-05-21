@@ -381,6 +381,15 @@ const layoutArrows = computed(() => {
   font-family: var(--font-sans);
 }
 
+:deep(button),
+:deep(a),
+:deep(text),
+:deep(.u-button),
+:deep(.tab-btn-label),
+:deep(.nav-control-btn) {
+  font-family: var(--font-sans) !important;
+}
+
 /* Guide Header Card (More Compact, No Icon) */
 .guide-header-card {
   background: #ffffff;

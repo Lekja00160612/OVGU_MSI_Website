@@ -73,14 +73,14 @@ const { data: page } = await useAsyncData('page-' + route.path, () =>
 .prose :deep(h3) {
   font-size: 1.4rem;
   font-weight: 600;
-  color: var(--color-gray-800);
+  color: var(--color-primary);
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
 .prose :deep(p) {
   font-size: 1.05rem;
-  color: var(--color-gray-600);
+  color: var(--color-gray-700);
   line-height: 1.7;
   margin-bottom: 1.5rem;
 }
@@ -92,7 +92,7 @@ const { data: page } = await useAsyncData('page-' + route.path, () =>
 
 .prose :deep(li) {
   font-size: 1.05rem;
-  color: var(--color-gray-600);
+  color: var(--color-gray-700);
   line-height: 1.7;
   margin-bottom: 0.75rem;
 }

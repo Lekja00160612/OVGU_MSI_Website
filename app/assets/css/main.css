@@ -420,9 +420,18 @@ h6 {
   line-height: 1.75;
 }
 
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: var(--color-primary) !important;
+  font-family: var(--font-display);
+}
+
 .prose h2 {
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  color: var(--color-primary);
   margin: 2.5rem 0 1rem;
   padding-left: 1rem;
   border-left: 3px solid var(--color-accent);
@@ -430,23 +439,28 @@ h6 {
 
 .prose h3 {
   font-size: 1.15rem;
-  color: var(--color-primary);
   margin: 1.75rem 0 0.5rem;
 }
 
 .prose p {
   margin-bottom: 1.25rem;
+  color: var(--color-gray-700) !important;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 0;
+  margin-bottom: 1.25rem;
 }
 
 .prose ul {
   list-style: none;
-  padding: 0;
-  margin-bottom: 1.25rem;
 }
 
 .prose ul li {
   padding: 0.25rem 0 0.25rem 1.5rem;
   position: relative;
+  color: var(--color-gray-700) !important;
 }
 
 .prose ul li::before {
@@ -457,13 +471,23 @@ h6 {
   font-size: 0.85em;
 }
 
+.prose ol li {
+  color: var(--color-gray-700) !important;
+  margin-bottom: 0.5rem;
+}
+
 .prose strong {
-  color: var(--color-primary);
-  font-weight: 600;
+  color: var(--color-primary) !important;
+  font-weight: 700;
 }
 
 .prose a {
   color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: var(--color-accent-dark);
 }
 
 /* ── Animation ── */

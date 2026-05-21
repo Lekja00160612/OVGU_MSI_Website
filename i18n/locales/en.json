@@ -7,7 +7,8 @@
     "partners_lecturers": "Partners & Lecturers",
     "tuition_scholarships": "Tuition & Scholarships",
     "laboratories_research": "Laboratories & Research",
-    "student_life": "Student Life"
+    "student_life": "Student Life",
+    "contact_us": "Contact Us"
   },
   "home": {
     "degree1": "Degree 1",
@@ -43,7 +44,9 @@
   "footer": {
     "subtitle": "A joint program between Vietnamese-German University (VGU) and Otto von Guericke University Magdeburg (OVGU).",
     "quick_links": "Quick Links",
-    "contact": "Contact"
+    "contact": "Contact",
+    "welcome_message": "You will be warmly welcomed by our Academic Coordinators, Faculty Assistants, or Alumni Students.",
+    "facebook_fanpage": "MSI Facebook Fanpage"
   },
   "activities": {
     "title": "Academic Activities",

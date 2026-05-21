@@ -7,7 +7,8 @@
     "partners_lecturers": "Đối Tác & Giảng Viên",
     "tuition_scholarships": "Học Phí & Học Bổng",
     "laboratories_research": "Thiết Bị & Nghiên Cứu",
-    "student_life": "Đời Sống Sinh Viên"
+    "student_life": "Đời Sống Sinh Viên",
+    "contact_us": "Liên hệ"
   },
   "home": {
     "degree1": "Bằng 1",
@@ -43,7 +44,9 @@
   "footer": {
     "subtitle": "Chương trình liên kết giữa Trường Đại học Việt Đức (VGU) và Đại học Otto von Guericke Magdeburg (OVGU).",
     "quick_links": "Liên Kết Nhanh",
-    "contact": "Liên Hệ"
+    "contact": "Liên Hệ",
+    "welcome_message": "Bạn sẽ luôn được chào đón bởi các Điều phối viên học thuật, Trợ lý khoa hoặc Cựu học viên.",
+    "facebook_fanpage": "Fanpage Facebook MSI"
   },
   "activities": {
     "title": "Trải Nghiệm Học Thuật",

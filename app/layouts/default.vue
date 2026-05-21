@@ -20,6 +20,13 @@ const toggleLanguage = () => {
   mobileMenuOpen.value = false
 }
 watch(() => route.path, () => { mobileMenuOpen.value = false })
+
+const scrollToFooter = () => {
+  const footer = document.getElementById('site-footer')
+  if (footer) {
+    footer.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
@@ -70,6 +77,15 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
 
         <!-- Language switcher + mobile toggle -->
         <div class="header-controls">
+          <!-- Contact Us CTA -->
+          <a
+            href="#site-footer"
+            class="contact-cta"
+            @click.prevent="scrollToFooter"
+          >
+            {{ t('nav.contact_us') }}
+          </a>
+
           <!-- Language buttons (EN / VI) -->
           <div class="lang-switcher">
             <button
@@ -111,6 +127,14 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
               :class="{ 'mobile-nav-link--active': isActive(link.to) }"
             >{{ link.label }}</NuxtLink>
             <div class="mobile-nav-divider" />
+            <a
+              href="#site-footer"
+              class="mobile-contact-cta"
+              @click.prevent="scrollToFooter(); mobileMenuOpen = false"
+            >
+              {{ t('nav.contact_us') }}
+            </a>
+            <div class="mobile-nav-divider" />
             <div class="mobile-lang-row">
               <button class="mobile-lang-btn" :class="{ active: locale === 'en' }" @click="setLocale('en'); mobileMenuOpen=false">English</button>
               <button class="mobile-lang-btn" :class="{ active: locale === 'vi' }" @click="setLocale('vi'); mobileMenuOpen=false">Tiếng Việt</button>
@@ -130,15 +154,23 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
     </main>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
+    <footer class="site-footer" id="site-footer">
       <div class="footer-watermark"></div>
       <div class="footer-top container">
 
         <div class="footer-brand">
           <p class="footer-tagline">{{ t('footer.subtitle') }}</p>
           <div class="footer-uni-logos">
-            <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU" class="footer-uni-logo footer-uni-logo--ovgu" width="140" height="auto" />
-            <NuxtImg src="/Logo/VGU_Logo.png" alt="VGU" class="footer-uni-logo footer-uni-logo--vgu" width="auto" height="36" />
+            <a href="https://www.ovgu.de" target="_blank" rel="noopener noreferrer" aria-label="OVGU Website">
+              <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU" class="footer-uni-logo footer-uni-logo--ovgu" width="140" height="auto" />
+            </a>
+            <a href="https://vgu.edu.vn" target="_blank" rel="noopener noreferrer" aria-label="VGU Website">
+              <NuxtImg src="/Logo/VGU_Logo.png" alt="VGU" class="footer-uni-logo footer-uni-logo--vgu" width="auto" height="36" />
+            </a>
+          </div>
+          <div class="footer-uni-links">
+            <a href="https://vgu.edu.vn" target="_blank" rel="noopener noreferrer" class="uni-link">Vietnamese-German University (VGU)</a>
+            <a href="https://www.ovgu.de" target="_blank" rel="noopener noreferrer" class="uni-link">Otto von Guericke University Magdeburg (OVGU)</a>
           </div>
         </div>
 
@@ -151,15 +183,27 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
           </ul>
         </div>
 
-        <div class="footer-col">
+        <div class="footer-col footer-contact-col">
           <h4 class="footer-heading">{{ t('footer.contact') }}</h4>
+          <p class="contact-welcome">
+            {{ t('footer.welcome_message') }}
+          </p>
           <address class="footer-address">
             Vietnamese-German University<br>
             Ring road 4, Quarter 4<br>
             Thoi Hoa Ward, Ben Cat Town<br>
             Ho Chi Minh City, Vietnam
           </address>
-          <a href="mailto:msi.info@vgu.edu.vn" class="footer-email">msi.info@vgu.edu.vn</a>
+          <div class="contact-methods">
+            <a href="mailto:msi.info@vgu.edu.vn" class="footer-email-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>msi.info@vgu.edu.vn</span>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61577622987645" target="_blank" rel="noopener noreferrer" class="footer-facebook-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              <span>{{ t('footer.facebook_fanpage') }}</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -251,7 +295,7 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -259,21 +303,21 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
 .lang-switcher {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.15rem;
   background: var(--color-gray-100);
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-full);
-  padding: 0.2rem 0.5rem;
+  padding: 0.15rem 0.4rem;
 }
 .lang-btn {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--color-gray-500);
-  padding: 0.2rem 0.4rem;
+  padding: 0.15rem 0.35rem;
   border-radius: var(--radius-full);
   transition: all 200ms;
 }
@@ -281,9 +325,9 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
 .lang-btn--active {
   background: var(--color-primary);
   color: #fff !important;
-  padding: 0.2rem 0.6rem;
+  padding: 0.15rem 0.45rem;
 }
-.lang-sep { color: var(--color-gray-300); font-size: 0.75rem; user-select:none; }
+.lang-sep { color: var(--color-gray-300); font-size: 0.65rem; user-select:none; }
 
 /* Hamburger */
 .mobile-menu-btn {
@@ -391,4 +435,176 @@ watch(() => route.path, () => { mobileMenuOpen.value = false })
 .slide-down-enter-from, .slide-down-leave-to { opacity:0; transform:translateY(-8px); }
 .fade-enter-active, .fade-leave-active { transition:opacity 300ms; }
 .fade-enter-from, .fade-leave-to { opacity:0; }
+
+/* ═══════════════ CONTACT US CTA & FOOTER ENHANCEMENTS ═══════════════ */
+.contact-cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  border: 1.5px solid var(--color-accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 250ms var(--ease-out);
+  white-space: nowrap;
+}
+.contact-cta:hover {
+  background: var(--color-accent);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(232, 119, 34, 0.25);
+  transform: translateY(-1px);
+}
+.contact-cta:active {
+  transform: translateY(0);
+}
+
+.mobile-contact-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-accent);
+  border: 1.5px solid var(--color-accent);
+  padding: 0.625rem 1rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  text-align: center;
+  transition: all 200ms;
+}
+.mobile-contact-cta:hover {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.footer-contact-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-contact-col .footer-heading {
+  color: var(--color-accent-light) !important;
+  position: relative;
+  padding-bottom: 6px;
+  margin-bottom: 1.25rem;
+  display: inline-block;
+  width: fit-content;
+}
+
+.footer-contact-col .footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+}
+
+.contact-welcome {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  border-left: 2px solid var(--color-accent);
+  padding-left: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.footer-email-link,
+.footer-facebook-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-accent-light);
+  text-decoration: none;
+  transition: all 200ms ease;
+  width: fit-content;
+}
+
+.footer-email-link:hover,
+.footer-facebook-link:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  stroke: currentColor;
+}
+
+.footer-uni-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1rem;
+  max-width: 280px;
+}
+
+.uni-link {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 200ms;
+  line-height: 1.4;
+}
+
+.uni-link:hover {
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .contact-cta {
+    padding: 0.2rem 0.55rem;
+    font-size: 0.7rem;
+  }
+}
+
+.brand-link {
+  margin-left: -0.5rem !important;
+}
+
+/* Intermediate screens navigation adjustment */
+@media (min-width: 1100px) and (max-width: 1300px) {
+  .nav-link {
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.45rem !important;
+  }
+  .header-inner {
+    gap: 0.75rem !important;
+  }
+  .brand-logo-wrapper {
+    padding: 0.1rem 0.35rem !important;
+  }
+  .brand-logo {
+    height: 60px !important;
+  }
+}
+
+/* Global button and link font override to guarantee Be Vietnam Pro */
+button,
+input,
+select,
+textarea,
+.btn,
+a.btn,
+.contact-cta,
+.mobile-contact-cta,
+.lang-btn {
+  font-family: var(--font-sans) !important;
+}
 </style>

@@ -43,7 +43,19 @@ export default defineNuxtConfig({
         }
       }
     }
-  }
+  },
+  content: {
+    preview: {
+      api: 'https://api.nuxt.studio'
+    }
+  },
+  nitro: {
+    preset: 'cloudflare_pages',
+    prerender: {
+      crawlLinks: true,
+      routes: ['/', '/vi']
+    }
+  },
 })
 
 
