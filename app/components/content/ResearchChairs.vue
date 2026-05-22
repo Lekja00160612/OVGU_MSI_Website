@@ -256,7 +256,7 @@ const goToSlide = (idx: number) => {
               rel="noopener"
               class="intro-btn"
             >
-              {{ locale === 'vi' ? 'Trang bộ môn' : 'Visit Chair' }} &rarr;
+              {{ $t('labs.visit_chair') }} &rarr;
             </a>
           </div>
         </div>
