@@ -67,7 +67,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
           <img src="/Logo/OVGU_Logo.png" alt="OVGU" class="hero-uni-logo" />
         </div>
         <div class="hero-actions animate-fade-in-up delay-300">
-          <NuxtLink :to="localePath('/future-students')" class="btn btn-primary">{{ t('home.explore_program') }} →</NuxtLink>
+          <NuxtLink :to="localePath('https://apply.vgu.edu.vn/en')" class="btn btn-primary">{{ t('home.apply_now') }} →</NuxtLink>
           <NuxtLink :to="localePath('/tuition-scholarships')" class="btn btn-outline-white">{{ t('home.view_scholarships') }}</NuxtLink>
         </div>
       </div>

@@ -1,6 +1,6 @@
 ---
 title: "Team Project"
-semester: 1
+semester: 3
 german_lecturer: true
 is_elective: false
 description: |

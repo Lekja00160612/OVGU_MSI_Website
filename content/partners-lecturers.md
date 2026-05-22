@@ -1,98 +1,94 @@
 ---
-title: "Partners & Lecturers"
-headline: "Partners & Lecturers"
-intro: "The Master of Materials Science and Innovation (MSI) is a joint collaborative program drawing on the expertise of multiple institutes at the Otto von Guericke University Magdeburg (OVGU), the Vietnamese-German University (VGU), and other premier research institutions. We offer a wide range of academic and research topics, directly aligned with the cutting-edge expertise of our faculty. Students have the opportunity to contribute to research across 6 different Chairs at OVGU, alongside excellent researchers from VGU, the Fraunhofer Institute, and TU Bergakademie Freiberg."
-
+title: Partners & Lecturers
+headline: Partners & Lecturers
+intro: The Master of Materials Science and Innovation (MSI) is a joint collaborative program drawing on the expertise of multiple institutes at the Otto von Guericke University Magdeburg (OVGU), the Vietnamese-German University (VGU), and other premier research institutions. We offer a wide range of academic and research topics, directly aligned with the cutting-edge expertise of our faculty. Students have the opportunity to contribute to research across 6 different Chairs at OVGU, alongside excellent researchers from VGU, the Fraunhofer Institute, and TU Bergakademie Freiberg.
 groups:
-  - id: "vgu-core"
-    title: "MSI Program Leadership & VGU Core Faculty"
+  - id: vgu-core
+    title: MSI Program Leadership & VGU Core Faculty
     members:
-      - name: "Dr. Nguyen Xuan Thanh"
-        roles: "Academic Coordinator of MSI"
-        image: "/Lecturer_Avatar/Thanh Nguyen Xuan.jpg"
-      - name: "Dr.-Ing. Tong Duy Hien"
-        roles: "Former Academic Coordinator of MSI"
-        image: "/Lecturer_Avatar/Tong Duy Hien.jpg"
-      - name: "Dr. rer. nat. Duong Hieu Linh"
+      - name: Dr. Nguyen Xuan Thanh
+        roles: Academic Coordinator of MSI
+        image: /Lecturer_Avatar/Thanh Nguyen Xuan.jpg
+      - name: Dr.-Ing. Tong Duy Hien
+        roles: Former Academic Coordinator of MSI
+        image: /Lecturer_Avatar/Tong Duy Hien.jpg
+      - name: Dr. rer. nat. Duong Hieu Linh
         roles: ""
-        image: "/Lecturer_Avatar/Linh Duong Hieu.png"
-
-  - id: "ovgu-chairs"
-    title: "OVGU Partner Chairs & Faculty"
-    description: "Students have the opportunity to contribute to research across 6 different Chairs at OVGU."
+        image: /Lecturer_Avatar/Linh Duong Hieu.png
+  - id: ovgu-chairs
+    title: OVGU Partner Chairs & Faculty
+    description: Students have the opportunity to contribute to research across 6 different Chairs at OVGU.
     subgroups:
-      - title: "Chair of Computational Mechanics"
-        link: "https://www.nm.ovgu.de/nm/en/"
+      - title: Chair of Computational Mechanics
+        link: https://www.nm.ovgu.de/nm/en/
         members:
-          - name: "Prof. Dr.-Ing. Daniel Juhre"
-            roles: "Director of Master Materials Science; Vice Dean of the Faculty of Mechanical Engineering (OVGU); Head of the Chair of Computational Mechanics"
-            image: "/Lecturer_Avatar/Daniel Juhre.jpg"
-      - title: "Chair of Solid State Physics"
-        link: "https://www.physik.ovgu.de/Abteilungen+des+IfP/Festkörperphysik_+spez_+Halbleiterphysik-p-8.html"
+          - name: Prof. Dr.-Ing. Daniel Juhre
+            roles: Director of Master Materials Science; Vice Dean of the Faculty of Mechanical Engineering (OVGU); Head of the Chair of Computational Mechanics
+            image: /Lecturer_Avatar/Daniel Juhre.jpg
+      - title: Chair of Solid State Physics
+        link: https://www.physik.ovgu.de/Abteilungen+des+IfP/Festkörperphysik_+spez_+Halbleiterphysik-p-8.html
         members:
-          - name: "Prof. Dr. rer. nat. Jürgen Christen"
-            roles: "Head of Chair of Solid State Physics"
-            image: "/Lecturer_Avatar/Jurgen Christen.jpg"
-          - name: "apl. Prof. Dr. rer. nat. habil. Frank Bertram"
+          - name: Prof. Dr. rer. nat. Jürgen Christen
+            roles: Head of Chair of Solid State Physics
+            image: /Lecturer_Avatar/Jurgen Christen.jpg
+          - name: apl. Prof. Dr. rer. nat. habil. Frank Bertram
             roles: ""
-            image: "/Lecturer_Avatar/Frank Bertram.jpg"
-      - title: "Chair of High Temperature Materials"
-        link: "https://www.ht-materials.ovgu.de/"
+            image: /Lecturer_Avatar/Frank Bertram.jpg
+      - title: Chair of High Temperature Materials
+        link: https://www.ht-materials.ovgu.de/
         members:
-          - name: "Prof. Dr.-Ing. Mania Krüger"
-            roles: "Head of Chair of High Temperature Materials"
-            image: "/Lecturer_Avatar/Manja Kruger.jpg"
-          - name: "Dr.-Ing. Georg Hasemann"
+          - name: Prof. Dr.-Ing. Mania Krüger
+            roles: Head of Chair of High Temperature Materials
+            image: /Lecturer_Avatar/Manja Kruger.jpg
+          - name: Dr.-Ing. Georg Hasemann
             roles: ""
-            image: "/Lecturer_Avatar/Georg Hasemann.jpg"
-      - title: "Chair of Metallic Materials"
-        link: "https://www.metalle.ovgu.de/"
+            image: /Lecturer_Avatar/Georg Hasemann.jpg
+      - title: Chair of Metallic Materials
+        link: https://www.metalle.ovgu.de/
         members:
-          - name: "Prof. Dr.-Ing. Thorsten Halle"
-            roles: "Head of Chair of Metallic Materials"
-            image: "/Lecturer_Avatar/Thorsten Halle.jpg"
-          - name: "Dr.-Ing. Sebastian Hütter"
+          - name: Prof. Dr.-Ing. Thorsten Halle
+            roles: Head of Chair of Metallic Materials
+            image: /Lecturer_Avatar/Thorsten Halle.jpg
+          - name: Dr.-Ing. Sebastian Hütter
             roles: ""
-            image: "/Lecturer_Avatar/Sebastian Huetter.jpg"
-      - title: "Chair of Non-Metallic Materials"
-        link: "https://www.ceramics.ovgu.de/"
+            image: /Lecturer_Avatar/Sebastian Huetter.jpg
+      - title: Chair of Non-Metallic Materials
+        link: https://www.ceramics.ovgu.de/
         members:
-          - name: "Prof. Dr. rer. nat. Michael Scheffler"
-            roles: "Head of Chair of Non-Metallic Materials"
-            image: "/Lecturer_Avatar/Michael Scheffler.jpg"
-          - name: "Dr. rer. nat. Ulf Betke"
+          - name: Prof. Dr. rer. nat. Michael Scheffler
+            roles: Head of Chair of Non-Metallic Materials
+            image: /Lecturer_Avatar/Michael Scheffler.jpg
+          - name: Dr. rer. nat. Ulf Betke
             roles: ""
-            image: "/Lecturer_Avatar/Ulf Betke.JPG"
-      - title: "Chair of Engineering Mechanics"
-        link: "https://www.tm.ovgu.de/tm/en/"
+            image: /Lecturer_Avatar/Ulf Betke.JPG
+      - title: Chair of Engineering Mechanics
+        link: https://www.tm.ovgu.de/tm/en/
         members:
-          - name: "Prof. Dr.-Ing. habil. Dr. h. c. mult. Holm Altenbach"
-            roles: "Former Head of Chair of Engineering Mechanics"
-            image: "/Lecturer_Avatar/Holm Altenbach.jpg"
-      - title: "Institute of Chemistry"
-        link: "https://www.ich.ovgu.de/Institut.html"
+          - name: Prof. Dr.-Ing. habil. Dr. h. c. mult. Holm Altenbach
+            roles: Former Head of Chair of Engineering Mechanics
+            image: /Lecturer_Avatar/Holm Altenbach.jpg
+      - title: Institute of Chemistry
+        link: https://www.ich.ovgu.de/Institut.html
         members:
-          - name: "Prof. Dr. Franziska Scheffler"
+          - name: Prof. Dr. Franziska Scheffler
             roles: ""
-            image: "/Lecturer_Avatar/Franziska Scheffler.jpg"
-
-  - id: "invited"
-    title: "Invited Lecturers & Partner Institutes"
+            image: /Lecturer_Avatar/Franziska Scheffler.jpg
+  - id: invited
+    title: Invited Lecturers & Partner Institutes
     members:
-      - name: "Dr. rer. nat. Sven Henning"
-        institution: "Fraunhofer-Institut für Mikrostruktur von Werkstoffen und Systemen (IMWS)"
+      - name: Dr. rer. nat. Sven Henning
+        institution: Fraunhofer-Institut für Mikrostruktur von Werkstoffen und Systemen (IMWS)
         roles: ""
-        image: "/Lecturer_Avatar/Sven Henning.jpg"
-      - name: "Dr. Dang Cuong Phan"
-        institution: "Institute of Glass Science and Technology (IGT), TU Bergakademie Freiberg"
+        image: /Lecturer_Avatar/Sven Henning.jpg
+      - name: Dr. Dang Cuong Phan
+        institution: Institute of Glass Science and Technology (IGT), TU Bergakademie Freiberg
         roles: ""
-        image: "/Lecturer_Avatar/Cuong Phan Dang.jpg"
-
-  - id: "support"
-    title: "Technical & Laboratory Support"
+        image: /Lecturer_Avatar/Cuong Phan Dang.jpg
+  - id: support
+    title: Technical & Laboratory Support
     members:
-      - name: "Mr. Le Dinh Phi"
-        institution: "VGU"
-        roles: "Lab Engineer of MSI"
-        image: "/Lecturer_Avatar/Le Dinh Phi.png"
+      - name: Mr. Le Dinh Phi
+        institution: VGU
+        roles: Lab Engineer of MSI
+        image: /Lecturer_Avatar/Le Dinh Phi.png
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Mechanics of Materials and Fracture Mechanics"
-semester: 3
+semester: 1
 german_lecturer: true
 is_elective: false
 description: |

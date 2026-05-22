@@ -1,6 +1,6 @@
 ---
-title: "Future Students Guide"
-description: "Discover if the Master in Materials Science and Innovation is the right fit for your academic and professional journey."
+title: Future Students Guide
+description: Discover if the Master in Materials Science and Innovation is the right fit for your academic and professional journey.
 ---
 
 The Master in Materials Science and Innovation (MSI) is designed for graduates with a background in physics, chemistry, materials science, mechanical engineering, electrical engineering, or related engineering and science disciplines. Depending on your academic background, select the corresponding pathway tab below to guide you through the application process.
@@ -20,7 +20,7 @@ nodes:
       Submit your Bachelor degree certificate, transcripts, and IELTS 6.0 (or
       equivalent English test) to the VGU admission portal.
 
-      
+
 
       - Verify university accreditation.
 
@@ -42,7 +42,7 @@ nodes:
       offline) covering fundamental mathematics, physics, and basic
       thermodynamics.
 
-      
+
 
       - Review core physics & calculus concepts.
 
@@ -63,7 +63,7 @@ nodes:
       Receive your official admission offer from VGU and OVGU Magdeburg. Accept
       the offer, pay the first semester tuition fee, and prepare for enrollment.
 
-      
+
 
       - Sign and return the Offer Acceptance Form.
 
@@ -85,13 +85,15 @@ nodes:
       computer science, biology, etc.) must first submit a Motivation Letter to
       the academic coordinator for preliminary review.
 
-      
+
 
       - Explain your interest in Materials Science.
 
-      - Detail your relevant coursework (math, physics, chemistry) and self-study efforts.
+      - Detail your relevant coursework (math, physics, chemistry) and
+      self-study efforts.
 
-      - Obtain preliminary academic approval before submitting a full application.
+      - Obtain preliminary academic approval before submitting a full
+      application.
     todoText: Draft and submit the Motivation Letter for academic approval.
     link: "#"
   - id: indirect_dossier
@@ -107,7 +109,7 @@ nodes:
       degree certificate, transcript, and English test to the VGU admission
       portal.
 
-      
+
 
       - Include the motivation approval document.
 
@@ -129,7 +131,7 @@ nodes:
       your capability to bridge into advanced materials science topics and
       engineering calculus.
 
-      
+
 
       - Review fundamentals and bridging syllabus.
 
@@ -148,10 +150,10 @@ nodes:
     arrowType: dashed
     desc: >-
       Receive your admission offer. For indirect background candidates,
-      enrollment may be conditional upon passing 1-2 bridging courses during your
-      first year.
+      enrollment may be conditional upon passing 1-2 bridging courses during
+      your first year.
 
-      
+
 
       - Sign the bridging and conditional enrollment agreement.
 
@@ -164,16 +166,19 @@ nodes:
 ::
 
 ## Who Should Apply?
-The Master in Materials Science and Innovation (MSI) is designed for graduates with a background in physics, chemistry, materials science, mechanical engineering, electrical engineering, or related engineering disciplines. 
+
+The Master in Materials Science and Innovation (MSI) is designed for graduates with a background in physics, chemistry, materials science, mechanical engineering, electrical engineering, or related engineering disciplines.
 
 If you are fascinated by the atomic structure of materials, how it dictates macroscopic physical properties, and how advanced materials drive technology (from electronics to green energy), this program is for you.
 
 ## Admission Requirements
+
 - **Bachelor's Degree:** A recognized Bachelor's degree in a relevant engineering or science field.
 - **English Proficiency:** IELTS 6.0 or equivalent (if your previous university degree was not fully taught in English).
 - **Academic Record:** Strong academic performance in relevant foundational subjects (mathematics, physics, chemistry).
 
 ## Alumni Testimonials
+
 *Hear from our graduates who are now working in top industries and research institutes worldwide.*
 
 > "The joint program between VGU and OVGU provided me with the perfect blend of theoretical knowledge and practical laboratory skills. The international environment was truly enriching."
