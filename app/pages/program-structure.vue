@@ -448,7 +448,7 @@ const getSemesterColor = (sem: number | string) => {
 .modal-fade-leave-to {
   opacity: 0;
 }
-.page-structure { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 5rem; }
+.page-structure { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 0rem; }
 
 .intro-section { max-width: 800px; margin: 0 auto 3rem auto; }
 .intro-text { font-size: 1.05rem; color: var(--color-gray-700); line-height: 1.75; margin-bottom: 2rem; }
@@ -823,7 +823,7 @@ const getSemesterColor = (sem: number | string) => {
   padding: 1.25rem;
   border: 1px solid var(--color-gray-200);
   box-shadow: var(--shadow-md);
-  max-height: 45vh; /* Fix height for single length of phone view */
+  max-height: 65vh; /* Fix height for single length of phone view */
   overflow-y: auto;
 }
 .mobile-mod-detail-header {
