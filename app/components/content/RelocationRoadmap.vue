@@ -581,7 +581,7 @@ const arrowMarkerId = computed(() => {
   justify-content: center;
   flex-shrink: 0;
 }
-.accordion-done { margin-left: auto; color: #22c55e; font-weight: 800; font-size: 0.85rem; }
+.accordion-done { margin-left: auto; color: var(--color-success-main); font-weight: 800; font-size: 0.85rem; }
 .accordion-body {
   padding: 0 1rem 1rem;
   border-top: 1px solid var(--color-gray-100, #f3f4f6);

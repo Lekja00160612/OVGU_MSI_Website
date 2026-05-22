@@ -33,10 +33,10 @@ function goToSlide(slideIdx: number) {
 const currentSlide = computed(() => Math.floor(carouselIndex.value / 2))
 
 function getSemesterColor(sem: number): string {
-  if (sem === 1) return '#E87722'
-  if (sem === 2) return '#1E3A5F'
-  if (sem === 3) return '#10B981'
-  return '#8B5CF6'
+  if (sem === 1) return '#E87722' // Orange
+  if (sem === 2) return '#1E3A5F' // Navy
+  if (sem === 3) return '#009FDF' // OVGU Blue
+  return '#2E5280' // Medium Navy
 }
 
 const leftCard = computed(() => modules.value[carouselIndex.value] || null)
@@ -99,7 +99,7 @@ const rightCard = computed(() => modules.value[carouselIndex.value + 1] || null)
                 >
                   Sem {{ leftCard.semester || leftCard.sem || 4 }}
                 </span>
-                <UBadge color="violet" variant="soft" size="xs">Elective</UBadge>
+                <UBadge color="orange" variant="soft" size="xs">Elective</UBadge>
               </div>
               <h3 class="card-title">{{ leftCard.title }}</h3>
             </template>
@@ -123,7 +123,7 @@ const rightCard = computed(() => modules.value[carouselIndex.value + 1] || null)
                 >
                   Sem {{ rightCard.semester || rightCard.sem || 4 }}
                 </span>
-                <UBadge color="violet" variant="soft" size="xs">Elective</UBadge>
+                <UBadge color="orange" variant="soft" size="xs">Elective</UBadge>
               </div>
               <h3 class="card-title">{{ rightCard.title }}</h3>
             </template>
@@ -189,7 +189,7 @@ const rightCard = computed(() => modules.value[carouselIndex.value + 1] || null)
           >
             Sem {{ mod.semester || mod.sem || 4 }}
           </span>
-          <UBadge color="violet" variant="soft" size="xs">Elective</UBadge>
+          <UBadge color="orange" variant="soft" size="xs">Elective</UBadge>
         </div>
         <h4 class="compact-title">{{ mod.title }}</h4>
         <p v-if="mod.description" class="compact-description">{{ mod.description }}</p>

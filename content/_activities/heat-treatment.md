@@ -3,14 +3,14 @@ title: "Laboratory activities of the Heat Treatment course - MSI Programs intake
 category: "Lab Works"
 date: "2025-12-12"
 image: "/images/academic_activities/laboratory-activities-of-the-heat-treatment-course-msi-programs-intake-2024-2025-cover.jpg"
-description: "As part of the Heat Treatment course, students of the MSI programs intakes 2024 and 2025 conducted a series of laboratory experiments using state of t..."
+description: "Learn how VGU Materials Science Master students perform hands-on heat treatment experiments on steels and aluminum using state-of-the-art equipment."
 ---
 
 # Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025
 
 As part of the Heat Treatment course, students of the MSI programs (intakes 2024 and 2025) conducted a series of laboratory experiments using state-of-the-art equipment designed for materials research. The activities aim to enhance students' understanding of the relationship between microstructure and mechanical properties through practical heat treatment processes.
 
-![](/images/academic_activities/laboratory-activities-of-the-heat-treatment-course-msi-programs-intake-2024-2025-img-1.jpg)
+![Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025 - Illustration 1](/images/academic_activities/laboratory-activities-of-the-heat-treatment-course-msi-programs-intake-2024-2025-img-1.jpg)
 
 ***Figure 1:**** MSI students from the 2024 and 2025 cohorts practicing in the Heat Treatment course.*
 
@@ -28,7 +28,7 @@ Students performed hardening and tempering procedures, followed by hardness meas
 
 **Exercise 2: Influence of cooling rate during hardening**
 
-Cooling media examined: *Air- Oil- Water*
+Cooling media examined: *Air, Oil, Water*
 
 Learning objectives:
 
@@ -60,7 +60,7 @@ Learning objectives:
 
 Through this experiment, students gained insights into strengthening mechanisms governed by precipitate formation and evolution.
 
-![](/images/academic_activities/laboratory-activities-of-the-heat-treatment-course-msi-programs-intake-2024-2025-img-2.jpg)
+![Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025 - Illustration 2](/images/academic_activities/laboratory-activities-of-the-heat-treatment-course-msi-programs-intake-2024-2025-img-2.jpg)
 
 ***Figure 2****: Students discussing the exercise together*
 

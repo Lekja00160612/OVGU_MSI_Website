@@ -30,7 +30,7 @@ pdfs:
     url: "/Documents/Team Project/Team Project MSI_SMA_Fatigue_ Juhre.pdf"
 links:
   - title: "MSI Students Conclude Fracture Mechanics Course with Presentations and Insightful Discussions"
-    url: "/academic-activities/msi-students-conclude-fracture-mechanics-course-with-presentations-and-insightful-discussions"
+    url: "/academic-activities/fracture-mechanics"
     description: "Activity from 2025-05-16"
 ---
 

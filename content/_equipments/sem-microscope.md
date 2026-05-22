@@ -20,7 +20,7 @@ links:
     url: "https://www.zeiss.com/microscopy/en/products/sem.html"
     description: "Official technical documentation and application notes"
   - title: "Lab Activity: Nano Crystals Seminar"
-    url: "/academic-activities/06-seminar-nano-crystals"
+    url: "/academic-activities/micro-nano-scale-materials"
     description: "Students used SEM for nanostructure characterization in this seminar"
 ---
 

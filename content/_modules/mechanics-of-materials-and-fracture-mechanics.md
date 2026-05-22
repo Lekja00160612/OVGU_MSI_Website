@@ -20,7 +20,7 @@ pdfs:
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
 links:
   - title: "MSI Students Conclude Fracture Mechanics Course with Presentations and Insightful Discussions"
-    url: "/academic-activities/msi-students-conclude-fracture-mechanics-course-with-presentations-and-insightful-discussions"
+    url: "/academic-activities/fracture-mechanics"
     description: "Activity from 2025-05-16"
 ---
 

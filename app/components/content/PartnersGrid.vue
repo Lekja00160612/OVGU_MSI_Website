@@ -35,7 +35,7 @@ const getLecturerModules = (lecturerName: string): any[] => {
 
 // ── Avatar color palette (deterministic per name) ────────────────────────────
 const PALETTE = [
-  '#1e3a5f', '#e87722', '#009fdf', '#0b5229', '#7b1fa2', '#495057'
+  '#1e3a5f', '#e87722', '#009fdf', '#2e5280', '#c95e0a', '#495057'
 ]
 const avatarColor = (name: string): string => {
   if (!name) return PALETTE[0]

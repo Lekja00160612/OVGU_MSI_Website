@@ -236,7 +236,7 @@ function clearFilters() {
 .highlights-title {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--color-primary-dark, #102a43);
+  color: var(--color-primary-dark, #0f2240);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;
@@ -475,7 +475,7 @@ function clearFilters() {
 .act-title {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--color-primary-dark, #102a43);
+  color: var(--color-primary-dark, #0f2240);
   margin-bottom: 0.5rem;
   line-height: 1.35;
   transition: color 200ms;

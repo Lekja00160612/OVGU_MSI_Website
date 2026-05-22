@@ -1,12 +1,12 @@
 ---
-title: "Exploring Materials at the Micro and Nano Scale – MSI Course Highlight"
+title: "Exploring Materials at the Micro and Nano Scale MSI Course Highlight"
 category: "Lab Works"
 date: "2026-03-11"
 image: "/images/academic_activities/exploring-materials-at-the-micro-and-nano-scale-msi-course-highlight-cover.jpg"
-description: "Students of the Master in Materials Science MSI program at Vietnamese German University VGU recently participated in the course \"Materials Characteriz..."
+description: "Discover how VGU Materials Science Master students analyze structures at the micro and nano scale with flying faculty from OVGU Magdeburg, Germany."
 ---
 
-# Exploring Materials at the Micro and Nano Scale – MSI Course Highlight
+# Exploring Materials at the Micro and Nano Scale  MSI Course Highlight
 
 Students of the Master in Materials Science (MSI) program at Vietnamese-German University (VGU) recently participated in the course "Materials Characterization", taught by Prof. Dr. Franziska Scheffler from the Chair of Technical Chemistry (Lehrstuhl für Technische Chemie) at Otto-von-Guericke University Magdeburg, Germany.
 
@@ -28,8 +28,8 @@ Courses like Materials Characterization equip MSI students with the analytical t
 
 With international faculty from Germany and strong research connections, MSI prepares students for careers in advanced materials research, industry innovation, and global scientific collaboration.
 
-![](/images/academic_activities/exploring-materials-at-the-micro-and-nano-scale-msi-course-highlight-img-1.jpg)
+![Exploring Materials at the Micro and Nano Scale MSI Course Highlight - Illustration 1](/images/academic_activities/exploring-materials-at-the-micro-and-nano-scale-msi-course-highlight-img-1.jpg)
 
-![](/images/academic_activities/exploring-materials-at-the-micro-and-nano-scale-msi-course-highlight-img-2.jpg)
+![Exploring Materials at the Micro and Nano Scale MSI Course Highlight - Illustration 2](/images/academic_activities/exploring-materials-at-the-micro-and-nano-scale-msi-course-highlight-img-2.jpg)
 
-![](/images/academic_activities/exploring-materials-at-the-micro-and-nano-scale-msi-course-highlight-img-3.jpg)
+![Exploring Materials at the Micro and Nano Scale MSI Course Highlight - Illustration 3](/images/academic_activities/exploring-materials-at-the-micro-and-nano-scale-msi-course-highlight-img-3.jpg)

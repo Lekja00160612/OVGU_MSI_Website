@@ -94,10 +94,10 @@ curriculum:
 activities:
   headline: Academic Activities
   highlights:
-    - /_activities/01-bosch-visit
-    - /_activities/02-sem-training
-    - /_activities/03-guest-seminar
-    - /_activities/crawled-0-international-colloquium-on-advanced-smart-materials
+    - /_activities/vina-kraft-paper-trip
+    - /_activities/sem-xrd-lab-tour
+    - /_activities/flying-faculty-germany
+    - /_activities/daad-scholarships-msi
   items:
     - title: Visit to Bosch Manufacturing Plant
       tag: INDUSTRY EXCURSION

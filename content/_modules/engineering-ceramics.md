@@ -16,7 +16,7 @@ pdfs:
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
 links:
   - title: "Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael"
-    url: "/academic-activities/engineering-ceramics-advanced-materials-science-with-prof-scheffler-michael"
+    url: "/academic-activities/engineering-ceramics"
     description: "Activity from 2026-03-03"
 ---
 

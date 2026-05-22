@@ -98,9 +98,9 @@ curriculum:
 activities:
   headline: "Hoạt động Học thuật"
   highlights:
-    - "/_activities/01-bosch-visit"
-    - "/_activities/02-sem-training"
-    - "/_activities/03-guest-seminar"
+    - "/_activities/vina-kraft-paper-trip"
+    - "/_activities/sem-xrd-lab-tour"
+    - "/_activities/flying-faculty-germany"
   items:
     - title: "Chuyến tham quan Nhà máy Bosch"
       tag: "TRẢI NGHIỆM THỰC TẾ"

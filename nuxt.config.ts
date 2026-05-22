@@ -61,23 +61,23 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare_pages',
     prerender: {
-      // crawlLinks: true,
-      // routes: ['/', '/vi'],
+      crawlLinks: true,
+      routes: ['/', '/vi'],
       autoSubfolderIndex: false,
     },
-    cloudflare: {
-      pages: {
-        routes: {
-          exclude: [
-            '/Documents/*',
-            '/Logo/*',
-            '/Thumbnail/*',
-            '/images/*',
-            '/Hybrid_Learning/*',
-            '/OVGU_Campus/*',
-          ]
-        }
-      }
-    }
+    // cloudflare: {
+    //   pages: {
+    //     routes: {
+    //       exclude: [
+    //         '/Documents/*',
+    //         '/Logo/*',
+    //         '/Thumbnail/*',
+    //         '/images/*',
+    //         '/Hybrid_Learning/*',
+    //         '/OVGU_Campus/*',
+    //       ]
+    //     }
+    //   }
+    // }
   },
 })

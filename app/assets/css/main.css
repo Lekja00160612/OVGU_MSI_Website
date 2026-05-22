@@ -32,6 +32,8 @@
   --color-ovgu-blue: #009FDF;
   /* OVGU bright blue */
   --color-ovgu-blue-dark: #007BB5;
+  --color-ovgu-blue-50: #e0f3fc;
+  /* OVGU light blue tint */
 
   /* Semantic Feedback Colors */
   --color-success-bg: #ecfdf5;
@@ -316,7 +318,7 @@ h6 {
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, #FFA055 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
+    background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
     background-size: 150% 150%;
     background-position: 0% 50%;
     color: #fff !important;
@@ -653,12 +655,15 @@ h6 {
 
 /* Fallback styles for markdown/prose images to prevent overflow and maintain clean styling */
 .prose img,
+.prose .prose-img-wrapper,
 .prose-content img,
-.prose-content .prose-img-wrapper {
-  max-width: 100%;
+.prose-content .prose-img-wrapper,
+.activity-body img,
+.activity-body .prose-img-wrapper {
+  max-width: 100% !important;
   height: auto;
   border-radius: var(--radius-lg, 16px);
-  margin: 1.5rem auto;
+  margin: 2rem auto;
   display: block;
   box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.08));
 }

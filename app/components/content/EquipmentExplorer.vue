@@ -461,7 +461,7 @@ const getRelatedActivities = (machine: any) => {
 }
 .modal-cat-badge {
   display: inline-block;
-  background: var(--color-primary-50, #e8eef8);
+  background: var(--color-primary-50, #eef3fb);
   color: var(--color-primary, #1e3a5f);
   font-size: 0.75rem;
   font-weight: 700;

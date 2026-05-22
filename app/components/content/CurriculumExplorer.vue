@@ -9,10 +9,10 @@ const isDetailModalOpen = ref(false)
 const activeMobileModule = ref<string | null>(null)
 
 function getSemesterColor(sem: number): string {
-  if (sem === 1) return '#E87722'
-  if (sem === 2) return '#1E3A5F'
-  if (sem === 3) return '#10B981'
-  return '#8B5CF6'
+  if (sem === 1) return '#E87722' // Orange
+  if (sem === 2) return '#1E3A5F' // Navy
+  if (sem === 3) return '#009FDF' // OVGU Blue
+  return '#2E5280' // Medium Navy
 }
 
 function getSemesterLabel(sem: number): string {
@@ -97,7 +97,7 @@ const semesters = [1, 2, 3, 4]
               <span v-if="mod.german_lecturer" class="german-dot" title="Taught by Visiting German Professor"></span>
             </div>
             <h4 class="module-title">{{ mod.title }}</h4>
-            <UBadge v-if="mod.type === 'elective'" color="violet" variant="soft" size="xs" class="mt-1">Elective</UBadge>
+            <UBadge v-if="mod.type === 'elective'" color="orange" variant="soft" size="xs" class="mt-1">Elective</UBadge>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ const semesters = [1, 2, 3, 4]
                   <UBadge v-if="selectedModule.german_lecturer" color="green" variant="soft" size="xs">
                     <span class="pulse-dot-sm"></span> German Lecturer
                   </UBadge>
-                  <UBadge v-if="selectedModule.type === 'elective'" color="violet" variant="soft" size="xs">Elective</UBadge>
+                  <UBadge v-if="selectedModule.type === 'elective'" color="orange" variant="soft" size="xs">Elective</UBadge>
                   <UBadge v-if="selectedModule.credits" color="gray" variant="soft" size="xs">{{ selectedModule.credits }} Credits</UBadge>
                 </div>
               </div>
@@ -204,7 +204,7 @@ const semesters = [1, 2, 3, 4]
           <div v-if="activeMobileModule === (mod._path || mod.title)" class="accordion-body">
             <div class="accordion-badges">
               <UBadge v-if="mod.german_lecturer" color="green" variant="soft" size="xs">German Lecturer</UBadge>
-              <UBadge v-if="mod.type === 'elective'" color="violet" variant="soft" size="xs">Elective</UBadge>
+              <UBadge v-if="mod.type === 'elective'" color="orange" variant="soft" size="xs">Elective</UBadge>
               <UBadge v-if="mod.credits" color="gray" variant="soft" size="xs">{{ mod.credits }} Credits</UBadge>
             </div>
             <ContentRenderer v-if="mod.body" :value="mod" class="prose accordion-prose" />
@@ -343,9 +343,9 @@ const semesters = [1, 2, 3, 4]
   font-weight: 700;
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius-full);
-  border: 2px solid #10B981;
-  color: #059669;
-  background: #ecfdf5;
+  border: 2px solid var(--color-success-main);
+  color: var(--color-success-text);
+  background: var(--color-success-bg);
   box-shadow: 0 0 10px rgba(16, 185, 129, 0.4), 0 0 20px rgba(16, 185, 129, 0.15);
   animation: green-glow 2.5s ease-in-out infinite;
 }
@@ -360,7 +360,7 @@ const semesters = [1, 2, 3, 4]
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #10B981;
+  background: var(--color-success-main);
   display: inline-block;
   position: relative;
   flex-shrink: 0;
@@ -378,7 +378,7 @@ const semesters = [1, 2, 3, 4]
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10B981;
+  background: var(--color-success-main);
   display: inline-block;
   flex-shrink: 0;
 }
@@ -393,7 +393,7 @@ const semesters = [1, 2, 3, 4]
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #10B981;
+  background: var(--color-success-main);
   display: inline-block;
   flex-shrink: 0;
   box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);

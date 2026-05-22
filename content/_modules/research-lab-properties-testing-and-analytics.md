@@ -23,7 +23,7 @@ pdfs:
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
 links:
   - title: "MSI Students Dive Into Hands-On Learning in Research Labs"
-    url: "/academic-activities/msi-students-dive-into-hands-on-learning-in-research-labs"
+    url: "/academic-activities/research-labs"
     description: "Activity from 2025-06-10"
 ---
 

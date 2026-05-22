@@ -79,19 +79,21 @@ useSeoMeta({
 }
 
 .activity-content-card {
-  --card-padding: 3rem;
+  --card-padding-x: 3rem;
+  --card-padding-y: 3rem;
   background: #fff;
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
   border: 1px solid var(--color-gray-200);
-  padding: var(--card-padding);
+  padding: var(--card-padding-y) var(--card-padding-x);
   max-width: 900px;
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .activity-content-card {
-    --card-padding: 1.25rem 1rem;
+    --card-padding-x: 1rem;
+    --card-padding-y: 1.25rem;
   }
 }
 
@@ -139,7 +141,7 @@ useSeoMeta({
 }
 
 .activity-hero-image {
-  margin: 0 calc(-1 * var(--card-padding)) 2.5rem calc(-1 * var(--card-padding));
+  margin: 0 calc(-1 * var(--card-padding-x)) 2.5rem calc(-1 * var(--card-padding-x));
   height: 400px;
   background: var(--color-gray-100);
   overflow: hidden;

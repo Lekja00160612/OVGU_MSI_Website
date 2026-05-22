@@ -720,8 +720,8 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
 }
 
 .bento-explore {
-  background: #f0f7ff;
-  border: 1px solid #d9eafd;
+  background: var(--color-primary-50);
+  border: 1px solid var(--color-primary-100);
   padding: 2rem 1.5rem;
   border-radius: var(--radius-xl);
   display: flex;
@@ -733,7 +733,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
   color: var(--color-primary);
   transition: all 250ms;
 }
-.bento-explore:hover { background: #e0f0ff; border-color: #c4e1fb; }
+.bento-explore:hover { background: var(--color-primary-100); border-color: var(--color-primary-100); }
 .bento-explore-icon {
   width: 48px; height: 48px;
   color: var(--color-ovgu-blue);
@@ -812,7 +812,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
   border-radius: var(--radius-full);
   padding: 0.15rem 0.6rem;
 }
-.mode--online { background: #e0f3fc; color: var(--color-ovgu-blue-dark); }
+.mode--online { background: var(--color-ovgu-blue-50); color: var(--color-ovgu-blue-dark); }
 .mode--onsite { background: var(--color-accent-50); color: var(--color-accent-dark); }
 .schedule-hours { font-size: 0.75rem; color: var(--color-gray-500); font-weight: 600; }
 

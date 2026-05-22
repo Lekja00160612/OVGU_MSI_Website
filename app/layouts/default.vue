@@ -56,6 +56,7 @@ const scrollToFooter = () => {
               v-for="link in navLinks.slice(0, 4)"
               :key="link.to"
               :to="link.to"
+              :prefetch="true"
               class="nav-link"
               :class="{ 'nav-link--active': isActive(link.to) }"
             >
@@ -67,6 +68,7 @@ const scrollToFooter = () => {
               v-for="link in navLinks.slice(4)"
               :key="link.to"
               :to="link.to"
+              :prefetch="true"
               class="nav-link"
               :class="{ 'nav-link--active': isActive(link.to) }"
             >

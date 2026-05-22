@@ -905,11 +905,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
 }
 
 .doc-link:hover { background: var(--color-primary-50); border-color: var(--color-primary-100); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.doc-icon { background: #fee2e2; color: #dc2626; padding: 0.6rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.doc-icon svg { width: 22px; height: 22px; }
-.doc-title { flex: 1; font-size: 0.9rem; }
-.doc-link:hover { background: var(--color-primary-50); border-color: var(--color-primary-100); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.doc-icon { background: var(--color-danger-bg); color: var(--color-danger-text); padding: 0.6rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.doc-icon { background: var(--color-primary-50); color: var(--color-primary); padding: 0.6rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .doc-icon svg { width: 22px; height: 22px; }
 .doc-title { flex: 1; font-size: 0.9rem; }
 .doc-arrow { width: 18px; height: 18px; color: var(--color-gray-400); transition: transform 0.2s; }

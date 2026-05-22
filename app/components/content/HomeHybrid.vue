@@ -113,7 +113,7 @@ const { page } = inject('pageData') as any
   border-radius: var(--radius-full);
   padding: 0.15rem 0.6rem;
 }
-.mode--online { background: #e0f3fc; color: var(--color-ovgu-blue-dark); }
+.mode--online { background: var(--color-ovgu-blue-50); color: var(--color-ovgu-blue-dark); }
 .mode--onsite { background: var(--color-accent-50); color: var(--color-accent-dark); }
 .schedule-hours { font-size: 0.75rem; color: var(--color-gray-500); font-weight: 600; }
 </style>

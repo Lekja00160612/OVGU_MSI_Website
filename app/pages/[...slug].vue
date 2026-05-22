@@ -63,6 +63,12 @@ useSeoMeta({
   border: 1px solid var(--color-gray-200);
 }
 
+@media (max-width: 640px) {
+  .prose-wrapper {
+    padding: 1.5rem;
+  }
+}
+
 .prose :deep(h2) {
   font-size: 1.8rem;
   font-weight: 700;

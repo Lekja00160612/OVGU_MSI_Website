@@ -18,14 +18,14 @@ pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
 links:
-  - title: "MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs"
-    url: "/academic-activities/msi-students-explore-powder-metallurgy-and-material-testing-in-state-of-the-art-labs"
-    description: "Activity from 2025-06-25"
   - title: "MSI Students Dive Into Hands-On Learning in Research Labs"
-    url: "/academic-activities/msi-students-dive-into-hands-on-learning-in-research-labs"
+    url: "/academic-activities/research-labs"
     description: "Activity from 2025-06-10"
+  - title: "MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs"
+    url: "/academic-activities/powder-metallurgy"
+    description: "Activity from 2025-06-25"
   - title: "Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael"
-    url: "/academic-activities/engineering-ceramics-advanced-materials-science-with-prof-scheffler-michael"
+    url: "/academic-activities/engineering-ceramics"
     description: "Activity from 2026-03-03"
 ---
 

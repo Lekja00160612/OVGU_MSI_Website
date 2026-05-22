@@ -1,12 +1,12 @@
 ---
-title: "Field Trip to Vina Kraft Paper – MSI Students"
+title: "Field Trip to Vina Kraft Paper MSI Students"
 category: "Industry Adventures"
 date: "2026-05-08"
 image: "/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-cover.jpg"
-description: "The Master in Materials Science MSI program at Vietnamese German University VGU organized a field trip to Vina Kraft Paper, providing students with th..."
+description: "Discover how VGU Materials Science Master students explore industrial paper manufacturing and product performance testing on a field trip to Vina Kraft."
 ---
 
-# Field Trip to Vina Kraft Paper – MSI Students
+# Field Trip to Vina Kraft Paper: MSI Students
 
 The Master in Materials Science (MSI) program at Vietnamese-German University (VGU) organized a field trip to Vina Kraft Paper, providing students with the opportunity to gain practical insights into industrial manufacturing and materials applications in the paper industry.
 
@@ -16,10 +16,10 @@ The field trip enabled students to observe how principles of materials science a
 
 Such industrial visits are an important component of the MSI program, helping students connect theoretical knowledge with practical applications while strengthening their professional and analytical perspectives in materials science and engineering.
 
-![](/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-img-1.jpg)
+![Field Trip to Vina Kraft Paper MSI Students - Illustration 1](/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-img-1.jpg)
 
-![](/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-img-2.jpg)
+![Field Trip to Vina Kraft Paper MSI Students - Illustration 2](/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-img-2.jpg)
 
-![](/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-img-3.jpg)
+![Field Trip to Vina Kraft Paper MSI Students - Illustration 3](/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-img-3.jpg)
 
-![](/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-img-4.jpg)
+![Field Trip to Vina Kraft Paper MSI Students - Illustration 4](/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-img-4.jpg)

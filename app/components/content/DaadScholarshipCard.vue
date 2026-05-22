@@ -416,7 +416,7 @@ onUnmounted(() => {
 }
 
 .detail-download-btn {
-  background: linear-gradient(135deg, #FFA055 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
+  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
   color: var(--color-white) !important;
   font-weight: 700;
   font-size: 0.95rem;
