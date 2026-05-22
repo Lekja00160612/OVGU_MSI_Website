@@ -10,7 +10,7 @@ const navLinks = computed(() => [
   { label: t('nav.academic_activities'), to: localePath('/academic-activities') },
   { label: t('nav.partners_lecturers'), to: localePath('/partners-lecturers') },
   { label: t('nav.tuition_scholarships'), to: localePath('/tuition-scholarships') },
-  { label: t('nav.laboratories_research'), to: localePath('/laboratories-researches') },
+  { label: t('nav.laboratories_research'), to: localePath('/laboratories-research') },
   { label: t('nav.student_life'), to: localePath('/student-life') },
 ])
 

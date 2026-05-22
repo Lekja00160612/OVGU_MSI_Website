@@ -1,6 +1,6 @@
 ---
-title: Tuition Fees & Scholarships
-description: "Investing in your future: transparent fee structures and generous financial support options."
+title: "Tuition Fees & Prestigious Scholarships"
+description: "Explore affordable German-degree tuition fees and generous DAAD, VGU, and merit-based scholarship opportunities for Materials Science Master students at VGU."
 ---
 
 ## Tuition Fees

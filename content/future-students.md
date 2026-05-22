@@ -1,6 +1,6 @@
 ---
-title: Future Students Guide
-description: Discover if the Master in Materials Science and Innovation is the right fit for your academic and professional journey.
+title: "Admission Guide & Career Pathways"
+description: "Unlock global opportunities with a German-degree Master of Science in Materials Science and Innovation at VGU. Learn about admission criteria, pathways, and career prospects."
 ---
 
 The Master in Materials Science and Innovation (MSI) is designed for graduates with a background in physics, chemistry, materials science, mechanical engineering, electrical engineering, or related engineering and science disciplines. Depending on your academic background, select the corresponding pathway tab below to guide you through the application process.

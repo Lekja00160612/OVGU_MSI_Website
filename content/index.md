@@ -18,12 +18,13 @@ whyChoose:
       icon: diploma
       title: Double Degree
       description: Graduate with two internationally recognized Master of Science degrees — one from VGU and one M. Sc. from OVGU Magdeburg — opening doors across Europe and Asia.
+      featured: true
     - id: 2
       icon: lab
       title: State-of-the-Art Laboratories
       description: Access modern characterization labs, thin-film deposition systems, and testing facilities at both VGU Binh Duong and OVGU Magdeburg.
       featured: false
-      link: /laboratories-researches
+      link: /laboratories-research
     - id: 3
       icon: faculty
       title: German Academic Faculty
@@ -34,15 +35,17 @@ whyChoose:
       icon: hybrid
       title: Flexible Hybrid Format
       description: New hybrid schedule balances work and study — online sessions on weekday evenings combined with intensive on-campus weekends.
+      link: "/#hybrid"
     - id: 5
       icon: industry
       title: Industry Connections
       description: Students will be equipped with Industry knowledge via numerous field trips throughout 2-year learning duration.
+      link: "/academic-activities"
     - id: 6
       icon: scholarship
       title: Scholarship Opportunities
       description: Merit-based and needs-based scholarships available through VGU, DAAD Germany, and international partner programs.
-      link: /tuition-scholarships
+      link: "/tuition-scholarships"
 curriculum:
   headline: Program Structure
   subtitle: Four semesters of progressive mastery — from fundamental theory to cutting-edge research.

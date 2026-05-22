@@ -62,7 +62,10 @@
     "cat_academic_lectures": "Academic Lectures",
     "cat_industry_adventures": "Industry Adventures",
     "cat_lab_works": "Lab Works",
-    "cat_other_activities": "Other Activities"
+    "cat_other_activities": "Other Activities",
+    "cat_industrial_visits": "Industrial Visits",
+    "cat_lab_trainings": "Lab Trainings",
+    "cat_achievements_&_events": "Achievements & Events"
   },
   "labs": {
     "title": "Laboratories & Research",
@@ -78,6 +81,7 @@
     "modal_documents": "Documents",
     "modal_links": "Related Links",
     "modal_activities": "Involved Academic Activities",
-    "modal_materials": "Equipment Details"
+    "modal_materials": "Equipment Details",
+    "visit_chair": "Visit Chair Research"
   }
 }

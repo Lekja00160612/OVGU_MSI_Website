@@ -1,6 +1,6 @@
 ---
-title: Hành trình Học viên Tương lai
-description: Khám phá xem chương trình Thạc sĩ Khoa học Vật liệu và Đổi mới sáng tạo có phù hợp với định hướng học thuật và sự nghiệp của bạn hay không.
+title: "Hướng Dẫn Tuyển Sinh & Lộ Trình Nghề Nghiệp"
+description: "Mở khóa các cơ hội toàn cầu với bằng Thạc sĩ Khoa học Vật liệu và Đổi mới từ Đức tại VGU. Tìm hiểu về điều kiện tuyển sinh, lộ trình học tập và cơ hội nghề nghiệp."
 ---
 
 Chương trình Thạc sĩ Khoa học Vật liệu và Đổi mới sáng tạo (MSI) được thiết kế cho các học viên tốt nghiệp ngành vật lý, hóa học, khoa học vật liệu, kỹ thuật cơ khí, kỹ thuật điện hoặc các ngành khoa học và kỹ thuật liên quan. Tùy thuộc vào nền tảng học thuật của bạn, hãy chọn tab lộ trình tương ứng dưới đây để xem hướng dẫn chi tiết quy trình ứng tuyển.

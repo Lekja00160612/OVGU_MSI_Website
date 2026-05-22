@@ -8,6 +8,14 @@ const { data: pageData } = await useAsyncData(`partners-page-${locale.value}`, (
   queryCollection('content').path(pagePath).first()
 )
 
+// SEO Metadata targeting OVGU-VGU collaborative faculty, academic excellence, and international professors
+useSeoMeta({
+  title: () => pageData.value?.title ? `${pageData.value.title} - Faculty & Partners | MSI VGU` : 'German Faculty, Lecturers & Partners - Materials Science & Innovation | VGU',
+  ogTitle: () => pageData.value?.title ? `${pageData.value.title} - Faculty & Partners | MSI VGU` : 'German Faculty, Lecturers & Partners - Materials Science & Innovation | VGU',
+  description: () => pageData.value?.description || 'Meet the outstanding international faculty and professors from Otto von Guericke University Magdeburg (OVGU) and VGU delivering world-class lectures in Materials Science & Innovation.',
+  ogDescription: () => pageData.value?.description || 'Meet the outstanding international faculty and professors from Otto von Guericke University Magdeburg (OVGU) and VGU delivering world-class lectures in Materials Science & Innovation.',
+})
+
 // Fetch all modules to build lecturers associations
 const { data: allModules } = await useAsyncData('partners-modules', () =>
   queryCollection('modules').all()
@@ -39,12 +47,7 @@ const page = computed(() => pageData.value?.meta ?? {})
 <template>
   <div class="page-partners">
     <!-- Header -->
-    <div class="header-banner">
-      <div class="container text-center">
-        <h1 class="page-title">{{ page.headline || 'Partners & Lecturers' }}</h1>
-        <p class="page-subtitle">A powerful collaboration of premier research institutes.</p>
-      </div>
-    </div>
+    <PageHeader :title="pageData?.title || 'Partners & Lecturers'" :description="pageData?.description" />
     
     <!-- Intro -->
     <div class="container intro-section text-center">
@@ -134,9 +137,6 @@ const page = computed(() => pageData.value?.meta ?? {})
 
 <style scoped>
 .page-partners { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 5rem; }
-.header-banner { background: var(--color-primary-dark); padding: 5rem 1.5rem; color: #fff; margin-bottom: 3rem; }
-.page-title { font-size: 3rem; font-family: var(--font-display); font-weight: 800; margin-bottom: 1rem;  background-color: var(--color-accent); padding: 0rem 0.5rem; display: inline-block;}
-.page-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.8); }
 
 .intro-section { max-width: 900px; margin: 0 auto 5rem auto; }
 .intro-text { font-size: 1.15rem; color: var(--color-gray-700); line-height: 1.8; margin-bottom: 2.5rem; }

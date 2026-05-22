@@ -33,6 +33,16 @@
   /* OVGU bright blue */
   --color-ovgu-blue-dark: #007BB5;
 
+  /* Semantic Feedback Colors */
+  --color-success-bg: #ecfdf5;
+  --color-success-border: #a7f3d0;
+  --color-success-text: #065f46;
+  --color-success-main: #10B981;
+
+  --color-danger-bg: #fee2e2;
+  --color-danger-border: #fca5a5;
+  --color-danger-text: #dc2626;
+
   /* Neutrals */
   --color-white: #ffffff;
   --color-gray-50: #f8f9fa;
@@ -181,6 +191,7 @@ h6 {
   background-color: var(--color-accent);
   padding: 0rem 0.5rem;
   display: inline-block;
+  color: var(--color-white);
 }
 
 .page-subtitle {
@@ -638,4 +649,16 @@ h6 {
   .brand-logo {
     height: 52px;
   }
+}
+
+/* Fallback styles for markdown/prose images to prevent overflow and maintain clean styling */
+.prose img,
+.prose-content img,
+.prose-content .prose-img-wrapper {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg, 16px);
+  margin: 1.5rem auto;
+  display: block;
+  box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.08));
 }

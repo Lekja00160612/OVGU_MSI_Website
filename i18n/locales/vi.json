@@ -62,7 +62,10 @@
     "cat_academic_lectures": "Bài giảng Học thuật",
     "cat_industry_adventures": "Trải nghiệm Doanh nghiệp",
     "cat_lab_works": "Thực hành Phòng Lab",
-    "cat_other_activities": "Hoạt động Khác"
+    "cat_other_activities": "Hoạt động Khác",
+    "cat_industrial_visits": "Kiến tập Công nghiệp",
+    "cat_lab_trainings": "Thực hành Lab",
+    "cat_achievements_&_events": "Thành tựu & Sự kiện"
   },
   "labs": {
     "title": "Phòng Lab & Nghiên Cứu",
@@ -78,6 +81,7 @@
     "modal_documents": "Tài Liệu",
     "modal_links": "Liên Kết Liên Quan",
     "modal_activities": "Hoạt Động Học Thuật Liên Quan",
-    "modal_materials": "Chi Tiết Thiết Bị"
+    "modal_materials": "Chi Tiết Thiết Bị",
+    "visit_chair": "Nghiên cứu của Bộ môn"
   }
 }

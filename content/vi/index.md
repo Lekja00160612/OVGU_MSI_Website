@@ -21,27 +21,33 @@ whyChoose:
       icon: "diploma"
       title: "Nhận Bằng Kép"
       description: "Tốt nghiệp với hai bằng Thạc sĩ Khoa học được công nhận quốc tế — một từ VGU và một từ OVGU Magdeburg — mở ra cơ hội trên toàn châu Âu và châu Á."
+      featured: true
     - id: 2
       icon: "lab"
       title: "Phòng thí nghiệm Hiện đại"
       description: "Tiếp cận các phòng thí nghiệm mô tả đặc tính hiện đại, hệ thống lắng đọng màng mỏng và cơ sở thử nghiệm tại cả VGU Bình Dương và OVGU Magdeburg."
+      link: "/laboratories-research"
     - id: 3
       icon: "faculty"
       title: "Giảng viên Học thuật Đức"
       description: "Học trực tiếp từ các giáo sư và nhà nghiên cứu của OVGU sang Việt Nam giảng dạy trực tiếp, duy trì chất lượng học thuật Đức."
       link: "/partners-lecturers"
+      featured: true
     - id: 4
       icon: "hybrid"
       title: "Mô hình Học Tập Linh hoạt"
       description: "Lịch học linh hoạt cân bằng giữa công việc và học tập — các buổi học trực tuyến vào buổi tối các ngày trong tuần kết hợp với những ngày cuối tuần chuyên sâu trên khuôn viên trường."
+      link: "/#hybrid"
     - id: 5
       icon: "industry"
       title: "Kết nối Doanh nghiệp"
       description: "Mối quan hệ hợp tác chặt chẽ với các nhà sản xuất hàng đầu trong lĩnh vực ô tô, hàng không vũ trụ và điện tử để thực tập và thực hiện luận văn thạc sĩ."
+      link: "/academic-activities"
     - id: 6
       icon: "scholarship"
       title: "Cơ hội Học bổng"
       description: "Có sẵn học bổng dựa trên thành tích và nhu cầu thông qua VGU, DAAD Đức, và các chương trình đối tác quốc tế."
+      link: "/tuition-scholarships"
 
 curriculum:
   headline: "Cấu trúc Chương trình"

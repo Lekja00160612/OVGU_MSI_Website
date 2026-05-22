@@ -6,18 +6,21 @@ const localePath = useLocalePath()
 const { data: page } = await useAsyncData('future-students-page-' + route.path, () =>
   queryCollection('content').path(route.path).first()
 )
+
+// SEO Metadata optimized for prospective MSI applicants (admission, requirements, English proficiency)
+useSeoMeta({
+  title: () => page.value?.title ? `${page.value.title} - Admissions & Requirements | MSI VGU` : 'Admissions & Requirements - Materials Science and Innovation | VGU',
+  ogTitle: () => page.value?.title ? `${page.value.title} - Admissions & Requirements | MSI VGU` : 'Admissions & Requirements - Materials Science and Innovation | VGU',
+  description: () => page.value?.description || 'Learn about admission requirements, English/IELTS criteria, direct entry, and bridging pathways for the Master of Science in Materials Science and Innovation program at VGU.',
+  ogDescription: () => page.value?.description || 'Learn about admission requirements, English/IELTS criteria, direct entry, and bridging pathways for the Master of Science in Materials Science and Innovation program at VGU.',
+})
 </script>
 
 <template>
   <main class="page-container">
     <template v-if="page">
       <!-- Premium Hero Banner -->
-      <div class="header-banner">
-        <div class="container text-center">
-          <h1 class="page-title">{{ page.title }}</h1>
-          <p v-if="page.description" class="page-subtitle">{{ page.description }}</p>
-        </div>
-      </div>
+      <PageHeader :title="page.title" :description="page.description" />
 
       <!-- Main Body Container -->
       <div class="container content-section">

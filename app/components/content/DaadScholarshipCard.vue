@@ -197,12 +197,12 @@ onUnmounted(() => {
 .label-overlay {
   position: absolute;
   left: 1.25rem;
-  bottom: 1.25rem;
-  background: var(--color-white);
-  padding: 0.5rem 0.75rem;
+  bottom: 0rem;
+  /* background: var(--color-white); */
+  /* padding: 0.5rem 0.75rem; */
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--color-gray-200);
+  /* border: 1px solid var(--color-gray-200); */
   max-width: 200px;
   display: flex;
   align-items: center;

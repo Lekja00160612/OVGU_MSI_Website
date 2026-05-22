@@ -6,18 +6,21 @@ const route = useRoute()
 const { data: page } = await useAsyncData('page-' + route.path, () =>
   queryCollection('content').path(route.path).first()
 )
+
+// Dynamic SEO metadata targeting prospective Master's students
+useSeoMeta({
+  title: () => page.value?.title ? `${page.value.title} - Materials Science & Innovation | VGU & OVGU` : 'Materials Science and Innovation (MSI) Master Program | VGU',
+  ogTitle: () => page.value?.title ? `${page.value.title} - Materials Science & Innovation | VGU & OVGU` : 'Materials Science and Innovation (MSI) Master Program | VGU',
+  description: () => page.value?.description || 'Earn a prestigious German-standard Master of Science joint degree in Materials Science and Innovation at VGU. High-tech research, study in Germany opportunities, and fully English-taught curriculum.',
+  ogDescription: () => page.value?.description || 'Earn a prestigious German-standard Master of Science joint degree in Materials Science and Innovation at VGU. High-tech research, study in Germany opportunities, and fully English-taught curriculum.',
+})
 </script>
 
 <template>
   <main class="page-container">
     <template v-if="page">
       <!-- Premium Hero Banner -->
-      <div class="header-banner">
-        <div class="container text-center">
-          <h1 class="page-title">{{ page.title }}</h1>
-          <p v-if="page.description" class="page-subtitle">{{ page.description }}</p>
-        </div>
-      </div>
+      <PageHeader :title="page.title" :description="page.description" />
 
       <!-- Main Body Container -->
       <div class="container content-section">

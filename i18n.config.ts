@@ -10,7 +10,7 @@ export default defineI18nConfig(() => ({
         academic_activities: 'Academic Activities',
         partners_lecturers: 'Partners & Lecturers',
         tuition_scholarships: 'Tuition & Scholarships',
-        laboratories_research: 'Laboratories & Researches',
+        laboratories_research: 'Laboratories & research',
         student_life: 'Student Life'
       },
       home: {

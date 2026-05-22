@@ -1,6 +1,7 @@
 ---
-title: Partners & Lecturers
-headline: Partners & Lecturers
+title: "German & VGU Faculty & Research Partners"
+headline: "German & VGU Faculty & Research Partners"
+description: "Meet the outstanding international professors and researchers from Otto von Guericke University Magdeburg (OVGU) and VGU delivering world-class lectures in Materials Science & Innovation."
 intro: The Master of Materials Science and Innovation (MSI) is a joint collaborative program drawing on the expertise of multiple institutes at the Otto von Guericke University Magdeburg (OVGU), the Vietnamese-German University (VGU), and other premier research institutions. We offer a wide range of academic and research topics, directly aligned with the cutting-edge expertise of our faculty. Students have the opportunity to contribute to research across 6 different Chairs at OVGU, alongside excellent researchers from VGU, the Fraunhofer Institute, and TU Bergakademie Freiberg.
 groups:
   - id: vgu-core

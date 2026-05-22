@@ -18,8 +18,10 @@ if (!activity.value) {
 }
 
 useSeoMeta({
-  title: activity.value?.title || 'Academic Activity',
-  description: activity.value?.meta?.description || activity.value?.description
+  title: () => activity.value?.title ? `${activity.value.title} - Academic Activities | MSI VGU` : 'Academic Activity | MSI VGU',
+  ogTitle: () => activity.value?.title ? `${activity.value.title} - Academic Activities | MSI VGU` : 'Academic Activity | MSI VGU',
+  description: () => activity.value?.meta?.description || activity.value?.description || 'Read about the latest academic activities, field trips, guest lectures, and lab trainings in the Materials Science & Innovation program.',
+  ogDescription: () => activity.value?.meta?.description || activity.value?.description || 'Read about the latest academic activities, field trips, guest lectures, and lab trainings in the Materials Science & Innovation program.',
 })
 </script>
 

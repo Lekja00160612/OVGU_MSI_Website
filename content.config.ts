@@ -36,6 +36,23 @@ export default defineContentConfig({
       type: 'page',
       source: '**/*.md'
     }),
+    research: defineCollection({
+      type: 'page',
+      source: '_research/*.md',
+      schema: z.object({
+        id: z.string(),
+        title: z.string(),
+        title_vi: z.string().optional(),
+        head: z.string(),
+        head_avatar: z.string(),
+        cover_image: z.string(),
+        link_to_introduction: z.string().optional(),
+        topics: z.array(z.string()).default([]),
+        topics_vi: z.array(z.string()).optional(),
+        projects: z.string().optional(),
+        projects_vi: z.string().optional()
+      })
+    }),
     activities: defineCollection({
       type: 'page',
       source: '_activities/*.md',

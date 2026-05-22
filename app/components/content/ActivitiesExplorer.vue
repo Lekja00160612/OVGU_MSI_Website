@@ -4,7 +4,7 @@ import { ref, computed, inject, watch, nextTick } from 'vue'
 const { t } = useI18n()
 const { activities, highlightedActivities, localePath, pageData } = inject('pageData') as any
 
-const categories = ['All', 'Academic Lectures', 'Industry Adventures', 'Lab Works', 'Other Activities']
+const categories = ['All', 'Academic Lectures', 'Industrial Visits', 'Lab Trainings', 'Achievements & Events']
 const activeCategory = ref('All')
 const searchQuery = ref('')
 const currentPage = ref(1)
@@ -16,10 +16,16 @@ watch([activeCategory, searchQuery], () => {
   currentPage.value = 1
 })
 
+watch(currentPage, () => {
+  scrollToStart()
+})
+
 function scrollToStart() {
   nextTick(() => {
     if (filterBarRef.value) {
-      const top = filterBarRef.value.getBoundingClientRect().top + window.scrollY - 96
+      const header = document.querySelector('.site-header')
+      const headerHeight = header ? (header as HTMLElement).offsetHeight : 120
+      const top = filterBarRef.value.getBoundingClientRect().top + window.scrollY - headerHeight - 24
       window.scrollTo({ top, behavior: 'smooth' })
     }
   })
@@ -41,12 +47,14 @@ const filteredActivities = computed(() => {
     let matchCat = false
     if (activeCategory.value === 'All') {
       matchCat = true
-    } else if (activeCategory.value === 'Other Activities') {
-      matchCat = !['Academic Lectures', 'Scientific Seminars', 'Industry Adventures', 'Lab Works', 'Lab Trainings'].includes(cat)
-    } else if (activeCategory.value === 'Lab Works') {
-      matchCat = cat === 'Lab Works' || cat === 'Lab Trainings'
+    } else if (activeCategory.value === 'Achievements & Events') {
+      matchCat = !['Academic Lectures', 'Scientific Seminars', 'Industrial Visits', 'Industry Adventures', 'Lab Trainings', 'Lab Works'].includes(cat) || cat === 'Achievements & Events' || cat === 'Other Activities'
+    } else if (activeCategory.value === 'Lab Trainings') {
+      matchCat = cat === 'Lab Trainings' || cat === 'Lab Works'
     } else if (activeCategory.value === 'Academic Lectures') {
       matchCat = cat === 'Academic Lectures' || cat === 'Scientific Seminars'
+    } else if (activeCategory.value === 'Industrial Visits') {
+      matchCat = cat === 'Industrial Visits' || cat === 'Industry Adventures'
     } else {
       matchCat = cat === activeCategory.value
     }
@@ -86,12 +94,7 @@ function clearFilters() {
 <template>
   <div class="activities-explorer">
     <!-- ── Header Banner ── -->
-    <div class="header-banner">
-      <div class="banner-inner">
-        <h1 class="page-title">{{ pageData?.title || t('activities.title') }}</h1>
-        <p class="page-subtitle">{{ pageData?.description || t('activities.subtitle') }}</p>
-      </div>
-    </div>
+    <PageHeader :title="pageData?.title || t('activities.title')" :description="pageData?.description || t('activities.subtitle')" />
 
     <!-- ── Featured Highlights ── -->
     <div v-if="showHighlights" class="container highlights-section">
@@ -212,43 +215,6 @@ function clearFilters() {
   padding-bottom: 3rem;
 }
 
-/* ── Header Banner ── */
-.header-banner {
-  background: var(--color-primary-dark, #102a43);
-  padding: 3.5rem 1.5rem;
-  color: #fff;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.banner-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.page-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-family: var(--font-display, inherit);
-  font-weight: 800;
-  margin-bottom: 0.75rem;
-  color: #fff;
-  position: relative;
-  display: inline-block;
-}
-.page-title::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: var(--color-accent, #e87722);
-  margin: 0.5rem auto 0;
-  border-radius: var(--radius-full, 9999px);
-}
-.page-subtitle {
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.5;
-}
 
 /* ── Container ── */
 .container {

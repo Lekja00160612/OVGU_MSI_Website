@@ -10,6 +10,14 @@ const { data: pageData } = await useAsyncData(`ps-page-${locale.value}`, () =>
 )
 const page = computed(() => pageData.value?.meta ?? {})
 
+// SEO Metadata optimized for prospective MSI students (curriculum, modules, German teaching standards)
+useSeoMeta({
+  title: () => pageData.value?.title ? `${pageData.value.title} - Curriculum & Modules | MSI VGU` : 'Master Program Structure & Modules - Materials Science and Innovation | VGU',
+  ogTitle: () => pageData.value?.title ? `${pageData.value.title} - Curriculum & Modules | MSI VGU` : 'Master Program Structure & Modules - Materials Science and Innovation | VGU',
+  description: () => pageData.value?.description || 'Explore our comprehensive German-standard curriculum, featuring modules in computational mechanics, advanced materials engineering, and wide-bandgap semiconductor devices taught by premier German lecturers.',
+  ogDescription: () => pageData.value?.description || 'Explore our comprehensive German-standard curriculum, featuring modules in computational mechanics, advanced materials engineering, and wide-bandgap semiconductor devices taught by premier German lecturers.',
+})
+
 // Fetch all modules
 const { data: allModules } = await useAsyncData('all-modules', () =>
   queryCollection('modules').all()
@@ -99,12 +107,7 @@ const getSemesterColor = (sem: number | string) => {
 
 <template>
   <div class="page-structure">
-    <div class="header-banner">
-      <div class="container text-center">
-        <h1 class="page-title">{{ page.headline || 'Program Structure' }}</h1>
-        <p class="page-subtitle">{{ page.subtitle }}</p>
-      </div>
-    </div>
+    <PageHeader :title="pageData?.title || 'Program Structure'" :description="pageData?.description" />
     
     <div class="container intro-section text-center">
       <p class="intro-text">
@@ -510,7 +513,7 @@ const getSemesterColor = (sem: number | string) => {
   right: 10px;
   width: 10px;
   height: 10px;
-  background-color: var(--color-german-taught, #10B981);
+  background-color: var(--color-german-taught, var(--color-success-main));
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
 }
@@ -519,7 +522,7 @@ const getSemesterColor = (sem: number | string) => {
   display: inline-block;
   width: 12px;
   height: 12px;
-  background-color: var(--color-german-taught, #10B981);
+  background-color: var(--color-german-taught, var(--color-success-main));
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
   animation: pulse-green 2s infinite;
@@ -529,7 +532,7 @@ const getSemesterColor = (sem: number | string) => {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background-color: var(--color-german-taught, #10B981);
+  background-color: var(--color-german-taught, var(--color-success-main));
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
 }
@@ -541,9 +544,9 @@ const getSemesterColor = (sem: number | string) => {
 }
 
 .legend-item--highlighted {
-  background-color: #ecfdf5 !important;
-  border-color: #a7f3d0 !important;
-  color: #065f46 !important;
+  background-color: var(--color-success-bg) !important;
+  border-color: var(--color-success-border) !important;
+  color: var(--color-success-text) !important;
   box-shadow: 0 4px 10px rgba(16, 185, 129, 0.15) !important;
 }
 
@@ -575,7 +578,7 @@ const getSemesterColor = (sem: number | string) => {
 .module-details-inner { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
 .mod-details-header { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start; margin-bottom: 0.5rem; border-bottom: 1px solid var(--color-gray-100); padding-bottom: 1rem; width: 100%; }
 .mod-details-title { font-size: 1.75rem; font-weight: 800; color: var(--color-primary); line-height: 1.2; }
-.badge-german { background: #ecfdf5; color: #065f46; font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 600; border: 1px solid #a7f3d0; }
+.badge-german { background: var(--color-success-bg); color: var(--color-success-text); border: 1px solid var(--color-success-border); font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 600; }
 .mod-details-content { font-size: 1rem; color: var(--color-gray-600); line-height: 1.7; width: 100%; }
 
 .module-details-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--color-gray-400); gap: 1rem; padding: 2rem; }
@@ -1046,8 +1049,8 @@ const getSemesterColor = (sem: number | string) => {
   box-shadow: var(--shadow-sm);
 }
 .doc-icon {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
   padding: 0.6rem;
   border-radius: var(--radius-md);
   display: flex;

@@ -16,6 +16,14 @@ const { data: allModules } = await useAsyncData(`msi-all-modules-${locale.value}
 // @nuxt/content v3: rich frontmatter (non-standard fields) is in .meta
 const page = computed(() => raw.value?.meta ?? {})
 
+// SEO Metadata for the homepage targeting prospective Master's students
+useSeoMeta({
+  title: () => page.value?.hero?.headline ? `${page.value.hero.headline} | Master of Science in Materials Science & Innovation | VGU & OVGU` : 'Master of Science in Materials Science and Innovation (MSI) | VGU & OVGU Magdeburg',
+  ogTitle: () => page.value?.hero?.headline ? `${page.value.hero.headline} | Master of Science in Materials Science & Innovation | VGU & OVGU` : 'Master of Science in Materials Science and Innovation (MSI) | VGU & OVGU Magdeburg',
+  description: () => page.value?.about?.paragraph1 || 'Study Materials Science & Innovation at VGU. Earn a German-standard joint degree from Otto von Guericke University Magdeburg & VGU with computational mechanics and wide-bandgap semiconductor specialties.',
+  ogDescription: () => page.value?.about?.paragraph1 || 'Study Materials Science & Innovation at VGU. Earn a German-standard joint degree from Otto von Guericke University Magdeburg & VGU with computational mechanics and wide-bandgap semiconductor specialties.',
+})
+
 const recentActivities = computed(() => {
   const highlights = page.value.activities?.highlights
   if (highlights && Array.isArray(highlights) && highlights.length > 0) {
@@ -253,7 +261,7 @@ const currentSemester = computed(() => semesters.value[activeTab.value] || null)
     </section>
 
     <!-- ══ HYBRID LEARNING ══ -->
-    <section class="section hybrid-section">
+    <section class="section hybrid-section" id="hybrid">
       <div class="container">
         <div class="hybrid-grid">
           <div class="hybrid-text">

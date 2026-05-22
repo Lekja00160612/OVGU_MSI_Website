@@ -4,9 +4,9 @@ import { ref, computed, watch, nextTick } from 'vue'
 const { locale, t } = useI18n()
 
 // ── Nuxt Content fetches ──────────────────────────────────────────────────────
-const pagePath = '/laboratories-researches'
+const pagePath = computed(() => locale.value === 'vi' ? '/vi/laboratories-research' : '/laboratories-research')
 const { data: pageData } = await useAsyncData(`labs-page-${locale.value}`, () =>
-  queryCollection('content').path(pagePath).first()
+  queryCollection('content').path(pagePath.value).first()
 )
 
 const { data: equipments } = await useAsyncData('all-equipments', () =>
@@ -16,6 +16,20 @@ const { data: equipments } = await useAsyncData('all-equipments', () =>
 const { data: activities } = await useAsyncData('labs-activities', () =>
   queryCollection('activities').all()
 )
+
+// SEO Metadata targeting high-tech research labs, AFM, SEM, XRD characterization, and advanced material analysis
+useSeoMeta({
+  title: () => pageData.value?.title ? `${pageData.value.title} - High-Tech Research Labs | MSI VGU` : 'State-of-the-Art Research Laboratories - Materials Science & Innovation | VGU',
+  ogTitle: () => pageData.value?.title ? `${pageData.value.title} - High-Tech Research Labs | MSI VGU` : 'State-of-the-Art Research Laboratories - Materials Science & Innovation | VGU',
+  description: () => pageData.value?.description || 'Explore the premium materials characterization laboratories at VGU. Fully equipped with XRD, SEM, AFM, and optical spectroscopy instruments for advanced materials research.',
+  ogDescription: () => pageData.value?.description || 'Explore the premium materials characterization laboratories at VGU. Fully equipped with XRD, SEM, AFM, and optical spectroscopy instruments for advanced materials research.',
+})
+
+// Fetch research chairs dynamically from Nuxt Content
+const { data: researchChairs } = await useAsyncData('research-chairs', () =>
+  queryCollection('research').all()
+)
+
 
 // ── State ────────────────────────────────────────────────────────────────────
 const activeCategory = ref('All')
@@ -47,10 +61,18 @@ watch([activeCategory, searchQuery], () => {
   currentPage.value = 1
 })
 
+
+watch(currentPage, () => {
+  scrollToStart()
+})
+
+
 function scrollToStart() {
   nextTick(() => {
     if (filterBarRef.value) {
-      const top = filterBarRef.value.getBoundingClientRect().top + window.scrollY - 96
+      const header = document.querySelector('.site-header')
+      const headerHeight = header ? (header as HTMLElement).offsetHeight : 120
+      const top = filterBarRef.value.getBoundingClientRect().top + window.scrollY - headerHeight - 24
       window.scrollTo({ top, behavior: 'smooth' })
     }
   })
@@ -126,95 +148,6 @@ function prevLightboxImage() {
   lightboxActiveIndex.value = (lightboxActiveIndex.value - 1 + lightboxImages.value.length) % lightboxImages.value.length
 }
 
-// ── Research slides (OVGU Chairs) ───────────────────────────────────────────
-const activeSlideIndex = ref(0)
-const ovguChairs = [
-  {
-    id: 'comp-mech',
-    title: 'Chair of Computational Mechanics',
-    head: 'Prof. Dr.-Ing. Daniel Juhre',
-    bgGradient: 'linear-gradient(135deg, #1e3a5f 0%, #2e5280 100%)',
-    icon: '⚙️',
-    topics: [
-      'Constitutive modeling of polymers and elastomers',
-      'Finite Element Method (FEM) code developments',
-      'Multi-physical field couplings (electro-viscoelasticity)',
-      'Anisotropic fracture behaviors in biological tissues'
-    ],
-    projects: 'DFG projects on rubber fatigue; polymer aging simulations.'
-  },
-  {
-    id: 'solid-state',
-    title: 'Chair of Solid State Physics',
-    head: 'Prof. Dr. rer. nat. Jürgen Christen',
-    bgGradient: 'linear-gradient(135deg, #009fdf 0%, #007bb5 100%)',
-    icon: '⚛️',
-    topics: [
-      'Micro-photoluminescence and cathodoluminescence spectroscopy',
-      'Optical properties of wide-bandgap semiconductors (GaN, AlN)',
-      'Spatial characterization of nanostructures and quantum wells',
-      'High-resolution scanning electron microscopy (SEM) characterization'
-    ],
-    projects: 'Nanowire LED optoelectronic structures; quantum emitter tracking.'
-  },
-  {
-    id: 'hi-temp',
-    title: 'Chair of High Temperature Materials',
-    head: 'Prof. Dr.-Ing. Mania Krüger',
-    bgGradient: 'linear-gradient(135deg, #e87722 0%, #c95e0a 100%)',
-    icon: '🔥',
-    topics: [
-      'Development of multi-component refractory silicide alloys',
-      'Powder metallurgical processing (Sintering, Spark Plasma Sintering)',
-      'Oxidation resistance coatings for high-temperature turbines',
-      'Mechanical testing at temperatures up to 1500°C'
-    ],
-    projects: 'Mo-Si-B gas turbine blade testing; ultra-high temperature ceramics.'
-  },
-  {
-    id: 'metallic',
-    title: 'Chair of Metallic Materials',
-    head: 'Prof. Dr.-Ing. Thorsten Halle',
-    bgGradient: 'linear-gradient(135deg, #495057 0%, #212529 100%)',
-    icon: '🔩',
-    topics: [
-      'Design of advanced high-strength steels and metal matrix composites',
-      'Dynamic mechanical behavior (split-Hopkinson pressure bar)',
-      'Microstructural changes during severe plastic deformation',
-      'Additive manufacturing post-processing treatments'
-    ],
-    projects: 'High-strain-rate impact testing; metallic phase transformations.'
-  },
-  {
-    id: 'non-metallic',
-    title: 'Chair of Non-Metallic Materials',
-    head: 'Prof. Dr. rer. nat. Michael Scheffler',
-    bgGradient: 'linear-gradient(135deg, #0b5229 0%, #1e703f 100%)',
-    icon: '🏺',
-    topics: [
-      'Polymer-derived ceramics (PDCs) and porous cellular structures',
-      'Recycling of industrial wastes into functional insulation components',
-      'Surface coating and functionalization of structural ceramic filters',
-      'Bio-compatible ceramic scaffoldings for bone engineering'
-    ],
-    projects: 'Waste-to-ceramic thermal barriers; filter systems for molten steel.'
-  },
-  {
-    id: 'eng-mechanics',
-    title: 'Chair of Engineering Mechanics',
-    head: 'Prof. Dr.-Ing. habil. Holm Altenbach (Emeritus)',
-    bgGradient: 'linear-gradient(135deg, #7b1fa2 0%, #4a148c 100%)',
-    icon: '📐',
-    topics: [
-      'Viscoelasticity, creep, and damage modeling of structures',
-      'Theory of plates and shells under complex loadings',
-      'Non-linear mechanics of composites and smart structural materials',
-      'Mathematical modeling in classical continuum mechanics'
-    ],
-    projects: 'Creep behavior of thin-walled vessels; composite panel load optimization.'
-  }
-]
-
 const nextSlide = () => { activeSlideIndex.value = (activeSlideIndex.value + 1) % ovguChairs.length }
 const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 + ovguChairs.length) % ovguChairs.length }
 </script>
@@ -223,12 +156,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   <div class="page-labs">
 
     <!-- ── Header Banner ── -->
-    <div class="header-banner">
-      <div class="banner-inner">
-        <h1 class="page-title">{{ pageData?.title || t('labs.title') }}</h1>
-        <p class="page-subtitle">{{ pageData?.description || t('labs.subtitle') }}</p>
-      </div>
-    </div>
+    <PageHeader :title="pageData?.title || t('labs.title')" :description="pageData?.description || t('labs.subtitle')" />
 
     <!-- ── Search + Filter Bar ── -->
     <div ref="filterBarRef" class="container filter-bar">
@@ -331,7 +259,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
     </div>
 
     <!-- ── OVGU Research Slides ── -->
-    <div class="container section-lg researches-section">
+    <div class="container section-lg research-section">
       <div class="section-header text-center">
         <span class="badge badge-primary">OVGU Collaboration</span>
         <h2 class="section-title mt-2">Research Areas at Partner Chairs (OVGU)</h2>
@@ -340,36 +268,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
         </p>
       </div>
       <div class="slides-carousel-wrapper">
-        <div class="slides-container">
-          <div class="slide-card" :style="{ background: ovguChairs[activeSlideIndex].bgGradient }">
-            <div class="slide-badge">{{ activeSlideIndex + 1 }} / {{ ovguChairs.length }}</div>
-            <div class="slide-icon">{{ ovguChairs[activeSlideIndex].icon }}</div>
-            <h3 class="slide-chair-title">{{ ovguChairs[activeSlideIndex].title }}</h3>
-            <span class="slide-chair-head">Head: {{ ovguChairs[activeSlideIndex].head }}</span>
-            <div class="slide-topics-box">
-              <h4>Core Research Focus Areas:</h4>
-              <ul>
-                <li v-for="(topic, idx) in ovguChairs[activeSlideIndex].topics" :key="idx">✓ {{ topic }}</li>
-              </ul>
-            </div>
-            <div class="slide-footer-meta">
-              <span><strong>Sample Projects:</strong> {{ ovguChairs[activeSlideIndex].projects }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-controls">
-          <button class="control-btn" @click="prevSlide" aria-label="Previous">←</button>
-          <div class="carousel-dots">
-            <span
-              v-for="(chair, idx) in ovguChairs"
-              :key="chair.id"
-              class="carousel-dot"
-              :class="{ 'carousel-dot--active': idx === activeSlideIndex }"
-              @click="activeSlideIndex = idx"
-            />
-          </div>
-          <button class="control-btn" @click="nextSlide" aria-label="Next">→</button>
-        </div>
+        <ResearchChairs :chairs="researchChairs || []" />
       </div>
     </div>
 
@@ -527,40 +426,6 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   min-height: 80vh;
   background: var(--color-gray-50);
   padding-bottom: 5rem;
-}
-
-/* ── Header Banner ── */
-.header-banner {
-  background: var(--color-primary-dark);
-  padding: 3.5rem 1.5rem;
-  color: #fff;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.banner-inner { max-width: 1200px; margin: 0 auto; }
-.page-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-family: var(--font-display, inherit);
-  font-weight: 800;
-  margin-bottom: 0.75rem;
-  color: #fff;
-  display: inline-block;
-}
-.page-title::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: var(--color-accent);
-  margin: 0.5rem auto 0;
-  border-radius: var(--radius-full);
-}
-.page-subtitle {
-  font-size: 1.05rem;
-  color: rgba(255,255,255,0.85);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.5;
 }
 
 /* ── Container ── */
@@ -863,7 +728,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
 }
 
 /* ── Research Slides ── */
-.researches-section { border-top: 1px solid var(--color-gray-200); margin-top: 5rem; }
+.research-section { border-top: 1px solid var(--color-gray-200); margin-top: 5rem; }
 .section-header { margin-bottom: 2rem; }
 .section-title { font-size: 1.75rem; font-weight: 800; color: var(--color-primary-dark); margin-bottom: 0.5rem; }
 .section-subtitle { font-size: 1rem; color: var(--color-gray-600); line-height: 1.6; }
@@ -880,32 +745,6 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   margin-bottom: 0.5rem;
 }
 .slides-carousel-wrapper { max-width: 800px; margin: 2rem auto 0; display: flex; flex-direction: column; gap: 1.5rem; }
-.slide-card {
-  border-radius: var(--radius-xl);
-  padding: 3rem;
-  color: #fff;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  min-height: 380px;
-  display: flex;
-  flex-direction: column;
-  transition: all 400ms var(--ease-out);
-}
-.slide-badge { position: absolute; top: 1.5rem; right: 2rem; font-size: 0.8rem; font-weight: 700; background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); backdrop-filter: blur(4px); }
-.slide-icon { font-size: 3rem; margin-bottom: 1rem; }
-.slide-chair-title { font-size: 1.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; }
-.slide-chair-head { font-size: 0.95rem; opacity: 0.9; margin-bottom: 2rem; display: block; font-weight: 600; }
-.slide-topics-box { margin-bottom: 2rem; }
-.slide-topics-box h4 { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.8); margin-bottom: 0.75rem; }
-.slide-topics-box ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-.slide-topics-box li { font-size: 1rem; line-height: 1.5; color: rgba(255,255,255,0.95); }
-.slide-footer-meta { margin-top: auto; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1.25rem; font-size: 0.9rem; color: rgba(255,255,255,0.85); }
-.carousel-controls { display: flex; align-items: center; justify-content: space-between; max-width: 320px; margin: 0 auto; }
-.control-btn { background: #fff; border: 1px solid var(--color-gray-200); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; box-shadow: var(--shadow-sm); transition: all 200ms; color: var(--color-primary); }
-.control-btn:hover { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
-.carousel-dots { display: flex; gap: 0.5rem; }
-.carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-gray-300); cursor: pointer; transition: all 200ms; }
-.carousel-dot--active { background: var(--color-primary); width: 24px; border-radius: 4px; }
 
 /* ── Modal Transition ── */
 .modal-fade-enter-active, .modal-fade-leave-active { transition: opacity 0.3s ease; }
@@ -1064,8 +903,13 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   font-weight: 700;
   transition: all 0.2s;
 }
+
 .doc-link:hover { background: var(--color-primary-50); border-color: var(--color-primary-100); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 .doc-icon { background: #fee2e2; color: #dc2626; padding: 0.6rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.doc-icon svg { width: 22px; height: 22px; }
+.doc-title { flex: 1; font-size: 0.9rem; }
+.doc-link:hover { background: var(--color-primary-50); border-color: var(--color-primary-100); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.doc-icon { background: var(--color-danger-bg); color: var(--color-danger-text); padding: 0.6rem; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .doc-icon svg { width: 22px; height: 22px; }
 .doc-title { flex: 1; font-size: 0.9rem; }
 .doc-arrow { width: 18px; height: 18px; color: var(--color-gray-400); transition: transform 0.2s; }

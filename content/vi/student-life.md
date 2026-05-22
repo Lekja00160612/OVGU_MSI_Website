@@ -1,6 +1,6 @@
 ---
-title: Đời Sống Sinh Viên
-description: Trải nghiệm cộng đồng học thuật quốc tế năng động tại Bình Dương và Magdeburg.
+title: "Đời Sống Sinh Viên & Hành Trình Học Tập Tại Đức"
+description: "Trải nghiệm đời sống sinh viên sôi động tại khuôn viên quốc tế VGU và định hình lộ trình chuyển tiếp học tập suôn sẻ sang Đại học Magdeburg, Đức."
 ---
 
 ## Đời Sống tại VGU

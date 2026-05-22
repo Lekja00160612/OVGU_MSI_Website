@@ -1,6 +1,6 @@
 ---
-title: Student Life
-description: Experience a vibrant, international campus community in Binh Duong.
+title: "Student Life & Relocation Guide to Germany"
+description: "Experience a vibrant international campus at VGU and navigate your relocation path to Magdeburg, Germany, with our step-by-step student transition guide."
 ---
 
 ## Life At VGU

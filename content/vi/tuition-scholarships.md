@@ -1,6 +1,6 @@
 ---
-title: "Học Phí & Học Bổng"
-description: "Đầu tư cho tương lai của bạn: cấu trúc học phí minh bạch và các cơ hội hỗ trợ tài chính hấp dẫn."
+title: "Học Phí & Học Bổng Danh Giá"
+description: "Tìm hiểu thông tin học phí chương trình thạc sĩ chuẩn Đức và các cơ hội học bổng DAAD, học bổng VGU và học bổng khuyến học hấp dẫn cho học viên ngành Khoa học Vật liệu tại VGU."
 ---
 
 ## Học Phí

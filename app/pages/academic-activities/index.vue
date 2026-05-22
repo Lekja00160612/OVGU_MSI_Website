@@ -30,8 +30,10 @@ provide('pageData', {
 })
 
 useSeoMeta({
-  title: computed(() => `${t('nav.academic_activities')} | MSI`),
-  description: computed(() => pageData.value?.description || t('activities.subtitle'))
+  title: computed(() => `${t('nav.academic_activities')} - Field Trips & Seminars | MSI VGU`),
+  ogTitle: computed(() => `${t('nav.academic_activities')} - Field Trips & Seminars | MSI VGU`),
+  description: computed(() => pageData.value?.description || 'Discover our academic activities: scientific seminars, international workshops, high-tech industrial field trips, and advanced laboratory hands-on training for Master of Science students.'),
+  ogDescription: computed(() => pageData.value?.description || 'Discover our academic activities: scientific seminars, international workshops, high-tech industrial field trips, and advanced laboratory hands-on training for Master of Science students.'),
 })
 </script>
 

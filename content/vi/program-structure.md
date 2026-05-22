@@ -1,6 +1,7 @@
 ---
-title: "Chương Trình Học"
-headline: "Chương Trình Học"
+title: "Khung Chương Trình Đào Tạo Chuẩn Đức"
+headline: "Khung Chương Trình Đào Tạo Chuẩn Đức"
+description: "Khám phá khung chương trình đào tạo chuẩn Đức, kết hợp lý thuyết liên ngành và thực hành nghiên cứu tại VGU & Magdeburg."
 subtitle: "Chương trình giảng dạy cân bằng được thiết kế cho ngành kỹ thuật vật liệu tiên tiến."
 intro_text: "Chương trình cốt lõi của chúng tôi được xây dựng tỉ mỉ nhằm thu hẹp khoảng cách giữa vật lý lý thuyết, hóa học và kỹ thuật ứng dụng. Bằng cách loại bỏ ranh giới cứng nhắc, sinh viên có thể tiếp cận khoa học vật liệu như một phổ liên tục, đa ngành."
 core_title: "Các Môn Học Cốt Lõi"

@@ -6,18 +6,21 @@ const localePath = useLocalePath()
 const { data: page } = await useAsyncData('student-life-page-' + route.path, () =>
   queryCollection('content').path(route.path).first()
 )
+
+// SEO Metadata optimized for prospective MSI students interested in campus life and accommodation
+useSeoMeta({
+  title: () => page.value?.title ? `${page.value.title} - Campus Life & Dorms | MSI VGU` : 'Student Life & Campus Facilities - Materials Science and Innovation | VGU',
+  ogTitle: () => page.value?.title ? `${page.value.title} - Campus Life & Dorms | MSI VGU` : 'Student Life & Campus Facilities - Materials Science and Innovation | VGU',
+  description: () => page.value?.description || 'Explore the dynamic student life at VGU. Discover state-of-the-art campus dormitories, sports facilities, student activities, and the green campus environment in Binh Duong.',
+  ogDescription: () => page.value?.description || 'Explore the dynamic student life at VGU. Discover state-of-the-art campus dormitories, sports facilities, student activities, and the green campus environment in Binh Duong.',
+})
 </script>
 
 <template>
   <main class="page-container">
     <template v-if="page">
       <!-- Premium Hero Banner -->
-      <div class="header-banner">
-        <div class="container text-center">
-          <h1 class="page-title">{{ page.title }}</h1>
-          <p v-if="page.description" class="page-subtitle">{{ page.description }}</p>
-        </div>
-      </div>
+      <PageHeader :title="page.title" :description="page.description" />
 
       <!-- Main Body Container -->
       <div class="container content-section">

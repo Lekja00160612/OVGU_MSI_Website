@@ -10,7 +10,6 @@ description: |
 lecturers:
   - "Prof. Dr. rer. nat. Michael Scheffler"
   - "Dr. rer. nat. Ulf Betke"
-  - "Prof. Dr. Franziska Scheffler"
 images: []
 pdfs:
   - title: "Module Handbook (PDF)"
