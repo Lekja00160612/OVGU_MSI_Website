@@ -144,6 +144,17 @@ const page = computed(() => pageData.value?.meta ?? {})
 .content-section { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 4rem; }
 
 .faculty-group { background: #fff; border-radius: var(--radius-xl); padding: 3rem; box-shadow: var(--shadow-md); border: 1px solid var(--color-gray-200); }
+@media (max-width: 768px) {
+  .faculty-group {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .subgroup-block {
+    padding: 1.25rem;
+  }
+}
 .group-title { font-size: 2rem; font-weight: 800; color: var(--color-primary-dark); border-bottom: 3px solid var(--color-accent); padding-bottom: 0.5rem; display: inline-block; margin-bottom: 1rem; }
 .group-desc { font-size: 1.05rem; color: var(--color-gray-600); margin-bottom: 2rem; max-width: 800px; }
 

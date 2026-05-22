@@ -63,9 +63,13 @@ useSeoMeta({
   border: 1px solid var(--color-gray-200);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .prose-wrapper {
-    padding: 1.5rem;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
   }
 }
 

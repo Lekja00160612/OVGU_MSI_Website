@@ -92,8 +92,11 @@ useSeoMeta({
 
 @media (max-width: 768px) {
   .activity-content-card {
-    --card-padding-x: 1rem;
-    --card-padding-y: 1.25rem;
+    --card-padding-x: 0px;
+    --card-padding-y: 0px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
 }
 
@@ -151,6 +154,7 @@ useSeoMeta({
   .activity-hero-image {
     height: 220px;
     margin-bottom: 1.5rem;
+    border-radius: var(--radius-lg);
   }
 }
 
