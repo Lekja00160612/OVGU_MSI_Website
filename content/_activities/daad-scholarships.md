@@ -1,6 +1,6 @@
 ---
 title: "MSI Students Awarded Prestigious DAAD Scholarships"
-category: "Achievement & Events"
+category: "Achievements & Events"
 date: "2026-03-09"
 image: "/images/academic_activities/msi-students-awarded-prestigious-daad-scholarships-cover.jpg"
 description: "Learn about VGU Materials Science Master students receiving prestigious DAAD scholarships for master thesis research at OVGU Magdeburg, Germany."
