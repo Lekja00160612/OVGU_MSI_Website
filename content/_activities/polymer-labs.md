@@ -4,6 +4,7 @@ category: "Lab Works"
 date: "2025-12-12"
 image: "/images/academic_activities/laboratory-activities-of-the-polymer-course-msi-intake-2024-cover.jpg"
 description: "Learn how VGU Materials Science Master students characterize polymers using tensile testing, rheometry, and SEM under German professor supervision."
+highlighted: true
 ---
 
 # Laboratory activities of the Polymer course - MSI intake 2024

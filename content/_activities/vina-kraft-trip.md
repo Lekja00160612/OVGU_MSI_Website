@@ -4,6 +4,7 @@ category: "Industry Adventures"
 date: "2026-05-08"
 image: "/images/academic_activities/field-trip-to-vina-kraft-paper-msi-students-cover.jpg"
 description: "Discover how VGU Materials Science Master students explore industrial paper manufacturing and product performance testing on a field trip to Vina Kraft."
+highlighted: true
 ---
 
 # Field Trip to Vina Kraft Paper: MSI Students

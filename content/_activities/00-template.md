@@ -4,6 +4,7 @@ category: Academic Lectures
 date: 2026-05-18
 description: Explore academic opportunities and hands-on learning experiences in the Materials Science Master program at VGU, in partnership with Germany.
 image: /images/academic_activities/00-template-cover.jpg
+highlighted: false
 ---
 
 # Activity Content

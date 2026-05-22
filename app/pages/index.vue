@@ -25,12 +25,28 @@ useSeoMeta({
 })
 
 const recentActivities = computed(() => {
-  const highlights = page.value.activities?.highlights
-  if (highlights && Array.isArray(highlights) && highlights.length > 0) {
-    return highlights.map(p => allActivities.value?.find(a => a.path === p)).filter(Boolean)
+  if (!allActivities.value) return []
+
+  // Get highlighted activities and sort by date descending
+  const highlighted = allActivities.value.filter(a => a.highlighted === true || a.meta?.highlighted === true)
+  
+  const sortByDateDesc = (a: any, b: any) => {
+    const dateA = a.date || a.meta?.date || ''
+    const dateB = b.date || b.meta?.date || ''
+    return dateB.localeCompare(dateA)
   }
-  // Fallback to latest 4 if highlights not set
-  return allActivities.value?.slice(0, 4) || []
+
+  const sortedHighlighted = [...highlighted].sort(sortByDateDesc)
+
+  if (sortedHighlighted.length >= 4) {
+    return sortedHighlighted.slice(0, 4)
+  }
+
+  // Fallback / fill the rest with recent non-highlighted activities
+  const nonHighlighted = allActivities.value.filter(a => !(a.highlighted === true || a.meta?.highlighted === true))
+  const sortedNonHighlighted = [...nonHighlighted].sort(sortByDateDesc)
+
+  return [...sortedHighlighted, ...sortedNonHighlighted].slice(0, 4)
 })
 
 

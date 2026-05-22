@@ -61,7 +61,8 @@ export default defineContentConfig({
         category: z.string().default('Other Activities'),
         image: z.string(),
         date: z.string(),
-        description: z.string().optional()
+        description: z.string().optional(),
+        highlighted: z.boolean().optional()
       })
     }),
     modules: defineCollection({

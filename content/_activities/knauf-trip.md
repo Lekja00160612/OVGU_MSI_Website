@@ -4,6 +4,7 @@ category: "Industry Adventures"
 date: "2025-12-11"
 image: "/images/academic_activities/msi-students-visit-knauf-vietnam-exploring-the-science-behind-lightweight-gypsum-construction-cover.jpg"
 description: "Discover how VGU Materials Science Master students explore automated lightweight gypsum manufacturing on a field trip to Knauf Vietnam in Nha Be."
+highlighted: false
 ---
 
 # MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction

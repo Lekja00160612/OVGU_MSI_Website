@@ -4,6 +4,7 @@ category: "Lab Works"
 date: "2025-10-27"
 image: "/images/academic_activities/vgu-welcomes-three-flying-faculty-members-from-germany-for-msi-courses-cover.jpg"
 description: "Discover how VGU welcoming three German flying faculty members from OVGU Magdeburg strengthens the academic quality of the Materials Science Master."
+highlighted: true
 ---
 
 # VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses

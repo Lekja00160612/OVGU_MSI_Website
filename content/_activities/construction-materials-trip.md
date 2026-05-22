@@ -4,6 +4,7 @@ category: "Industry Adventures"
 date: "2026-02-11"
 image: "/images/academic_activities/msi-students-gain-comprehensive-insights-into-construction-materials-through-field-trips-to-acc-factory-and-ready-mixed-concrete-plant-in-long-an-cover.jpg"
 description: "Discover how VGU Materials Science Master students explore advanced building materials and binder chemistry on an industrial field trip in Vietnam."
+highlighted: false
 ---
 
 # MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An
