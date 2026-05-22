@@ -2,7 +2,7 @@
 title: "MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction"
 category: "Industry Adventures"
 date: "2025-12-11"
-image: "/images/academic_activities/msi-students-visit-knauf-vietnam-exploring-the-science-behind-lightweight-gypsum-construction-cover.jpg"
+image: "/images/academic_activities/knauf-trip-cover.jpg"
 description: "Discover how VGU Materials Science Master students explore automated lightweight gypsum manufacturing on a field trip to Knauf Vietnam in Nha Be."
 highlighted: false
 ---
@@ -19,7 +19,7 @@ During the guided factory tour, students explored the entire process of **lightw
 
 The visit highlighted the importance of **chemical additives**, **foam stabilizers**, and **fiberglass reinforcements** in achieving **strength, fire resistance**, and **acoustic performance** while maintaining lightweight design.
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 1](/images/academic_activities/msi-students-visit-knauf-vietnam-exploring-the-science-behind-lightweight-gypsum-construction-img-1.jpg)
+![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 1](/images/academic_activities/knauf-trip-img-1.jpg)
 
 Knauf engineers also demonstrated how the **mass-spring-mass principle** underlies gypsum's sound insulation capabilities, and how **thermochemical reactions** contribute to fire resistance through controlled dehydration of crystal water.
 
@@ -37,10 +37,10 @@ The day concluded with a friendly lunch, where students, faculty, and Knauf engi
 
 This field trip embodies the MSI program's mission: *bridging science and application through real-world exposure and international collaboration.*
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 2](/images/academic_activities/msi-students-visit-knauf-vietnam-exploring-the-science-behind-lightweight-gypsum-construction-img-2.jpg)
+![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 2](/images/academic_activities/knauf-trip-img-2.jpg)
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 3](/images/academic_activities/msi-students-visit-knauf-vietnam-exploring-the-science-behind-lightweight-gypsum-construction-img-3.jpg)
+![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 3](/images/academic_activities/knauf-trip-img-3.jpg)
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 4](/images/academic_activities/msi-students-visit-knauf-vietnam-exploring-the-science-behind-lightweight-gypsum-construction-img-4.jpg)
+![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 4](/images/academic_activities/knauf-trip-img-4.jpg)
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 5](/images/academic_activities/msi-students-visit-knauf-vietnam-exploring-the-science-behind-lightweight-gypsum-construction-img-5.jpg)
+![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 5](/images/academic_activities/knauf-trip-img-5.jpg)

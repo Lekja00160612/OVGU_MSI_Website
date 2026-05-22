@@ -2,7 +2,7 @@
 title: MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs
 category: "Lab Works"
 date: 2025-06-25
-image: /images/academic_activities/msi-students-explore-powder-metallurgy-and-material-testing-in-state-of-the-art-labs-cover.jpg
+image: /images/academic_activities/powder-metallurgy-cover.jpg
 description: "Learn how VGU Materials Science Master students synthesize Mo-V-Si-B alloys using powder metallurgy and XRD characterization in advanced lab sessions."
 ---
 
@@ -10,7 +10,7 @@ description: "Learn how VGU Materials Science Master students synthesize Mo-V-Si
 
 MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs
 
-![MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs - Illustration 1](/images/academic_activities/msi-students-explore-powder-metallurgy-and-material-testing-in-state-of-the-art-labs-img-1.png)
+![MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs - Illustration 1](/images/academic_activities/powder-metallurgy-img-1.png)
 
 Binh Duong, VGU. Students of the Master of Science in Materials Science (MSI) program at Vietnamese-German University (VGU) recently engaged in an exciting hands-on lab course focusing on Powder Metallurgy, a critical area in materials engineering.
 As part of their curriculum, MSI students participated in the Research Lab Properties, Testing, and Analytics module, with a focus on the Powder Milling Process. The lab explored the creation and analysis of Mo-V-Si-B alloys, starting with milling and moving to analysis with dynamic light scattering (DLS), X-ray diffraction (XRD), and lastly scanning electron microscopy (SEM).

@@ -2,7 +2,7 @@
 title: "Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action"
 category: "Lab Works"
 date: "2026-02-04"
-image: "/images/academic_activities/hands-on-learning-in-inorganic-non-metallic-binders-msi-students-in-action-cover.jpg"
+image: "/images/academic_activities/non-metallic-binders-cover.jpg"
 description: "Discover how VGU Materials Science Master students practice mixing, casting, and analyzing inorganic non-metallic binder systems in state-of-the-art labs."
 ---
 
@@ -26,10 +26,10 @@ The session highlights the importance of mix design, workability, and material c
 
 These laboratory activities provide a strong foundation for students' future work in construction materials, concrete technology, and advanced binder systems, in both academic research and industry.
 
-![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 1](/images/academic_activities/hands-on-learning-in-inorganic-non-metallic-binders-msi-students-in-action-img-1.jpg)
+![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 1](/images/academic_activities/non-metallic-binders-img-1.jpg)
 
-![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 2](/images/academic_activities/hands-on-learning-in-inorganic-non-metallic-binders-msi-students-in-action-img-2.jpg)
+![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 2](/images/academic_activities/non-metallic-binders-img-2.jpg)
 
-![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 3](/images/academic_activities/hands-on-learning-in-inorganic-non-metallic-binders-msi-students-in-action-img-3.jpg)
+![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 3](/images/academic_activities/non-metallic-binders-img-3.jpg)
 
-![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 4](/images/academic_activities/hands-on-learning-in-inorganic-non-metallic-binders-msi-students-in-action-img-4.jpg)
+![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 4](/images/academic_activities/non-metallic-binders-img-4.jpg)

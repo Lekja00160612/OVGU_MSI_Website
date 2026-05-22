@@ -2,7 +2,7 @@
 title: "MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An"
 category: "Industry Adventures"
 date: "2026-02-11"
-image: "/images/academic_activities/msi-students-gain-comprehensive-insights-into-construction-materials-through-field-trips-to-acc-factory-and-ready-mixed-concrete-plant-in-long-an-cover.jpg"
+image: "/images/academic_activities/construction-materials-cover.jpg"
 description: "Discover how VGU Materials Science Master students explore advanced building materials and binder chemistry on an industrial field trip in Vietnam."
 highlighted: false
 ---
@@ -25,9 +25,9 @@ At the AAC plant, students learned about:
 
 This visit highlighted how binder chemistry and controlled porosity are used to optimize materials for energy-efficient and fast-paced construction.
 
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 1](/images/academic_activities/msi-students-gain-comprehensive-insights-into-construction-materials-through-field-trips-to-acc-factory-and-ready-mixed-concrete-plant-in-long-an-img-1.jpg)
+![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 1](/images/academic_activities/construction-materials-img-1.jpg)
 
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 2](/images/academic_activities/msi-students-gain-comprehensive-insights-into-construction-materials-through-field-trips-to-acc-factory-and-ready-mixed-concrete-plant-in-long-an-img-2.jpg)
+![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 2](/images/academic_activities/construction-materials-img-2.jpg)
 
 ### Afternoon Session: Mekong Concrete Plant - Structural Materials for Large-Scale Infrastructure
 
@@ -55,8 +55,8 @@ By visiting both facilities in one day, MSI students gained a broad and balanced
 
 This field trip exemplifies the MSI program's commitment to connecting materials science theory with diverse industrial practices, preparing students for a wide range of professional paths in construction materials and engineering.
 
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 3](/images/academic_activities/msi-students-gain-comprehensive-insights-into-construction-materials-through-field-trips-to-acc-factory-and-ready-mixed-concrete-plant-in-long-an-img-3.jpg)
+![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 3](/images/academic_activities/construction-materials-img-3.jpg)
 
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 4](/images/academic_activities/msi-students-gain-comprehensive-insights-into-construction-materials-through-field-trips-to-acc-factory-and-ready-mixed-concrete-plant-in-long-an-img-4.jpg)
+![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 4](/images/academic_activities/construction-materials-img-4.jpg)
 
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 5](/images/academic_activities/msi-students-gain-comprehensive-insights-into-construction-materials-through-field-trips-to-acc-factory-and-ready-mixed-concrete-plant-in-long-an-img-5.jpg)
+![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 5](/images/academic_activities/construction-materials-img-5.jpg)

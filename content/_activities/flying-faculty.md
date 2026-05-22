@@ -2,7 +2,7 @@
 title: "VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses"
 category: "Lab Works"
 date: "2025-10-27"
-image: "/images/academic_activities/vgu-welcomes-three-flying-faculty-members-from-germany-for-msi-courses-cover.jpg"
+image: "/images/academic_activities/flying-faculty-cover.jpg"
 description: "Discover how VGU welcoming three German flying faculty members from OVGU Magdeburg strengthens the academic quality of the Materials Science Master."
 highlighted: true
 ---
@@ -19,14 +19,14 @@ The MSI program at VGU offers students opportunities to engage with internationa
 
 Photo: MSI 2024 & MSI 2025 with Prof. Sven Henning, Dr. Sebastian Hütter, and Dr. Georg Hasemann at VGU campus.
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 1](/images/academic_activities/vgu-welcomes-three-flying-faculty-members-from-germany-for-msi-courses-img-1.jpg)
+![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 1](/images/academic_activities/flying-faculty-img-1.jpg)
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 2](/images/academic_activities/vgu-welcomes-three-flying-faculty-members-from-germany-for-msi-courses-img-2.jpg)
+![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 2](/images/academic_activities/flying-faculty-img-2.jpg)
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 3](/images/academic_activities/vgu-welcomes-three-flying-faculty-members-from-germany-for-msi-courses-img-3.jpg)
+![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 3](/images/academic_activities/flying-faculty-img-3.jpg)
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 4](/images/academic_activities/vgu-welcomes-three-flying-faculty-members-from-germany-for-msi-courses-img-4.jpg)
+![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 4](/images/academic_activities/flying-faculty-img-4.jpg)
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 5](/images/academic_activities/vgu-welcomes-three-flying-faculty-members-from-germany-for-msi-courses-img-5.jpg)
+![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 5](/images/academic_activities/flying-faculty-img-5.jpg)
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 6](/images/academic_activities/vgu-welcomes-three-flying-faculty-members-from-germany-for-msi-courses-img-6.jpg)
+![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 6](/images/academic_activities/flying-faculty-img-6.jpg)

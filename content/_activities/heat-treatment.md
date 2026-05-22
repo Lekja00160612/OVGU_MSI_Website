@@ -2,7 +2,7 @@
 title: "Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025"
 category: "Lab Works"
 date: "2025-12-12"
-image: "/images/academic_activities/laboratory-activities-of-the-heat-treatment-course-msi-programs-intake-2024-2025-cover.jpg"
+image: "/images/academic_activities/heat-treatment-cover.jpg"
 description: "Learn how VGU Materials Science Master students perform hands-on heat treatment experiments on steels and aluminum using state-of-the-art equipment."
 ---
 
@@ -10,9 +10,9 @@ description: "Learn how VGU Materials Science Master students perform hands-on h
 
 As part of the Heat Treatment course, students of the MSI programs (intakes 2024 and 2025) conducted a series of laboratory experiments using state-of-the-art equipment designed for materials research. The activities aim to enhance students' understanding of the relationship between microstructure and mechanical properties through practical heat treatment processes.
 
-![Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025 - Illustration 1](/images/academic_activities/laboratory-activities-of-the-heat-treatment-course-msi-programs-intake-2024-2025-img-1.jpg)
+![Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025 - Illustration 1](/images/academic_activities/heat-treatment-img-1.jpg)
 
-***Figure 1:**** MSI students from the 2024 and 2025 cohorts practicing in the Heat Treatment course.*
+***Figure 1:*** MSI students from the 2024 and 2025 cohorts practicing in the Heat Treatment course.*
 
 The laboratory exercises included the following modules:
 
@@ -60,8 +60,8 @@ Learning objectives:
 
 Through this experiment, students gained insights into strengthening mechanisms governed by precipitate formation and evolution.
 
-![Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025 - Illustration 2](/images/academic_activities/laboratory-activities-of-the-heat-treatment-course-msi-programs-intake-2024-2025-img-2.jpg)
+![Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025 - Illustration 2](/images/academic_activities/heat-treatment-img-2.jpg)
 
-***Figure 2****: Students discussing the exercise together*
+***Figure 2***: Students discussing the exercise together*
 
 The laboratory activities provided students with valuable hands-on experience, reinforcing theoretical knowledge and enhancing analytical capability in materials science. These exercises form a critical foundation for advanced study and professional practice in heat treatment and metallurgical material engineering.

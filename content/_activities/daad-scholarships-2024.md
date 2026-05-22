@@ -1,8 +1,8 @@
 ---
 title: "Two MSI 2024 Students Awarded Prestigious DAAD Scholarships"
-category: "Achievements & Events"
+category: "Academic Lectures"
 date: "2026-01-27"
-image: "/images/academic_activities/two-msi-2024-students-awarded-prestigious-daad-scholarships-cover.jpg"
+image: "/images/academic_activities/daad-scholarships-2024-cover.jpg"
 description: "Discover how two VGU Materials Science Master students won prestigious DAAD scholarships to conduct advanced research and master thesis work in Germany."
 highlighted: false
 ---

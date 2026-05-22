@@ -2,7 +2,7 @@
 title: "Laboratory activities of the Polymer course - MSI intake 2024"
 category: "Lab Works"
 date: "2025-12-12"
-image: "/images/academic_activities/laboratory-activities-of-the-polymer-course-msi-intake-2024-cover.jpg"
+image: "/images/academic_activities/polymer-labs-cover.jpg"
 description: "Learn how VGU Materials Science Master students characterize polymers using tensile testing, rheometry, and SEM under German professor supervision."
 highlighted: true
 ---
@@ -13,7 +13,7 @@ As part of the **Polymer** course, students of the MSI intake 2024 participated 
 
 ## **Activity 1: Introduction to tensile testing and mechanical characterization of Polymers**
 
-![Laboratory activities of the Polymer course - MSI intake 2024 - Illustration 1](/images/academic_activities/laboratory-activities-of-the-polymer-course-msi-intake-2024-img-1.jpg)
+![Laboratory activities of the Polymer course - MSI intake 2024 - Illustration 1](/images/academic_activities/polymer-labs-img-1.jpg)
 
 ***Figure 1: MSI students learn about the experimental procedure using the universal testing machine at VGU****.*
 
@@ -31,7 +31,7 @@ This activity enabled students to understand the importance of mechanical testin
 
 ## **Activity 2: Hands-on study of rheometry and flow behavior of Polymers**
 
-![Laboratory activities of the Polymer course - MSI intake 2024 - Illustration 2](/images/academic_activities/laboratory-activities-of-the-polymer-course-msi-intake-2024-img-2.jpg)
+![Laboratory activities of the Polymer course - MSI intake 2024 - Illustration 2](/images/academic_activities/polymer-labs-img-2.jpg)
 
 ***Figure 2:**** Students explore and practice using the rheometer at VGU*.
 
@@ -49,7 +49,7 @@ This experience provided valuable insight into the relationship between molecula
 
 ## **Activity 3: Microstructural observation of Polymers using Scanning Electron Microscopy (SEM)**
 
-![Laboratory activities of the Polymer course - MSI intake 2024 - Illustration 3](/images/academic_activities/laboratory-activities-of-the-polymer-course-msi-intake-2024-img-3.jpg)
+![Laboratory activities of the Polymer course - MSI intake 2024 - Illustration 3](/images/academic_activities/polymer-labs-img-3.jpg)
 
 ***Figure 3****: Students practice observing the characteristic microstructural morphology of polymers using a scanning electron microscope (SEM)*.
 

@@ -2,7 +2,7 @@
 title: "MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour"
 category: "Lab Works"
 date: "2026-03-30"
-image: "/images/academic_activities/msi-students-dive-deep-into-materials-characterization-with-sem-and-xrd-lab-tour-cover.jpg"
+image: "/images/academic_activities/sem-xrd-tour-cover.jpg"
 description: "Discover how VGU Materials Science Master students explore advanced characterization using SEM and XRD on a research lab tour with Dr. Ulf Betke."
 ---
 
@@ -22,8 +22,8 @@ The tour not only reinforced theoretical knowledge from the Materials Characteri
 
 Thank you, Dr. Ulf Betke, for leading this engaging and insightful tour!
 
-![MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour - Illustration 1](/images/academic_activities/msi-students-dive-deep-into-materials-characterization-with-sem-and-xrd-lab-tour-img-1.jpg)
+![MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour - Illustration 1](/images/academic_activities/sem-xrd-tour-img-1.jpg)
 
-![MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour - Illustration 2](/images/academic_activities/msi-students-dive-deep-into-materials-characterization-with-sem-and-xrd-lab-tour-img-2.jpg)
+![MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour - Illustration 2](/images/academic_activities/sem-xrd-tour-img-2.jpg)
 
-![MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour - Illustration 3](/images/academic_activities/msi-students-dive-deep-into-materials-characterization-with-sem-and-xrd-lab-tour-img-3.jpg)
+![MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour - Illustration 3](/images/academic_activities/sem-xrd-tour-img-3.jpg)
