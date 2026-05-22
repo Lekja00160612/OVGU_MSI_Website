@@ -30,8 +30,8 @@ Through this module, MSI students deepen their knowledge of non-metallic materia
 
 The participation of international faculty members such as Prof. Scheffler Michael reflects MSI's commitment to academic excellence and global collaboration in materials science education.
 
-![Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael - Illustration 1](/images/academic_activities/engineering-ceramics-advanced-materials-science-with-prof-scheffler-michael-img-1.jpg)
+![Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael - Illustration 1](/images/academic_activities/engineering-ceramics-with-prof-scheffler-michael-img-1.jpg)
 
-![Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael - Illustration 2](/images/academic_activities/engineering-ceramics-advanced-materials-science-with-prof-scheffler-michael-img-2.jpg)
+![Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael - Illustration 2](/images/academic_activities/engineering-ceramics-with-prof-scheffler-michael-img-2.jpg)
 
-![Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael - Illustration 3](/images/academic_activities/engineering-ceramics-advanced-materials-science-with-prof-scheffler-michael-img-3.png)
+![Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael - Illustration 3](/images/academic_activities/engineering-ceramics-with-prof-scheffler-michael-img-3.png)
