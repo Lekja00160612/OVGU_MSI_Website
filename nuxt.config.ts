@@ -65,20 +65,45 @@ export default defineNuxtConfig({
       routes: ['/', '/vi'],
       autoSubfolderIndex: false,
     },
-    cloudflare: {
-      pages: {
-        routes: {
-          exclude: [
-            '/Documents/*',
-            '/Logo/*',
-            '/Thumbnail/*',
-            '/images/*',
-            '/Hybrid_Learning/*',
-            '/OVGU_Campus/*',
-            'Lecturer_Avatar/*',
-          ]
-        }
-      }
-    }
+    // PLEASE CHANGE CLOUDFLARE BUILD TO: npx nuxi generate
+    // 
+    // cloudflare: {
+    //   pages: {
+    //     routes: {
+    //       exclude: [
+    //         '/Documents/*',
+    //         '/Logo/*',
+    //         '/Thumbnail/*',
+    //         '/images/*',
+    //         '/Hybrid_Learning/*',
+    //         '/OVGU_Campus/*',
+    //         '/Lecturer_Avatar/*',
+    //         '/academic-activities/*',
+    //         '/academic-activities',
+    //         '/future-students/*',
+    //         '/future-students',
+    //         '/laboratories-research/*',
+    //         '/laboratories-research',
+    //         '/partners-lecturers/*',
+    //         '/partners-lecturers',
+    //         '/potential-candidates/*',
+    //         '/potential-candidates',
+    //         '/program-structure/*',
+    //         '/program-structure',
+    //         '/student-life/*',
+    //         '/student-life',
+    //         '/tuition-scholarships/*',
+    //         '/tuition-scholarships',
+    //         '/vi/*',
+    //         '/vi',
+    //         '/admin/*',
+    //         '/admin',
+    //         '/__nuxt_content/*',
+    //         '/_i18n/*',
+    //         '/dump*',
+    //       ]
+    //     }
+    //   }
+    // }
   },
 })
