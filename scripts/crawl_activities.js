@@ -845,12 +845,13 @@ async function main() {
       const title = details.tieude;
       const publishDate = details.ngayxuatban || '2026-05-19';
       const slug = slugify(title);
-      console.log(`Extracted metadata: title="${title}", date="${publishDate}", slug="${slug}"`);
+      const imgSlug = slug.substring(0, 40).replace(/-$/, '');
+      console.log(`Extracted metadata: title="${title}", date="${publishDate}", slug="${slug}", imgSlug="${imgSlug}"`);
 
       // Download Cover Image
       let coverImgPath = '/images/academic_activities/placeholder-cover.jpg';
       if (details.imghinhdaidien) {
-        const coverDownload = await downloadImage(details.imghinhdaidien, `${slug}-cover`, cookieString, headers);
+        const coverDownload = await downloadImage(details.imghinhdaidien, `${imgSlug}-cover`, cookieString, headers);
         if (coverDownload) {
           coverImgPath = coverDownload;
         }
@@ -876,7 +877,7 @@ async function main() {
         const cleanSrc = rawSrc.replace(/&amp;/g, '&');
         console.log(`Downloading body image: ${cleanSrc}`);
 
-        const localPath = await downloadImage(cleanSrc, `${slug}-img-${inlineIdx}`, cookieString, headers);
+        const localPath = await downloadImage(cleanSrc, `${imgSlug}-img-${inlineIdx}`, cookieString, headers);
         if (localPath) {
           processedSrcs[rawSrc] = localPath;
           inlineIdx++;
