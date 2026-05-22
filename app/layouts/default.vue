@@ -576,6 +576,23 @@ const scrollToFooter = () => {
   }
 }
 
+@media (max-width: 768px) {
+  .header-inner {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+  .brand-logo-wrapper {
+    margin-top: -6px;
+    margin-bottom: -6px;
+    padding: 0.1rem 0.25rem;
+    border-radius: var(--radius-sm);
+  }
+  .brand-logo {
+    height: 38px !important;
+    width: auto !important;
+  }
+}
+
 .brand-link {
   margin-left: -0.5rem !important;
 }
