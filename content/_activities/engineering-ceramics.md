@@ -2,7 +2,7 @@
 title: "Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael"
 category: "Academic Lectures"
 date: "2026-03-03"
-image: "/images/academic_activities/engineering-ceramics-advanced-materials-science-with-prof-scheffler-michael-cover.jpg"
+image: "/images/academic_activities/engineering-ceramics-with-prof-scheffler-michael-cover.jpg"
 description: "Explore advanced engineering ceramics under the guidance of OVGU Germany flying faculty Prof. Michael Scheffler in the VGU Materials Science Master."
 ---
 

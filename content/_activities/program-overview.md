@@ -2,7 +2,7 @@
 title: "Elevate Your Expertise: The VGU Master of Materials Science Program"
 category: "Academic Lectures"
 date: "2025-11-05"
-image: "/images/academic_activities/elevate-your-expertise-the-vgu-master-of-materials-science-program-cover.jpg"
+image: "/images/academic_activities/elevate-your-expertise-with-msi-cover.jpg"
 description: "Explore how the VGU Materials Science Master program and its German flying faculty partner, OVGU Magdeburg, prepare students for global research careers."
 ---
 
@@ -27,6 +27,6 @@ By directly introducing you to these Chair research projects, you will gain an u
 
 Join the VGU MSI program and transform from a student of materials science to an active participant in its evolution.
 
-![Elevate Your Expertise: The VGU Master of Materials Science Program - Illustration 1](/images/academic_activities/elevate-your-expertise-the-vgu-master-of-materials-science-program-img-1.jpg)
+![Elevate Your Expertise: The VGU Master of Materials Science Program - Illustration 1](/images/academic_activities/elevate-your-expertise-with-msi-img-1.jpg)
 
-![Elevate Your Expertise: The VGU Master of Materials Science Program - Illustration 2](/images/academic_activities/elevate-your-expertise-the-vgu-master-of-materials-science-program-img-2.jpg)
+![Elevate Your Expertise: The VGU Master of Materials Science Program - Illustration 2](/images/academic_activities/elevate-your-expertise-with-msi-img-2.jpg)
