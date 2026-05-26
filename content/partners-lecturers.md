@@ -6,7 +6,7 @@ intro: >-
   The MSI program draws on the expertise of faculty from the Otto von Guericke University Magdeburg (OVGU), the Vietnamese-German University (VGU), the Fraunhofer Institute (IMWS), and TU Bergakademie Freiberg. Students have the opportunity to contribute to research across **6 specialist Chairs at OVGU**, alongside outstanding VGU researchers — covering the full breadth of Engineering Materials from solid-state physics and metallic materials to ceramics, polymer chemistry, and computational mechanics.
 
 
-  Our faculty are more than instructors. They are active researchers who genuinely invest in student projects. Lecturers are known to support student research initiatives and, in a number of cases, have **provided funding for student projects** through their own research grants or institutional budgets. If you have a compelling idea and the drive to pursue it, the MSI faculty want to hear it.
+  Our lecturers are more than instructors. They are active researchers who genuinely invest in student projects. Lecturers are known to support student research initiatives and, in a number of cases, have **provided funding for student projects** through their own research grants or institutional budgets. If you have a compelling idea and the drive to pursue it, the MSI program want to hear it.
 groups:
   - id: vgu-core
     title: MSI Program Leadership & VGU Core Faculty
