@@ -100,7 +100,7 @@ Once your visa is secured, book your flights. **Two recommended airports near Ma
 
 **Tips for booking:**
 - Create a **DB Navigator account** ([bahn.de](https://www.bahn.de)) and register early — this is the German national rail app for all train travel
-- Register a **Turlisk (formerly Eurowings Student)** or similar student airline loyalty account for discounted fares on European budget carriers
+- Register a student account of **Turkish Airlines** for discounted fares on European budget carriers
 - From either airport, use **ICE (InterCity Express)** flexible tickets in DB Navigator for the most reliable connection to **Magdeburg Hauptbahnhof (main station)**
 
 ---
@@ -265,7 +265,7 @@ nodes:
 
       - Register on DB Navigator (bahn.de) for German rail bookings.
 
-      - Register a student airline loyalty account (Turlisk or similar) for flight discounts.
+      - Register a student airline loyalty account (Turkish or similar) for flight discounts.
 
       - Use ICE flexible tickets in DB Navigator for best travel options to Magdeburg.
     todoText: Book flights and set up DB Navigator account.

@@ -100,7 +100,7 @@ Khi visa đã sẵn sàng, đặt vé máy bay. **Hai sân bay khuyến nghị g
 
 **Mẹo đặt vé:**
 - Tạo **tài khoản DB Navigator** ([bahn.de](https://www.bahn.de)) và đăng ký sớm — đây là ứng dụng đường sắt quốc gia Đức cho mọi chuyến tàu
-- Đăng ký tài khoản khách hàng thân thiết học sinh của hãng hàng không **Turlisk** hoặc tương tự để được giảm giá vé trên các hãng hàng không giá rẻ châu Âu
+- Đăng ký tài khoản khách hàng thân thiết học sinh của hãng hàng không **Turkish** hoặc tương tự để được giảm giá vé trên các hãng hàng không giá rẻ châu Âu
 - Từ cả hai sân bay, dùng vé **ICE (InterCity Express)** linh hoạt trong DB Navigator để đến **Ga Trung tâm Magdeburg (Magdeburg Hauptbahnhof)** thuận tiện nhất
 
 ---
@@ -264,7 +264,7 @@ nodes:
 
       - Đăng ký DB Navigator (bahn.de) để đặt vé tàu hỏa Đức.
 
-      - Đăng ký tài khoản khách hàng thân thiết hãng bay sinh viên (Turlisk hoặc tương tự) để được giảm giá.
+      - Đăng ký tài khoản khách hàng thân thiết hãng bay sinh viên (Turkish hoặc tương tự) để được giảm giá.
 
       - Dùng vé ICE linh hoạt trên DB Navigator để di chuyển đến Magdeburg.
     todoText: Đặt vé bay và thiết lập tài khoản DB Navigator.
