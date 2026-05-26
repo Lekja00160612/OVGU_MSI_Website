@@ -1,9 +1,27 @@
 ---
-title: "Hướng Dẫn Tuyển Sinh & Lộ Trình Nghề Nghiệp"
-description: "Mở khóa các cơ hội toàn cầu với bằng Thạc sĩ Khoa học Vật liệu và Đổi mới từ Đức tại VGU. Tìm hiểu về điều kiện tuyển sinh, lộ trình học tập và cơ hội nghề nghiệp."
+title: Hướng Dẫn Tuyển Sinh & Điều Kiện Ứng Tuyển
+description: Khám phá cách ứng tuyển vào chương trình Thạc sĩ MSI tại VGU — bằng Thạc sĩ theo chuẩn Đức về Khoa học Vật liệu Kỹ thuật. Tìm hiểu về điều kiện, lộ trình ứng tuyển và cơ hội nghề nghiệp.
 ---
 
-Chương trình Thạc sĩ Khoa học Vật liệu và Đổi mới sáng tạo (MSI) được thiết kế cho các học viên tốt nghiệp ngành vật lý, hóa học, khoa học vật liệu, kỹ thuật cơ khí, kỹ thuật điện hoặc các ngành khoa học và kỹ thuật liên quan. Tùy thuộc vào nền tảng học thuật của bạn, hãy chọn tab lộ trình tương ứng dưới đây để xem hướng dẫn chi tiết quy trình ứng tuyển.
+## Về Chương Trình
+
+Khoa học Vật liệu là nền tảng của kỹ thuật hiện đại. Tại MSI, **Vật liệu Kỹ thuật** là trọng tâm cốt lõi của chúng tôi. Chúng tôi nghiên cứu cách cấu trúc vi mô trực tiếp điều khiển các tính chất cơ học, nhiệt học và chức năng ở cấp độ vĩ mô — và việc nắm vững mối liên hệ này mở ra con đường tạo ra các sản phẩm tốt hơn, kết cấu bền hơn và công nghệ thông minh hơn.
+
+Chúng tôi không chạy theo xu hướng "hype" của các vật liệu chức năng ngoại lai, nhưng chúng tôi mang lại điều gì đó bền vững hơn: **kiến thức nền tảng vận hành thế giới vật chất và thúc đẩy nền kinh tế thực**. Kim loại, gốm sứ, polymer, vật liệu composite — những vật liệu cấu thành mọi chiếc ô tô, máy bay, gói linh kiện bán dẫn và hệ thống năng lượng trên hành tinh này.
+
+Nếu bạn đam mê tìm hiểu cách cấu trúc ở cấp độ nguyên tử quyết định hiệu suất trong thực tế, và cách Vật liệu Kỹ thuật thúc đẩy công nghệ — từ ô tô, hàng không vũ trụ đến năng lượng xanh và vi điện tử — **chương trình này là dành cho bạn**.
+
+Bạn có thể khám phá toàn bộ các học phần trên trang [Cấu trúc Chương trình](/program-structure), bao gồm: Vật lý Chất rắn, Nhiệt luyện Vật liệu, Kim loại, Gốm sứ, Polymer, Vật liệu Composite, Luyện kim Bột, Cơ học Liên tục, Cơ học Phá hủy, Phân tích Đặc tính Vật liệu và nhiều hơn nữa.
+
+## Nền Tảng Của Bạn Có Phù Hợp Không?
+
+Chương trình MSI được thiết kế cho sinh viên tốt nghiệp ngành *Vật lý, Hóa học, Khoa học Vật liệu, Kỹ thuật Cơ khí hoặc các ngành khoa học và kỹ thuật liên quan*.
+
+**Nhưng tại VGU, chúng tôi thực sự chào đón sinh viên từ mọi nền tảng.** Khoa học Vật liệu vốn mang tính liên ngành. Dù nền tảng của bạn là Kỹ thuật Điện, Khoa học Môi trường, Công nghệ Thông tin hay bất kỳ lĩnh vực nào khác, điều quan trọng nhất là sự tò mò, tinh thần học hỏi và động lực kết nối ý tưởng từ nhiều lĩnh vực của bạn.
+
+Sinh viên có nền tảng khoa học trực tiếp liên quan thường có lợi thế khởi đầu — nhưng nhiều sinh viên tốt nghiệp xuất sắc nhất của chúng tôi lại đến từ các ngành không truyền thống.
+
+Tùy thuộc vào nền tảng học thuật của bạn, hãy chọn tab lộ trình tương ứng bên dưới để xem hướng dẫn chi tiết quy trình ứng tuyển.
 
 ::interactive-pathway
 ---
@@ -11,58 +29,67 @@ nodes:
   - id: direct_dossier_vi
     tabId: direct_route_vi
     tabLabel: Ngành Gần / Ngành Đúng
-    label: Nộp Hồ sơ Ứng tuyển
+    label: Nộp Hồ Sơ Ứng Tuyển
     sub: Bằng cấp & IELTS 6.0
     color: "#1E3A5F"
     arrowColor: "#E87722"
-    arrowType: dashed
+    arrowType: solid
     desc: >-
       Nộp bằng tốt nghiệp Đại học, bảng điểm và chứng chỉ tiếng Anh IELTS 6.0
       (hoặc tương đương) lên cổng thông tin tuyển sinh của VGU.
 
-
-      - Xác thực kiểm định văn bằng đại học.
+      - Xác thực tình trạng kiểm định của trường đại học.
 
       - Tải lên bảng điểm chính thức.
 
       - Nộp chứng chỉ tiếng Anh còn hiệu lực.
-    todoText: Nộp đầy đủ hồ sơ ứng tuyển lên cổng thông tin VGU.
-    link: https://vgu.edu.vn/
+
+      Lưu ý: Nếu bạn chưa có chứng chỉ IELTS hoặc tương đương, VGU tổ chức
+      bài kiểm tra năng lực tiếng Anh nội bộ. Chúng tôi khuyến khích bạn
+      nộp chứng chỉ được công nhận quốc tế để tăng tính cạnh tranh trong
+      các vòng xét học bổng sau này.
+    todoText: Nộp đầy đủ hồ sơ ứng tuyển lên cổng VGU.
+    link: https://apply.vgu.edu.vn/
   - id: direct_interview_vi
     tabId: direct_route_vi
     tabLabel: Ngành Gần / Ngành Đúng
-    label: Đánh giá Học thuật
-    sub: Phỏng vấn Kỹ thuật
+    label: Đánh Giá Học Thuật
+    sub: Phỏng Vấn Kỹ Thuật
     color: "#1E3A5F"
     arrowColor: "#E87722"
-    arrowType: dashed
+    arrowType: solid
     desc: >-
-      Hội đồng học thuật chương trình MSI tiến hành phỏng vấn kỹ thuật (trực
-      tuyến hoặc trực tiếp) đánh giá kiến thức cơ bản về toán, vật lý và nhiệt
-      động lực học cơ sở.
+      Sau khi nộp hồ sơ, bạn sẽ nhận được thư mời tham gia buổi Đánh giá Học
+      thuật (và bài kiểm tra tiếng Anh nếu không có chứng chỉ ngôn ngữ). Hội
+      đồng Học thuật MSI tiến hành phỏng vấn kỹ thuật — trực tuyến hoặc trực
+      tiếp — bao gồm toán học cơ bản, vật lý và nhiệt động lực học nhập môn.
 
+      **Buổi phỏng vấn này không phải vòng loại. Mục đích là củng cố và
+      định hướng:** chúng tôi dùng buổi phỏng vấn để xác định các lỗ hổng
+      kiến thức và truyền đạt rõ ràng những gì bạn cần chuẩn bị để phát triển
+      trong chương trình MSI. Bạn sẽ ra về với một bức tranh rõ ràng về những
+      gì cần mong đợi.
 
       - Ôn tập các khái niệm vật lý và giải tích cốt lõi.
 
       - Trao đổi về mục tiêu học tập và định hướng sự nghiệp.
 
-      - Chuẩn bị trình bày tóm tắt về khóa luận tốt nghiệp đại học của bạn.
-    todoText: Đặt lịch và hoàn thành buổi phỏng vấn kỹ thuật.
+      - Hiểu rõ những gì cần thiết để trở thành một Nhà khoa học Vật liệu.
+    todoText: Đặt lịch và hoàn thành buổi phỏng vấn kỹ thuật học thuật.
     link: "#"
   - id: direct_offer_vi
     tabId: direct_route_vi
     tabLabel: Ngành Gần / Ngành Đúng
-    label: Nhận Thư mời Nhập học
-    sub: Đăng ký Nhập học VGU/OVGU
+    label: Nhận Thư Mời Nhập Học
+    sub: Đăng Ký Nhập Học VGU/OVGU
     color: "#1E3A5F"
     arrowColor: "#E87722"
-    arrowType: dashed
+    arrowType: solid
     desc: >-
-      Nhận thư mời nhập học chính thức từ VGU và OVGU Magdeburg. Chấp nhận thư
-      mời, hoàn thành đóng học phí học kỳ đầu tiên và chuẩn bị nhập học.
+      Nhận thư mời nhập học chính thức từ VGU và OVGU Magdeburg. Chấp nhận
+      thư mời, hoàn thành đóng học phí học kỳ đầu tiên và chuẩn bị nhập học.
 
-
-      - Ký và gửi lại Phiếu đồng ý nhập học.
+      - Ký và gửi lại Phiếu Đồng ý Nhập học.
 
       - Hoàn thành đóng học phí đợt đầu.
 
@@ -72,109 +99,103 @@ nodes:
   - id: indirect_motivation_vi
     tabId: indirect_route_vi
     tabLabel: Ngành Khác / Ngành Trái
-    label: Nộp Thư bày tỏ Nguyện vọng
-    sub: Giai đoạn Phê duyệt Trước
+    label: Nộp Thư Bày Tỏ Nguyện Vọng
+    sub: Giai Đoạn Phê Duyệt Sơ Bộ
     color: "#1E3A5F"
     arrowColor: "#E87722"
-    arrowType: solid
+    arrowType: dashed
     desc: >-
-      Ứng viên có nền tảng ngành học khác (như kỹ thuật xây dựng, khoa học máy
-      tính, sinh học, v.v.) trước tiên phải nộp Thư bày tỏ nguyện vọng
-      (Motivation Letter) gửi tới điều phối viên học thuật để xem xét sơ bộ.
+      Ứng viên có nền tảng ngành học khác — như Kỹ thuật Xây dựng, Khoa học
+      Máy tính, Công nghệ Thông tin, Kỹ thuật Điện, Khoa học Môi trường, Sinh
+      học hoặc các ngành tương tự — trước tiên phải nộp Thư Bày Tỏ Nguyện Vọng
+      (Motivation Letter) gửi tới điều phối viên học thuật tại
+      msi.info@vgu.edu.vn để xem xét sơ bộ. Hình thức do bạn tự chọn.
+      Chúng tôi gợi ý:
 
+      - Giải thích rõ lý do thực sự mong muốn chuyển hướng sang Khoa học
+      Vật liệu Kỹ thuật.
 
-      - Giải thích rõ lý do mong muốn chuyển hướng sang Khoa học Vật liệu.
+      - Trình bày chi tiết các môn học liên quan đã tích lũy (toán, lý, hóa)
+      và quá trình tự học.
 
-      - Trình bày chi tiết các môn học liên quan đã tích lũy (toán, lý, hóa) và
-      quá trình tự học.
-
-      - Nhận phê duyệt học thuật sơ bộ trước khi nộp hồ sơ chính thức.
-    todoText: Soạn thảo và nộp Thư bày tỏ nguyện vọng để xin phê duyệt sơ bộ.
+      - Sau khi Hội đồng xem xét thư và xác nhận sự phù hợp, bạn tiến hành
+      quy trình ứng tuyển chính thức — hoàn toàn giống như các ứng viên ngành
+      trực tiếp liên quan.
+    todoText: Soạn thảo và nộp Thư Bày Tỏ Nguyện Vọng để xin phê duyệt sơ bộ.
     link: "#"
   - id: indirect_dossier_vi
     tabId: indirect_route_vi
     tabLabel: Ngành Khác / Ngành Trái
-    label: Nộp Hồ sơ Ứng tuyển
+    label: Nộp Hồ Sơ Ứng Tuyển
     sub: Bằng cấp & IELTS 6.0
     color: "#1E3A5F"
     arrowColor: "#E87722"
-    arrowType: dashed
+    arrowType: solid
     desc: >-
-      Sau khi thư bày tỏ nguyện vọng được phê duyệt sơ bộ, tiến hành nộp bằng
-      tốt nghiệp Đại học, bảng điểm và chứng chỉ tiếng Anh lên cổng thông tin
-      tuyển sinh của VGU.
+      Sau khi Thư Bày Tỏ Nguyện Vọng được phê duyệt, tiến hành nộp bằng tốt
+      nghiệp Đại học, bảng điểm và chứng chỉ tiếng Anh lên cổng tuyển sinh
+      VGU — quy trình hoàn toàn giống ứng viên ngành trực tiếp liên quan.
 
-
-      - Đính kèm thư phê duyệt nguyện vọng sơ bộ.
+      - Đính kèm xác nhận phê duyệt nguyện vọng.
 
       - Tải lên bảng điểm và đề cương chi tiết môn học để đối chiếu tín chỉ.
 
-      - Nộp chứng chỉ tiếng Anh còn hiệu lực (IELTS 6.0+).
-    todoText: Nộp hồ sơ ứng tuyển đầy đủ kèm thư phê duyệt lên cổng VGU.
-    link: https://vgu.edu.vn/
+      - Nộp chứng chỉ tiếng Anh còn hiệu lực (IELTS 6.0+). Nếu chưa có, VGU
+      tổ chức bài kiểm tra nội bộ. Chúng tôi khuyến khích bạn nộp chứng chỉ
+      được công nhận quốc tế để tăng tính cạnh tranh trong các vòng xét học
+      bổng.
+    todoText: Nộp hồ sơ đầy đủ kèm xác nhận phê duyệt lên cổng VGU.
+    link: https://apply.vgu.edu.vn/
   - id: indirect_interview_vi
     tabId: indirect_route_vi
     tabLabel: Ngành Khác / Ngành Trái
-    label: Đánh giá Học thuật
-    sub: Phỏng vấn Kỹ thuật
+    label: Đánh Giá Học Thuật
+    sub: Phỏng Vấn Kỹ Thuật
     color: "#1E3A5F"
     arrowColor: "#E87722"
-    arrowType: dashed
+    arrowType: solid
     desc: >-
-      Tham gia buổi phỏng vấn đánh giá kỹ thuật được thiết kế riêng. Hội đồng sẽ
-      đánh giá khả năng bổ túc kiến thức để theo kịp các chuyên đề vật liệu nâng
-      cao và giải tích kỹ thuật.
+      Tham gia buổi phỏng vấn kỹ thuật được thiết kế riêng. Hội đồng sẽ đánh
+      giá sự sẵn sàng nền tảng của bạn để bổ túc kiến thức tiến vào các chuyên
+      đề vật liệu nâng cao.
 
+      **Buổi phỏng vấn này không phải vòng loại — mà là một cuộc trao đổi.**
+      Chúng tôi sẽ nói thẳng với bạn về những lỗ hổng kiến thức và mức độ nỗ
+      lực tự học cần thiết. Chúng tôi không loại ứng viên ở giai đoạn này;
+      chúng tôi hướng dẫn họ.
 
-      - Ôn tập kiến thức cơ sở và đề chương học phần bổ túc.
+      - Ôn tập kiến thức cơ sở và nội dung bổ túc được khuyến nghị.
 
-      - Thể hiện tư duy giải quyết vấn đề và năng lực tự học.
+      - Thể hiện tư duy phân tích và cách tiếp cận giải quyết vấn đề.
 
-      - Trao đổi về kế hoạch và tiến độ học bổ túc kiến thức.
-    todoText: Đặt lịch và hoàn thành phỏng vấn kỹ thuật bổ túc.
+      - Cùng trao đổi về kế hoạch và lộ trình bổ túc kiến thức.
+    todoText: Đặt lịch và hoàn thành buổi phỏng vấn kỹ thuật bổ túc.
     link: "#"
   - id: indirect_offer_vi
     tabId: indirect_route_vi
     tabLabel: Ngành Khác / Ngành Trái
-    label: Thư mời Nhập học Có điều kiện
-    sub: Học phần Bổ túc Kiến thức
+    label: Thư Mời Nhập Học Có Điều Kiện
+    sub: Học Phần Bổ Túc Kiến Thức
     color: "#1E3A5F"
     arrowColor: "#E87722"
     arrowType: dashed
-    desc: >-
-      Nhận thư mời nhập học. Đối với ứng viên ngành trái, việc nhập học chính
-      thức có thể đi kèm điều kiện hoàn thành 1-2 môn học bổ túc kiến thức trong
-      năm học đầu tiên.
-
-
+    desc: |-
+      Nhận thư mời nhập học. Đối với ứng viên ngành trái, việc nhập học có thể đi kèm thành phần bổ túc kiến thức.
       - Ký cam kết thỏa thuận học phần bổ túc kiến thức.
-
-      - Đóng học phí và hoàn tất thủ tục đăng ký học.
-
+      - Đóng học phí và hoàn tất thủ tục đăng ký.
       - Đăng ký các học phần bổ túc được chỉ định.
-    todoText: Chấp nhận thư mời có điều kiện và đăng ký học phần bổ túc.
+    todoText: Chấp nhận thư mời có điều kiện và chuẩn bị về Vật liệu Kỹ thuật.
     link: "#"
 ---
+##
 ::
-
-## Ai Nên Ứng Tuyển?
-
-Chương trình Thạc sĩ Khoa học Vật liệu và Đổi mới sáng tạo (MSI) được thiết kế cho các học viên tốt nghiệp ngành vật lý, hóa học, khoa học vật liệu, kỹ thuật cơ khí, kỹ thuật điện hoặc các ngành khoa học và kỹ thuật liên quan.
-
-Nếu bạn đam mê tìm hiểu cấu trúc nguyên tử của vật liệu, cách cấu trúc quyết định tính chất vật lý vĩ mô, và cách vật liệu tiên tiến thúc đẩy công nghệ (từ điện tử đến năng lượng xanh), chương trình này là dành cho bạn.
-
-## Yêu Cầu Tuyển Sinh
-
-- **Bằng Đại Học:** Bằng tốt nghiệp Đại học được công nhận thuộc lĩnh vực khoa học hoặc kỹ thuật liên quan.
-- **Trình Độ Tiếng Anh:** IELTS 6.0 hoặc tương đương (nếu chương trình đại học trước đó không được giảng dạy hoàn toàn bằng tiếng Anh).
-- **Kết Quả Học Tập:** Thành tích học tập tốt ở các môn nền tảng liên quan (toán học, vật lý, hóa học).
 
 ## Cảm Nhận Từ Cựu Học Viên
 
-*Lắng nghe chia sẻ từ các cựu học viên đang làm việc tại các doanh nghiệp hàng đầu và viện nghiên cứu trên toàn thế giới.*
+*Vẫn chưa chắc MSI có phù hợp với bạn không? Hãy nghe trực tiếp từ cựu học viên của chúng tôi:*
 
-> "Chương trình liên kết giữa VGU và OVGU mang lại sự kết hợp hoàn hảo giữa kiến thức lý thuyết và kỹ năng thực hành phòng thí nghiệm. Môi trường quốc tế tại đây thực sự rất giá trị."
-> **— Nguyễn Văn A, Nhà nghiên cứu tại Bosch**
+> "Chương trình liên kết giữa VGU và OVGU chính xác là điều tôi hằng mơ ước — du học ngay tại nhà. Tôi được tự tay thao tác các máy phân tích đặc tính vật liệu tiên tiến, duy trì mối quan hệ gần gũi với các chuyên gia trong ngành và xây dựng mạng lưới học thuật quốc tế thực sự. Chương trình này có tất cả mọi thứ: sự nghiêm khắc học thuật Đức, tiếp cận phòng thí nghiệm thực tế, nghiên cứu thực chất, con đường đến châu Âu và một cộng đồng gắn kết chân thật. Tôi mạnh mẽ khuyến nghị MSI cho những bạn trẻ tò mò từ **mọi nền tảng** — bản thân tôi tốt nghiệp Đại học ngành Trí tuệ Nhân tạo."
+>
+> **— Nguyễn Sơn Tùng, Học bổng DAAD, Khóa 2024 · Cựu sinh viên ngành Trí tuệ Nhân tạo**
 
-> "Việc tiếp cận các thiết bị phòng thí nghiệm hiện đại và sự hướng dẫn tận tình từ các giáo sư Đức đã giúp tôi giành được học bổng tiến sĩ tại châu Âu ngay sau khi tốt nghiệp."
-> **— Trần Thị B, Nghiên cứu sinh Tiến sĩ tại Viện Max Planck**
+Muốn nghe chia sẻ thực tế? **Liên hệ trực tiếp Sơn Tùng qua Zalo: [+84 969 363 642](tel:+84969363642)** — anh ấy sẵn sàng chia sẻ trải nghiệm và trả lời mọi câu hỏi của bạn.

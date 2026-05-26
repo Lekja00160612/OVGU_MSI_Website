@@ -1,6 +1,6 @@
 ---
-title: Master of Materials Science
-description: A prestigious joint program offered by VGU and OVGU Magdeburg.
+title: Master of Materials Science — VGU × OVGU Magdeburg
+description: Earn a German-standard Master of Science in Engineering Materials at VGU Vietnam. A joint double-degree program with OVGU Magdeburg — covering microstructures, material properties, characterization, and advanced manufacturing.
 hero:
   badge: Intake 2026 · Apply Now
   headline: Shaping the Future of Engineering Materials
@@ -39,7 +39,7 @@ whyChoose:
     - id: 5
       icon: industry
       title: Industry Connections
-      description: Students will be equipped with Industry knowledge via numerous field trips throughout 2-year learning duration.
+      description: Students are equipped with real industry knowledge through numerous factory visits and industry events throughout the 2-year program.
       link: "/academic-activities"
     - id: 6
       icon: scholarship
@@ -85,7 +85,7 @@ curriculum:
         - Research Project & Seminar
     - number: 4
       label: Semester 4
-      theme: Master Research
+      theme: Master's Research
       color: "#C95E0A"
       modules:
         - Master Thesis (30 ECTS)
@@ -123,7 +123,7 @@ hybrid:
     - day: Thursday
       time: 7–9 pm (VN Time)
       mode: Online
-      location: DB Campus
+      location: BD Campus
       hours: 2 AH
     - day: Saturday
       time: Full day (9AM–4PM)

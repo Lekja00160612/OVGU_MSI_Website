@@ -1,4 +1,4 @@
 ---
-title: "Hệ Thống Phòng Thí Nghiệm Hiện Đại & Các Hướng Nghiên Cứu Hợp Tác"
-description: "Thực hiện các nghiên cứu khoa học đột phá với hệ thống thiết bị phân tích vật liệu tiên tiến (XRD, SEM, AFM) tại VGU và các bộ môn nghiên cứu đối tác tại Đại học Magdeburg."
+title: "Phòng Thí Nghiệm Hiện Đại — Sinh Viên Trực Tiếp Thao Tác, Không Phí Phát Sinh"
+description: "Học viên MSI được trực tiếp thao tác hệ thống phân tích vật liệu hàng đầu tại miền Nam Việt Nam — SEM, XRD, AFM và nhiều thiết bị khác — ngay từ học kỳ đầu tiên, không tốn thêm chi phí. Nghiên cứu tại VGU và OVGU Magdeburg."
 ---

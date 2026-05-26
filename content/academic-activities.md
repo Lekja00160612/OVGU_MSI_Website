@@ -1,7 +1,6 @@
 ---
-title: "Academic Activities & Scientific Exploration"
-description: "Explore hands-on lab training, industrial field trips, scientific seminars, and student research projects at VGU."
+title: Academic Activities — Industry Visits, Lab Training & Scientific Seminars
+description: Explore MSI's hands-on academic activities — factory excursions to Bosch and paper mills, SEM and XRD lab training, DAAD scholarship events, and flying faculty seminars from OVGU Magdeburg. Real science, real industry, real experience.
 ---
 
-::ActivitiesExplorer
-::
+:activities-explorer

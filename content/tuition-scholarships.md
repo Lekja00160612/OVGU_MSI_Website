@@ -1,37 +1,60 @@
 ---
-title: "Tuition Fees & Prestigious Scholarships"
-description: "Explore affordable German-degree tuition fees and generous DAAD, VGU, and merit-based scholarship opportunities for Materials Science Master students at VGU."
+title: Tuition Fees & Scholarship Opportunities — MSI at VGU
+description: Discover the transparent, semester-based tuition fees and generous scholarship options for the MSI Master's program at VGU — including DAAD Sur-Place, VGU Merit, and AFS Industry Scholarships. Lab access included, no extra charges.
 ---
 
 ## Tuition Fees
 
-The tuition fee for the Master in Materials Science and Innovation (MSI) program is structured to be highly competitive while delivering German-standard academic quality and direct hands-on laboratory access.
+The MSI program at VGU is built on a principle of transparency and value: you know exactly what you pay, and you know exactly what you get. Tuition is structured in two distinct components depending on where you study.
 
-### Fee Structure Breakdown
+### Component 1 — VGU Semester Fee (Vietnam, Semesters 1–4)
 
-- **Convenient Semester-Based Payments:** Tuition is billed per semester rather than upfront, allowing students to manage their expenses easily.
-- **Standard Intake Fee:** For the most up-to-date schedule of fees, please refer to the official VGU admission portal.
-- **All-Inclusive Access:** The fees cover all standard academic activities, direct laboratory usage, research equipment training, and access to campus library resources.
+Tuition is charged **per semester** at the start of each term — no lump-sum upfront payment. For the most current fee schedule, refer to the [official VGU tuition page](https://vgu.edu.vn/tuition-fees/for-master-programs).
+
+**Key facts:**
+
+- **Fee lock-in:** The tuition rate is fixed for your entire intake cohort — no mid-program price increases.
+- **Scholarship reimbursement:** If you are awarded a scholarship, the fee is paid at the start of the semester as required by Vietnamese government regulation, and the scholarship amount is returned to you near the end of that same semester.
+- **All-inclusive:** Your semester fee covers **all** standard academic activities, direct laboratory usage and equipment training, laboratory consumables on a regular learning basis, and access to campus library resources. **There are no hidden lab fees or equipment procurement charges.**
+
+> 💡 In many Vietnamese universities, students must outsource characterization work — paying per sample to send to external institutes. At MSI, you have **direct, first-hand access** to our equipment from your very first semester, at no extra cost. This is a genuine and significant advantage.
+
+---
+
+### Component 2 — OVGU Grant for Master's Thesis in Germany
+
+Top-performing students have the opportunity to conduct part or all of their **Master's Thesis research at OVGU Magdeburg**, supported by a separate DAAD Mobility Scholarship (detailed below). This is not an additional tuition burden — it is a funded research opportunity at a German university, fully supported through the VGU-OVGU partnership.
 
 ---
 
 ## Scholarships at VGU
 
-We are fully committed to ensuring that financial constraints do not stand in the way of academic excellence. We provide generous merit and needs-based scholarship opportunities for qualified candidates.
+We are committed to ensuring that financial barriers never block academic potential. Three distinct scholarship pathways are available to MSI students:
 
-### Scholarship for Semester fee at VGU
+### 1. VGU Merit Scholarship
 
-#### 1. Merit Scholarships
+Awarded to students with outstanding Bachelor's academic records.
 
-Awarded automatically to students displaying exceptional performance in their Bachelor's degrees.
+- **Coverage:** Up to **100% of the VGU semester tuition fee**
+- **Criteria:** Entrance examination results, Bachelor's GPA, and interview performance
+- **Renewal:** Subject to maintaining strong academic performance each semester
+- 📄 [Full scholarship regulation](https://vgu.edu.vn/merit-scholarships-for-60-of-full-time-master-students)
 
-- **Coverage:** Up to **100% of the tuition fee**.
-- **Criteria:** Based on entrance examination results, Bachelor GPA, and interview performance.
-- **Renewal:** Subject to maintaining high academic records during each semester of the MSI program.
+---
 
-#### 2. DAAD Surplace Scholarship
+### 2. Association of Friends and Supporters of VGU Scholarship
 
-A prestigious scholarship sponsored by the German Academic Exchange Service (DAAD) for study directly at VGU.
+A prestigious scholarship program supporting talented master students at VGU, including the MSI program.
+
+- **Coverage:** 3000€ one time payment per student
+- **Criteria:** Students with Financial Hardship with Academic merit, motivation
+- 📄 [Learn more about AFS scholarships](https://vgu.edu.vn/industry-scholarships1)
+
+---
+
+### 3. DAAD Sur-Place Scholarship
+
+A prestigious scholarship sponsored by the German Academic Exchange Service (DAAD) for study **directly at VGU** — so you benefit from German funding without leaving Vietnam.
 
 ::daad-scholarship-card
 ---
@@ -47,13 +70,9 @@ keyFacts:
   - label: "FOCUS:"
     value: Academic progress, research orientation and international exchange
 coverImage: /images/scholarships/MSI_Surplace_Scholarship.png
-description: This scholarship supports talented Materials Science students
-  directly at Vietnamese-German University. It is designed for students who want
-  to strengthen their academic profile, deepen their scientific skills and
-  become part of an international German-Vietnamese academic environment within
-  their study program at VGU.
+description: This scholarship supports talented Materials Science students directly at the Vietnamese-German University. It is designed for students who want to strengthen their academic profile, deepen their scientific skills, and become part of an international German-Vietnamese academic environment — all within their study program at VGU.
 fileLabel: Download Brochure (PPTX)
-fileUrl: /Documents/Scholarships/MSI Sur_Place_scholarship_brochure.pptx
+fileUrl: /Documents/Scholarships/MSI Sur_Place_scholarship_brochure.pdf
 labelImage: /images/scholarships/MSI_DAAD_Label.png
 opportunityTitle: YOUR OPPORTUNITY AT VIETNAMESE-GERMAN UNIVERSITY
 ---
@@ -61,9 +80,9 @@ opportunityTitle: YOUR OPPORTUNITY AT VIETNAMESE-GERMAN UNIVERSITY
 
 ---
 
-### DAAD to Study in Germany
+### DAAD Mobility Scholarship — Study & Research in Germany
 
-Through the partnership between VGU, Otto von Guericke University Magdeburg (OVGU), and the German Academic Exchange Service (DAAD), outstanding students have the opportunity to study and conduct research in Germany.
+Through the VGU–OVGU–DAAD partnership, high-performing MSI students can carry out study semesters or their **Master's Thesis research at OVGU Magdeburg** — fully funded. This is the path that has already taken MSI students to Germany.
 
 ::daad-scholarship-card
 ---
@@ -79,10 +98,7 @@ keyFacts:
   - label: "FOCUS:"
     value: Research stay, joint thesis supervision and German academic experience
 coverImage: /images/scholarships/MSI_Mobility_Scholarship.png
-description: This mobility scholarship supports highly qualified MSI students to
-  carry out study semesters or master thesis research projects at Otto von
-  Guericke University Magdeburg (OVGU) in Germany. It aims to foster
-  international scientific exchange and academic excellence.
+description: This mobility scholarship supports highly qualified MSI students to carry out study semesters or master thesis research projects at Otto von Guericke University Magdeburg (OVGU) in Germany. It aims to foster international scientific exchange and academic excellence.
 fileLabel: Download Brochure (PDF)
 fileUrl: /Documents/Scholarships/Mobility_Scholarship Brochure MSI_Thanh_Marc.pdf
 labelImage: /images/scholarships/MSI_DAAD_Label.png

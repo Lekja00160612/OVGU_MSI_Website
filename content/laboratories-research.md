@@ -1,4 +1,4 @@
 ---
-title: "State-of-the-Art Research Laboratories & Partner Chairs"
-description: "Conduct breakthrough scientific research using state-of-the-art materials characterization equipment (XRD, SEM, AFM) at VGU and partner chairs at OVGU Magdeburg."
+title: "State-of-the-Art Laboratories — Direct Student Access, No Extra Fees"
+description: "MSI students have first-hand access to one of the best materials characterization facilities in Southern Vietnam — SEM, XRD, AFM and more — from the very first semester, at no additional cost. Research at VGU and OVGU Magdeburg."
 ---

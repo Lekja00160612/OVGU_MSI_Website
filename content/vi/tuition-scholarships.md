@@ -1,68 +1,95 @@
 ---
-title: "Học Phí & Học Bổng Danh Giá"
-description: "Tìm hiểu thông tin học phí chương trình thạc sĩ chuẩn Đức và các cơ hội học bổng DAAD, học bổng VGU và học bổng khuyến học hấp dẫn cho học viên ngành Khoa học Vật liệu tại VGU."
+title: "Học Phí & Cơ Hội Học Bổng — MSI tại VGU"
+description: "Tìm hiểu cấu trúc học phí theo kỳ minh bạch và các loại học bổng hấp dẫn cho chương trình Thạc sĩ MSI tại VGU — bao gồm DAAD Sur-Place, Học bổng Khuyến học VGU và Học bổng Doanh nghiệp AFS. Phòng thí nghiệm được sử dụng miễn phí, không phát sinh thêm chi phí."
 ---
 
 ## Học Phí
-Học phí của chương trình Thạc sĩ Khoa học Vật liệu và Đổi mới (MSI) được thiết kế ở mức cạnh tranh trong khi vẫn duy trì chất lượng đào tạo cao nhất theo tiêu chuẩn học thuật của Đức và cơ hội thực hành trực tiếp tại các phòng thí nghiệm hiện đại.
 
-### Chi Tiết Cấu Trúc Học Phí
+Chương trình MSI tại VGU được xây dựng trên nguyên tắc minh bạch và giá trị: bạn biết chính xác mình trả bao nhiêu và nhận được gì. Học phí được cấu trúc thành hai thành phần tùy theo nơi bạn học.
 
-* **Đóng Học Phí Theo Kỳ Linh Hoạt:** Học phí được đóng theo từng học kỳ thay vì đóng toàn bộ trước khóa học, giúp học viên dễ dàng quản lý tài chính cá nhân.
-* **Biểu Phí Tuyển Sinh Hiện Tại:** Để cập nhật biểu phí mới nhất cho kỳ tuyển sinh sắp tới, vui lòng tham khảo cổng thông tin tuyển sinh chính thức của VGU.
-* **Chi Phí Trọn Gói:** Học phí đã bao gồm tất cả các hoạt động học thuật tiêu chuẩn, quyền sử dụng phòng thí nghiệm trực tiếp, đào tạo thiết bị nghiên cứu và tài nguyên thư viện trường.
+### Thành Phần 1 — Học Phí Kỳ Học tại VGU (Việt Nam, Học kỳ 1–4)
+
+Học phí được tính **theo từng học kỳ** vào đầu mỗi kỳ — không cần đóng toàn bộ trước. Để biết mức học phí hiện tại, vui lòng tham khảo [trang học phí chính thức của VGU](https://vgu.edu.vn/tuition-fees/for-master-programs).
+
+**Những điểm quan trọng cần biết:**
+
+- **Cố định học phí:** Mức học phí được giữ nguyên cho toàn bộ khóa học của bạn — không tăng giá giữa chương trình.
+- **Hoàn trả học bổng:** Nếu bạn được nhận học bổng, học phí vẫn được đóng vào đầu kỳ theo quy định của Chính phủ Việt Nam, và khoản học bổng sẽ được hoàn trả cho bạn vào cuối học kỳ đó.
+- **Chi phí trọn gói:** Học phí kỳ học bao gồm **tất cả** các hoạt động học thuật tiêu chuẩn, sử dụng phòng thí nghiệm trực tiếp, đào tạo thiết bị nghiên cứu và tài nguyên thư viện. **Không có phí phòng lab hay phí mua sắm thiết bị ẩn nào.**
+
+> 💡 Tại nhiều trường đại học ở Việt Nam, sinh viên phải gửi mẫu đến các viện bên ngoài và trả tiền theo từng lần phân tích. Tại MSI, bạn có **quyền truy cập trực tiếp, tự tay thao tác** thiết bị của chúng tôi ngay từ học kỳ đầu tiên, hoàn toàn miễn phí ngoài học phí. Đây là một lợi thế thực sự và đáng kể.
+
+---
+
+### Thành Phần 2 — Hỗ Trợ OVGU cho Luận văn Thạc sĩ tại Đức
+
+Những học viên xuất sắc có cơ hội thực hiện một phần hoặc toàn bộ **nghiên cứu Luận văn Thạc sĩ tại OVGU Magdeburg**, được hỗ trợ bởi Học bổng Trao đổi DAAD (chi tiết bên dưới). Đây không phải gánh nặng học phí bổ sung — mà là một cơ hội nghiên cứu được tài trợ tại một trường đại học Đức, hỗ trợ đầy đủ thông qua quan hệ đối tác VGU-OVGU.
 
 ---
 
 ## Học Bổng tại VGU
 
-Chúng tôi cam kết đảm bảo rằng khó khăn tài chính không cản trở con đường đạt tới sự xuất sắc trong học thuật của bạn. Chương trình cung cấp nhiều loại học bổng đa dạng dựa trên thành tích và nhu cầu cho các ứng viên đủ điều kiện.
+Chúng tôi cam kết đảm bảo rằng rào cản tài chính không bao giờ cản trở tiềm năng học thuật. Ba lộ trình học bổng riêng biệt dành cho học viên MSI:
 
-### Học Bổng Học Phí Kỳ học tại VGU
+### 1. Học Bổng Khuyến Học VGU
 
-#### 1. Học bổng Khuyến học VGU
-Được trao tự động cho các học viên có thành tích học tập xuất sắc ở bậc Cử nhân.
-* **Mức hỗ trợ:** Lên đến **100% học phí**.
-* **Tiêu chí:** Dựa trên kết quả thi đầu vào, điểm trung bình tích lũy (GPA) bậc Cử nhân và kết quả phỏng vấn tuyển sinh.
-* **Duy trì học bổng:** Yêu cầu duy trì kết quả học tập xuất sắc trong từng học kỳ của chương trình MSI.
+Dành cho học viên có kết quả học tập xuất sắc ở bậc Đại học.
 
-#### 2. Học bổng DAAD Sur Place
-Học bổng danh giá được tài trợ bởi Cơ quan Trao đổi Học thuật Đức (DAAD) cho chương trình học trực tiếp tại VGU.
+- **Mức hỗ trợ:** Lên đến **100% học phí kỳ học tại VGU**
+- **Tiêu chí:** Kết quả thi đầu vào, điểm GPA Đại học và kết quả phỏng vấn
+- **Duy trì:** Yêu cầu duy trì kết quả học tập tốt mỗi học kỳ
+- 📄 [Quy chế học bổng đầy đủ](https://vgu.edu.vn/merit-scholarships-for-60-of-full-time-master-students)
+
+---
+
+### 2. Association of Friends and Supporters of VGU Scholarship
+
+Chương trình học bổng được tài trợ bởi Association of Friends and Supporters of VGU, dành cho học viên tài năng trong chương trình MSI.
+
+- **Mức hỗ trợ:** 3000€ cho mỗi sinh viên, chi trả 1 lần.
+- **Tiêu chí:** Sinh viên gặp khó khăn về tài chính, có thành tích học tập tốt và có động lực học tập.
+- 📄 [Tìm hiểu thêm về học bổng AFS](https://vgu.edu.vn/industry-scholarships1)
+
+---
+
+### 3. Học Bổng DAAD Sur-Place
+
+Học bổng danh giá được tài trợ bởi Cơ quan Trao đổi Học thuật Đức (DAAD) cho chương trình học **trực tiếp tại VGU** — bạn nhận được tài trợ từ Đức mà không cần rời Việt Nam.
 
 ::daad-scholarship-card
 ---
 coverImage: "/images/scholarships/MSI_Surplace_Scholarship.png"
 labelImage: "/images/scholarships/MSI_DAAD_Label.png"
 opportunityTitle: "CƠ HỘI CỦA BẠN TẠI TRƯỜNG ĐẠI HỌC VIỆT ĐỨC"
-description: "Học bổng này hỗ trợ các học viên Khoa học Vật liệu tài năng trực tiếp tại Trường Đại học Việt Đức. Học bổng được thiết kế dành cho các học viên mong muốn nâng cao hồ sơ học thuật, đào sâu các kỹ năng nghiên cứu khoa học và trở thành một phần của môi trường học thuật quốc tế Đức - Việt."
+description: "Học bổng này hỗ trợ các học viên Khoa học Vật liệu tài năng trực tiếp tại Trường Đại học Việt Đức. Được thiết kế cho những học viên mong muốn nâng cao hồ sơ học thuật, đào sâu kỹ năng nghiên cứu khoa học và trở thành một phần của môi trường học thuật quốc tế Đức - Việt trong chính chương trình học tại VGU."
 keyFacts:
   - label: "LOẠI HỌC BỔNG:"
     value: "Học bổng học tại VGU (Sur-place)"
   - label: "THỜI GIAN:"
     value: "12 tháng"
   - label: "ĐỐI TƯỢNG:"
-    value: "Học viên có động lực học tập và tiềm năng học thuật xuất sắc"
+    value: "Học viên có động lực và tiềm năng học thuật xuất sắc"
   - label: "TUYỂN CHỌN:"
     value: "Quy trình tuyển chọn minh bạch dựa trên chất lượng"
   - label: "TRỌNG TÂM:"
     value: "Tiến độ học thuật, định hướng nghiên cứu và trao đổi quốc tế"
-fileUrl: "/Documents/Scholarships/MSI Sur_Place_scholarship_brochure.pptx"
+fileUrl: "/Documents/Scholarships/MSI Sur_Place_scholarship_brochure.pdf"
 fileLabel: "Tải Tài Liệu Giới Thiệu (PPTX)"
 ---
 ::
 
 ---
 
-### Học bổng DAAD Học tại Đức
+### Học Bổng Trao Đổi DAAD — Học Tập & Nghiên Cứu tại Đức
 
-Thông qua mối quan hệ đối tác giữa VGU, Đại học Otto von Guericke Magdeburg (OVGU) và Cơ quan Trao đổi Học thuật Đức (DAAD), các học viên xuất sắc có cơ hội học tập và nghiên cứu trực tiếp tại Đức.
+Thông qua quan hệ đối tác VGU–OVGU–DAAD, học viên MSI xuất sắc có thể thực hiện các kỳ học hoặc **nghiên cứu Luận văn Thạc sĩ tại OVGU Magdeburg** — được tài trợ toàn phần. Đây là con đường đã đưa học viên MSI sang Đức thành công.
 
 ::daad-scholarship-card
 ---
 coverImage: "/images/scholarships/MSI_Mobility_Scholarship.png"
 labelImage: "/images/scholarships/MSI_DAAD_Label.png"
 opportunityTitle: "CƠ HỘI CỦA BẠN ĐỂ HỌC TẬP TẠI ĐỨC"
-description: "Học bổng trao đổi này hỗ trợ các học viên MSI có năng lực xuất sắc thực hiện các kỳ học hoặc dự án nghiên cứu luận văn Thạc sĩ tại Đại học Otto von Guericke Magdeburg (OVGU), Đức. Mục tiêu nhằm thúc đẩy trao đổi khoa học quốc tế và xuất sắc học thuật."
+description: "Học bổng trao đổi này hỗ trợ các học viên MSI có năng lực xuất sắc thực hiện các kỳ học hoặc dự án nghiên cứu Luận văn Thạc sĩ tại Đại học Otto von Guericke Magdeburg (OVGU), Đức. Mục tiêu là thúc đẩy trao đổi khoa học quốc tế và xuất sắc học thuật."
 keyFacts:
   - label: "LOẠI HỌC BỔNG:"
     value: "Học bổng trao đổi học tập tại Đức"
@@ -71,7 +98,7 @@ keyFacts:
   - label: "ĐỐI TƯỢNG:"
     value: "Học viên MSI xuất sắc có đề xuất học tập/luận văn thuyết phục"
   - label: "TUYỂN CHỌN:"
-    value: "Cạnh tranh, do hội đồng liên hợp VGU-OVGU xét duyệt"
+    value: "Cạnh tranh, do Hội đồng liên hợp VGU-OVGU xét duyệt"
   - label: "TRỌNG TÂM:"
     value: "Đợt nghiên cứu, đồng hướng dẫn luận văn và trải nghiệm học thuật tại Đức"
 fileUrl: "/Documents/Scholarships/Mobility_Scholarship Brochure MSI_Thanh_Marc.pdf"

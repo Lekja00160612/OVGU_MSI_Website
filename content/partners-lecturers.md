@@ -1,8 +1,12 @@
 ---
-title: "German & VGU Faculty & Research Partners"
-headline: "German & VGU Faculty & Research Partners"
-description: "Meet the outstanding international professors and researchers from Otto von Guericke University Magdeburg (OVGU) and VGU delivering world-class lectures in Materials Science & Innovation."
-intro: The Master of Materials Science and Innovation (MSI) is a joint collaborative program drawing on the expertise of multiple institutes at the Otto von Guericke University Magdeburg (OVGU), the Vietnamese-German University (VGU), and other premier research institutions. We offer a wide range of academic and research topics, directly aligned with the cutting-edge expertise of our faculty. Students have the opportunity to contribute to research across 6 different Chairs at OVGU, alongside excellent researchers from VGU, the Fraunhofer Institute, and TU Bergakademie Freiberg.
+title: Meet Our Faculty — OVGU Professors & VGU Researchers in Materials Science
+description: Meet the German and Vietnamese professors from OVGU Magdeburg, Fraunhofer IMWS, and TU Freiberg who deliver world-class instruction and research supervision in the MSI Materials Science program at VGU.
+headline: German & VGU Faculty & Research Partners
+intro: >-
+  The MSI program draws on the expertise of faculty from the Otto von Guericke University Magdeburg (OVGU), the Vietnamese-German University (VGU), the Fraunhofer Institute (IMWS), and TU Bergakademie Freiberg. Students have the opportunity to contribute to research across **6 specialist Chairs at OVGU**, alongside outstanding VGU researchers — covering the full breadth of Engineering Materials from solid-state physics and metallic materials to ceramics, polymer chemistry, and computational mechanics.
+
+
+  Our faculty are more than instructors. They are active researchers who genuinely invest in student projects. Lecturers are known to support student research initiatives and, in a number of cases, have **provided funding for student projects** through their own research grants or institutional budgets. If you have a compelling idea and the drive to pursue it, the MSI faculty want to hear it.
 groups:
   - id: vgu-core
     title: MSI Program Leadership & VGU Core Faculty
