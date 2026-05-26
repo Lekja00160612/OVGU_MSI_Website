@@ -42,6 +42,29 @@ const getLecturerModules = (lecturerName: string) => {
 
 // @nuxt/content v3: rich frontmatter properties (headline, intro, groups) live in .meta
 const page = computed(() => pageData.value?.meta ?? {})
+
+const renderMarkdown = (text: string) => {
+  if (!text) return ''
+  return text
+    .split(/\n\s*\n/)
+    .map(para => {
+      const trimmed = para.trim()
+      if (!trimmed) return ''
+      if (trimmed.startsWith('- ')) {
+        const items = trimmed.split(/\n\s*-\s+/)
+          .map(item => {
+            const cleanItem = item.replace(/^-\s+/, '').trim()
+            if (!cleanItem) return ''
+            return `<li class="intro-li">${cleanItem}</li>`
+          })
+          .filter(Boolean)
+          .join('')
+        return `<ul class="intro-ul">${items}</ul>`
+      }
+      return `<p class="intro-paragraph">${trimmed.replace(/\n/g, ' ')}</p>`
+    })
+    .join('')
+}
 </script>
 
 <template>
@@ -51,9 +74,7 @@ const page = computed(() => pageData.value?.meta ?? {})
     
     <!-- Intro -->
     <div class="container intro-section text-center">
-      <p class="intro-text">
-        {{ page.intro }}
-      </p>
+      <div class="intro-text" v-html="renderMarkdown(page.intro)" />
     </div>
 
     <!-- Groups -->
@@ -140,6 +161,32 @@ const page = computed(() => pageData.value?.meta ?? {})
 
 .intro-section { max-width: 900px; margin: 0 auto 5rem auto; }
 .intro-text { font-size: 1.15rem; color: var(--color-gray-700); line-height: 1.8; margin-bottom: 2.5rem; }
+.intro-text :deep(.intro-paragraph) {
+  margin-bottom: 1.5rem;
+}
+.intro-text :deep(.intro-paragraph:last-child) {
+  margin-bottom: 0;
+}
+.intro-text :deep(.intro-ul) {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+.intro-text :deep(.intro-li) {
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  position: relative;
+}
+.intro-text :deep(.intro-li::before) {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-size: 0.85em;
+}
 
 .content-section { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 4rem; }
 

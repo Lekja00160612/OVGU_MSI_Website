@@ -1,7 +1,7 @@
 ---
 title: "Solid-State Physics"
 semester: 1
-german_lecturer: false
+german_lecturer: true
 is_elective: false
 description: |
   • Chemical Bonding in Solids: - Covalent Bonding - Ionic Bonding - Metallic Bonding - The Hydrogen bond - The van der Waals Bond

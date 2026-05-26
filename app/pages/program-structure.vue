@@ -24,7 +24,12 @@ const { data: allModules } = await useAsyncData('all-modules', () =>
 )
 
 const coreModules = computed(() => {
-  return allModules.value?.filter(m => !(m.is_elective || m.meta?.is_elective)) || []
+  const list = allModules.value?.filter(m => !(m.is_elective || m.meta?.is_elective)) || []
+  return [...list].sort((a, b) => {
+    const semA = Number(a.semester ?? a.meta?.semester ?? 1)
+    const semB = Number(b.semester ?? b.meta?.semester ?? 1)
+    return semA - semB
+  })
 })
 
 const electiveModules = computed(() => {
@@ -103,6 +108,35 @@ const getSemesterColor = (sem: number | string) => {
   if (s === 3) return 'var(--color-accent)'
   return 'var(--color-accent-dark)'
 }
+
+const hasGermanLecturer = (mod: any) => {
+  if (!mod) return false
+  const val = mod.german_lecturer ?? mod.meta?.german_lecturer
+  return val === true || val === 'true'
+}
+
+const renderMarkdown = (text: string) => {
+  if (!text) return ''
+  return text
+    .split(/\n\s*\n/)
+    .map(para => {
+      const trimmed = para.trim()
+      if (!trimmed) return ''
+      if (trimmed.startsWith('- ')) {
+        const items = trimmed.split(/\n\s*-\s+/)
+          .map(item => {
+            const cleanItem = item.replace(/^-\s+/, '').trim()
+            if (!cleanItem) return ''
+            return `<li class="intro-li">${cleanItem}</li>`
+          })
+          .filter(Boolean)
+          .join('')
+        return `<ul class="intro-ul">${items}</ul>`
+      }
+      return `<p class="intro-paragraph">${trimmed.replace(/\n/g, ' ')}</p>`
+    })
+    .join('')
+}
 </script>
 
 <template>
@@ -110,9 +144,7 @@ const getSemesterColor = (sem: number | string) => {
     <PageHeader :title="pageData?.title || 'Program Structure'" :description="pageData?.description" />
     
     <div class="container intro-section text-center">
-      <p class="intro-text">
-        {{ page.intro_text }}
-      </p>
+      <div class="intro-text" v-html="renderMarkdown(page.intro_text)" />
       <div class="cta-wrapper mt-12 mb-16">
         <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-primary cta-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
@@ -123,15 +155,7 @@ const getSemesterColor = (sem: number | string) => {
 
     <!-- CORE MODULES -->
     <div class="container modules-container">
-      <h2 class="section-title text-center mb-4">{{ page.core_title || t('program.core_title') }}</h2>
-      
-      <!-- German Lecturer Legend -->
-      <div class="legend-container text-center mb-26">
-        <span class="legend-item legend-item--highlighted bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm inline-flex items-center text-sm font-semibold">
-          <span class="german-indicator-dot-legend mr-2" />
-          {{ t('program.german_indicator_legend') }}
-        </span>
-      </div>
+      <h2 class="section-title text-center mb-16">{{ page.core_title || t('program.core_title') }}</h2>
 
       <!-- DESKTOP MODULES LAYOUT -->
       <div class="desktop-only w-full">
@@ -141,12 +165,16 @@ const getSemesterColor = (sem: number | string) => {
               v-for="mod in coreModules" 
               :key="mod.path" 
               class="module-card"
-              :class="{ 'module-card--active': selectedModule?.path === mod.path }"
+              :class="{ 
+                'module-card--active': selectedModule?.path === mod.path,
+                'thesis-card': mod.title === 'Master Thesis'
+              }"
               :style="{ '--mod-color': getSemesterColor(mod.semester || mod.meta?.semester || 1) }"
               @click="selectedModule = mod"
             >
               <span class="mod-name">{{ mod.title }}</span>
-              <span v-if="mod.meta?.german_lecturer || mod.german_lecturer" class="german-indicator-dot" title="Taught by German Lecturer" />
+              <span v-if="mod.title === 'Master Thesis'" class="thesis-cp-badge">30 CP · Compulsory</span>
+              <span v-else-if="hasGermanLecturer(mod)" class="german-de-badge" title="Taught by Visiting German Professor">DE</span>
             </button>
           </div>
           
@@ -155,7 +183,7 @@ const getSemesterColor = (sem: number | string) => {
             <div v-if="selectedModule" class="module-details-inner fade-in">
               <div class="mod-details-header">
                 <h3 class="mod-details-title">{{ selectedModule.title }}</h3>
-                <span v-if="selectedModule.meta?.german_lecturer || selectedModule.german_lecturer" class="badge-german">🟢 {{ t('program.german_badge') }}</span>
+                <span v-if="selectedModule.title !== 'Master Thesis' && hasGermanLecturer(selectedModule)" class="badge-german">🟢 {{ t('program.german_badge') }}</span>
               </div>
               <div class="mod-details-content prose max-w-none">
                 <ContentRenderer v-if="selectedModule.body" :value="selectedModule" />
@@ -188,12 +216,20 @@ const getSemesterColor = (sem: number | string) => {
             <button
               v-for="mod in coreModules"
               :key="mod.path"
-              class="mobile-mod-chip"
-              :class="{ 'mobile-mod-chip--active': selectedModule?.path === mod.path }"
-              :style="{ '--mod-color': getSemesterColor(mod.semester || mod.meta?.semester || 1) }"
+              class="mobile-mod-chip flex items-center justify-between gap-2"
+              :class="{ 
+                'mobile-mod-chip--active': selectedModule?.path === mod.path,
+                'mobile-thesis-chip': mod.title === 'Master Thesis'
+              }"
+              :style="{ 
+                '--mod-color': getSemesterColor(mod.semester || mod.meta?.semester || 1),
+                background: mod.title === 'Master Thesis' && selectedModule?.path === mod.path ? getSemesterColor(4) : (mod.title === 'Master Thesis' ? 'linear-gradient(135deg, #1E3A5F 0%, #2E5280 100%)' : undefined),
+                color: mod.title === 'Master Thesis' ? '#fff' : undefined
+              }"
               @click="selectedModule = mod"
             >
-              {{ mod.title }}
+              <span class="font-bold">{{ mod.title }} <span v-if="mod.title === 'Master Thesis'">(30 CP)</span></span>
+              <span v-if="mod.title !== 'Master Thesis' && hasGermanLecturer(mod)" class="german-de-badge" title="Taught by Visiting German Professor">DE</span>
             </button>
           </div>
         </div>
@@ -201,7 +237,7 @@ const getSemesterColor = (sem: number | string) => {
         <div v-if="selectedModule" class="mobile-mod-detail-box fade-in">
           <div class="mobile-mod-detail-header" :style="{ borderBottomColor: getSemesterColor(selectedModule.semester || selectedModule.meta?.semester || 1) }">
             <h3 class="mobile-mod-detail-title">{{ selectedModule.title }}</h3>
-            <span v-if="selectedModule.meta?.german_lecturer || selectedModule.german_lecturer" class="badge-german text-[10px]">🟢 {{ t('program.german_badge') }}</span>
+            <span v-if="selectedModule.title !== 'Master Thesis' && hasGermanLecturer(selectedModule)" class="badge-german text-[10px]">🟢 {{ t('program.german_badge') }}</span>
           </div>
           <div class="mobile-module-desc prose prose-sm max-w-none text-gray-600 mt-4">
             <ContentRenderer v-if="selectedModule.body" :value="selectedModule" />
@@ -505,17 +541,92 @@ const getSemesterColor = (sem: number | string) => {
   transform: scale(1.02);
 }
 
+/* Master Thesis static card — semester 4 navy */
+.thesis-card {
+  --mod-color: #2E5280;
+  cursor: default;
+  background: linear-gradient(135deg, #1E3A5F 0%, #2E5280 100%);
+  color: #fff;
+  border-left-color: #E87722;
+}
+.thesis-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.thesis-card .mod-name {
+  color: #fff;
+}
+.thesis-card .thesis-cp-badge {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(232, 119, 34, 0.85);
+  border: 1px solid #E87722;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
 .mod-name { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.3; }
 
-.german-indicator-dot {
+.german-de-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--color-success-text, #065f46);
+  background: var(--color-success-bg, #d1fae5);
+  border: 1px solid var(--color-success-border, #6ee7b7);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* Absolute position for DE badge on desktop module cards */
+.module-card .german-de-badge {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 10px;
-  height: 10px;
-  background-color: var(--color-german-taught, var(--color-success-main));
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
+}
+
+/* Normal flow inside flex chips on mobile so it is on the rightmost */
+.mobile-mod-chip .german-de-badge {
+  position: static;
+  margin-left: auto;
+}
+
+/* Intro Text custom parsed styling */
+.intro-text :deep(.intro-paragraph) {
+  font-size: 1.05rem;
+  color: var(--color-gray-700);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.intro-text :deep(.intro-paragraph:last-child) {
+  margin-bottom: 0;
+}
+.intro-text :deep(.intro-ul) {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+.intro-text :deep(.intro-li) {
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  position: relative;
+  color: var(--color-gray-700);
+}
+.intro-text :deep(.intro-li::before) {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-size: 0.85em;
 }
 
 .german-indicator-dot-legend {

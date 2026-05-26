@@ -3,10 +3,10 @@ title: "Đội Ngũ Giảng Viên — Giáo Sư OVGU & Nhà Nghiên Cứu VGU tr
 headline: "Đối Tác Hợp Tác & Đội Ngũ Giảng Viên Đức - VGU"
 description: "Gặp gỡ các giáo sư Đức và Việt Nam từ OVGU Magdeburg, Fraunhofer IMWS và TU Freiberg — đội ngũ giảng dạy và hướng dẫn nghiên cứu đẳng cấp thế giới trong chương trình MSI tại VGU."
 intro: >-
-  Chương trình MSI hội tụ chuyên môn từ đội ngũ giảng viên của Đại học Otto von Guericke Magdeburg (OVGU), Đại học Việt Đức (VGU), Viện Fraunhofer (IMWS) và Đại học Mỏ-Địa chất Freiberg (TU Bergakademie Freiberg). Học viên có cơ hội tham gia nghiên cứu tại **6 Bộ môn chuyên sâu của OVGU**, cùng với các nhà nghiên cứu xuất sắc của VGU — bao phủ toàn bộ phổ Vật liệu Kỹ thuật từ vật lý chất rắn và vật liệu kim loại đến gốm sứ, hóa học polymer và cơ học tính toán.
+  Chương trình MSI hội tụ chuyên môn từ đội ngũ giảng viên của Đại học Otto von Guericke Magdeburg (OVGU), Đại học Việt Đức (VGU), Viện Fraunhofer (IMWS) và Đại học Mỏ-Địa chất Freiberg (TU Bergakademie Freiberg). Học viên có cơ hội tham gia nghiên cứu tại <strong>6 Bộ môn chuyên sâu của OVGU</strong>, cùng với các nhà nghiên cứu xuất sắc của VGU — bao phủ toàn bộ phổ Vật liệu Kỹ thuật từ vật lý chất rắn và vật liệu kim loại đến gốm sứ, hóa học polymer và cơ học tính toán.
 
 
-  Giảng viên của chúng tôi không chỉ là người dạy học. Họ là các nhà nghiên cứu tích cực, thực sự đầu tư vào các dự án của sinh viên. Giảng viên được biết đến là luôn hỗ trợ các sáng kiến nghiên cứu của học viên và trong nhiều trường hợp đã **cung cấp kinh phí cho dự án của học viên** thông qua ngân sách nghiên cứu hoặc nguồn kinh phí của tổ chức. Nếu bạn có một ý tưởng thuyết phục và đủ động lực theo đuổi, đội ngũ giảng viên MSI luôn muốn lắng nghe.
+  Giảng viên của chúng tôi không chỉ là người dạy học. Họ là các nhà nghiên cứu tích cực, thực sự đầu tư vào các dự án của sinh viên. Giảng viên được biết đến là luôn hỗ trợ các sáng kiến nghiên cứu của học viên và trong nhiều trường hợp đã <strong>cung cấp kinh phí cho dự án của học viên</strong> thông qua ngân sách nghiên cứu hoặc nguồn kinh phí của tổ chức. Nếu bạn có một ý tưởng thuyết phục và đủ động lực theo đuổi, đội ngũ giảng viên MSI luôn muốn lắng nghe.
 groups:
   - id: vgu-core
     title: Ban Điều hành Chương trình & Giảng viên Cơ hữu VGU
