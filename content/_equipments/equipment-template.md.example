@@ -1,0 +1,56 @@
+---
+# =============================================================================
+# LABORATORY EQUIPMENT / MACHINE MARKDOWN TEMPLATE
+# Save new files as: content/_equipments/[unique-slug].md
+# Note: Keep the filename and the "id" field below identical (use kebab-case).
+# =============================================================================
+
+# [REQUIRED] A unique identifier for the machine in kebab-case. 
+# Matches the markdown filename (excluding .md) and the image folder name under public/images/labs/.
+id: "equipment-slug-id"
+
+# [REQUIRED] The display name of the equipment (e.g. "Analytical Balance").
+name: "Name of the Equipment"
+
+# [REQUIRED] The room or laboratory where the machine is located.
+room: "Room XXX - [Name of Laboratory]"
+
+# [REQUIRED] The category to group this equipment under in the UI explorer.
+# Common Categories:
+#   - "General Laboratory Equipment"
+#   - "Analytical & Characterization Instruments"
+#   - "Microfabrication & Cleanroom Systems"
+#   - "Thermal Processing & Furnaces"
+#   - "Sample Preparation & Processing"
+#   - "Optical & Metrology Instruments"
+category: "Category Name"
+
+# [OPTIONAL] A brief 1-2 sentence description summarizing the main purpose/accuracy of the machine.
+description: "Provides high-precision measurements and processing for advanced materials research and experimental training."
+
+# [REQUIRED] List of image URLs representing the equipment. 
+# Store actual image files under: public/images/labs/[equipment-slug-id]/
+# Specify paths starting from the root (excluding 'public'):
+images:
+  - "/images/labs/equipment-slug-id/image-file-name.jpg"
+
+# [OPTIONAL] A list of relevant PDF documents or operating procedures.
+pdfs:
+  - title: "Equipment Operating Procedure"
+    url: "/Documents/MODULE CATALOGUE MSI.pdf"
+
+# [OPTIONAL] A list of helpful links relevant to the equipment or laboratory overview.
+links:
+  - title: "VGU Laboratories Overview"
+    url: "/laboratories-research"
+    description: "Detailed overview of all equipment available in the VGU high-tech research facility"
+---
+
+## Integration in Academic & Research Programs
+
+Provide a detailed description of how the equipment is integrated into the study program or ongoing research activities. 
+
+### Key Guidelines for Body Content:
+1. **Academic Connection**: Detail which master's program courses (e.g., Module name, Lab work, Practice sessions) actively utilize this machine.
+2. **Student Projects**: Explain how students can interact with this machine for their group projects, research papers, or master's theses.
+3. **Research Applications**: Explain what material properties, processing parameters, or manufacturing steps are analyzed using this equipment.
