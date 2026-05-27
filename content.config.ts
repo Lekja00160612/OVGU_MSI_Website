@@ -47,6 +47,7 @@ export default defineContentConfig({
         head_avatar: z.string(),
         cover_image: z.string(),
         link_to_introduction: z.string().optional(),
+        pdf_introduction: z.string().optional(),
         topics: z.array(z.string()).default([]),
         topics_vi: z.array(z.string()).optional(),
         projects: z.string().optional(),

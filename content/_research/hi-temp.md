@@ -7,15 +7,15 @@ head_avatar: /Lecturer_Avatar/Manja Kruger.jpg
 cover_image: /images/research/hi-temp.png
 link_to_introduction: https://www.ht-materials.ovgu.de/
 topics:
-  - Development of multi-component refractory silicide alloys
-  - Powder metallurgical processing (Sintering, Spark Plasma Sintering)
-  - Oxidation resistance coatings for high-temperature turbines
-  - Mechanical testing at temperatures up to 1500°C
+  - Refractory multi-component silicide alloys (e.g. Mo-Si-B and V-Si-B systems)
+  - High-temperature alloy design, phase evolution, and solidification patterns
+  - Mechanical testing and creep resistance at extreme temperatures up to 1500°C
+  - Bio-compatible metallic alloys (TiAl6V4, CoCr28Mo6) and porous implant surface modifications
 topics_vi:
-  - Phát triển hợp kim silicide chịu lửa đa thành phần
-  - Xử lý luyện kim bột (Thiêu kết, Thiêu kết Plasma dòng điện cực mạnh)
-  - Lớp phủ chống oxy hóa cho tuabin nhiệt độ cao
-  - Kiểm tra cơ học ở nhiệt độ lên tới 1500°C
-projects: Mo-Si-B gas turbine blade testing; ultra-high temperature ceramics.
-projects_vi: Thử nghiệm cánh tuabin khí Mo-Si-B; gốm chịu nhiệt độ siêu cao.
+  - Hợp kim silicide chịu lửa đa thành phần (ví dụ: hệ Mo-Si-B và V-Si-B)
+  - Thiết kế hợp kim nhiệt độ cao, sự tiến triển pha và đặc tính đông đặc
+  - Thử nghiệm cơ học và khả năng chống từ biến ở nhiệt độ cực cao lên tới 1500°C
+  - Hợp kim kim loại tương thích sinh học (TiAl6V4, CoCr28Mo6) và sửa đổi bề mặt mô cấy xốp
+projects: Mo-Si-B alloys for gas turbine blades; structural titanium and cobalt-based biomaterials.
+projects_vi: Hợp kim Mo-Si-B cho cánh tuabin khí; vật liệu sinh học nền titan và coban.
 ---

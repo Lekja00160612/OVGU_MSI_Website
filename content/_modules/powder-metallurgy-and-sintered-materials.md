@@ -17,6 +17,12 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
+  - title: "High Entropy Alloys"
+    url: "/images/modules/Powder Metullurgy_High Entropy Alloys.pdf"
+  - title: "Mechanical Properties & Microstructures of Sintered Material"
+    url: "/images/modules/Powder Metullurgy_Mechanical properties under Microstructures of Sintered Material.pdf"
+  - title: "Overview of Sintering Technologies"
+    url: "/images/modules/Powder Metullurgy_Overview of Sintering Technologies.pdf"
 links:
   - title: "MSI Students Dive Into Hands-On Learning in Research Labs"
     url: "/academic-activities/research-labs"

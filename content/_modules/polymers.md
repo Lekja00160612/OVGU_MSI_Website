@@ -19,6 +19,18 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
+  - title: "Composite Morphology"
+    url: "/images/modules/Polymers_Composite Morphology.pdf"
+  - title: "Deformation Mechanisms of Amorphous Polymers"
+    url: "/images/modules/Polymers_Deformation Mechanisms of Amorphous Polymers.pdf"
+  - title: "Intra & Interspherulitic Defects"
+    url: "/images/modules/Polymers_Intra & Interspherulitic defects.pdf"
+  - title: "Lecturer Profile"
+    url: "/images/modules/Polymers_Lecturer Profile.pdf"
+  - title: "Module Structure"
+    url: "/images/modules/Polymers_Module Structure.pdf"
+  - title: "Semi-Crystalline Polymers: Micro to Macro"
+    url: "/images/modules/Polymers_Semi Crystaline Polymers from Micro to Macro.pdf"
 links:
   - title: "Field Trip to Vina Kraft Paper MSI Students"
     url: "/academic-activities/vina-kraft-trip"

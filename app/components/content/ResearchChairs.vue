@@ -249,15 +249,26 @@ const goToSlide = (idx: number) => {
               <strong class="footer-label">{{ locale === 'vi' ? 'Dự án tiêu biểu: ' : 'Sample Projects: ' }}</strong>
               <span class="footer-text">{{ activeProjects }}</span>
             </div>
-            <a
-              v-if="activeChair.link_to_introduction"
-              :href="activeChair.link_to_introduction"
-              target="_blank"
-              rel="noopener"
-              class="intro-btn"
-            >
-              {{ $t('labs.visit_chair') }} &rarr;
-            </a>
+            <div class="footer-actions flex gap-2 flex-wrap shrink-0">
+              <a
+                v-if="activeChair.pdf_introduction"
+                :href="activeChair.pdf_introduction"
+                target="_blank"
+                rel="noopener"
+                class="intro-pdf-btn"
+              >
+                📄 {{ locale === 'vi' ? 'Giới thiệu (PDF)' : 'Intro (PDF)' }}
+              </a>
+              <a
+                v-if="activeChair.link_to_introduction"
+                :href="activeChair.link_to_introduction"
+                target="_blank"
+                rel="noopener"
+                class="intro-btn"
+              >
+                {{ $t('labs.visit_chair') }} &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -314,11 +325,11 @@ const goToSlide = (idx: number) => {
 
 .slide-card {
   border-radius: var(--radius-xl, 16px);
-  padding: 2.5rem 2.75rem;
+  padding: 2rem 2.25rem;
   color: #fff;
   box-shadow: var(--shadow-lg, 0 10px 40px rgba(0,0,0,.18));
   position: relative;
-  min-height: 440px;
+  height: 440px;
   display: flex;
   flex-direction: column;
   animation: slideIn 350ms var(--ease-out, cubic-bezier(0.16,1,0.3,1)) forwards;
@@ -356,9 +367,9 @@ const goToSlide = (idx: number) => {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.15rem;
   background: rgba(255, 255, 255, 0.06);
-  padding: 0.75rem 1.25rem;
+  padding: 0.6rem 1.15rem;
   border-radius: var(--radius-lg, 12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
@@ -397,7 +408,7 @@ const goToSlide = (idx: number) => {
 /* Topics box — scrollable */
 .slide-topics-box {
   flex: 1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .topics-heading {
   font-size: 0.8rem;
@@ -405,13 +416,13 @@ const goToSlide = (idx: number) => {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: rgba(255,255,255,0.75);
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.5rem;
 }
 .topics-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 180px;
+  max-height: 110px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -464,6 +475,37 @@ const goToSlide = (idx: number) => {
 .footer-label { color: rgba(255,255,255,0.95); }
 .footer-text { font-style: italic; }
 
+.footer-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: flex-start;
+}
+
+.intro-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-lg, 12px);
+  text-decoration: none;
+  transition: all 200ms;
+  white-space: nowrap;
+}
+.intro-pdf-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
 .intro-btn {
   display: inline-flex;
   align-items: center;
@@ -474,7 +516,7 @@ const goToSlide = (idx: number) => {
   color: #fff;
   background: var(--color-accent);
   border: 1px solid var(--color-accent);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg, 12px);
   text-decoration: none;
   transition: all 200ms;
   white-space: nowrap;

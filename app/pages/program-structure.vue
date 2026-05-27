@@ -61,39 +61,24 @@ watch(isDrawerOpen, (newVal) => {
   }
 })
 
-// Electives Carousel & View Toggle States
-const electiveViewMode = ref('carousel') // 'carousel' or 'compact'
-const carouselIndex = ref(0)
+// Elective Details Overlay State
+const selectedElective = ref<any | null>(null)
+const isElectiveModalOpen = ref(false)
 
-const maxCarouselIndex = computed(() => {
-  return Math.max(0, electiveModules.value.length - 1)
-})
-
-const prevElectives = () => {
-  if (carouselIndex.value > 0) {
-    carouselIndex.value--
-  }
+const openElectiveDetail = (mod: any) => {
+  selectedElective.value = mod
+  isElectiveModalOpen.value = true
 }
 
-const nextElectives = () => {
-  if (carouselIndex.value < maxCarouselIndex.value) {
-    carouselIndex.value++
-  } else {
-    carouselIndex.value = 0 // loop back
-  }
+const closeElectiveModal = () => {
+  isElectiveModalOpen.value = false
+  selectedElective.value = null
 }
 
-// Auto-play interval
-let autoplayTimer: any = null
-onMounted(() => {
-  autoplayTimer = setInterval(() => {
-    nextElectives()
-  }, 4000)
-})
-
-onUnmounted(() => {
-  if (autoplayTimer) clearInterval(autoplayTimer)
-})
+const hasDetails = (mod: any) => {
+  if (!mod) return false
+  return !!(mod.body && Array.isArray(mod.body.children) && mod.body.children.length > 0)
+}
 
 // Mobile Accordion & Styling Helpers
 const activeMobileModule = ref<string | null>(null)
@@ -262,110 +247,13 @@ const renderMarkdown = (text: string) => {
 
     <!-- ELECTIVE COURSES -->
     <div v-if="electiveModules.length > 0" class="container electives-container">
-      <div class="electives-header flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-        <div class="text-center sm:text-left">
-          <h2 class="section-title mb-2">{{ page.electives_title || t('program.electives_title') }}</h2>
-          <p class="text-gray-600 text-sm max-w-xl">{{ page.electives_intro }}</p>
-        </div>
-        
-        <!-- Toggle Switcher -->
-        <div class="toggle-group bg-gray-100 p-1 rounded-full flex gap-1 border border-gray-200">
-          <button 
-            type="button"
-            class="toggle-btn"
-            :class="{ 'toggle-btn--active': electiveViewMode === 'carousel' }"
-            @click="electiveViewMode = 'carousel'"
-          >
-            <span>🎠 {{ t('program.carousel_view') }}</span>
-          </button>
-          <button 
-            type="button"
-            class="toggle-btn"
-            :class="{ 'toggle-btn--active': electiveViewMode === 'compact' }"
-            @click="electiveViewMode = 'compact'"
-          >
-            <span>📋 {{ t('program.compact_view') }}</span>
-          </button>
-        </div>
+      <div class="electives-header">
+        <h2 class="section-title text-center sm:text-left mb-2">{{ page.electives_title || t('program.electives_title') }}</h2>
+        <p class="text-gray-600 text-sm max-w-xl text-center sm:text-left mb-8">{{ page.electives_intro }}</p>
       </div>
 
-      <!-- VIEW 1: CAROUSEL VIEW -->
-      <div v-if="electiveViewMode === 'carousel'" class="carousel-view-wrapper relative">
-        <div class="electives-carousel-grid">
-          <Transition name="carousel-slide" mode="out-in">
-            <div 
-              :key="carouselIndex"
-              class="carousel-pair-container"
-            >
-              <!-- Slide item 1 -->
-              <div 
-                v-if="electiveModules[carouselIndex]" 
-                class="elective-card-slide"
-              >
-                <div class="elective-content">
-                  <span class="elective-card-sem-badge">{{ t('program.sem') }} {{ electiveModules[carouselIndex].semester || 3 }}</span>
-                  <h3 class="elective-title">{{ electiveModules[carouselIndex].title }}</h3>
-                  <div class="prose elective-desc-body">
-                    <ContentRenderer v-if="electiveModules[carouselIndex].body" :value="electiveModules[carouselIndex]" />
-                    <p v-else class="text-sm font-medium text-gray-700 mb-3">{{ electiveModules[carouselIndex].description }}</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Slide item 2 (if available and screened is wide enough) -->
-              <div 
-                v-if="electiveModules[carouselIndex + 1]" 
-                class="elective-card-slide desktop-only-inline"
-              >
-                <div class="elective-content">
-                  <span class="elective-card-sem-badge">{{ t('program.sem') }} {{ electiveModules[carouselIndex + 1].semester || 3 }}</span>
-                  <h3 class="elective-title">{{ electiveModules[carouselIndex + 1].title }}</h3>
-                  <div class="prose elective-desc-body">
-                    <ContentRenderer v-if="electiveModules[carouselIndex + 1].body" :value="electiveModules[carouselIndex + 1]" />
-                    <p v-else class="text-sm font-medium text-gray-700 mb-3">{{ electiveModules[carouselIndex + 1].description }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Transition>
-        </div>
-
-        <!-- Carousel navigation controls at bottom -->
-        <div class="carousel-nav-controls mt-16 flex justify-between items-center w-full">
-          <button 
-            type="button"
-            class="carousel-nav-btn"
-            :disabled="carouselIndex === 0"
-            @click="prevElectives"
-            :style="{ opacity: carouselIndex === 0 ? 0.35 : 1, cursor: carouselIndex === 0 ? 'not-allowed' : 'pointer' }"
-          >
-            &larr; {{ t('program.prev') }}
-          </button>
-          
-          <div class="carousel-bullets">
-            <span 
-              v-for="idx in maxCarouselIndex + 1"
-              :key="idx"
-              class="carousel-bullet"
-              :class="{ 'carousel-bullet--active': carouselIndex === idx - 1 }"
-              @click="carouselIndex = idx - 1"
-            />
-          </div>
-
-          <button 
-            type="button"
-            class="carousel-nav-btn"
-            :disabled="carouselIndex >= maxCarouselIndex"
-            @click="nextElectives"
-            :style="{ opacity: carouselIndex >= maxCarouselIndex ? 0.35 : 1, cursor: carouselIndex >= maxCarouselIndex ? 'not-allowed' : 'pointer' }"
-          >
-            {{ t('program.next') }} &rarr;
-          </button>
-        </div>
-      </div>
-
-      <!-- VIEW 2: COMPACT VIEW (TITLES ONLY) -->
-      <div v-else class="compact-view-wrapper fade-in">
+      <!-- DESKTOP/LAPTOP: COMPACT GRID VIEW (Titles only) -->
+      <div class="desktop-only w-full">
         <div class="compact-grid">
           <div 
             v-for="mod in electiveModules" 
@@ -373,12 +261,44 @@ const renderMarkdown = (text: string) => {
             class="compact-elective-card"
           >
             <div class="compact-elective-info">
-              <span class="compact-semester-tag">{{ t('program.semester_long') }} {{ mod.semester || 3 }}</span>
               <h3 class="compact-elective-title">{{ mod.title }}</h3>
             </div>
-            <!-- Handdrawn styling detail view or simple info -->
-            <div class="compact-elective-hover-desc mt-3 pt-3 border-t border-gray-100 text-xs text-gray-500">
-              {{ mod.description }}
+            <!-- Display Details Button if details exist -->
+            <div v-if="hasDetails(mod)" class="elective-actions mt-auto pt-4">
+              <button 
+                type="button"
+                class="elective-detail-btn"
+                @click="openElectiveDetail(mod)"
+              >
+                {{ t('program.more_detail') || 'View Details' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOBILE/TABLET: HORIZONTAL SLIDING CAROUSEL -->
+      <div class="mobile-only w-full">
+        <div class="electives-mobile-slider">
+          <div class="electives-horizontal-scroll">
+            <div 
+              v-for="mod in electiveModules" 
+              :key="mod.path" 
+              class="mobile-elective-card"
+            >
+              <div class="mobile-elective-content">
+                <h3 class="mobile-elective-title">{{ mod.title }}</h3>
+                <!-- Display Details Button if details exist -->
+                <div v-if="hasDetails(mod)" class="elective-actions mt-auto pt-4">
+                  <button 
+                    type="button"
+                    class="elective-detail-btn"
+                    @click="openElectiveDetail(mod)"
+                  >
+                    {{ t('program.more_detail') || 'View Details' }}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -467,6 +387,34 @@ const renderMarkdown = (text: string) => {
                   </a>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
+
+    <!-- Elective Details Modal Overlay -->
+    <Teleport to="body">
+      <Transition name="modal-fade">
+        <div v-if="isElectiveModalOpen && selectedElective" class="custom-modal-overlay" @click.self="closeElectiveModal">
+          <div class="custom-modal-content elective-modal">
+            <!-- Header -->
+            <div class="custom-modal-header">
+              <h3 class="custom-modal-title">
+                {{ selectedElective.title }}
+              </h3>
+              <button @click="closeElectiveModal" class="custom-modal-close" title="Close">
+                &times;
+              </button>
+            </div>
+
+            <!-- Body - Insides are just text -->
+            <div class="custom-modal-body elective-modal-body prose max-w-none text-gray-700">
+              <div v-if="selectedElective.description" class="elective-desc-text">
+                {{ selectedElective.description }}
+              </div>
+              <ContentRenderer v-else-if="selectedElective.body" :value="selectedElective" />
+              <p v-else class="text-gray-400 italic">No details available.</p>
             </div>
           </div>
         </div>
@@ -798,75 +746,33 @@ const renderMarkdown = (text: string) => {
   line-height: 1.7;
 }
 
-/* Carousel Nav Controls */
-.carousel-nav-controls {
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--color-gray-100);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap; /* Keep on one line */
-  gap: 0.5rem;
-}
-.carousel-nav-btn {
-  padding: 0.75rem 1rem; /* slightly less padding for tighter fit on mobile */
-  background: #ffffff;
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-full);
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  cursor: pointer;
-  transition: all 300ms var(--ease-out);
-  box-shadow: var(--shadow-sm);
-  min-width: 90px;
-  text-align: center;
-}
-.carousel-nav-btn:hover:not(:disabled) {
-  background: var(--color-primary);
-  color: #fff;
-  border-color: var(--color-primary);
-}
-.carousel-bullets {
-  display: flex;
-  flex-wrap: wrap; /* allow dots to wrap on small screens (doubles) */
-  justify-content: center;
-  gap: 0.5rem;
-  max-width: 140px; /* constrain width to force wrapping before pushing buttons */
-}
-.carousel-bullet {
-  width: 8px;
-  height: 8px;
-  background: var(--color-gray-300);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.carousel-bullet--active {
-  background: var(--color-primary);
-  transform: scale(1.3);
-}
-
 /* Compact view */
 .compact-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 @media (min-width: 768px) {
   .compact-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+@media (min-width: 1024px) {
+  .compact-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .compact-elective-card {
   background: #ffffff;
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-xl);
-  padding: 1.5rem;
+  padding: 1.75rem;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
 }
 .compact-elective-card:hover {
   transform: translateY(-3px);
@@ -878,19 +784,93 @@ const renderMarkdown = (text: string) => {
   align-items: center;
   gap: 0.75rem;
 }
-.compact-semester-tag {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  background: var(--color-primary-50);
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-}
 .compact-elective-title {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-primary-dark);
+}
+
+/* Mobile Horizontal Slider */
+.electives-mobile-slider {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0.5rem 0 1.5rem 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.electives-horizontal-scroll {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  padding: 0 1rem;
+}
+.mobile-elective-card {
+  scroll-snap-align: start;
+  flex: 0 0 280px; /* fixed width for slide cards */
+  background: #ffffff;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 160px;
+}
+.mobile-elective-card:hover {
+  border-color: var(--color-primary-light);
+}
+.mobile-elective-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+.mobile-elective-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 1.6rem;
+}
+
+/* Elective Detail Button */
+.elective-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.elective-detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1.15rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  background: var(--color-accent-50);
+  border: 1.5px solid rgba(232, 119, 34, 0.2);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.elective-detail-btn:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(232, 119, 34, 0.2);
+}
+.elective-modal-body {
+  gap: 1rem !important;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-gray-600);
+}
+.elective-desc-text {
+  white-space: pre-line;
 }
 
 /* MOBILE SCROLLABLE CHIPS (2 ROWS) */

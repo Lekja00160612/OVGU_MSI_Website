@@ -6,16 +6,17 @@ head: Prof. Dr.-Ing. Thorsten Halle
 head_avatar: /Lecturer_Avatar/Thorsten Halle.jpg
 cover_image: /images/research/metallic.png
 link_to_introduction: https://www.metalle.ovgu.de/
+pdf_introduction: /images/research/Metallic.pdf
 topics:
-  - Design of advanced high-strength steels and metal matrix composites
-  - Dynamic mechanical behavior (split-Hopkinson pressure bar)
-  - Microstructural changes during severe plastic deformation
-  - Additive manufacturing post-processing treatments
+  - Advanced high-performance metallic materials development and microstructural characterization
+  - Mechanical behavior under high strain rates and dynamic loadings
+  - Corrosive wear and bio-compatibility of orthopedic metallic implants
+  - Deep rolling and joining technology effects on surface and interface microstructures
 topics_vi:
-  - Thiết kế thép cường độ cao và vật liệu composite nền kim loại tiên tiến
-  - Đặc tính cơ học động lực học (sử dụng thanh ép Hopkinson)
-  - Thay đổi vi cấu trúc trong quá trình biến dạng dẻo nghiêm trọng
-  - Các phương pháp xử lý sau sản xuất bồi đắp (in 3D kim loại)
-projects: High-strain-rate impact testing; metallic phase transformations.
-projects_vi: Kiểm tra va đập tốc độ biến dạng cao; chuyển pha kim loại.
+  - Phát triển vật liệu kim loại hiệu suất cao và đặc tính hóa cấu trúc vi mô
+  - Hành vi cơ học dưới tốc độ biến dạng cao và tải trọng động
+  - Mài mòn ăn mòn và tính tương thích sinh học của các mô cấy kim loại chỉnh hình
+  - Ảnh hưởng của công nghệ cán sâu và hàn nối lên cấu trúc vi mô bề mặt và liên kết
+projects: Dynamic mechanical testing and surface modification for orthopedic implants.
+projects_vi: Thử nghiệm cơ học động học và biến tính bề mặt cho các mô cấy chỉnh hình.
 ---

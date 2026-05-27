@@ -6,16 +6,19 @@ head: Prof. Dr.-Ing. Daniel Juhre
 head_avatar: /Lecturer_Avatar/Daniel Juhre.jpg
 cover_image: /images/research/comp-mech.png
 link_to_introduction: https://www.nm.ovgu.de/nm/en/
+pdf_introduction: /images/research/Comp_Mech.pdf
 topics:
-  - Constitutive modeling of polymers and elastomers
-  - Finite Element Method (FEM) code developments
-  - Multi-physical field couplings (electro-viscoelasticity)
-  - Anisotropic fracture behaviors in biological tissues
+  - Non-standard discretization (Finite Cell Method FCM, immersed boundaries)
+  - Physics-Augmented Neural Networks (PANNs) for material models
+  - Fracture mechanics and phase-field modeling of cracks
+  - Biomechanical modeling and performance of ankle-foot orthoses (AFO)
+  - Multi-physical field couplings in elastomers
 topics_vi:
-  - Xây dựng mô hình cấu trúc cho polyme và chất đàn hồi
-  - Phát triển mã nguồn Phương pháp Phần tử Hữu hạn (FEM)
-  - Liên kết trường đa vật lý (hiện tượng nhớt đàn hồi điện)
-  - Đặc tính phá hủy dị hướng trong các mô sinh học
-projects: DFG projects on rubber fatigue; polymer aging simulations.
-projects_vi: Các dự án DFG về độ mỏi của cao su; mô phỏng quá trình lão hóa polyme.
+  - Phương pháp rời rạc hóa phi tiêu chuẩn (Phương pháp Tế bào Hữu hạn FCM)
+  - Mạng nơ-ron tăng cường vật lý (PANNs) cho các mô hình vật liệu
+  - Cơ học phá hủy và mô hình hóa trường pha của vết nứt
+  - Mô hình hóa cơ sinh học và hiệu suất của dụng cụ chỉnh hình cổ bàn chân (AFO)
+  - Liên kết trường đa vật lý trong chất đàn hồi (elastomers)
+projects: DFG projects on phase-field modeling and fracture; neural-network-augmented material modeling.
+projects_vi: Các dự án DFG về mô hình hóa trường pha phá hủy; mô hình vật liệu tăng cường mạng nơ-ron.
 ---

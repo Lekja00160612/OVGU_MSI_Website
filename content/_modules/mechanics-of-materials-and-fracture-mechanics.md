@@ -18,6 +18,12 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
+  - title: "Creep Motivation"
+    url: "/images/modules/Materials Mechanics_Creep Motivation.pdf"
+  - title: "Fatigue"
+    url: "/images/modules/Materials Mechanics_Fatigue.pdf"
+  - title: "Fracturing Modes"
+    url: "/images/modules/Materials Mechanics_Fracturing Modes.pdf"
 links:
   - title: "MSI Students Conclude Fracture Mechanics Course with Presentations and Insightful Discussions"
     url: "/academic-activities/fracture-mechanics"
