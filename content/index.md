@@ -144,7 +144,7 @@ cta:
   badge: Apply for Intake 2026
   backgroundImage: /Thumbnail/MATERIALS SCIENCE_THUMB.png
   primaryCta: Check Eligibility
-  primaryLink: /potential-candidates
+  primaryLink: /future-students
   secondaryCta: Scholarship Options
   secondaryLink: /tuition-scholarships
 ---

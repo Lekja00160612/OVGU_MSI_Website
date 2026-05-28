@@ -151,7 +151,7 @@ cta:
   badge: "Đăng Ký Tuyển Sinh 2026"
   backgroundImage: "/Thumbnail/MATERIALS SCIENCE_THUMB.png"
   primaryCta: "Kiểm Tra Điều Kiện"
-  primaryLink: "/potential-candidates"
+  primaryLink: "/future-students"
   secondaryCta: "Tùy Chọn Học Bổng"
   secondaryLink: "/tuition-scholarships"
 ---
