@@ -69,7 +69,10 @@ watch(activeTab, () => {
   selectedModule.value = null
 })
 const getModulesForSemester = (semNumber: number) => {
-  return allModules.value?.filter(m => (m.meta?.semester || m.semester) === semNumber) || []
+  return allModules.value?.filter(m => 
+    (m.meta?.semester || m.semester) === semNumber &&
+    !(m.is_elective || m.meta?.is_elective)
+  ) || []
 }
 
 const semesters = computed(() => page.value.curriculum?.semesters || [])
