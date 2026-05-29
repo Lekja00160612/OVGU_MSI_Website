@@ -1,29 +1,66 @@
 ---
-title: "Biocalorimetry for the biotechnological use of natural and synthetic macromolecules"
+title: "Biocalorimetry: Q1 Research Publication by Dr. Linh Duong on Sustainable Macromolecules"
 category: "Industry Adventures"
 date: "2026-05-28"
 image: "/images/academic_activities/biocalorimetry-for-the-biotechnological-cover.jpg"
-description: "We are delighted to share that Dr. Hieu Linh Duong from Vietnamese German University VGU has contributed to an important international publication in ..."
+description: "Discover VGU breakthrough circular bioeconomy research: Dr. Hieu Linh Duong's Q1 publication on biocalorimetry, sustainable plastic recycling, and metabolic heat."
+highlighted: true
+
+ja_id: "13990095"
+edited: true
+modules:
+  - polymers
 ---
 
-# Biocalorimetry for the biotechnological use of natural and synthetic macromolecules
+# Q1 Research Breakthrough: Biocalorimetry for Sustainable Macromolecules and Circular Bioeconomy
 
-We are delighted to share that **Dr. Hieu Linh Duong** from **Vietnamese-German University (VGU)** has contributed to an important international publication in the journal **Applied Microbiology and Biotechnology** (Q1, IF = 4.3), in collaboration with the Helmholtz Centre for Environmental Research – UFZ, Leipzig, Germany.
+We are thrilled to celebrate a milestone for the Materials Science & Innovation (MSI) program at the **Vietnamese-German University (VGU)**. **Dr. Hieu Linh Duong** has co-authored a high-impact international review in the prestigious journal **Applied Microbiology and Biotechnology** (Q1, Impact Factor = 4.3), in partnership with the renowned **Helmholtz Centre for Environmental Research (UFZ)** in Leipzig, Germany.
 
-The mini-review, titled **"Biocalorimetry for the biotechnological use of natural and synthetic macromolecules"** (Maskow, Duong, Fernández Merayo, & Schlosser, 2026), examines the powerful potential of **biocalorimetry** — the real-time measurement of metabolic heat produced by microorganisms — as a cutting-edge tool for monitoring and optimizing biological processes involving solid substrates, from plant biomass to plastic waste.
+The publication, titled **"Biocalorimetry for the biotechnological use of natural and synthetic macromolecules"** (2026), explores how measuring the metabolic heat of microorganisms in real-time can revolutionize the way we recycle plastic waste and process solid substrates.
 
-Key contributions of the review include:
+---
 
-	- A critical analysis of the strengths and limitations of biothermodynamics and calorimetry for tracking microbial activity across diverse scales — from nanoliter chip calorimeters to 100 m³ industrial bioreactors.
+## 🌟 The Core Innovation: What is Biocalorimetry?
 
-	- Demonstrated applications in **solid-state fermentation (SSF)**, composting, and the **enzymatic recycling of plastics** such as PET — fields that remain underexplored compared to conventional liquid-phase fermentation.
+Biocalorimetry is the real-time measurement of the microscopic amounts of heat released by living microbes as they consume and break down materials. Because all living processes generate heat, this acts as a universal, non-invasive sensor of microbial activity. 
 
-	- A forward-looking perspective on integrating metabolic heat data with **-omics technologies and machine learning** to build predictive models for next-generation sustainable bioprocesses.
+This research highlights how biocalorimetry serves as a game-changing tool for solid substrates—ranging from agricultural plant biomass to synthetic plastic polymers—which are notoriously difficult to monitor with traditional liquid sensors.
 
-This work was supported by the **Helmholtz Association** (Integration Platform at UFZ), the **Helmholtz Investment and Networking Fund** (Projects FINEST – KA2-HSC-10 and PUreValue – KA-HSC-13), and the **German Research Foundation (DFG)** through the projects TherMic (MA 3746/8-1; MA 3746/8-2), DriverPool (MA 3746/9-1), and EnergyStructures (MA 3746/9-2). Open Access publication was enabled and organized by **Projekt DEAL**.
+---
 
-This publication reflects VGU's growing international research footprint and its commitment to advancing science at the intersection of biotechnology, sustainability, and the circular bioeconomy.
+## 🚀 Key Research Pillars & Student Takeaways
 
-Congratulations to Dr. Hieu Linh Duong and all authors — wishing you continued success in your impactful research journey! 
+For students in our Materials Science program, this publication represents exactly the kind of interdisciplinary, real-world science they engage in at VGU. The review outlines three major breakthroughs:
 
-🔗 Full article: [https://doi.org/10.1007/s00253-026-13871-5](https://doi.org/10.1007/s00253-026-13871-5)
+### 1. Multi-Scale Tracking (From Nanoliters to Industrial Bio-Reactors)
+The review provides a critical roadmap of thermodynamic tools capable of tracking microbial activity across massive scale gaps—from tiny **nanoliter chip calorimeters** used in high-throughput screening to giant **100 m³ industrial bioreactors** used in global manufacturing.
+
+### 2. Upcycling Solid Wastes & Plastic Enzymatic Recycling
+Unlike conventional fermentation in liquid liquids, this work focuses heavily on solid substrates. It demonstrates how metabolic heat tracking optimizes the **enzymatic recycling of plastics** (like PET) and composting, paving the way for next-generation circular bioeconomy solutions.
+
+### 3. Merging Thermodynamics with Artificial Intelligence (AI)
+The authors present a visionary perspective: by combining biocalorimetric metabolic heat data with advanced **-omics technologies and machine learning**, researchers can build highly predictive AI models to design self-optimizing sustainable bioprocesses.
+
+---
+
+> [!NOTE]
+> **Why this matters for MSI Students:** 
+> This publication showcases VGU's rising research footprint and directly connects to our curriculum in polymer chemistry, advanced characterization, and sustainability engineering. Our students work alongside active researchers like Dr. Linh Duong to solve actual environmental challenges.
+
+---
+
+## 🔬 Institutional Support & Collaboration
+
+This international breakthrough was made possible through extensive collaborative funding and networks:
+- **Helmholtz Association** (Integration Platform at UFZ)
+- **Helmholtz Investment and Networking Fund** (Circular Economy projects: *FINEST* – KA2-HSC-10 and *PUreValue* – KA-HSC-13)
+- **German Research Foundation (DFG)** (Projects: *TherMic*, *DriverPool*, and *EnergyStructures*)
+- Open Access facilitated by **Projekt DEAL**
+
+This joint effort highlights the strong, direct ties between VGU and leading German scientific research institutions, giving our students unique pathways to international research careers.
+
+---
+
+### 📖 Access the Full Research
+Explore the full details of this pioneering work:
+🔗 **Full Article (Open Access):** [https://doi.org/10.1007/s00253-026-13871-5](https://doi.org/10.1007/s00253-026-13871-5)

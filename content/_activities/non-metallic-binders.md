@@ -1,35 +1,54 @@
 ---
-title: "Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action"
+title: "Lab Training: Cement & Concrete Mix Design and Early-Stage Hydration with Prof. Thomas Bier"
 category: "Lab Works"
 date: "2026-02-04"
 image: "/images/academic_activities/non-metallic-binders-cover.jpg"
-description: "Discover how VGU Materials Science Master students practice mixing, casting, and analyzing inorganic non-metallic binder systems in state-of-the-art labs."
+description: "VGU MSI Master students practice cement mixing, casting, and workability testing during hands-on Inorganic Binders lab training under Prof. Thomas Bier."
+highlighted: false
+
+ja_id: "13138517"
+edited: true
+modules:
+  - inorganic-non-metallic-binders
 ---
 
-# Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action
+# Lab Training: Cement & Concrete Mix Design and Early-Stage Hydration with Prof. Thomas Bier
 
-This morning (January 30, 2026), students of the Master of Science in Materials Science (MSI) program at Vietnamese-German University (VGU) participated in a practical laboratory session as part of the course Inorganic, Non-Metallic Binders, taught by Prof. Dr.-Ing. Thomas Bier.
+On January 30, 2026, students of the Master of Science in Materials Science (MSI) program at VGU participated in a rigorous, hands-on laboratory session for the **Inorganic, Non-Metallic Binders** module.
 
-The laboratory session offers the valuable opportunity for the MSI students to directly apply theoretical knowledge to practice by working with cement-based binder systems that comprises the following activities:
+Supervised by **Prof. Dr.-Ing. Thomas Bier**, our flying faculty from Germany, the session allowed students to immediately translate theoretical thermodynamics of binder hydration into physical cement and mortar formulations.
 
-	- Measuring and proportioning cement and water.
+---
 
-	-  Mixing binder materials to achieve the required workability
+## 🔬 Practicing Modern Binder Engineering
 
-	- Casting fresh mortar into molds
+Operating in VGU's advanced concrete technology laboratory, student groups conducted key industrial characterization and mixing steps:
 
-	- Observing setting behavior and material consistency
+1. **High-Precision Proportioning:** Calculating and weighing water-to-cement ($w/c$) ratios to control mechanical strength and porosity.
+2. **Homogeneous Mixing:** Mixing dry cement, fine aggregates, and functional admixtures to achieve targeted rheological properties.
+3. **Workability & Flow Assessment:** Utilizing flow tables to measure slump, workability, and the yield stress of fresh mortar mixtures.
+4. **Casting & Setting Analysis:** Casting fresh mixtures into professional standard molds, monitoring setting behavior, and observing early-stage microstructure consolidation.
 
-Through these hands-on exercises, students gained first-hand insight into the composition, processing, and early-stage behavior of inorganic binders, which are fundamental materials in construction and civil engineering applications.
+---
 
-The session highlights the importance of mix design, workability, and material control, reinforcing key concepts related to microstructure development, strength, and durability. Such practical training is a core element of the MSI curriculum, bridging materials chemistry, engineering principles, and real-world applications.
+> [!NOTE]
+> **MSI Takeaway:**
+> Cement is not just a building material; it is a complex, chemically active mineral system. Understanding how superplasticizers and accelerators alter early-stage calcium-silicate-hydrate (C-S-H) gel growth is key to designing high-performance concretes.
 
-These laboratory activities provide a strong foundation for students' future work in construction materials, concrete technology, and advanced binder systems, in both academic research and industry.
+---
 
-![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 1](/images/academic_activities/non-metallic-binders-img-1.jpg)
+## 🚀 Building Real-World Competency
 
-![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 2](/images/academic_activities/non-metallic-binders-img-2.jpg)
+Through these practical, collaborative exercises, VGU students gain deep, quantitative insights into concrete mix design, microstructural development, and durability control. 
 
-![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 3](/images/academic_activities/non-metallic-binders-img-3.jpg)
+This hands-on training forms a strong foundation for future research in green concrete formulations, sustainable geopolymers, and advanced binder materials—preparing our graduates to lead construction materials R&D both in academia and global industries.
 
-![Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action - Illustration 4](/images/academic_activities/non-metallic-binders-img-4.jpg)
+---
+
+![MSI Students weighing cement binder components - Illustration 1](/images/academic_activities/non-metallic-binders-img-1.jpg)
+
+![Mixing concrete mortar with Prof. Thomas Bier - Illustration 2](/images/academic_activities/non-metallic-binders-img-2.jpg)
+
+![Flow table slump testing for mortar workability - Illustration 3](/images/academic_activities/non-metallic-binders-img-3.jpg)
+
+![Casting fresh mortar specimens in steel molds - Illustration 4](/images/academic_activities/non-metallic-binders-img-4.jpg)

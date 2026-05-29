@@ -31,16 +31,7 @@ pdfs:
     url: "/images/modules/Polymers_Module Structure.pdf"
   - title: "Semi-Crystalline Polymers: Micro to Macro"
     url: "/images/modules/Polymers_Semi Crystaline Polymers from Micro to Macro.pdf"
-links:
-  - title: "Field Trip to Vina Kraft Paper MSI Students"
-    url: "/academic-activities/vina-kraft-trip"
-    description: "Activity from 2026-05-08"
-  - title: "Laboratory activities of the Polymer course - MSI intake 2024"
-    url: "/academic-activities/polymer-labs"
-    description: "Activity from 2025-12-12"
-  - title: "VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses"
-    url: "/academic-activities/flying-faculty"
-    description: "Activity from 2025-10-27"
+links: []
 ---
 
 - Constitution, Configuration, Conformation, Bonds, Structure of macromolecules

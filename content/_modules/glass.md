@@ -16,10 +16,7 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links:
-  - title: "MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction"
-    url: "/academic-activities/knauf-trip"
-    description: "Activity from 2025-12-11"
+links: []
 ---
 
 - Definition of glass and the glassy state, fundamental aspects

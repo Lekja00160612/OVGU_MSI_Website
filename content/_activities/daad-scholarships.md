@@ -1,40 +1,55 @@
 ---
-title: "MSI Students Awarded Prestigious DAAD Scholarships"
+title: "Scholarship Success: VGU Materials Science Students Win Competitive DAAD Awards for Germany"
 category: "Academic Lectures"
 date: "2026-03-09"
 image: "/images/academic_activities/daad-scholarships-cover.jpg"
-description: "Learn about VGU Materials Science Master students receiving prestigious DAAD scholarships for master thesis research at OVGU Magdeburg, Germany."
+description: "VGU Materials Science students Son Tung and Thuy Khanh share reflections on winning competitive DAAD scholarships for master thesis research at OVGU, Germany."
 highlighted: true
+
+ja_id: "13341569"
+edited: true
+modules:
+  - team-project
 ---
 
-# MSI Students Awarded Prestigious DAAD Scholarships
+# Scholarship Success: VGU Materials Science Students Win Competitive DAAD Awards for Germany
 
-The Master of Science in Materials Science (MSI) program at Vietnamese-German University (VGU) is proud to announce that two students from MSI Intake 2024 have been awarded the highly competitive one year DAAD (German Academic Exchange Service) Scholarship for conducting his/her master thesis at the Partner University, OVGU. 
+The Master of Science in Materials Science (MSI) program at the **Vietnamese-German University (VGU)** is proud to highlight the outstanding achievement of two students from the MSI Intake 2024 who have been awarded the highly competitive **DAAD (German Academic Exchange Service) Scholarship**.
 
-The scholarship recipients are:
+This award fully funds their one-year master thesis research stay at our German partner institution, **Otto von Guericke University Magdeburg (OVGU)**.
 
-	- Nguyễn Sơn Tùng (Student ID: 21324001)
+Our scholars are:
+- **Nguyễn Sơn Tùng** (Student ID: 21324001)
+- **Nguyễn Ngọc Thuỵ Khanh** (Student ID: 21324009)
 
-	- Nguyễn Ngọc Thuỵ Khanh (Student ID: 21324009)
+---
 
-The DAAD Scholarship is one of the most prestigious international funding programs, supporting outstanding students worldwide to pursue advanced study and research in Germany. Receiving this award demonstrates the students' academic excellence, research potential, and strong commitment to scientific development in the field of materials science.
+## 🎙️ Student Reflections: Insights from our Scholars
 
-This achievement also reflects the high academic standards and strong international collaboration of the MSI program at VGU, which is developed in close partnership with leading German universities and research institutions. Through such opportunities, MSI students gain access to global research environments, cutting-edge laboratories, and international academic networks.
+Hear directly from our DAAD scholars about their experiences in the VGU MSI program and their anticipation of studying in Germany:
 
-### Student Reflections
+### 🔬 Nguyễn Sơn Tùng: A Strong Scientific Foundation
+> "Receiving the DAAD Scholarship is a great honor and motivation for me. The MSI program at VGU has provided a strong academic foundation in materials science, and I am excited to continue my research journey in Germany. I hope to gain deeper knowledge and contribute to advanced materials research in the future."
 
-Nguyễn Sơn Tùng shared:
+![Nguyễn Sơn Tùng - DAAD Scholar 2024](/images/academic_activities/daad-scholarships-img-1.png)
 
-"Receiving the DAAD Scholarship is a great honor and motivation for me. The MSI program at VGU has provided a strong academic foundation in materials science, and I am excited to continue my research journey in Germany. I hope to gain deeper knowledge and contribute to advanced materials research in the future."
+---
 
-![MSI Students Awarded Prestigious DAAD Scholarships - Illustration 1](/images/academic_activities/daad-scholarships-img-1.png)
+### ⚛️ Nguyễn Ngọc Thuỵ Khanh: Access to Global Research Networks
+> "This scholarship opens an incredible opportunity to experience Germany's research environment and collaborate with international scientists. I am very thankful to the MSI program and our professors for their guidance and support throughout my studies."
 
-Nguyễn Ngọc Thuỵ Khanh also expressed her gratitude:
+![Nguyễn Ngọc Thuỵ Khanh - DAAD Scholar 2024](/images/academic_activities/daad-scholarships-img-2.png)
 
-"This scholarship opens an incredible opportunity to experience Germany's research environment and collaborate with international scientists. I am very thankful to the MSI program and our professors for their guidance and support throughout my studies."
+---
 
-![MSI Students Awarded Prestigious DAAD Scholarships - Illustration 2](/images/academic_activities/daad-scholarships-img-2.png)
+> [!NOTE]
+> **Direct Pathway to Germany:**
+> VGU's Materials Science & Innovation program acts as a launchpad for international research. The direct connection with OVGU Magdeburg ensures that students can transition easily to Germany for funded thesis work, doctoral opportunities, and European careers.
 
-The MSI program warmly congratulates Sơn Tùng and Thuỵ Khanh on this remarkable achievement and wishes them great success in their upcoming academic and research journeys in Germany.
+---
 
-This milestone further demonstrates MSI's mission to educate globally competitive materials scientists and engineers, capable of contributing to both academic research and advanced industries worldwide.
+## 🇩🇪 Advancing Global Materials Science
+
+By training globally competitive materials scientists and engineers, the MSI program bridges advanced industry and scientific research. 
+
+The entire VGU community congratulates **Sơn Tùng** and **Thuỵ Khanh** on their well-deserved achievements and wishes them a fruitful and inspiring research journey in Magdeburg, Germany!

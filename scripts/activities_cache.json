@@ -1,20 +1,92 @@
 [
-  "11301492",
-  "11434216",
-  "11595979",
-  "12581029",
-  "12633585",
-  "12876662",
-  "12883878",
-  "12884225",
-  "13072137",
-  "13110958",
-  "13138517",
-  "13162862",
-  "13292685",
-  "13341569",
-  "13367608",
-  "13548847",
-  "13827278",
-  "13990095"
+  {
+    "id": "11301492",
+    "title": "fracture-mechanics",
+    "edited": true
+  },
+  {
+    "id": "11434216",
+    "title": "research-labs",
+    "edited": true
+  },
+  {
+    "id": "11595979",
+    "title": "powder-metallurgy",
+    "edited": true
+  },
+  {
+    "id": "12581029",
+    "title": "flying-faculty",
+    "edited": true
+  },
+  {
+    "id": "12633585",
+    "title": "program-overview",
+    "edited": true
+  },
+  {
+    "id": "12876662",
+    "title": "knauf-trip",
+    "edited": true
+  },
+  {
+    "id": "12883878",
+    "title": "heat-treatment",
+    "edited": true
+  },
+  {
+    "id": "12884225",
+    "title": "polymer-labs",
+    "edited": true
+  },
+  {
+    "id": "13072137",
+    "title": "gyss-2026",
+    "edited": true
+  },
+  {
+    "id": "13110958",
+    "title": "daad-scholarships-2024",
+    "edited": true
+  },
+  {
+    "id": "13138517",
+    "title": "non-metallic-binders",
+    "edited": true
+  },
+  {
+    "id": "13162862",
+    "title": "construction-materials-trip",
+    "edited": true
+  },
+  {
+    "id": "13292685",
+    "title": "engineering-ceramics",
+    "edited": true
+  },
+  {
+    "id": "13341569",
+    "title": "daad-scholarships",
+    "edited": true
+  },
+  {
+    "id": "13367608",
+    "title": "micro-nano-scale",
+    "edited": true
+  },
+  {
+    "id": "13548847",
+    "title": "sem-xrd-tour",
+    "edited": true
+  },
+  {
+    "id": "13827278",
+    "title": "vina-kraft-trip",
+    "edited": true
+  },
+  {
+    "id": "13990095",
+    "title": "biocalorimetry-for-the-biotechnological-use-of-natural-and-synthetic-macromolecules",
+    "edited": true
+  }
 ]

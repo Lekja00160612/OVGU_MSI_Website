@@ -1,32 +1,63 @@
 ---
-title: "VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses"
+title: "International Learning: VGU Welcomes German Flying Faculty for Core Materials Science Courses"
 category: "Lab Works"
 date: "2025-10-27"
 image: "/images/academic_activities/flying-faculty-cover.jpg"
-description: "Discover how VGU welcoming three German flying faculty members from OVGU Magdeburg strengthens the academic quality of the Materials Science Master."
+description: "VGU MSI program welcomes German flying faculty members from OVGU Magdeburg and Fraunhofer IMWS to deliver world-class lectures in metals and polymers."
 highlighted: true
+
+ja_id: "12581029"
+edited: true
+modules:
+  - solid-state-physics
+  - team-project
 ---
 
-# VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses
+# International Learning: VGU Welcomes German Flying Faculty for Core Materials Science Courses
 
-Binh Duong, October 2025  The Vietnamese-German University (VGU) proudly welcomed three flying faculty members from Germany to teach key modules in the Master of Science in Materials Science (MSI) program.
+In October 2025, the Master of Science in Materials Science (MSI) program at the **Vietnamese-German University (VGU)** proudly welcomed three distinguished flying faculty members from Germany to lead core teaching and lab-integration modules.
 
-This semester, Dr. Sebastian Hütter and Dr. Georg Hasemann from Otto von Guericke University Magdeburg (OVGU) are teaching the Metal Materials module, while Prof. Sven Henning is leading the Polymer Materials course. Their presence marks another milestone in strengthening VGU's collaboration with German universities and advancing the academic quality of the MSI program.
+Their arrival represents the robust, structural partnership between VGU, **Otto von Guericke University Magdeburg (OVGU)**, and the prestigious **Fraunhofer Institute (IMWS)**, ensuring our students receive an internationally accredited, top-tier German engineering education directly on our Binh Duong campus.
 
-The faculty, together with students from MSI 2024 and MSI 2025, gathered this morning for a memorable group photo session, symbolizing the spirit of international partnership and academic exchange that defines VGU.
+---
 
-The MSI program at VGU offers students opportunities to engage with international professors, hands-on laboratory work, and research experiences that align with global standards in materials science and engineering.
+## ✈️ Meet Our German Flying Faculty & Core Courses
 
-Photo: MSI 2024 & MSI 2025 with Prof. Sven Henning, Dr. Sebastian Hütter, and Dr. Georg Hasemann at VGU campus.
+During this intensive block semester, students from the MSI Intake 2024 and Intake 2025 cohorts engaged with leading experts across metallic and polymer material classes:
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 1](/images/academic_activities/flying-faculty-img-1.jpg)
+### ⚙️ Metals & Structural Mechanics
+- **Dr. Sebastian Hütter** (Research Associate, OVGU Magdeburg)
+- **Dr. Georg Hasemann** (Chair of Metallic Materials, OVGU Magdeburg)
+- **Core Topics:** High-temperature superalloys, advanced dislocation dynamics, crystal lattice defects, and deformation mechanisms.
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 2](/images/academic_activities/flying-faculty-img-2.jpg)
+### 🧪 Advanced Polymer Materials
+- **Prof. Dr. rer. nat. Sven Henning** (Fraunhofer Institute for Microstructure of Materials and Systems IMWS)
+- **Core Topics:** Polymer physics, molecular structure-property relationships, polymer matrix composites, and microstructural failure analysis.
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 3](/images/academic_activities/flying-faculty-img-3.jpg)
+---
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 4](/images/academic_activities/flying-faculty-img-4.jpg)
+> [!NOTE]
+> **Why Flying Faculty Matter:**
+> Having active German researchers deliver block lectures and supervise laboratory runs ensures VGU students are exposed to current global standards. This close contact also fosters direct relationships, helping students secure funded master thesis spots and research projects in Germany.
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 5](/images/academic_activities/flying-faculty-img-5.jpg)
+---
 
-![VGU Welcomes Three Flying Faculty Members from Germany for MSI Courses - Illustration 6](/images/academic_activities/flying-faculty-img-6.jpg)
+## 🤝 Building a Global Scientific Network
+
+This morning, our faculty members joined the MSI 2024 and MSI 2025 students for a memorable campus photo session, capturing the vibrant spirit of international partnership, scientific curiosity, and academic excellence that defines VGU.
+
+We extend a warm welcome to our German colleagues and wish our students an inspiring and transformative semester!
+
+---
+
+![German Flying Faculty at VGU Campus - Group Photo 1](/images/academic_activities/flying-faculty-img-1.jpg)
+
+![German Flying Faculty at VGU Campus - Photo 2](/images/academic_activities/flying-faculty-img-2.jpg)
+
+![German Flying Faculty at VGU Campus - Photo 3](/images/academic_activities/flying-faculty-img-3.jpg)
+
+![German Flying Faculty at VGU Campus - Photo 4](/images/academic_activities/flying-faculty-img-4.jpg)
+
+![German Flying Faculty at VGU Campus - Photo 5](/images/academic_activities/flying-faculty-img-5.jpg)
+
+![German Flying Faculty at VGU Campus - Photo 6](/images/academic_activities/flying-faculty-img-6.jpg)

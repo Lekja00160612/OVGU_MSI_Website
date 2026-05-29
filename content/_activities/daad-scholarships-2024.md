@@ -1,25 +1,43 @@
 ---
-title: "Two MSI 2024 Students Awarded Prestigious DAAD Scholarships"
+title: "VGU Excellence: Two MSI Students Win Prestigious DAAD Master Thesis Scholarships"
 category: "Academic Lectures"
 date: "2026-01-27"
 image: "/images/academic_activities/daad-scholarships-2024-cover.jpg"
-description: "Discover how two VGU Materials Science Master students won prestigious DAAD scholarships to conduct advanced research and master thesis work in Germany."
+description: "Two VGU Materials Science Master students, Son Tung and Thuy Khanh, win prestigious DAAD scholarships for advanced master thesis research in Germany."
 highlighted: false
+
+ja_id: "13110958"
+edited: true
+modules:
+  - team-project
 ---
 
-# Two MSI 2024 Students Awarded Prestigious DAAD Scholarships
+# VGU Excellence: Two MSI Students Win Prestigious DAAD Master Thesis Scholarships
 
-The Master of Science in Materials Science (MSI) program at Vietnamese-German University (VGU) is pleased to announce that two students from the MSI Intake 2024 have been awarded the highly competitive DAAD (German Academic Exchange Service) Scholarship.
+The Master of Science in Materials Science (MSI) program at the **Vietnamese-German University (VGU)** is proud to announce that two of our outstanding students from the MSI Intake 2024 have been awarded the highly competitive **DAAD (German Academic Exchange Service) Scholarship**.
 
 The scholarship recipients are:
+- **Nguyễn Sơn Tùng** (Student ID: 21324001)
+- **Nguyễn Ngọc Thuỵ Khanh** (Student ID: 21324009)
 
-- Nguyễn Sơn Tùng (Student ID: 21324001)
-- Nguyễn Ngọc Thuỵ Khanh (Student ID: 21324009)
+---
 
-The DAAD Scholarship is one of the most prestigious international funding programs, supporting excellent students to pursue advanced study and research in Germany. Being selected for this scholarship reflects the recipients' strong academic performance, research capability, and commitment to scientific excellence.
+## 🇩🇪 Gateway to World-Class Research in Germany
 
-This achievement also highlights the quality of education and international orientation of the MSI program at VGU, which is designed in close cooperation with German partner universities. Through such opportunities, MSI students gain access to global academic networks, advanced research environments, and cross-cultural learning experiences.
+The DAAD Scholarship is one of the most prestigious academic funding programs globally, designed to support exceptional international students to conduct research-level work directly at partner institutions in Germany.
 
-The MSI program warmly congratulates Sơn Tùng and Thuỵ Khanh on this outstanding accomplishment and wishes them great success in their upcoming academic and research journeys in Germany.
+For Sơn Tùng and Thuỵ Khanh, this competitive scholarship fully funds a one-year research stay at **Otto von Guericke University Magdeburg (OVGU)**, our primary German academic partner. Here, they will carry out their **master thesis projects** under joint supervision from VGU and OVGU professors, working in state-of-the-art European materials labs.
 
-This milestone further demonstrates MSI's mission to nurture internationally competitive materials scientists and engineers for academia and industry.
+---
+
+> [!NOTE]
+> **A Track Record of Success:**
+> Winning a DAAD scholarship requires an exemplary academic record, strong scientific aptitude, and a convincing research proposal. This achievement highlights the caliber of VGU's Materials Science curriculum, which aligns perfectly with German engineering standards.
+
+---
+
+## 🌟 Nurturing Globally Competitive Scientists
+
+At VGU, our mission is to act as a direct academic bridge between Vietnam and Germany. By working with international flying faculty and utilizing research-grade equipment, our students are uniquely prepared to succeed on the global stage. 
+
+The MSI program warmly congratulates **Sơn Tùng** and **Thuỵ Khanh** on this outstanding accomplishment and wishes them the absolute best as they begin their research adventure in Germany!

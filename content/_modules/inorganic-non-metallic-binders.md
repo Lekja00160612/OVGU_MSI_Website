@@ -19,16 +19,7 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links:
-  - title: "Hands-on Learning in Inorganic, Non-Metallic Binders: MSI Students in Action"
-    url: "/academic-activities/non-metallic-binders"
-    description: "Activity from 2026-02-04"
-  - title: "MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction"
-    url: "/academic-activities/knauf-trip"
-    description: "Activity from 2025-12-11"
-  - title: "MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An"
-    url: "/academic-activities/construction-materials-trip"
-    description: "Activity from 2026-02-11"
+links: []
 ---
 
 - Structural and Functional mortars and concrete

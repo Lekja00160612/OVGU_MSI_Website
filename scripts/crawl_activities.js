@@ -557,6 +557,33 @@ async function rebuildAllLinks() {
     const title = titleMatch[1].replace(/\\"/g, '"');
     const publishDate = dateMatch ? dateMatch[1] : '2026-05-19';
     
+    const isEdited = /edited:\s*true/.test(frontmatter) || /manual:\s*true/.test(frontmatter) || /refined:\s*true/.test(frontmatter);
+    if (isEdited) {
+      console.log(`Preserving manually refined activity: ${file}`);
+      
+      // Parse modules (looking for a YAML array under `modules:`)
+      const modules = [];
+      const modulesSectionMatch = /modules:\s*\n([\s\S]*?)(?=\n[a-z]+:|\n---)/.exec(frontmatter);
+      if (modulesSectionMatch) {
+        const lines = modulesSectionMatch[1].split('\n');
+        for (const line of lines) {
+          const itemMatch = /-\s*["']?([a-zA-Z0-9_-]+)["']?/.exec(line);
+          if (itemMatch) {
+            modules.push(itemMatch[1].trim());
+          }
+        }
+      }
+      
+      // Add links to modules
+      const slug = file.replace('.md', '');
+      for (const moduleName of modules) {
+        const moduleFileName = `${moduleName}.md`;
+        const relativeActivityUrl = `/academic-activities/${slug}`;
+        addLinkToModule(moduleFileName, title, relativeActivityUrl, `Activity from ${publishDate}`);
+      }
+      continue;
+    }
+    
     console.log(`Re-classifying: "${title}"`);
     const classification = await classifyActivity(title, body);
     
@@ -727,6 +754,54 @@ async function main() {
     }
     console.log(`Cache has ${cache.length} processed articles.`);
 
+    // Synchronize cache with manually edited markdown files
+    if (cache.length > 0) {
+      console.log('Synchronizing cache with markdown frontmatters...');
+      let cacheUpdated = false;
+      const activityFiles = fs.readdirSync(OUTPUT_DIR);
+      for (const file of activityFiles) {
+        if (!file.endsWith('.md') || file === '00-template.md') continue;
+        const filePath = path.join(OUTPUT_DIR, file);
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        const parts = fileContent.split('---');
+        if (parts.length < 3) continue;
+        const frontmatter = parts[1];
+        
+        // Extract ja_id
+        const jaIdMatch = /ja_id:\s*"([^"]+)"/.exec(frontmatter) || /ja_id:\s*([^\n]+)/.exec(frontmatter);
+        if (!jaIdMatch) continue;
+        const ja_id = jaIdMatch[1].replace(/\\"/g, '"').trim();
+        
+        // Extract edited
+        const isEdited = /edited:\s*true/.test(frontmatter) || /manual:\s*true/.test(frontmatter) || /refined:\s*true/.test(frontmatter);
+        
+        // Find cache entry
+        const entryIdx = cache.findIndex(entry => {
+          if (typeof entry === 'string') return entry === ja_id;
+          if (entry && typeof entry === 'object') return String(entry.id) === ja_id;
+          return false;
+        });
+        
+        if (entryIdx !== -1) {
+          const oldEntry = cache[entryIdx];
+          const newEntry = {
+            id: ja_id,
+            title: file.replace('.md', ''),
+            edited: isEdited
+          };
+          
+          if (typeof oldEntry === 'string' || oldEntry.edited !== isEdited || oldEntry.title !== newEntry.title) {
+            cache[entryIdx] = newEntry;
+            cacheUpdated = true;
+          }
+        }
+      }
+      if (cacheUpdated) {
+        fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2), 'utf-8');
+        console.log('Cache file synchronized and updated.');
+      }
+    }
+
     // Find JSF/PrimeFaces form configurations for A3331:frm
     const formStart = html.indexOf('id="A3331:frm"');
     if (formStart === -1) {
@@ -772,7 +847,12 @@ async function main() {
     
     for (const item of reversedList) {
       const ja_id = String(item.ja_id);
-      if (cache.includes(ja_id)) {
+      const isCached = cache.some(entry => {
+        if (typeof entry === 'string') return entry === ja_id;
+        if (entry && typeof entry === 'object') return String(entry.id) === ja_id;
+        return false;
+      });
+      if (isCached) {
         console.log(`Skipping cached article ${ja_id}: ${item.context.tieude}`);
         continue;
       }
@@ -924,7 +1004,11 @@ ${markdownBody}
       console.log(`Saved Markdown file to ${outputFilePath}`);
 
       // Update Cache
-      cache.push(ja_id);
+      cache.push({
+        id: ja_id,
+        title: slug,
+        edited: false
+      });
       fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2), 'utf-8');
       console.log(`Updated cache file with article ${ja_id}`);
     }

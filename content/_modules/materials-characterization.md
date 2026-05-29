@@ -16,19 +16,7 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links:
-  - title: "MSI Students Dive Deep into Materials Characterization with SEM and XRD Lab Tour"
-    url: "/academic-activities/sem-xrd-tour"
-    description: "Activity from 2026-03-30"
-  - title: "MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs"
-    url: "/academic-activities/powder-metallurgy"
-    description: "Activity from 2025-06-25"
-  - title: "Laboratory activities of the Polymer course - MSI intake 2024"
-    url: "/academic-activities/polymer-labs"
-    description: "Activity from 2025-12-12"
-  - title: "Exploring Materials at the Micro and Nano Scale MSI Course Highlight"
-    url: "/academic-activities/micro-nano-scale"
-    description: "Activity from 2026-03-11"
+links: []
 ---
 
 - Structural description of materials (basics in crystallography, symmetry and space group theory)

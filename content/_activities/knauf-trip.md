@@ -1,46 +1,61 @@
 ---
-title: "MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction"
+title: "Excursion to Knauf Vietnam: Automated Gypsum Manufacturing & Acoustic Engineering"
 category: "Industry Adventures"
 date: "2025-12-11"
 image: "/images/academic_activities/knauf-trip-cover.jpg"
 description: "Discover how VGU Materials Science Master students explore automated lightweight gypsum manufacturing on a field trip to Knauf Vietnam in Nha Be."
 highlighted: false
+
+ja_id: "12876662"
+edited: true
+modules:
+  - inorganic-non-metallic-binders
 ---
 
-# MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction
+# Excursion to Knauf Vietnam: Automated Gypsum Manufacturing & Acoustic Engineering
 
-**Binh Duong, December 9, 2025**  As part of the *Master of Science in Materials Science (MSI)* program at the Vietnamese-German University (VGU), students from the MSI 2024 and MSI 2025 cohorts visited **Knauf Vietnam's production facility** in Nha Be, Ho Chi Minh City.
+On December 9, 2025, students from the MSI Intake 2024 and Intake 2025 cohorts at the **Vietnamese-German University (VGU)** conducted an academic field excursion to **Knauf Vietnam’s state-of-the-art production facility** in Nha Be, Ho Chi Minh City.
 
-The visit offered an exceptional learning experience connecting **materials chemistry, applied physics, and industrial automation** within one of the world's leading gypsum manufacturers.
+As a key part of our *Master of Science in Materials Science (MSI)* curriculum, the trip provided students with an immersion into the industrial chemistry, thermodynamics, and high-precision automation powering one of the world's premier gypsum wallboard manufacturers.
 
-**From Chemistry to Construction**
+---
 
-During the guided factory tour, students explored the entire process of **lightweight gypsum board production** from raw material preparation and foaming control to high-precision drying and finishing.
+## 🏛️ From Chemistry to Construction: Technical Focus
 
-The visit highlighted the importance of **chemical additives**, **foam stabilizers**, and **fiberglass reinforcements** in achieving **strength, fire resistance**, and **acoustic performance** while maintaining lightweight design.
+Knauf engineers guided the students through the entire automated manufacturing process, showing the physical chemistry behind modern building elements:
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 1](/images/academic_activities/knauf-trip-img-1.jpg)
+- **Porosity & foaming chemistry:** How surfactant-based foam stabilizers, fiberglass reinforcements, and chemical additives are blended with calcium sulfate hemihydrate to cast extremely lightweight but highly durable panels.
+- **Thermodynamics of fire-resistance:** Examining the endothermic calcination reaction that makes gypsum fire-resistant. When exposed to fire, the bound crystal water in calcium sulfate dihydrate ($CaSO_4 \cdot 2H_2O$) evaporates, keeping the structural system cool.
+- **Acoustic Physics:** Applying the **mass-spring-mass principle** to see how modern gypsum multi-layered wall assemblies absorb acoustic energy and dampen noise transmission.
 
-Knauf engineers also demonstrated how the **mass-spring-mass principle** underlies gypsum's sound insulation capabilities, and how **thermochemical reactions** contribute to fire resistance through controlled dehydration of crystal water.
+---
 
-**Automation & Sustainability**
+> [!NOTE]
+> **Industrial Immersion Advantage:**
+> Seeing a continuous, high-speed automated production line in action highlights how critical precise dosage, water-binder ratios, and high-temperature belt drying are for maintaining German quality standards.
 
-The group was introduced to Knauf's **Industry 4.0 production line**, featuring automated dosing, laser scanning, and energy-efficient drying systems. Students gained valuable insights into how **automation and material optimization** contribute to sustainable and consistent quality in construction materials.
+---
 
-**Hands-on Experience**
+## 🏗️ Hands-On Autoclaved Construction Practice
 
-After the tour, the MSI students participated in a **hands-on activity**, implementing small-scale samples of **gypsum wall construction under German standards**. The session reinforced the connection between theoretical knowledge and real-world engineering practice.
+Following the plant tour, VGU MSI students engaged in an interactive **hands-on workshop** led by Knauf technical instructors:
 
-**A Day of Learning and Collaboration**
+1. **Building Metal Stud Frames:** Laying out and erecting standard steel wall channels under German drywall guidelines.
+2. **Board Mounting & Jointing:** Applying drywall panels, taping, and mudding joints to master industrial finishing.
+3. **Quality & Fit Checks:** Inspecting the structural robustness, alignments, and joint stability of their completed mock wall assemblies.
 
-The day concluded with a friendly lunch, where students, faculty, and Knauf engineers shared experiences, ideas, and research perspectives  strengthening the bridge between academia and industry.
+This excellent exercise allowed students to immediately connect materials chemistry with civil engineering and real-world construction practices.
 
-This field trip embodies the MSI program's mission: *bridging science and application through real-world exposure and international collaboration.*
+We express our sincere thanks to Knauf Vietnam for welcoming our students, and for providing a lunch session to discuss joint thesis projects and R&D pathways!
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 2](/images/academic_activities/knauf-trip-img-2.jpg)
+---
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 3](/images/academic_activities/knauf-trip-img-3.jpg)
+![Knauf factory floor and automated dosing system - Illustration 1](/images/academic_activities/knauf-trip-img-1.jpg)
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 4](/images/academic_activities/knauf-trip-img-4.jpg)
+![MSI Students hands-on building drywall under German standards - Illustration 2](/images/academic_activities/knauf-trip-img-2.jpg)
 
-![MSI Students Visit Knauf Vietnam: Exploring the Science Behind Lightweight Gypsum Construction - Illustration 5](/images/academic_activities/knauf-trip-img-5.jpg)
+![Instructors demonstrating jointing compound properties - Illustration 3](/images/academic_activities/knauf-trip-img-3.jpg)
+
+![Drywall framing layout and acoustic insulation installation - Illustration 4](/images/academic_activities/knauf-trip-img-4.jpg)
+
+![VGU MSI cohort group photo at Knauf Vietnam HQ - Illustration 5](/images/academic_activities/knauf-trip-img-5.jpg)

@@ -24,10 +24,7 @@ pdfs:
     url: "/images/modules/Materials Mechanics_Fatigue.pdf"
   - title: "Fracturing Modes"
     url: "/images/modules/Materials Mechanics_Fracturing Modes.pdf"
-links:
-  - title: "MSI Students Conclude Fracture Mechanics Course with Presentations and Insightful Discussions"
-    url: "/academic-activities/fracture-mechanics"
-    description: "Activity from 2025-05-16"
+links: []
 ---
 
 - Elasticity

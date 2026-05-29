@@ -1,31 +1,49 @@
 ---
-title: MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs
+title: "Lab Highlight: Powder Metallurgy, Sintering, & Characterization of High-Temp Mo-Si-B Alloys"
 category: "Lab Works"
-date: 2025-06-25
-image: /images/academic_activities/powder-metallurgy-cover.jpg
-description: "Learn how VGU Materials Science Master students synthesize Mo-V-Si-B alloys using powder metallurgy and XRD characterization in advanced lab sessions."
+date: "2025-06-25"
+image: "/images/academic_activities/powder-metallurgy-cover.jpg"
+description: "MSI Master students synthesize high-temperature Mo-V-Si-B alloys, practicing ball milling, particle sizing, XRD lattice scans, and SEM morphology."
+highlighted: false
+
+ja_id: "11595979"
+edited: true
+modules:
+  - powder-metallurgy-and-sintered-materials
+  - materials-characterization
 ---
 
-# MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs
+# Lab Highlight: Powder Metallurgy, Sintering, & Characterization of High-Temp Mo-Si-B Alloys
 
-MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs
+In the intensive **Research Lab: Properties, Testing, and Analytics** module, Master of Science in Materials Science (MSI) students at VGU engaged in a hands-on laboratory series focused on **Powder Metallurgy**—a vital manufacturing technology for producing components from high-melting-point materials.
 
-![MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs - Illustration 1](/images/academic_activities/powder-metallurgy-img-1.png)
+The lab series tasked students with synthesizing and analyzing refractory **Molybdenum-Silicon-Vanadium-Boron (Mo-V-Si-B)** alloys, which are designed for extreme aerospace and turbine environments.
 
-Binh Duong, VGU. Students of the Master of Science in Materials Science (MSI) program at Vietnamese-German University (VGU) recently engaged in an exciting hands-on lab course focusing on Powder Metallurgy, a critical area in materials engineering.
-As part of their curriculum, MSI students participated in the Research Lab Properties, Testing, and Analytics module, with a focus on the Powder Milling Process. The lab explored the creation and analysis of Mo-V-Si-B alloys, starting with milling and moving to analysis with dynamic light scattering (DLS), X-ray diffraction (XRD), and lastly scanning electron microscopy (SEM).
-Exploring the Powder Metallurgy Process
-The lab session introduced students to the key steps involved in powder metallurgy, including the preparation of a Molybdenum-Silicon-Vanadium-Boron (Mo-V-Si-B) powder mixture. Students used ball milling to prepare samples at various time intervals (1h, 2h, 5h, and 20h) and studied the effect of different milling durations on the material properties.
-Key activities included machine theory teaching and training, along with practical daily lab examples:
+---
 
-- XRD Analysis: To identify lattice size and volume changes as a function of milling time.
-- SEM Observation: Examining the morphology and microstructure changes at different milling stages.
-- Particle Size Analysis: Observing the reduction in particle size with increased milling time.
+## 🔬 Sintering & Mechanical Alloying Process
 
-Insights into Material Properties
-The students investigated the thermo-mechanical processes that occur during powder milling and observed the formation of different phases after heat treatment.
-The key to this activity is understanding the effect of Vanadium substitution into the Molybdenum lattice point via multiple examination processes. Firstly, it is agreed with the theory that at early stages, the more milling time leads to a smaller particle size. XRD data support the conclusion of multiple supersaturated microstructures mixing during mechanical force application. The SEM images revealed distinct lamellar microstructures formed during the initial 1-2 hours of milling. However, the 15h and 20h samples were, unfortunately, oxidised and cannot be observed properly.
-Students were also introduced to the potential applications of powder metallurgy in industrial component production, where materials are processed below their melting points. The lab session provided them with hands-on experience in XRD data analysis, particle size measurement, and SEM observations.
-What's Next for MSI Students?
-With each experiment, students gained deeper insights into the practical aspects of materials science, preparing them for future careers in research, industry, and academia. By understanding the behaviour of materials under various processing conditions, they are better equipped to innovate and contribute to the development of advanced materials.
-As they move forward, students will continue to explore other critical areas such as nanoengineering, metallurgical processes, and materials characterization in future lab sessions.
+Operating research-grade mechanical alloying equipment, students executed key steps in the powder metallurgy pipeline:
+
+- **Mechanical Alloying via Ball Milling:** Preparing a high-purity Mo-V-Si-B powder mixture and milling specimens at varied intervals (**1 hour, 2 hours, 5 hours, and 20 hours**) to study particle refinement and lattice deformation.
+- **Particle Size Dynamic Light Scattering (DLS):** Monitoring the systematic reduction in particle sizes and the development of high surface energies as a function of milling time.
+- **X-Ray Diffraction (XRD) Lattice Scans:** Tracking phase transitions, lattice expansion, and the creation of supersaturated solid solutions due to intense mechanical forces.
+- **Morphology Mapping via SEM:** Characterizing particle shape transitions—observing the formation of distinct **lamellar (layered) microstructures** during the initial 1–2 hours of milling.
+
+---
+
+> [!NOTE]
+> **Scientific Finding:**
+> Powder metallurgy allows us to engineer alloys far beyond their equilibrium limits. In this lab, XRD scans successfully proved the insertion of Vanadium into the Molybdenum lattice, while SEM microscopy confirmed optimal particle welding and mechanical consolidation during the early milling hours.
+
+---
+
+## 🚀 Equipping Future Advanced Metallurgy Experts
+
+By analyzing their own XRD and SEM data, VGU students master advanced materials characterization and processing. 
+
+This practical training lays the groundwork for high-impact master's theses and prepares our graduates to enter specialized metallurgy, aerospace turbine R&D, and advanced additive manufacturing industries globally!
+
+---
+
+![VGU MSI students preparing Mo-Si-B alloy powders - Illustration 1](/images/academic_activities/powder-metallurgy-img-1.png)

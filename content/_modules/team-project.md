@@ -28,10 +28,7 @@ pdfs:
     url: "/images/modules/Team Project_Heat Treament of Aluminum alloys Prof. Halle.pdf"
   - title: "Topic: SMA Material Modelling & Fatigue (Supervisor: Prof. Juhre)"
     url: "/images/modules/Team Project_SMA Fatigue Prof. Juhre.pdf"
-links:
-  - title: "MSI Students Conclude Fracture Mechanics Course with Presentations and Insightful Discussions"
-    url: "/academic-activities/fracture-mechanics"
-    description: "Activity from 2025-05-16"
+links: []
 ---
 
 - Scientific team project in Materials Science (groups of 2-3 students)

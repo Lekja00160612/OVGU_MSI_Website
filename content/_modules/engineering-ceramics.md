@@ -22,10 +22,7 @@ pdfs:
     url: "/images/modules/Ceramic Engineering_Chapter 10 Selected Engineering Ceramics.pdf"
   - title: "Chapter 11: Conductive Ceramic Materials"
     url: "/images/modules/Ceramic Engineering_Chapter 11 Conductive Ceramic Materials.pdf"
-links:
-  - title: "Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael"
-    url: "/academic-activities/engineering-ceramics"
-    description: "Activity from 2026-03-03"
+links: []
 ---
 
 - Theory of chemical bonds and properties correlations such as density, melting behavior, thermal, mechanical, optical, chemical properties

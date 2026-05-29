@@ -1,62 +1,66 @@
 ---
-title: "MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An"
+title: "Excursion: Exploring Cement & Concrete Tech at Mekong Concrete and AAC Plants"
 category: "Industry Adventures"
 date: "2026-02-11"
 image: "/images/academic_activities/construction-materials-cover.jpg"
-description: "Discover how VGU Materials Science Master students explore advanced building materials and binder chemistry on an industrial field trip in Vietnam."
+description: "MSI Master students visit automated AAC and Mekong Concrete plants in Long An with Prof. Thomas Bier, exploring modern cement chemistry and concrete engineering."
 highlighted: false
+
+ja_id: "13162862"
+edited: true
+modules:
+  - inorganic-non-metallic-binders
 ---
 
-# MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An
+# Excursion: Exploring Cement & Concrete Tech at Mekong Concrete and AAC Plants
 
-As part of the course Inorganic, Non-Metallic Binders at Vietnamese-German University (VGU), on February 04, 2026  MSI students joined Prof. Dr.-Ing. Thomas Bier and Dr. Duong Hieu Linh on an academic field trip to two construction-material manufacturers in Long An, offering complementary perspectives on modern building materials.
+On February 04, 2026, as a core component of the **Inorganic, Non-Metallic Binders** module, Master of Science in Materials Science (MSI) students at VGU embarked on a comprehensive, double-excursion to two leading construction-material manufacturers in Long An. 
 
-### Morning Session: AAC Plant - Lightweight Materials for Civil Construction
+Accompanied by **Prof. Dr.-Ing. Thomas Bier** and **Dr. Duong Hieu Linh**, the field trip gave students a firsthand look at two highly contrasting binder systems—from ultra-lightweight civil building components to massive high-strength structural concrete elements used for international airports and deep infrastructure.
 
-In the morning, the group visited an AAC plant, where students explored lightweight construction materials primarily used in civil and residential buildings.
+---
 
-At the AAC plant, students learned about: 
+## 🏛️ Morning Session: The Science of Lightweight Porous Concrete (AAC Plant)
 
-	- AAC and reinforced AAC elements
+The morning session was dedicated to exploring **Autoclaved Aerated Concrete (AAC)** and reinforced elements—technologies that are revolutionizing civil and residential building designs due to their high energy efficiency.
 
-	- Specialized mortars for AAC systems
+Students toured the highly automated production facilities and learned about:
+- **Binder Chemistry & Porosity Control:** How gypsum, lime, and cement are reacted with aluminum powder to generate hydrogen gas, producing a high-strength, cellular structure with optimized weight.
+- **Material Advantages:** Hands-on analysis of AAC's superior characteristics, including flame retardancy, rapid construction capability, acoustic barriers, and thermal insulation.
+- **Eco-Friendly Manufacturing:** The complete absence of high-temperature firing, dramatically lowering carbon footprints compared to traditional red-clay bricks.
 
-	- Key material advantages such as lightweight structure, flame retardancy, fast construction speed, thermal insulation, sound insulation, and eco-friendly production processes (without high-temperature firing)
+---
 
-This visit highlighted how binder chemistry and controlled porosity are used to optimize materials for energy-efficient and fast-paced construction.
+> [!NOTE]
+> **MSI Takeaway:** Autoclaved Aerated Concrete (AAC) is a premier example of how materials scientists engineer micro-porous systems to deliver high structural stability alongside extremely low thermal conductivity.
 
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 1](/images/academic_activities/construction-materials-img-1.jpg)
+---
 
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 2](/images/academic_activities/construction-materials-img-2.jpg)
+## 🏗️ Afternoon Session: Heavy-Duty Structural Concrete (Mekong Concrete Plant)
 
-### Afternoon Session: Mekong Concrete Plant - Structural Materials for Large-Scale Infrastructure
+In the afternoon, the excursion transitioned from lightweight materials to massive, heavy-duty structural concrete at the **Mekong Concrete Plant** in Long An. This plant manufactures precast and ready-mixed concrete designed to withstand extreme loads in major civil infrastructure projects.
 
-In the afternoon, students continued their field trip at the Mekong Concrete Plant in Long An, which focuses on heavy-duty concrete components for large-scale infrastructure projects, such as beams, foundations, and structural elements for airports and major civil works.
+Students observed:
+- **High-Strength Precast Elements:** The manufacturing of structural beams, massive foundations, and customized structural pieces engineered for airports and deep civil works.
+- **Extreme Durability Engineering:** Formulations designed to resist high mechanical loads, chemical aggression, and wear over long service lives.
+- **Contrasting Material Classes:** Exploring the physical differences in aggregate selection, water-binder ratios, and steel reinforcement compared to the aerated civil concrete studied in the morning.
 
-Here, students observed:
+---
 
-	- Production of high-strength concrete elements
+## 🔬 Broadening Horizons in Materials Engineering
 
-	- Materials designed to withstand high loads, durability requirements, and long service life
+This double-session field trip gave VGU MSI students a balanced, real-world understanding of the construction materials sector. Seeing the direct translation of **binder technology** and **material characterization** from the classroom to automated, high-precision factory floors prepares our graduates to step straight into high-value engineering roles.
 
-	- The contrast between structural concrete systems and lightweight materials used earlier in the day
+We thank the teams at both plants and our flying faculty for organizing this outstanding industry-immersion day!
 
-### Broadening Perspectives in Construction Materials
+---
 
-Although both companies operate in the construction materials sector, they serve very different applicationsfrom lightweight civil construction systems to massive structural components for infrastructure projects.
+![AAC and Mekong Concrete plants in Long An - Illustration 1](/images/academic_activities/construction-materials-img-1.jpg)
 
-By visiting both facilities in one day, MSI students gained a broad and balanced understanding of construction materials, spanning:
+![AAC and Mekong Concrete plants in Long An - Illustration 2](/images/academic_activities/construction-materials-img-2.jpg)
 
-	- Material design and binder technology
+![AAC and Mekong Concrete plants in Long An - Illustration 3](/images/academic_activities/construction-materials-img-3.jpg)
 
-	- Application-driven material selection
+![AAC and Mekong Concrete plants in Long An - Illustration 4](/images/academic_activities/construction-materials-img-4.jpg)
 
-	- The role of materials science in both civil buildings and large-scale infrastructure
-
-This field trip exemplifies the MSI program's commitment to connecting materials science theory with diverse industrial practices, preparing students for a wide range of professional paths in construction materials and engineering.
-
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 3](/images/academic_activities/construction-materials-img-3.jpg)
-
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 4](/images/academic_activities/construction-materials-img-4.jpg)
-
-![MSI Students Gain Comprehensive Insights into Construction Materials Through Field Trips to ACC factory and ready-mixed concrete plant in Long An - Illustration 5](/images/academic_activities/construction-materials-img-5.jpg)
+![AAC and Mekong Concrete plants in Long An - Illustration 5](/images/academic_activities/construction-materials-img-5.jpg)

@@ -34,13 +34,7 @@ pdfs:
     url: "/images/modules/Metals_Partial Dislocations and Stacking Faults.pdf"
   - title: "Types of Binary Phase"
     url: "/images/modules/Metals_Types of Binary Phase.pdf"
-links:
-  - title: "Elevate Your Expertise: The VGU Master of Materials Science Program"
-    url: "/academic-activities/program-overview"
-    description: "Activity from 2025-11-05"
-  - title: "Laboratory activities of the Heat Treatment course - MSI Programs intake 2024 & 2025"
-    url: "/academic-activities/heat-treatment"
-    description: "Activity from 2025-12-12"
+links: []
 ---
 
 - Crystal symmetries and symmetry classes

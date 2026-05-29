@@ -23,16 +23,7 @@ pdfs:
     url: "/images/modules/Powder Metullurgy_Mechanical properties under Microstructures of Sintered Material.pdf"
   - title: "Overview of Sintering Technologies"
     url: "/images/modules/Powder Metullurgy_Overview of Sintering Technologies.pdf"
-links:
-  - title: "MSI Students Dive Into Hands-On Learning in Research Labs"
-    url: "/academic-activities/research-labs"
-    description: "Activity from 2025-06-10"
-  - title: "MSI Students Explore Powder Metallurgy and Material Testing in State-of-the-Art Labs"
-    url: "/academic-activities/powder-metallurgy"
-    description: "Activity from 2025-06-25"
-  - title: "Engineering Ceramics: Advanced Materials Science with Prof. Scheffler Michael"
-    url: "/academic-activities/engineering-ceramics"
-    description: "Activity from 2026-03-03"
+links: []
 ---
 
 - Fundamentals of basic mechanisms and processing technologies of elemental powders and alloyed powders
