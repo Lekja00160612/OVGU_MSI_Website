@@ -103,7 +103,7 @@ groups:
         roles: ""
         image: /Lecturer_Avatar/Cuong Phan Dang.jpg
       - name: Prof. Dr.-Ing. Thomas A. Bier
-        institution: TU Bergakademie Freiberg
+        institution: Institute for Ceramics, Refractories and Composite Materials, TU Bergakademie Freiberg
         institution_link: https://www.researchgate.net/profile/Thomas-Bier
         roles: ""
         image: /Lecturer_Avatar/Thomas Bier.jpg

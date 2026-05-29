@@ -104,7 +104,7 @@ groups:
         roles: Giảng viên thỉnh giảng
         image: /Lecturer_Avatar/Cuong Phan Dang.jpg
       - name: Prof. Dr.-Ing. Thomas A. Bier
-        institution: Đại học Mỏ-Địa chất Freiberg (TU Bergakademie Freiberg)
+        institution: Viện Gốm sứ, Vật liệu Chịu lửa và Vật liệu Composite, Đại học Mỏ-Địa chất Freiberg (TU Bergakademie Freiberg)
         institution_link: https://www.researchgate.net/profile/Thomas-Bier
         roles: Giảng viên thỉnh giảng
         image: /Lecturer_Avatar/Thomas Bier.jpg
