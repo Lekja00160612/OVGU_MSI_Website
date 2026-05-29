@@ -12,10 +12,13 @@ groups:
     title: Ban Điều hành Chương trình & Giảng viên Cơ hữu VGU
     members:
       - name: Dr. Nguyen Xuan Thanh
-        roles: Điều phối viên học thuật chương trình MSI
+        roles: Giảng viên Cơ hữu VGU
         image: /Lecturer_Avatar/Thanh Nguyen Xuan.jpg
+        email: thanh.nx@vgu.edu.vn
+        is_management: true
+        management_role: Điều phối viên Học thuật
       - name: Dr.-Ing. Tong Duy Hien
-        roles: Nguyên Điều phối viên học thuật chương trình MSI
+        roles: Giảng viên Cơ hữu VGU
         image: /Lecturer_Avatar/Tong Duy Hien.jpg
       - name: Dr. rer. nat. Duong Hieu Linh
         roles: Giảng viên chuyên ngành
@@ -28,8 +31,17 @@ groups:
         link: https://www.nm.ovgu.de/nm/en/
         members:
           - name: Prof. Dr.-Ing. Daniel Juhre
-            roles: Giám đốc chương trình Thạc sĩ Khoa học Vật liệu; Phó Trưởng khoa Cơ khí (OVGU); Trưởng Bộ môn Cơ học Tính toán
+            roles: Phó Trưởng khoa Cơ khí (OVGU); Trưởng Bộ môn Cơ học Tính toán
             image: /Lecturer_Avatar/Daniel Juhre.jpg
+            email: daniel.juhre@ovgu.de
+            is_management: true
+            management_role: Giám đốc Chương trình
+          - name: Marc Ulrich
+            roles: Trợ lý Nghiên cứu (Bộ môn Cơ học Tính toán)
+            image: /Lecturer_Avatar/Marc Ulrich.png
+            email: marc.ulrich@ovgu.de
+            is_management: true
+            management_role: Điều phối viên Chương trình
       - title: Bộ môn Vật lý Chất rắn
         link: https://www.physik.ovgu.de/Abteilungen+des+IfP/Festkörperphysik_+spez_+Halbleiterphysik-p-8.html
         members:
@@ -83,12 +95,19 @@ groups:
     members:
       - name: Dr. rer. nat. Sven Henning
         institution: Viện Fraunhofer về Vi cấu trúc của Vật liệu và Hệ thống (IMWS)
+        institution_link: https://publica.fraunhofer.de/entities/person/2347d630-efb1-4160-80b2-c0067d8737b0
         roles: Giảng viên thỉnh giảng
         image: /Lecturer_Avatar/Sven Henning.jpg
       - name: Dr. Dang Cuong Phan
         institution: Viện Khoa học và Công nghệ Thủy tinh (IGT), Đại học Mỏ-Địa chất Freiberg (TU Bergakademie Freiberg)
+        institution_link: https://www.xing.com/profile/DangCuong_Phan
         roles: Giảng viên thỉnh giảng
         image: /Lecturer_Avatar/Cuong Phan Dang.jpg
+      - name: Prof. Dr.-Ing. Thomas A. Bier
+        institution: Đại học Mỏ-Địa chất Freiberg (TU Bergakademie Freiberg)
+        institution_link: https://www.researchgate.net/profile/Thomas-Bier
+        roles: Giảng viên thỉnh giảng
+        image: /Lecturer_Avatar/Thomas Bier.jpg
   - id: support
     title: Hỗ trợ Kỹ thuật & Phòng Thí nghiệm
     members:

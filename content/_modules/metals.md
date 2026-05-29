@@ -15,6 +15,7 @@ description: |
 lecturers:
   - "Prof. Dr.-Ing. Mania Krüger"
   - "Dr.-Ing. Georg Hasemann"
+  - "Dr.-Ing. Sebastian Hütter"
 images: []
 pdfs:
   - title: "Module Handbook (PDF)"

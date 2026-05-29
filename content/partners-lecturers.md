@@ -11,10 +11,13 @@ groups:
     title: MSI Program Leadership & VGU Core Faculty
     members:
       - name: Dr. Nguyen Xuan Thanh
-        roles: Academic Coordinator of MSI
+        roles: Senior Lecturer VGU
         image: /Lecturer_Avatar/Thanh Nguyen Xuan.jpg
+        email: thanh.nx@vgu.edu.vn
+        is_management: true
+        management_role: Academic Coordinator
       - name: Dr.-Ing. Tong Duy Hien
-        roles: Former Academic Coordinator of MSI
+        roles: Senior Lecturer VGU
         image: /Lecturer_Avatar/Tong Duy Hien.jpg
       - name: Dr. rer. nat. Duong Hieu Linh
         roles: ""
@@ -27,8 +30,17 @@ groups:
         link: https://www.nm.ovgu.de/nm/en/
         members:
           - name: Prof. Dr.-Ing. Daniel Juhre
-            roles: Director of Master Materials Science; Vice Dean of the Faculty of Mechanical Engineering (OVGU); Head of the Chair of Computational Mechanics
+            roles: Vice Dean of the Faculty of Mechanical Engineering (OVGU); Head of the Chair of Computational Mechanics
             image: /Lecturer_Avatar/Daniel Juhre.jpg
+            email: daniel.juhre@ovgu.de
+            is_management: true
+            management_role: Program Director
+          - name: Marc Ulrich
+            roles: Research Assistant (Chair of Computational Mechanics)
+            image: /Lecturer_Avatar/Marc Ulrich.png
+            email: marc.ulrich@ovgu.de
+            is_management: true
+            management_role: Program Coordinator
       - title: Chair of Solid State Physics
         link: https://www.physik.ovgu.de/Abteilungen+des+IfP/Festkörperphysik_+spez_+Halbleiterphysik-p-8.html
         members:
@@ -82,12 +94,19 @@ groups:
     members:
       - name: Dr. rer. nat. Sven Henning
         institution: Fraunhofer-Institut für Mikrostruktur von Werkstoffen und Systemen (IMWS)
+        institution_link: https://publica.fraunhofer.de/entities/person/2347d630-efb1-4160-80b2-c0067d8737b0
         roles: ""
         image: /Lecturer_Avatar/Sven Henning.jpg
       - name: Dr. Dang Cuong Phan
         institution: Institute of Glass Science and Technology (IGT), TU Bergakademie Freiberg
+        institution_link: https://www.xing.com/profile/DangCuong_Phan
         roles: ""
         image: /Lecturer_Avatar/Cuong Phan Dang.jpg
+      - name: Prof. Dr.-Ing. Thomas A. Bier
+        institution: TU Bergakademie Freiberg
+        institution_link: https://www.researchgate.net/profile/Thomas-Bier
+        roles: ""
+        image: /Lecturer_Avatar/Thomas Bier.jpg
   - id: support
     title: Technical & Laboratory Support
     members:

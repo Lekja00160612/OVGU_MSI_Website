@@ -73,10 +73,12 @@ const avatarColor = (name: string): string => {
           v-for="member in group.members"
           :key="member.name"
           class="faculty-card"
+          :class="{ 'management-card': member.is_management }"
         >
           <!-- Avatar -->
           <div
             class="faculty-avatar"
+            :class="{ 'management-avatar': member.is_management }"
             :style="{ background: member.image ? 'transparent' : avatarColor(member.name) }"
           >
             <img
@@ -90,7 +92,12 @@ const avatarColor = (name: string): string => {
 
           <!-- Info -->
           <div class="faculty-info">
-            <h3 class="faculty-name">{{ member.name }}</h3>
+            <div class="faculty-name-row">
+              <h3 class="faculty-name">{{ member.name }}</h3>
+              <span v-if="member.is_management" class="mgmt-badge" :class="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc') ? 'director' : 'coordinator'">
+                {{ member.management_role }}
+              </span>
+            </div>
 
             <UBadge
               v-if="member.institution"
@@ -99,10 +106,21 @@ const avatarColor = (name: string): string => {
               size="xs"
               class="inst-badge"
             >
-              {{ member.institution }}
+              <a v-if="member.institution_link" :href="member.institution_link" target="_blank" class="inst-link">
+                {{ member.institution }}
+              </a>
+              <template v-else>{{ member.institution }}</template>
             </UBadge>
 
             <p v-if="member.roles" class="faculty-roles">{{ member.roles }}</p>
+
+            <!-- Exposed Email -->
+            <div v-if="member.email" class="faculty-email-row">
+              <a :href="`mailto:${member.email}`" class="faculty-email">
+                <span class="email-icon">✉</span>
+                {{ member.email }}
+              </a>
+            </div>
 
             <!-- Module tags -->
             <div
@@ -159,9 +177,11 @@ const avatarColor = (name: string): string => {
               v-for="member in subgroup.members"
               :key="member.name"
               class="faculty-card"
+              :class="{ 'management-card': member.is_management }"
             >
               <div
                 class="faculty-avatar"
+                :class="{ 'management-avatar': member.is_management }"
                 :style="{ background: member.image ? 'transparent' : avatarColor(member.name) }"
               >
                 <img
@@ -174,7 +194,12 @@ const avatarColor = (name: string): string => {
               </div>
 
               <div class="faculty-info">
-                <h3 class="faculty-name">{{ member.name }}</h3>
+                <div class="faculty-name-row">
+                  <h3 class="faculty-name">{{ member.name }}</h3>
+                  <span v-if="member.is_management" class="mgmt-badge" :class="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc') ? 'director' : 'coordinator'">
+                    {{ member.management_role }}
+                  </span>
+                </div>
 
                 <UBadge
                   v-if="member.institution"
@@ -183,10 +208,21 @@ const avatarColor = (name: string): string => {
                   size="xs"
                   class="inst-badge"
                 >
-                  {{ member.institution }}
+                  <a v-if="member.institution_link" :href="member.institution_link" target="_blank" class="inst-link">
+                    {{ member.institution }}
+                  </a>
+                  <template v-else>{{ member.institution }}</template>
                 </UBadge>
 
                 <p v-if="member.roles" class="faculty-roles">{{ member.roles }}</p>
+
+                <!-- Exposed Email -->
+                <div v-if="member.email" class="faculty-email-row">
+                  <a :href="`mailto:${member.email}`" class="faculty-email">
+                    <span class="email-icon">✉</span>
+                    {{ member.email }}
+                  </a>
+                </div>
 
                 <div
                   v-if="getLecturerModules(member.name).length > 0"
@@ -292,6 +328,20 @@ const avatarColor = (name: string): string => {
   box-shadow: var(--shadow-md, 0 4px 12px rgba(0,0,0,.1));
 }
 
+/* Management Card & Avatar */
+.management-card {
+  border: 1.5px solid rgba(232, 119, 34, 0.3) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf8 100%);
+  box-shadow: 0 4px 15px rgba(232, 119, 34, 0.04) !important;
+}
+.management-card:hover {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 6px 20px rgba(232, 119, 34, 0.08) !important;
+}
+.management-avatar {
+  border: 2px solid var(--color-accent) !important;
+}
+
 /* ── Avatar ─────────────────────────────── */
 .faculty-avatar {
   width: 64px;
@@ -325,16 +375,83 @@ const avatarColor = (name: string): string => {
   gap: 0.3rem;
   min-width: 0;
 }
+.faculty-name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+}
 .faculty-name {
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-primary-dark, #0f2240);
   line-height: 1.25;
 }
+
+/* Management Badges */
+.mgmt-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm, 4px);
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.mgmt-badge.director {
+  background-color: rgba(232, 119, 34, 0.08);
+  color: var(--color-accent);
+  border: 1px solid rgba(232, 119, 34, 0.2);
+}
+.mgmt-badge.coordinator {
+  background-color: rgba(30, 58, 95, 0.08);
+  color: var(--color-primary);
+  border: 1px solid rgba(30, 58, 95, 0.2);
+}
+
 .inst-badge {
   align-self: flex-start;
   margin-top: 0.1rem;
 }
+
+/* Institution External Link */
+.inst-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.inst-link:hover {
+  text-decoration: underline;
+}
+
+/* Exposed Emails */
+.faculty-email-row {
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+.faculty-email {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--color-gray-600);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 150ms;
+}
+.faculty-email:hover {
+  color: var(--color-accent);
+}
+.email-icon {
+  font-size: 0.8rem;
+  color: var(--color-accent);
+}
+
 .faculty-roles {
   font-size: 0.85rem;
   color: var(--color-gray-600, #4b5563);

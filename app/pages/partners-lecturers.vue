@@ -85,15 +85,38 @@ const renderMarkdown = (text: string) => {
 
         <!-- Direct Members -->
         <div v-if="group.members && group.members.length > 0" class="faculty-grid mt-6">
-          <div v-for="member in group.members" :key="member.name" class="faculty-card">
-            <div class="faculty-avatar">
+          <div 
+            v-for="member in group.members" 
+            :key="member.name" 
+            class="faculty-card"
+            :class="{ 'management-card': member.is_management }"
+          >
+            <div class="faculty-avatar" :class="{ 'management-avatar': member.is_management }">
               <img v-if="member.image" :src="member.image" :alt="member.name" class="avatar-img" />
               <div v-else class="avatar-placeholder">{{ getInitials(member.name) }}</div>
             </div>
             <div class="faculty-info">
-              <h3 class="faculty-name">{{ member.name }}</h3>
-              <span v-if="member.institution" class="faculty-inst">{{ member.institution }}</span>
+              <div class="faculty-name-row">
+                <h3 class="faculty-name">{{ member.name }}</h3>
+                <span v-if="member.is_management" class="mgmt-badge" :class="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc') ? 'director' : 'coordinator'">
+                  {{ member.management_role }}
+                </span>
+              </div>
+              <span v-if="member.institution" class="faculty-inst">
+                <a v-if="member.institution_link" :href="member.institution_link" target="_blank" class="inst-link">
+                  {{ member.institution }}
+                </a>
+                <template v-else>{{ member.institution }}</template>
+              </span>
               <p class="faculty-roles">{{ member.roles }}</p>
+              
+              <!-- Exposed Email -->
+              <div v-if="member.email" class="faculty-email-row">
+                <a :href="`mailto:${member.email}`" class="faculty-email">
+                  <span class="email-icon">✉</span>
+                  {{ member.email }}
+                </a>
+              </div>
               
               <!-- Taught Modules -->
               <div v-if="getLecturerModules(member.name).length > 0" class="lecturer-modules mt-2">
@@ -121,15 +144,38 @@ const renderMarkdown = (text: string) => {
               <a v-if="subgroup.link" :href="subgroup.link" target="_blank" class="subgroup-link">Visit Institute &rarr;</a>
             </div>
             <div class="faculty-grid">
-              <div v-for="member in subgroup.members" :key="member.name" class="faculty-card">
-                <div class="faculty-avatar">
+              <div 
+                v-for="member in subgroup.members" 
+                :key="member.name" 
+                class="faculty-card"
+                :class="{ 'management-card': member.is_management }"
+              >
+                <div class="faculty-avatar" :class="{ 'management-avatar': member.is_management }">
                   <img v-if="member.image" :src="member.image" :alt="member.name" class="avatar-img" />
                   <div v-else class="avatar-placeholder">{{ getInitials(member.name) }}</div>
                 </div>
                 <div class="faculty-info">
-                  <h3 class="faculty-name">{{ member.name }}</h3>
-                  <span v-if="member.institution" class="faculty-inst">{{ member.institution }}</span>
+                  <div class="faculty-name-row">
+                    <h3 class="faculty-name">{{ member.name }}</h3>
+                    <span v-if="member.is_management" class="mgmt-badge" :class="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc') ? 'director' : 'coordinator'">
+                      {{ member.management_role }}
+                    </span>
+                  </div>
+                  <span v-if="member.institution" class="faculty-inst">
+                    <a v-if="member.institution_link" :href="member.institution_link" target="_blank" class="inst-link">
+                      {{ member.institution }}
+                    </a>
+                    <template v-else>{{ member.institution }}</template>
+                  </span>
                   <p class="faculty-roles">{{ member.roles }}</p>
+                  
+                  <!-- Exposed Email -->
+                  <div v-if="member.email" class="faculty-email-row">
+                    <a :href="`mailto:${member.email}`" class="faculty-email">
+                      <span class="email-icon">✉</span>
+                      {{ member.email }}
+                    </a>
+                  </div>
                   
                   <!-- Taught Modules -->
                   <div v-if="getLecturerModules(member.name).length > 0" class="lecturer-modules mt-2">
@@ -219,13 +265,96 @@ const renderMarkdown = (text: string) => {
 .faculty-card { display: flex; align-items: flex-start; gap: 1.25rem; background: #fff; padding: 1.5rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--color-gray-200); transition: transform 200ms, box-shadow 200ms; }
 .faculty-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--color-gray-300); }
 
+/* Management Card & Avatar styles */
+.management-card {
+  border: 1.5px solid rgba(232, 119, 34, 0.3) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #fffbf8 100%);
+  box-shadow: 0 4px 15px rgba(232, 119, 34, 0.04) !important;
+}
+.management-card:hover {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 6px 20px rgba(232, 119, 34, 0.08) !important;
+}
+.management-avatar {
+  border: 2px solid var(--color-accent) !important;
+}
+
 .faculty-avatar { width: 70px; height: 70px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: var(--color-gray-100); border: 2px solid var(--color-gray-200); display: flex; align-items: center; justify-content: center; }
 .avatar-img { width: 100%; height: 100%; object-fit: cover; }
 .avatar-placeholder { font-size: 1.5rem; font-weight: 800; color: var(--color-gray-400); font-family: var(--font-display); }
 
 .faculty-info { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.faculty-name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+
 .faculty-name { font-size: 1.15rem; font-weight: 700; color: var(--color-primary-dark); line-height: 1.2; }
+
+/* Management Badges */
+.mgmt-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm, 4px);
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.mgmt-badge.director {
+  background-color: rgba(232, 119, 34, 0.08);
+  color: var(--color-accent);
+  border: 1px solid rgba(232, 119, 34, 0.2);
+}
+.mgmt-badge.coordinator {
+  background-color: rgba(30, 58, 95, 0.08);
+  color: var(--color-primary);
+  border: 1px solid rgba(30, 58, 95, 0.2);
+}
+
 .faculty-inst { display: inline-block; font-size: 0.75rem; font-weight: 700; color: #fff; background: var(--color-primary); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); align-self: flex-start; }
+
+/* Institution External Link */
+.inst-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.inst-link:hover {
+  text-decoration: underline;
+}
+
+/* Exposed Emails */
+.faculty-email-row {
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+.faculty-email {
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: var(--color-gray-600);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 150ms;
+}
+.faculty-email:hover {
+  color: var(--color-accent);
+}
+.email-icon {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+}
+
 .faculty-roles { font-size: 0.9rem; color: var(--color-gray-600); line-height: 1.5; margin-top: 0.25rem; }
 
 .lecturer-modules { display: flex; flex-direction: column; gap: 0.25rem; }

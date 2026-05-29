@@ -11,6 +11,7 @@ description: |
   • Constitutive equations
 lecturers:
   - "Prof. Dr.-Ing. Daniel Juhre"
+  - "Marc Ulrich"
 images: []
 pdfs:
   - title: "Module Handbook (PDF)"

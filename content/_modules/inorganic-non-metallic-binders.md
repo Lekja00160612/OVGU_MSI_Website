@@ -13,7 +13,8 @@ description: |
   • Ultra-high strength concrete - UHPC
   • Self-Compacting Concrete - SCC
   • Special mortars for grouting, repair, adhesives, extrusion and 3D printing
-lecturers: []
+lecturers:
+  - "Prof. Dr.-Ing. Thomas A. Bier"
 images: []
 pdfs:
   - title: "Module Handbook (PDF)"

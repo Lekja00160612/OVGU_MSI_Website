@@ -9,6 +9,8 @@ description: |
   • Design of process-integrated technologies
 lecturers:
   - "Prof. Dr.-Ing. Thorsten Halle"
+  - "Marc Ulrich"
+  - "Dr.-Ing. Sebastian Hütter"
 images: []
 pdfs:
   - title: "Module Handbook (PDF)"

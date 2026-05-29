@@ -9,14 +9,17 @@ const getLecturerNames = (): [string, ...string[]] => {
     'Dr. rer. nat. Sven Henning',
     'Prof. Dr. rer. nat. Jürgen Christen',
     'apl. Prof. Dr. rer. nat. habil. Frank Bertram',
-    'Prof. Dr.-Ing. Daniel Juhre'
+    'Prof. Dr.-Ing. Daniel Juhre',
+    'Marc Ulrich',
+    'Dr.-Ing. Sebastian Hütter',
+    'Prof. Dr.-Ing. Thomas A. Bier'
   ]
   try {
     const filePath = join(process.cwd(), 'content/partners-lecturers.md')
     const content = readFileSync(filePath, 'utf-8')
-    const matches = content.match(/name:\s*"([^"]+)"/g)
+    const matches = content.match(/name:\s*([^\r\n]+)/g)
     if (matches) {
-      const names = matches.map(m => m.replace(/name:\s*"/, '').replace(/"$/, '').trim())
+      const names = matches.map(m => m.replace(/name:\s*["']?/, '').replace(/["']?$/, '').trim())
       const uniqueNames = Array.from(new Set(names))
       if (uniqueNames.length > 0) {
         return uniqueNames as [string, ...string[]]
