@@ -1,6 +1,6 @@
 ---
 title: "Biocalorimetry: Q1 Research Publication by Dr. Linh Duong on Sustainable Macromolecules"
-category: "Industry Adventures"
+category: "Achievements & Events"
 date: "2026-05-28"
 image: "/images/academic_activities/biocalorimetry-for-the-biotechnological-cover.jpg"
 description: "Discover VGU breakthrough circular bioeconomy research: Dr. Hieu Linh Duong's Q1 publication on biocalorimetry, sustainable plastic recycling, and metabolic heat."

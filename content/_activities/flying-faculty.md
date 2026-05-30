@@ -1,6 +1,6 @@
 ---
 title: "International Learning: VGU Welcomes German Flying Faculty for Core Materials Science Courses"
-category: "Lab Works"
+category: "Achievements & Events"
 date: "2025-10-27"
 image: "/images/academic_activities/flying-faculty-cover.jpg"
 description: "VGU MSI program welcomes German flying faculty members from OVGU Magdeburg and Fraunhofer IMWS to deliver world-class lectures in metals and polymers."

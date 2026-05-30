@@ -1,6 +1,6 @@
 ---
 title: "Scholarship Success: VGU Materials Science Students Win Competitive DAAD Awards for Germany"
-category: "Academic Lectures"
+category: "Achievements & Events"
 date: "2026-03-09"
 image: "/images/academic_activities/daad-scholarships-cover.jpg"
 description: "VGU Materials Science students Son Tung and Thuy Khanh share reflections on winning competitive DAAD scholarships for master thesis research at OVGU, Germany."

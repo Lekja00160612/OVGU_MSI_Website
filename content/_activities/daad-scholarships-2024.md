@@ -1,6 +1,6 @@
 ---
 title: "VGU Excellence: Two MSI Students Win Prestigious DAAD Master Thesis Scholarships"
-category: "Academic Lectures"
+category: "Achievements & Events"
 date: "2026-01-27"
 image: "/images/academic_activities/daad-scholarships-2024-cover.jpg"
 description: "Two VGU Materials Science Master students, Son Tung and Thuy Khanh, win prestigious DAAD scholarships for advanced master thesis research in Germany."
