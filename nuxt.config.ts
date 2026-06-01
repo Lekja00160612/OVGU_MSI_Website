@@ -1,3 +1,6 @@
+import { readdirSync } from 'fs'
+import { join } from 'path'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
@@ -9,6 +12,30 @@ export default defineNuxtConfig({
           href: '/favicon.ico'
         }
       ]
+    }
+  },
+  hooks: {
+    'nitro:config'(nitroConfig) {
+      // Automatically discover and push all activity routes into Nitro's prerender queue
+      // This official configuration ensures 'nuxi generate' crawls every activity page,
+      // which in turn triggers Nuxt Image to process all dynamic and markdown images.
+      try {
+        const activitiesDir = join(process.cwd(), 'content/_activities')
+        const files = readdirSync(activitiesDir)
+        
+        nitroConfig.prerender = nitroConfig.prerender || {}
+        nitroConfig.prerender.routes = nitroConfig.prerender.routes || []
+        
+        for (const file of files) {
+          if (file.endsWith('.md') && !file.startsWith('00-template')) {
+            const slug = file.replace('.md', '')
+            nitroConfig.prerender.routes.push(`/academic-activities/${slug}`)
+            nitroConfig.prerender.routes.push(`/vi/academic-activities/${slug}`)
+          }
+        }
+      } catch (e) {
+        console.warn('Could not load activity routes for prerender', e)
+      }
     }
   },
   compatibilityDate: '2025-07-15',
