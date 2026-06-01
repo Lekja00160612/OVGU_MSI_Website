@@ -5,6 +5,13 @@ const { t } = useI18n()
 const { activities, highlightedActivities, localePath, pageData } = inject('pageData') as any
 
 const categories = ['All', 'Academic Lectures', 'Industrial Visits', 'Lab Trainings', 'Achievements & Events']
+
+if (import.meta.server && activities?.value) {
+  // Officially register all activity detail pages for static prerendering.
+  // This ensures that nuxi generate crawls all pages, naturally discovering and 
+  // generating all cover images and internal markdown NuxtImages via the detail routes.
+  prerenderRoutes(activities.value.map((a: any) => localePath(a.path.replace('/_activities', '/academic-activities'))))
+}
 const activeCategory = ref('All')
 const searchQuery = ref('')
 const currentPage = ref(1)
