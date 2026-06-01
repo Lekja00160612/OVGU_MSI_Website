@@ -243,15 +243,19 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
         <button class="pag-btn" :disabled="currentPage === 1" @click="currentPage--">
           &larr; {{ t('labs.prev') }}
         </button>
-        <button
-          v-for="p in totalPages"
-          :key="p"
-          class="pag-num"
-          :class="{ 'pag-num--active': currentPage === p }"
-          @click="currentPage = p"
-        >
-          {{ p }}
-        </button>
+        
+        <div class="pag-nums-scroll">
+          <button
+            v-for="p in totalPages"
+            :key="p"
+            class="pag-num"
+            :class="{ 'pag-num--active': currentPage === p }"
+            @click="currentPage = p"
+          >
+            {{ p }}
+          </button>
+        </div>
+        
         <button class="pag-btn" :disabled="currentPage === totalPages" @click="currentPage++">
           {{ t('labs.next') }} &rarr;
         </button>
@@ -426,6 +430,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   min-height: 80vh;
   background: var(--color-gray-50);
   padding-bottom: 5rem;
+  overflow-x: hidden;
 }
 
 /* ── Container ── */
@@ -661,6 +666,11 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(232, 119, 34, 0.3);
 }
+@media (max-width: 767px) {
+  .card-cta {
+    display: none !important;
+  }
+}
 .cta-icon { width: 16px; height: 16px; }
 
 /* ── No Results ── */
@@ -685,12 +695,25 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
 .pagination-bar {
   display: flex;
   align-items: center;
+  justify-content: center; /* Centers items inside the capsule perfectly */
   gap: 0.35rem;
   background: #fff;
   padding: 0.4rem 0.6rem;
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-gray-200);
+}
+.pag-nums-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.pag-nums-scroll::-webkit-scrollbar {
+  display: none; /* Hide scrollbar by default */
 }
 .pag-btn {
   background: transparent;
@@ -702,9 +725,14 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   cursor: pointer;
   border-radius: var(--radius-full);
   transition: all 200ms;
+  flex-shrink: 0;
 }
 .pag-btn:hover:not(:disabled) { color: var(--color-primary); background: var(--color-gray-100); }
-.pag-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.pag-btn:disabled {
+  color: var(--color-gray-300, #d1d5db) !important;
+  opacity: 1 !important;
+  cursor: not-allowed;
+}
 .pag-num {
   width: 32px;
   height: 32px;
@@ -719,12 +747,54 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   border-radius: 50%;
   cursor: pointer;
   transition: all 200ms;
+  flex-shrink: 0;
 }
 .pag-num:hover:not(.pag-num--active) { background: var(--color-gray-100); color: var(--color-primary); }
 .pag-num--active {
   background: var(--color-accent) !important;
   color: #fff !important;
   box-shadow: 0 2px 6px rgba(232, 119, 34, 0.3);
+}
+@media (max-width: 639px) {
+  .pagination-container {
+    margin-top: 0.5rem;
+  }
+  .pagination-bar {
+    padding: 0.25rem 0.5rem;
+    gap: 0.2rem;
+    max-width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .pag-nums-scroll {
+    max-width: 130px; /* Limits width of numbers zone so it scrolls */
+    overflow-x: auto;
+    
+    /* Styled micro-scrollbar to clearly indicate scrollability on mobile */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(232, 119, 34, 0.45) transparent;
+    padding-bottom: 3px; /* make space for micro scrollbar */
+  }
+  .pag-nums-scroll::-webkit-scrollbar {
+    display: block !important;
+    height: 3px;
+  }
+  .pag-nums-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .pag-nums-scroll::-webkit-scrollbar-thumb {
+    background: rgba(232, 119, 34, 0.45);
+    border-radius: 99px;
+  }
+  .pag-btn {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .pag-num {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
 }
 
 /* ── Research Slides ── */

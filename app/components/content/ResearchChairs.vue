@@ -582,7 +582,8 @@ const goToSlide = (idx: number) => {
 @media (max-width: 640px) {
   .slide-card {
     padding: 1.75rem 1.5rem;
-    min-height: 400px;
+    height: auto !important;
+    min-height: 440px;
   }
   .slide-title { font-size: 1.35rem; }
   .slide-head-row {
