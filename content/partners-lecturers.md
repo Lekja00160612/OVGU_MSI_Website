@@ -49,7 +49,7 @@ groups:
             image: /Lecturer_Avatar/Jurgen Christen.jpg
           - name: apl. Prof. Dr. rer. nat. habil. Frank Bertram
             roles: ""
-            image: /Lecturer_Avatar/Frank Bertram.jpg
+            image: /Lecturer_Avatar/Frank Bertram.jpeg
       - title: Chair of High Temperature Materials
         link: https://www.ht-materials.ovgu.de/
         members:

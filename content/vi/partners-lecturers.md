@@ -50,7 +50,7 @@ groups:
             image: /Lecturer_Avatar/Jurgen Christen.jpg
           - name: apl. Prof. Dr. rer. nat. habil. Frank Bertram
             roles: Giáo sư chuyên ngành
-            image: /Lecturer_Avatar/Frank Bertram.jpg
+            image: /Lecturer_Avatar/Frank Bertram.jpeg
       - title: Bộ môn Vật liệu Chịu nhiệt độ cao
         link: https://www.ht-materials.ovgu.de/
         members:
