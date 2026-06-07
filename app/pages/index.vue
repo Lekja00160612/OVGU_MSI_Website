@@ -4,7 +4,7 @@ const localePath = useLocalePath()
 
 const pathPrefix = computed(() => locale.value === 'en' ? '/' : `/${locale.value}`)
 
-const { data: raw } = await useAsyncData(`msi-home-page-${locale.value}`, () =>
+const { data: raw, refresh: refreshRaw } = await useAsyncData(`msi-home-page-${locale.value}`, () =>
   queryCollection('content').path(pathPrefix.value).first()
 )
 const { data: allActivities } = await useAsyncData(`msi-all-activities-${locale.value}`, () =>
@@ -13,15 +13,26 @@ const { data: allActivities } = await useAsyncData(`msi-all-activities-${locale.
 const { data: allModules } = await useAsyncData(`msi-all-modules-${locale.value}`, () =>
   queryCollection('modules').all()
 )
-// @nuxt/content v3: rich frontmatter (non-standard fields) is in .meta
-const page = computed(() => raw.value?.meta ?? {})
+
+// Re-fetch on client-side navigation back to this page (fixes blank page on logo click)
+const route = useRoute()
+watch(() => route.path, async (newPath) => {
+  if (newPath === '/' || newPath === `/${locale.value}`) {
+    await refreshRaw()
+  }
+})
+// @nuxt/content v3: pass the full raw document so injected child components
+// (HomeCurriculum, HomeActivities, etc.) can access both .meta and top-level fields.
+// Using only raw.value?.meta (old approach) broke after content/index.md moved
+// curriculum/hero data into MDC props instead of frontmatter.
+const page = computed(() => raw.value ?? {})
 
 // SEO Metadata for the homepage targeting prospective Master's students
 useSeoMeta({
-  title: () => page.value?.hero?.headline ? `${page.value.hero.headline} | Master of Science in Materials Science & Innovation | VGU & OVGU` : 'Master of Science in Materials Science and Innovation (MSI) | VGU & OVGU Magdeburg',
-  ogTitle: () => page.value?.hero?.headline ? `${page.value.hero.headline} | Master of Science in Materials Science & Innovation | VGU & OVGU` : 'Master of Science in Materials Science and Innovation (MSI) | VGU & OVGU Magdeburg',
-  description: () => page.value?.about?.paragraph1 || 'Study Materials Science & Innovation at VGU. Earn a German-standard joint degree from Otto von Guericke University Magdeburg & VGU with computational mechanics and wide-bandgap semiconductor specialties.',
-  ogDescription: () => page.value?.about?.paragraph1 || 'Study Materials Science & Innovation at VGU. Earn a German-standard joint degree from Otto von Guericke University Magdeburg & VGU with computational mechanics and wide-bandgap semiconductor specialties.',
+  title: () => raw.value?.title ? `${raw.value.title} | VGU & OVGU` : 'Master of Science in Materials Science and Innovation (MSI) | VGU & OVGU Magdeburg',
+  ogTitle: () => raw.value?.title ? `${raw.value.title} | VGU & OVGU` : 'Master of Science in Materials Science and Innovation (MSI) | VGU & OVGU Magdeburg',
+  description: () => raw.value?.meta?.description || 'Study Materials Science & Innovation at VGU. Earn a German-standard joint degree from Otto von Guericke University Magdeburg & VGU with computational mechanics and wide-bandgap semiconductor specialties.',
+  ogDescription: () => raw.value?.meta?.description || 'Study Materials Science & Innovation at VGU. Earn a German-standard joint degree from Otto von Guericke University Magdeburg & VGU with computational mechanics and wide-bandgap semiconductor specialties.',
 })
 
 const recentActivities = computed(() => {
@@ -77,274 +88,13 @@ const getModulesForSemester = (semNumber: number) => {
 
 const semesters = computed(() => page.value.curriculum?.semesters || [])
 const currentSemester = computed(() => semesters.value[activeTab.value] || null)
+
+provide('pageData', { page, allModules, recentActivities, localePath })
 </script>
 
 <template>
   <div v-if="raw">
-
-    <!-- ══ HERO ══ -->
-    <section class="hero" :style="{ backgroundImage: `url(${page.hero?.backgroundImage})` }">
-      <div class="hero-overlay" />
-      <div class="container hero-content">
-        <div class="badge badge-white animate-fade-in">{{ page.hero?.badge }}</div>
-        <h1 class="hero-title animate-fade-in-up delay-100">{{ page.hero?.headline }}</h1>
-        <div class="hero-logos animate-fade-in-up delay-200">
-          <img src="/Logo/VGU_Logo.png" alt="VGU" class="hero-uni-logo" />
-          <span class="hero-logo-x">×</span>
-          <img src="/Logo/OVGU_Logo.png" alt="OVGU" class="hero-uni-logo" />
-        </div>
-        <div class="hero-actions animate-fade-in-up delay-300">
-          <NuxtLink :to="localePath('https://apply.vgu.edu.vn/en')" class="btn btn-primary">{{ t('home.apply_now') }} →</NuxtLink>
-          <NuxtLink :to="localePath('/tuition-scholarships')" class="btn btn-outline-white">{{ t('home.view_scholarships') }}</NuxtLink>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ ABOUT ══ -->
-    <section class="section about-section">
-      <div class="container about-grid">
-        <div class="about-text">
-          <h2 class="about-title">{{ page.about?.headline }}</h2>
-          <div class="about-tag">{{ page.about?.subtitle }}</div>
-          <p class="about-body">{{ page.about?.paragraph1 }}</p>
-          <p class="about-body">{{ page.about?.paragraph2 }}</p>
-        </div>
-        <div class="about-visual">
-          <div class="degree-card">
-            <div class="degree-card-header">
-              <NuxtImg src="/Logo/LOGO_MSI_Full_color.png" alt="MSI" class="degree-msi-logo" />
-            </div>
-            <div class="degree-card-body">
-              <div class="degree-item">
-                <div class="degree-dot degree-dot--blue" />
-                <div>
-                  <div class="degree-label">{{ t('home.degree1') }}</div>
-                  <div class="degree-value">{{ t('home.degree1_value') }}</div>
-                </div>
-              </div>
-              <div class="degree-divider" />
-              <div class="degree-item">
-                <div class="degree-dot degree-dot--orange" />
-                <div>
-                  <div class="degree-label">{{ t('home.degree2') }}</div>
-                  <div class="degree-value">{{ t('home.degree2_value') }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ WHY CHOOSE MSI ══ -->
-    <section class="section features-section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">{{ page.whyChoose?.headline }}</h2>
-          <p class="section-subtitle">{{ page.whyChoose?.subtitle }}</p>
-        </div>
-        <div class="features-grid">
-          <div v-for="f in page.whyChoose?.features" :key="f.id" class="feature-card card" :class="{ 'feature-card--featured': f.featured }">
-            <div class="feature-icon-wrap">
-              <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path :d="iconMap[f.icon] ?? iconMap.diploma" />
-              </svg>
-            </div>
-            <h3 class="feature-title">{{ f.title }}</h3>
-            <p class="feature-desc">{{ f.description }}</p>
-            <NuxtLink v-if="f.link" :to="localePath(f.link)" class="feature-link" :class="{ 'feature-link--featured': f.featured }">{{ t('home.view_feature', { title: f.title }) }} &rarr;</NuxtLink>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ CURRICULUM ══ -->
-    <section class="section curriculum-section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">{{ page.curriculum?.headline }}</h2>
-          <p class="section-subtitle">{{ page.curriculum?.subtitle }}</p>
-        </div>
-
-        <!-- Semester Tabs -->
-        <div v-if="semesters.length" class="sem-tabs-container scroll-x">
-          <div class="sem-tabs">
-            <button
-              v-for="(s, i) in semesters"
-              :key="s.number"
-              class="sem-tab"
-              :class="{ 'sem-tab--active': activeTab === i }"
-              :style="activeTab === i ? { borderColor: s.color, color: s.color } : {}"
-              @click="activeTab = i"
-            >
-              <span class="sem-tab-num">{{ s.label }}</span>
-              <span class="sem-tab-theme">{{ s.theme }}</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Semester Panel -->
-        <Transition name="fade" mode="out-in">
-          <div
-            v-if="currentSemester"
-            :key="activeTab"
-            class="sem-panel"
-          >
-            <div
-              class="sem-panel-header"
-              :style="{ background: `linear-gradient(135deg, ${currentSemester.color} 0%, ${currentSemester.color}CC 100%)` }"
-            >
-              <div class="sem-num-big">S{{ currentSemester.number }}</div>
-              <div>
-                <div class="sem-panel-label">{{ currentSemester.label }}</div>
-                <div class="sem-panel-theme">{{ currentSemester.theme }}</div>
-              </div>
-            </div>
-            <div class="sem-modules-layout">
-              <ul class="sem-modules">
-                <li v-for="mod in getModulesForSemester(currentSemester.number)" :key="mod.path" class="sem-module">
-                  <span class="sem-module-dot" :style="{ background: currentSemester.color }" />
-                  {{ mod.title }}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </Transition>
-
-        <div class="curriculum-actions">
-          <NuxtLink :to="localePath('/program-structure')" class="btn btn-primary">
-            {{ t('home.explore_full_program') }} →
-          </NuxtLink>
-        </div>
-
-
-      </div>
-    </section>
-
-    <!-- ══ ACADEMIC ACTIVITIES ══ -->
-    <section class="section activities-section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">{{ page.activities?.headline || t('nav.academic_activities') }}</h2>
-        </div>
-        
-        <div v-if="recentActivities?.length" class="bento-grid">
-          <NuxtLink v-if="recentActivities[0]" :to="localePath(recentActivities[0].path.replace('/_activities', '/academic-activities'))" class="bento-main">
-            <div class="bento-card bento-card--large">
-              <NuxtImg :src="recentActivities[0].meta?.image || recentActivities[0].image" class="bento-img" loading="lazy" />
-              <div class="bento-overlay" />
-              <div class="bento-content">
-                <span class="bento-tag">{{ recentActivities[0].meta?.category || recentActivities[0].category }}</span>
-                <h3 class="bento-title">{{ recentActivities[0].title }}</h3>
-                <p class="bento-desc">{{ recentActivities[0].meta?.description || recentActivities[0].description }}</p>
-              </div>
-            </div>
-          </NuxtLink>
-          
-          <div class="bento-side">
-            <NuxtLink v-if="recentActivities[1]" :to="localePath(recentActivities[1].path.replace('/_activities', '/academic-activities'))" class="bento-card bento-card--wide">
-              <NuxtImg :src="recentActivities[1].meta?.image || recentActivities[1].image" class="bento-img" loading="lazy" />
-              <div class="bento-overlay bento-overlay--light" />
-              <div class="bento-content">
-                <span class="bento-tag">{{ recentActivities[1].meta?.category || recentActivities[1].category }}</span>
-                <h3 class="bento-title">{{ recentActivities[1].title }}</h3>
-              </div>
-            </NuxtLink>
-            
-            <div class="bento-bottom-row">
-              <NuxtLink v-if="recentActivities[2]" :to="localePath(recentActivities[2].path.replace('/_activities', '/academic-activities'))" class="bento-card">
-                <NuxtImg :src="recentActivities[2].meta?.image || recentActivities[2].image" class="bento-img" loading="lazy" />
-                <div class="bento-overlay bento-overlay--light" />
-                <div class="bento-content bento-content--bottom">
-                  <h3 class="bento-title bento-title--small">{{ recentActivities[2].title }}</h3>
-                </div>
-              </NuxtLink>
-              
-              <NuxtLink v-if="recentActivities[3]" :to="localePath(recentActivities[3].path.replace('/_activities', '/academic-activities'))" class="bento-card">
-                <NuxtImg :src="recentActivities[3].meta?.image || recentActivities[3].image" class="bento-img" loading="lazy" />
-                <div class="bento-overlay bento-overlay--light" />
-                <div class="bento-content bento-content--bottom">
-                  <h3 class="bento-title bento-title--small">{{ recentActivities[3].title }}</h3>
-                </div>
-              </NuxtLink>
-            </div>
-          </div>
-        </div>
-
-        <div class="activities-actions">
-          <NuxtLink :to="localePath('/academic-activities')" class="btn btn-primary">
-            {{ t('home.explore_all') }} &rarr;
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ HYBRID LEARNING ══ -->
-    <section class="section hybrid-section" id="hybrid">
-      <div class="container">
-        <div class="hybrid-grid">
-          <div class="hybrid-text">
-            <div class="badge badge-accent">{{ page.hybrid?.badge }}</div>
-            <h2 class="hybrid-title">{{ page.hybrid?.headline }}</h2>
-            <p class="hybrid-sub">{{ page.hybrid?.subtitle }}</p>
-            <p class="hybrid-desc">{{ page.hybrid?.description }}</p>
-            <div class="hybrid-contact">
-              <span>📞 {{ page.hybrid?.contact }}</span>
-              <span>🌐 {{ page.hybrid?.website }}</span>
-            </div>
-          </div>
-
-          <div class="hybrid-schedule">
-            <div class="schedule-total">
-              <span class="schedule-total-num">20</span>
-              <span class="schedule-total-label">{{ t('home.academic_hours') }}</span>
-            </div>
-            <div class="schedule-rows">
-              <div
-                v-for="row in page.hybrid?.schedule"
-                :key="row.day"
-                class="schedule-row"
-                :class="row.mode === 'Online' ? 'schedule-row--online' : 'schedule-row--onsite'"
-              >
-                <div class="schedule-day">{{ row.day }}</div>
-                <div class="schedule-info">
-                  <div class="schedule-time">{{ row.time }}</div>
-                  <div class="schedule-location">{{ row.location }}</div>
-                </div>
-                <div class="schedule-meta">
-                  <span class="schedule-mode-badge" :class="row.mode === 'Online' ? 'mode--online' : 'mode--onsite'">
-                    {{ row.mode }}
-                  </span>
-                  <span class="schedule-hours">{{ row.hours }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══ CTA ══ -->
-    <section
-      class="cta-section"
-      :style="{ backgroundImage: `url(${page.cta?.backgroundImage})` }"
-    >
-      <div class="cta-overlay" />
-      <div class="container cta-inner">
-        <div class="badge badge-white">{{ page.cta?.badge }}</div>
-        <h2 class="cta-title">{{ page.cta?.headline }}</h2>
-        <p class="cta-desc">{{ page.cta?.description }}</p>
-        <div class="cta-actions">
-          <NuxtLink :to="localePath(page.cta?.primaryLink ?? '/')" class="btn btn-primary">
-            {{ page.cta?.primaryCta }} →
-          </NuxtLink>
-          <NuxtLink :to="localePath(page.cta?.secondaryLink ?? '/')" class="btn btn-outline-white">
-            {{ page.cta?.secondaryCta }}
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
-
+    <ContentRenderer :key="route?.path" :value="raw" />
   </div>
   <div v-else class="container section" style="min-height:60vh;display:flex;align-items:center;justify-content:center">
     <p style="color:var(--color-gray-500)">{{ t('home.loading') }}</p>

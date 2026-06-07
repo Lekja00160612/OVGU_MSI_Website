@@ -21,8 +21,8 @@ const { data: activities } = await useAsyncData('labs-activities', () =>
 useSeoMeta({
   title: () => pageData.value?.title ? `${pageData.value.title} - High-Tech Research Labs | MSI VGU` : 'State-of-the-Art Research Laboratories - Materials Science & Innovation | VGU',
   ogTitle: () => pageData.value?.title ? `${pageData.value.title} - High-Tech Research Labs | MSI VGU` : 'State-of-the-Art Research Laboratories - Materials Science & Innovation | VGU',
-  description: () => pageData.value?.description || 'Explore the premium materials characterization laboratories at VGU. Fully equipped with XRD, SEM, AFM, and optical spectroscopy instruments for advanced materials research.',
-  ogDescription: () => pageData.value?.description || 'Explore the premium materials characterization laboratories at VGU. Fully equipped with XRD, SEM, AFM, and optical spectroscopy instruments for advanced materials research.',
+  description: () => pageData.value?.meta?.description || 'Explore the premium materials characterization laboratories at VGU. Fully equipped with XRD, SEM, AFM, and optical spectroscopy instruments for advanced materials research.',
+  ogDescription: () => pageData.value?.meta?.description || 'Explore the premium materials characterization laboratories at VGU. Fully equipped with XRD, SEM, AFM, and optical spectroscopy instruments for advanced materials research.',
 })
 
 // Fetch research chairs dynamically from Nuxt Content
@@ -156,7 +156,7 @@ const prevSlide = () => { activeSlideIndex.value = (activeSlideIndex.value - 1 +
   <div class="page-labs">
 
     <!-- ── Header Banner ── -->
-    <PageHeader :title="pageData?.title || t('labs.title')" :description="pageData?.description || t('labs.subtitle')" />
+    <PageHeader :title="pageData?.title || t('labs.title')" :description="pageData?.meta?.description || t('labs.subtitle')" />
 
     <!-- ── Search + Filter Bar ── -->
     <div ref="filterBarRef" class="container filter-bar">

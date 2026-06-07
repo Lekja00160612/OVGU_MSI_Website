@@ -12,8 +12,8 @@ const { data: pageData } = await useAsyncData(`partners-page-${locale.value}`, (
 useSeoMeta({
   title: () => pageData.value?.title ? `${pageData.value.title} - Faculty & Partners | MSI VGU` : 'German Faculty, Lecturers & Partners - Materials Science & Innovation | VGU',
   ogTitle: () => pageData.value?.title ? `${pageData.value.title} - Faculty & Partners | MSI VGU` : 'German Faculty, Lecturers & Partners - Materials Science & Innovation | VGU',
-  description: () => pageData.value?.description || 'Meet the outstanding international faculty and professors from Otto von Guericke University Magdeburg (OVGU) and VGU delivering world-class lectures in Materials Science & Innovation.',
-  ogDescription: () => pageData.value?.description || 'Meet the outstanding international faculty and professors from Otto von Guericke University Magdeburg (OVGU) and VGU delivering world-class lectures in Materials Science & Innovation.',
+  description: () => pageData.value?.meta?.description || 'Meet the outstanding international faculty and professors from Otto von Guericke University Magdeburg (OVGU) and VGU delivering world-class lectures in Materials Science & Innovation.',
+  ogDescription: () => pageData.value?.meta?.description || 'Meet the outstanding international faculty and professors from Otto von Guericke University Magdeburg (OVGU) and VGU delivering world-class lectures in Materials Science & Innovation.',
 })
 
 // Fetch all modules to build lecturers associations
@@ -43,38 +43,19 @@ const getLecturerModules = (lecturerName: string) => {
 // @nuxt/content v3: rich frontmatter properties (headline, intro, groups) live in .meta
 const page = computed(() => pageData.value?.meta ?? {})
 
-const renderMarkdown = (text: string) => {
-  if (!text) return ''
-  return text
-    .split(/\n\s*\n/)
-    .map(para => {
-      const trimmed = para.trim()
-      if (!trimmed) return ''
-      if (trimmed.startsWith('- ')) {
-        const items = trimmed.split(/\n\s*-\s+/)
-          .map(item => {
-            const cleanItem = item.replace(/^-\s+/, '').trim()
-            if (!cleanItem) return ''
-            return `<li class="intro-li">${cleanItem}</li>`
-          })
-          .filter(Boolean)
-          .join('')
-        return `<ul class="intro-ul">${items}</ul>`
-      }
-      return `<p class="intro-paragraph">${trimmed.replace(/\n/g, ' ')}</p>`
-    })
-    .join('')
-}
+
 </script>
 
 <template>
   <div class="page-partners">
     <!-- Header -->
-    <PageHeader :title="pageData?.title || 'Partners & Lecturers'" :description="pageData?.description" />
+    <PageHeader :title="pageData?.title || 'Partners & Lecturers'" :description="pageData?.meta?.description" />
     
     <!-- Intro -->
     <div class="container intro-section text-center">
-      <div class="intro-text" v-html="renderMarkdown(page.intro)" />
+      <div class="intro-text">
+        <ContentRenderer v-if="pageData" :value="pageData" />
+      </div>
     </div>
 
     <!-- Groups -->
@@ -205,15 +186,17 @@ const renderMarkdown = (text: string) => {
 <style scoped>
 .page-partners { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 5rem; }
 
-.intro-section { max-width: 900px; margin: 0 auto 5rem auto; }
-.intro-text { font-size: 1.15rem; color: var(--color-gray-700); line-height: 1.8; margin-bottom: 2.5rem; }
-.intro-text :deep(.intro-paragraph) {
+.intro-section { max-width: 850px; margin: 0 auto 4rem auto; }
+.intro-text { font-size: 1.1rem; color: var(--color-gray-700); line-height: 1.8; }
+.intro-text :deep(p) {
+  font-size: 1.1rem;
+  line-height: 1.8;
   margin-bottom: 1.5rem;
 }
-.intro-text :deep(.intro-paragraph:last-child) {
+.intro-text :deep(p:last-child) {
   margin-bottom: 0;
 }
-.intro-text :deep(.intro-ul) {
+.intro-text :deep(ul) {
   list-style: none;
   padding-left: 0;
   margin-bottom: 1.5rem;
@@ -222,16 +205,21 @@ const renderMarkdown = (text: string) => {
   gap: 0.75rem;
   text-align: left;
 }
-.intro-text :deep(.intro-li) {
+.intro-text :deep(li) {
+  font-size: 1.1rem;
+  line-height: 1.8;
   padding: 0.25rem 0 0.25rem 1.5rem;
   position: relative;
 }
-.intro-text :deep(.intro-li::before) {
+.intro-text :deep(li::before) {
   content: '▸';
   position: absolute;
   left: 0;
   color: var(--color-accent);
   font-size: 0.85em;
+}
+.intro-text :deep(strong) {
+  color: var(--color-primary);
 }
 
 .content-section { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 4rem; }

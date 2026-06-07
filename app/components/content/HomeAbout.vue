@@ -1,5 +1,27 @@
 <script setup lang="ts">
-const { page } = inject('pageData') as any
+const props = defineProps<{
+  headline?: string
+  subtitle?: string
+  paragraph1?: string
+  paragraph2?: string
+  degree1Label?: string
+  degree1Value?: string
+  degree2Label?: string
+  degree2Value?: string
+}>()
+
+const pageData = inject('pageData', null) as any
+const page = computed(() => pageData?.page?.value ?? {})
+const { t } = useI18n()
+
+const displayHeadline = computed(() => props.headline ?? page.value.about?.headline)
+const displaySubtitle = computed(() => props.subtitle ?? page.value.about?.subtitle)
+const displayParagraph1 = computed(() => props.paragraph1 ?? page.value.about?.paragraph1)
+const displayParagraph2 = computed(() => props.paragraph2 ?? page.value.about?.paragraph2)
+const displayDegree1Label = computed(() => props.degree1Label ?? t('home.degree1'))
+const displayDegree1Value = computed(() => props.degree1Value ?? t('home.degree1_value'))
+const displayDegree2Label = computed(() => props.degree2Label ?? t('home.degree2'))
+const displayDegree2Value = computed(() => props.degree2Value ?? t('home.degree2_value'))
 </script>
 
 <template>
@@ -7,10 +29,10 @@ const { page } = inject('pageData') as any
     <div class="container about-grid">
       <!-- Left: Text -->
       <div class="about-text">
-        <h2 class="about-title">{{ page.about?.headline }}</h2>
-        <div class="about-tag">{{ page.about?.subtitle }}</div>
-        <p class="about-body">{{ page.about?.paragraph1 }}</p>
-        <p class="about-body">{{ page.about?.paragraph2 }}</p>
+        <h2 v-if="displayHeadline" class="about-title">{{ displayHeadline }}</h2>
+        <div v-if="displaySubtitle" class="about-tag">{{ displaySubtitle }}</div>
+        <p v-if="displayParagraph1" class="about-body">{{ displayParagraph1 }}</p>
+        <p v-if="displayParagraph2" class="about-body">{{ displayParagraph2 }}</p>
       </div>
 
       <!-- Right: Degree Card -->
@@ -23,16 +45,16 @@ const { page } = inject('pageData') as any
             <div class="degree-item">
               <div class="degree-dot degree-dot--blue" />
               <div>
-                <div class="degree-label">Degree 1</div>
-                <div class="degree-value">M.Sc. — Otto von Guericke University Magdeburg</div>
+                <div class="degree-label">{{ displayDegree1Label }}</div>
+                <div class="degree-value">{{ displayDegree1Value }}</div>
               </div>
             </div>
             <div class="degree-divider" />
             <div class="degree-item">
               <div class="degree-dot degree-dot--orange" />
               <div>
-                <div class="degree-label">Degree 2</div>
-                <div class="degree-value">M.Sc. — Vietnamese-German University</div>
+                <div class="degree-label">{{ displayDegree2Label }}</div>
+                <div class="degree-value">{{ displayDegree2Value }}</div>
               </div>
             </div>
           </div>

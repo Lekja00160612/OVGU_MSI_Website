@@ -1,28 +1,64 @@
 <script setup lang="ts">
-const { page, recentActivities, localePath } = inject('pageData') as any
+const props = defineProps<{
+  headline?: string
+  recentActivities?: any[]
+}>()
+
+const pageData = inject('pageData', null) as any
+const page = computed(() => pageData?.page?.value ?? {})
+const injectedActivities = computed(() => pageData?.recentActivities?.value ?? [])
+const localePath = pageData?.localePath ?? ((path: string) => path)
+const { t, locale } = useI18n()
+
+// Local fallback query if injected recentActivities is not available
+const localActivities = ref<any[]>([])
+if (!pageData) {
+  const { data } = await useAsyncData(`msi-home-activities-${locale.value}`, () =>
+    queryCollection('activities').all()
+  )
+  if (data.value) {
+    const highlighted = data.value.filter(a => a.highlighted === true || a.meta?.highlighted === true)
+    const sortByDateDesc = (a: any, b: any) => {
+      const dateA = a.date || a.meta?.date || ''
+      const dateB = b.date || b.meta?.date || ''
+      return dateB.localeCompare(dateA)
+    }
+    const sortedHighlighted = [...highlighted].sort(sortByDateDesc)
+    if (sortedHighlighted.length >= 4) {
+      localActivities.value = sortedHighlighted.slice(0, 4)
+    } else {
+      const nonHighlighted = data.value.filter(a => !(a.highlighted === true || a.meta?.highlighted === true))
+      const sortedNonHighlighted = [...nonHighlighted].sort(sortByDateDesc)
+      localActivities.value = [...sortedHighlighted, ...sortedNonHighlighted].slice(0, 4)
+    }
+  }
+}
+
+const displayHeadline = computed(() => props.headline ?? page.value.activities?.headline ?? t('nav.academic_activities'))
+const displayActivities = computed(() => props.recentActivities ?? (pageData ? injectedActivities.value : localActivities.value))
 </script>
 
 <template>
   <section class="section activities-section">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">{{ page.activities?.headline || 'Academic Activities' }}</h2>
+        <h2 v-if="displayHeadline" class="section-title">{{ displayHeadline }}</h2>
       </div>
 
-      <div v-if="recentActivities?.length" class="bento-grid">
+      <div v-if="displayActivities?.length" class="bento-grid">
         <!-- Main large card -->
         <NuxtLink
-          v-if="recentActivities[0]"
-          :to="localePath(recentActivities[0].path.replace('/_activities', '/academic-activities'))"
+          v-if="displayActivities[0]"
+          :to="localePath(displayActivities[0].path.replace('/_activities', '/academic-activities'))"
           class="bento-main"
         >
           <div class="bento-card bento-card--large">
-            <NuxtImg :src="recentActivities[0].meta?.image || recentActivities[0].image" class="bento-img" loading="lazy" />
+            <NuxtImg :src="displayActivities[0].meta?.image || displayActivities[0].image" class="bento-img" loading="lazy" />
             <div class="bento-overlay" />
             <div class="bento-content">
-              <span class="bento-tag">{{ recentActivities[0].meta?.category || recentActivities[0].category }}</span>
-              <h3 class="bento-title">{{ recentActivities[0].title }}</h3>
-              <p class="bento-desc">{{ recentActivities[0].meta?.description || recentActivities[0].description }}</p>
+              <span class="bento-tag">{{ displayActivities[0].meta?.category || displayActivities[0].category }}</span>
+              <h3 class="bento-title">{{ displayActivities[0].title }}</h3>
+              <p class="bento-desc">{{ displayActivities[0].meta?.description || displayActivities[0].description }}</p>
             </div>
           </div>
         </NuxtLink>
@@ -30,50 +66,50 @@ const { page, recentActivities, localePath } = inject('pageData') as any
         <!-- Side column -->
         <div class="bento-side">
           <NuxtLink
-            v-if="recentActivities[1]"
-            :to="localePath(recentActivities[1].path.replace('/_activities', '/academic-activities'))"
+            v-if="displayActivities[1]"
+            :to="localePath(displayActivities[1].path.replace('/_activities', '/academic-activities'))"
             class="bento-card bento-card--wide"
           >
-            <NuxtImg :src="recentActivities[1].meta?.image || recentActivities[1].image" class="bento-img" loading="lazy" />
+            <NuxtImg :src="displayActivities[1].meta?.image || displayActivities[1].image" class="bento-img" loading="lazy" />
             <div class="bento-overlay bento-overlay--light" />
             <div class="bento-content">
-              <span class="bento-tag">{{ recentActivities[1].meta?.category || recentActivities[1].category }}</span>
-              <h3 class="bento-title">{{ recentActivities[1].title }}</h3>
+              <span class="bento-tag">{{ displayActivities[1].meta?.category || displayActivities[1].category }}</span>
+              <h3 class="bento-title">{{ displayActivities[1].title }}</h3>
             </div>
           </NuxtLink>
 
           <!-- Bottom row: cards 3 & 4 -->
           <div class="bento-bottom-row">
             <NuxtLink
-              v-if="recentActivities[2]"
-              :to="localePath(recentActivities[2].path.replace('/_activities', '/academic-activities'))"
+              v-if="displayActivities[2]"
+              :to="localePath(displayActivities[2].path.replace('/_activities', '/academic-activities'))"
               class="bento-card"
             >
-              <NuxtImg :src="recentActivities[2].meta?.image || recentActivities[2].image" class="bento-img" loading="lazy" />
+              <NuxtImg :src="displayActivities[2].meta?.image || displayActivities[2].image" class="bento-img" loading="lazy" />
               <div class="bento-overlay bento-overlay--light" />
               <div class="bento-content bento-content--bottom">
-                <h3 class="bento-title bento-title--small">{{ recentActivities[2].title }}</h3>
+                <h3 class="bento-title bento-title--small">{{ displayActivities[2].title }}</h3>
               </div>
             </NuxtLink>
 
             <NuxtLink
-              v-if="recentActivities[3]"
-              :to="localePath(recentActivities[3].path.replace('/_activities', '/academic-activities'))"
+              v-if="displayActivities[3]"
+              :to="localePath(displayActivities[3].path.replace('/_activities', '/academic-activities'))"
               class="bento-card"
             >
-              <NuxtImg :src="recentActivities[3].meta?.image || recentActivities[3].image" class="bento-img" loading="lazy" />
+              <NuxtImg :src="displayActivities[3].meta?.image || displayActivities[3].image" class="bento-img" loading="lazy" />
               <div class="bento-overlay bento-overlay--light" />
               <div class="bento-content bento-content--bottom">
-                <h3 class="bento-title bento-title--small">{{ recentActivities[3].title }}</h3>
+                <h3 class="bento-title bento-title--small">{{ displayActivities[3].title }}</h3>
               </div>
             </NuxtLink>
           </div>
         </div>
       </div>
 
-      <div class="explore-row">
-        <NuxtLink :to="localePath('/academic-activities')" class="btn btn-primary px-8">
-          Explore All Academic Activities &rarr;
+      <div class="activities-actions">
+        <NuxtLink :to="localePath('/academic-activities')" class="btn btn-primary" style="padding-left: 1rem; padding-right: 1rem;">
+          {{ t('home.explore_all') }} &rarr;
         </NuxtLink>
       </div>
     </div>
@@ -177,7 +213,7 @@ const { page, recentActivities, localePath } = inject('pageData') as any
   text-shadow: 0 1px 8px rgba(0,0,0,0.5);
 }
 
-.explore-row {
+.activities-actions {
   display: flex;
   justify-content: center;
   margin-top: 2.5rem;

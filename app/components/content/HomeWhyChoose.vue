@@ -1,5 +1,27 @@
 <script setup lang="ts">
-const { page, localePath } = inject('pageData') as any
+interface FeatureItem {
+  id: number
+  icon: string
+  title: string
+  description: string
+  link?: string
+  featured?: boolean
+}
+
+const props = defineProps<{
+  headline?: string
+  subtitle?: string
+  features?: FeatureItem[]
+}>()
+
+const pageData = inject('pageData', null) as any
+const page = computed(() => pageData?.page?.value ?? {})
+const localePath = pageData?.localePath ?? ((path: string) => path)
+const { t } = useI18n()
+
+const displayHeadline = computed(() => props.headline ?? page.value.whyChoose?.headline)
+const displaySubtitle = computed(() => props.subtitle ?? page.value.whyChoose?.subtitle)
+const displayFeatures = computed(() => props.features ?? page.value.whyChoose?.features ?? [])
 
 const iconMap: Record<string, string> = {
   diploma:    'M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z',
@@ -15,11 +37,11 @@ const iconMap: Record<string, string> = {
   <section class="section features-section">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">{{ page.whyChoose?.headline }}</h2>
-        <p class="section-subtitle">{{ page.whyChoose?.subtitle }}</p>
+        <h2 v-if="displayHeadline" class="section-title">{{ displayHeadline }}</h2>
+        <p v-if="displaySubtitle" class="section-subtitle">{{ displaySubtitle }}</p>
       </div>
       <div class="features-grid">
-        <div v-for="f in page.whyChoose?.features" :key="f.id" class="feature-card card">
+        <div v-for="f in displayFeatures" :key="f.id" class="feature-card card" :class="{ 'feature-card--featured': f.featured }">
           <div class="feature-icon-wrap">
             <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path :d="iconMap[f.icon] ?? iconMap.diploma" />
@@ -27,7 +49,9 @@ const iconMap: Record<string, string> = {
           </div>
           <h3 class="feature-title">{{ f.title }}</h3>
           <p class="feature-desc">{{ f.description }}</p>
-          <NuxtLink v-if="f.link" :to="localePath(f.link)" class="feature-link">View {{ f.title }} &rarr;</NuxtLink>
+          <NuxtLink v-if="f.link" :to="localePath(f.link)" class="feature-link" :class="{ 'feature-link--featured': f.featured }">
+            {{ t('home.view_feature', { title: f.title }) }} &rarr;
+          </NuxtLink>
         </div>
       </div>
     </div>

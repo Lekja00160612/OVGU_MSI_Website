@@ -1,41 +1,75 @@
 <script setup lang="ts">
-const { page, allModules, localePath } = inject('pageData') as any
+interface Semester {
+  number: number
+  label: string
+  theme: string
+  color: string
+}
+
+const props = defineProps<{
+  headline?: string
+  subtitle?: string
+  semesters?: Semester[]
+}>()
+
+const pageData = inject('pageData', null) as any
+const page = computed(() => pageData?.page?.value ?? {})
+const injectedModules = computed(() => pageData?.allModules?.value ?? [])
+const localePath = pageData?.localePath ?? ((path: string) => path)
+const { t, locale } = useI18n()
+
+// If allModules was not injected, query it locally
+const localModules = ref<any[]>([])
+if (!pageData) {
+  const { data } = await useAsyncData(`msi-curriculum-modules-${locale.value}`, () =>
+    queryCollection('modules').all()
+  )
+  if (data.value) {
+    localModules.value = data.value
+  }
+}
+
+const allModules = computed(() => pageData ? injectedModules.value : localModules.value)
+
+const displayHeadline = computed(() => props.headline ?? page.value.curriculum?.headline)
+const displaySubtitle = computed(() => props.subtitle ?? page.value.curriculum?.subtitle)
+const displaySemesters = computed(() => props.semesters ?? page.value.curriculum?.semesters ?? [])
 
 const activeTab = ref(0)
+const currentSemester = computed(() => displaySemesters.value[activeTab.value] ?? null)
 
-const semesters = computed(() => page.curriculum?.semesters || [])
-const currentSemester = computed(() => semesters.value[activeTab.value] || null)
-
-watch(activeTab, () => {
-  // Reset scroll when tab changes (if needed)
+const currentModules = computed(() => {
+  if (!allModules.value || !currentSemester.value) return []
+  return allModules.value.filter(m => 
+    ((m.semester || m.meta?.semester) === currentSemester.value!.number) && 
+    !(m.is_elective || m.meta?.is_elective)
+  )
 })
-
-const getModulesForSemester = (semNumber: number) => {
-  return allModules?.filter((m: any) => (m.meta?.semester || m.semester) === semNumber) || []
-}
 </script>
 
 <template>
   <section class="section curriculum-section">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">{{ page.curriculum?.headline }}</h2>
-        <p class="section-subtitle">{{ page.curriculum?.subtitle }}</p>
+        <h2 v-if="displayHeadline" class="section-title">{{ displayHeadline }}</h2>
+        <p v-if="displaySubtitle" class="section-subtitle">{{ displaySubtitle }}</p>
       </div>
 
       <!-- Semester Tabs -->
-      <div v-if="semesters.length" class="sem-tabs">
-        <button
-          v-for="(s, i) in semesters"
-          :key="s.number"
-          class="sem-tab"
-          :class="{ 'sem-tab--active': activeTab === i }"
-          :style="activeTab === i ? { borderColor: s.color, color: s.color } : {}"
-          @click="activeTab = i"
-        >
-          <span class="sem-tab-num">{{ s.label }}</span>
-          <span class="sem-tab-theme">{{ s.theme }}</span>
-        </button>
+      <div class="sem-tabs-container scroll-x">
+        <div class="sem-tabs">
+          <UButton
+            v-for="(s, i) in displaySemesters"
+            :key="s.number"
+            variant="outline"
+            :class="['sem-tab', { 'sem-tab--active': activeTab === i }]"
+            :style="activeTab === i ? { borderColor: s.color, color: s.color } : {}"
+            @click="activeTab = i"
+          >
+            <span class="sem-tab-num">{{ s.label }}</span>
+            <span class="sem-tab-theme">{{ s.theme }}</span>
+          </UButton>
+        </div>
       </div>
 
       <!-- Semester Panel -->
@@ -57,7 +91,7 @@ const getModulesForSemester = (semNumber: number) => {
           </div>
           <div class="sem-modules-layout">
             <ul class="sem-modules">
-              <li v-for="mod in getModulesForSemester(currentSemester.number)" :key="mod.path" class="sem-module">
+              <li v-for="mod in currentModules" :key="mod.path" class="sem-module">
                 <span class="sem-module-dot" :style="{ background: currentSemester.color }" />
                 {{ mod.title }}
               </li>
@@ -68,7 +102,7 @@ const getModulesForSemester = (semNumber: number) => {
                 class="btn btn-curriculum"
                 :style="{ '--semester-color': currentSemester.color }"
               >
-                Explore Detailed Program Structure
+                {{ t('home.explore_full_program') }} →
               </NuxtLink>
             </div>
           </div>
@@ -142,8 +176,8 @@ const getModulesForSemester = (semNumber: number) => {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
-  min-height: 330px;
-  max-height: 330px;
+  min-height: 285px;
+  max-height: 285px;
   overflow-y: auto;
 }
 .sem-module {
@@ -168,6 +202,8 @@ const getModulesForSemester = (semNumber: number) => {
   color: var(--semester-color) !important;
   background: transparent;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .btn-curriculum:hover {
   background: var(--semester-color) !important;

@@ -1,21 +1,38 @@
 <script setup lang="ts">
-const { page, localePath } = inject('pageData') as any
+const props = defineProps<{
+  badge?: string
+  headline?: string
+  backgroundImage?: string
+  applyUrl?: string
+  scholarshipsUrl?: string
+}>()
+
+const pageData = inject('pageData', null) as any
+const page = computed(() => pageData?.page?.value ?? {})
+const localePath = pageData?.localePath ?? ((path: string) => path)
+const { t } = useI18n()
+
+const displayBadge = computed(() => props.badge ?? page.value.hero?.badge)
+const displayHeadline = computed(() => props.headline ?? page.value.hero?.headline)
+const displayBackgroundImage = computed(() => props.backgroundImage ?? page.value.hero?.backgroundImage)
+const displayApplyUrl = computed(() => props.applyUrl ?? 'https://apply.vgu.edu.vn/en')
+const displayScholarshipsUrl = computed(() => props.scholarshipsUrl ?? '/tuition-scholarships')
 </script>
 
 <template>
-  <section class="hero" :style="{ backgroundImage: `url(${page.hero?.backgroundImage})` }">
+  <section class="hero" :style="{ backgroundImage: `url(${displayBackgroundImage})` }">
     <div class="hero-overlay" />
     <div class="container hero-content">
-      <div class="badge badge-white animate-fade-in">{{ page.hero?.badge }}</div>
-      <h1 class="hero-title animate-fade-in-up delay-100">{{ page.hero?.headline }}</h1>
+      <div v-if="displayBadge" class="badge badge-white animate-fade-in">{{ displayBadge }}</div>
+      <h1 v-if="displayHeadline" class="hero-title animate-fade-in-up delay-100">{{ displayHeadline }}</h1>
       <div class="hero-logos animate-fade-in-up delay-200">
         <img src="/Logo/VGU_Logo.png" alt="VGU" class="hero-uni-logo" />
         <span class="hero-logo-x">×</span>
-        <img src="/Logo/OVGU_Logo_Transparent.svg" alt="OVGU" class="hero-uni-logo" />
+        <img src="/Logo/OVGU_Logo.png" alt="OVGU" class="hero-uni-logo" />
       </div>
       <div class="hero-actions animate-fade-in-up delay-300">
-        <NuxtLink :to="localePath('/future-students')" class="btn btn-primary">Explore the Program →</NuxtLink>
-        <NuxtLink :to="localePath('/tuition-scholarships')" class="btn btn-outline-white">View Scholarships</NuxtLink>
+        <NuxtLink :to="displayApplyUrl.startsWith('http') ? displayApplyUrl : localePath(displayApplyUrl)" class="btn btn-primary">{{ t('home.apply_now') }} →</NuxtLink>
+        <NuxtLink :to="localePath(displayScholarshipsUrl)" class="btn btn-outline-white">{{ t('home.view_scholarships') }}</NuxtLink>
       </div>
     </div>
   </section>

@@ -1,35 +1,65 @@
 <script setup lang="ts">
-const { page } = inject('pageData') as any
+interface ScheduleRow {
+  day: string
+  time: string
+  mode: string
+  location: string
+  hours: string
+}
+
+const props = defineProps<{
+  headline?: string
+  badge?: string
+  subtitle?: string
+  description?: string
+  contact?: string
+  website?: string
+  schedule?: ScheduleRow[]
+  totalHours?: string
+}>()
+
+const pageData = inject('pageData', null) as any
+const page = computed(() => pageData?.page?.value ?? {})
+const { t } = useI18n()
+
+const displayHeadline = computed(() => props.headline ?? page.value.hybrid?.headline)
+const displayBadge = computed(() => props.badge ?? page.value.hybrid?.badge)
+const displaySubtitle = computed(() => props.subtitle ?? page.value.hybrid?.subtitle)
+const displayDescription = computed(() => props.description ?? page.value.hybrid?.description)
+const displayContact = computed(() => props.contact ?? page.value.hybrid?.contact)
+const displayWebsite = computed(() => props.website ?? page.value.hybrid?.website)
+const displaySchedule = computed(() => props.schedule ?? page.value.hybrid?.schedule ?? [])
+const displayTotalHours = computed(() => props.totalHours ?? page.value.hybrid?.totalHours ?? '20')
 </script>
 
 <template>
-  <section class="section hybrid-section">
+  <section class="section hybrid-section" id="hybrid">
     <div class="container">
       <div class="hybrid-grid">
         <!-- Left: Text info -->
         <div class="hybrid-text">
-          <div class="badge badge-accent">{{ page.hybrid?.badge }}</div>
-          <h2 class="hybrid-title">{{ page.hybrid?.headline }}</h2>
-          <p class="hybrid-sub">{{ page.hybrid?.subtitle }}</p>
-          <p class="hybrid-desc">{{ page.hybrid?.description }}</p>
+          <div v-if="displayBadge" class="badge badge-accent">{{ displayBadge }}</div>
+          <h2 v-if="displayHeadline" class="hybrid-title">{{ displayHeadline }}</h2>
+          <p v-if="displaySubtitle" class="hybrid-sub">{{ displaySubtitle }}</p>
+          <p v-if="displayDescription" class="hybrid-desc">{{ displayDescription }}</p>
           <div class="hybrid-contact">
-            <span>📞 {{ page.hybrid?.contact }}</span>
-            <span>🌐 {{ page.hybrid?.website }}</span>
+            <span v-if="displayContact">📞 {{ displayContact }}</span>
+            <span v-if="displayWebsite">🌐 {{ displayWebsite }}</span>
           </div>
         </div>
 
         <!-- Right: Schedule -->
         <div class="hybrid-schedule">
           <div class="schedule-total">
-            <span class="schedule-total-num">20</span>
-            <span class="schedule-total-label">Academic Hours / Week</span>
+            <span class="schedule-total-num">{{ displayTotalHours }}</span>
+            <span class="schedule-total-label">{{ t('home.academic_hours') }}</span>
           </div>
           <div class="schedule-rows">
             <div
-              v-for="row in page.hybrid?.schedule"
+              v-for="row in displaySchedule"
               :key="row.day"
               class="schedule-row"
-              :class="row.mode === 'Online' ? 'schedule-row--online' : 'schedule-row--onsite'"
+              :class="row.mode === 'Online' || row.mode === 'Trực tuyến' ? 'schedule-row--online' : 'schedule-row--onsite'"
             >
               <div class="schedule-day">{{ row.day }}</div>
               <div class="schedule-info">
@@ -37,7 +67,7 @@ const { page } = inject('pageData') as any
                 <div class="schedule-location">{{ row.location }}</div>
               </div>
               <div class="schedule-meta">
-                <span class="schedule-mode-badge" :class="row.mode === 'Online' ? 'mode--online' : 'mode--onsite'">
+                <span class="schedule-mode-badge" :class="row.mode === 'Online' || row.mode === 'Trực tuyến' ? 'mode--online' : 'mode--onsite'">
                   {{ row.mode }}
                 </span>
                 <span class="schedule-hours">{{ row.hours }}</span>

@@ -14,8 +14,8 @@ const page = computed(() => pageData.value?.meta ?? {})
 useSeoMeta({
   title: () => pageData.value?.title ? `${pageData.value.title} - Curriculum & Modules | MSI VGU` : 'Master Program Structure & Modules - Materials Science and Innovation | VGU',
   ogTitle: () => pageData.value?.title ? `${pageData.value.title} - Curriculum & Modules | MSI VGU` : 'Master Program Structure & Modules - Materials Science and Innovation | VGU',
-  description: () => pageData.value?.description || 'Explore our comprehensive German-standard curriculum, featuring modules in computational mechanics, advanced materials engineering, and wide-bandgap semiconductor devices taught by premier German lecturers.',
-  ogDescription: () => pageData.value?.description || 'Explore our comprehensive German-standard curriculum, featuring modules in computational mechanics, advanced materials engineering, and wide-bandgap semiconductor devices taught by premier German lecturers.',
+  description: () => pageData.value?.meta?.description || 'Explore our comprehensive German-standard curriculum, featuring modules in computational mechanics, advanced materials engineering, and wide-bandgap semiconductor devices taught by premier German lecturers.',
+  ogDescription: () => pageData.value?.meta?.description || 'Explore our comprehensive German-standard curriculum, featuring modules in computational mechanics, advanced materials engineering, and wide-bandgap semiconductor devices taught by premier German lecturers.',
 })
 
 // Fetch all modules
@@ -100,36 +100,17 @@ const hasGermanLecturer = (mod: any) => {
   return val === true || val === 'true'
 }
 
-const renderMarkdown = (text: string) => {
-  if (!text) return ''
-  return text
-    .split(/\n\s*\n/)
-    .map(para => {
-      const trimmed = para.trim()
-      if (!trimmed) return ''
-      if (trimmed.startsWith('- ')) {
-        const items = trimmed.split(/\n\s*-\s+/)
-          .map(item => {
-            const cleanItem = item.replace(/^-\s+/, '').trim()
-            if (!cleanItem) return ''
-            return `<li class="intro-li">${cleanItem}</li>`
-          })
-          .filter(Boolean)
-          .join('')
-        return `<ul class="intro-ul">${items}</ul>`
-      }
-      return `<p class="intro-paragraph">${trimmed.replace(/\n/g, ' ')}</p>`
-    })
-    .join('')
-}
+
 </script>
 
 <template>
   <div class="page-structure">
-    <PageHeader :title="pageData?.title || 'Program Structure'" :description="pageData?.description" />
+    <PageHeader :title="pageData?.title || 'Program Structure'" :description="pageData?.meta?.description || pageData?.meta?.subtitle" />
     
     <div class="container intro-section text-center">
-      <div class="intro-text" v-html="renderMarkdown(page.intro_text)" />
+      <div class="intro-text">
+        <ContentRenderer v-if="pageData" :value="pageData" />
+      </div>
       <div class="cta-wrapper mt-12 mb-16">
         <a href="/Documents/MODULE CATALOGUE MSI.pdf" target="_blank" class="btn btn-primary cta-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
@@ -434,8 +415,8 @@ const renderMarkdown = (text: string) => {
 }
 .page-structure { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 0rem; }
 
-.intro-section { max-width: 800px; margin: 0 auto 3rem auto; }
-.intro-text { font-size: 1.05rem; color: var(--color-gray-700); line-height: 1.75; margin-bottom: 2rem; }
+.intro-section { max-width: 850px; margin: 0 auto 4rem auto; }
+.intro-text { font-size: 1.1rem; color: var(--color-gray-700); line-height: 1.8; }
 .cta-wrapper { display: flex; justify-content: center; width: 100%; margin: 2rem 0; }
 .cta-btn { padding: 0.85rem 1.75rem; font-size: 1rem; }
 .btn-icon { width: 22px; height: 22px; margin-right: 10px; display: inline-block; vertical-align: middle; }
@@ -546,16 +527,16 @@ const renderMarkdown = (text: string) => {
 }
 
 /* Intro Text custom parsed styling */
-.intro-text :deep(.intro-paragraph) {
-  font-size: 1.05rem;
+.intro-text :deep(p) {
+  font-size: 1.1rem;
   color: var(--color-gray-700);
-  line-height: 1.75;
+  line-height: 1.8;
   margin-bottom: 1.5rem;
 }
-.intro-text :deep(.intro-paragraph:last-child) {
+.intro-text :deep(p:last-child) {
   margin-bottom: 0;
 }
-.intro-text :deep(.intro-ul) {
+.intro-text :deep(ul) {
   list-style: none;
   padding-left: 0;
   margin-bottom: 1.5rem;
@@ -564,17 +545,22 @@ const renderMarkdown = (text: string) => {
   gap: 0.75rem;
   text-align: left;
 }
-.intro-text :deep(.intro-li) {
+.intro-text :deep(li) {
+  font-size: 1.1rem;
+  line-height: 1.8;
   padding: 0.25rem 0 0.25rem 1.5rem;
   position: relative;
   color: var(--color-gray-700);
 }
-.intro-text :deep(.intro-li::before) {
+.intro-text :deep(li::before) {
   content: '▸';
   position: absolute;
   left: 0;
   color: var(--color-accent);
   font-size: 0.85em;
+}
+.intro-text :deep(strong) {
+  color: var(--color-primary);
 }
 
 .german-indicator-dot-legend {

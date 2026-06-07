@@ -1,23 +1,45 @@
 <script setup lang="ts">
-const { page, localePath } = inject('pageData') as any
+const props = defineProps<{
+  headline?: string
+  description?: string
+  badge?: string
+  backgroundImage?: string
+  primaryCta?: string
+  primaryLink?: string
+  secondaryCta?: string
+  secondaryLink?: string
+}>()
+
+const pageData = inject('pageData', null) as any
+const page = computed(() => pageData?.page?.value ?? {})
+const localePath = pageData?.localePath ?? ((path: string) => path)
+
+const displayHeadline = computed(() => props.headline ?? page.value.cta?.headline)
+const displayDescription = computed(() => props.description ?? page.value.cta?.description)
+const displayBadge = computed(() => props.badge ?? page.value.cta?.badge)
+const displayBackgroundImage = computed(() => props.backgroundImage ?? page.value.cta?.backgroundImage)
+const displayPrimaryCta = computed(() => props.primaryCta ?? page.value.cta?.primaryCta)
+const displayPrimaryLink = computed(() => props.primaryLink ?? page.value.cta?.primaryLink ?? '/')
+const displaySecondaryCta = computed(() => props.secondaryCta ?? page.value.cta?.secondaryCta)
+const displaySecondaryLink = computed(() => props.secondaryLink ?? page.value.cta?.secondaryLink ?? '/')
 </script>
 
 <template>
   <section
     class="cta-section"
-    :style="{ backgroundImage: `url(${page.cta?.backgroundImage})` }"
+    :style="{ backgroundImage: `url(${displayBackgroundImage})` }"
   >
     <div class="cta-overlay" />
     <div class="container cta-inner">
-      <div class="badge badge-white">{{ page.cta?.badge }}</div>
-      <h2 class="cta-title">{{ page.cta?.headline }}</h2>
-      <p class="cta-desc">{{ page.cta?.description }}</p>
+      <div v-if="displayBadge" class="badge badge-white">{{ displayBadge }}</div>
+      <h2 v-if="displayHeadline" class="cta-title">{{ displayHeadline }}</h2>
+      <p v-if="displayDescription" class="cta-desc">{{ displayDescription }}</p>
       <div class="cta-actions">
-        <NuxtLink :to="localePath(page.cta?.primaryLink ?? '/')" class="btn btn-primary">
-          {{ page.cta?.primaryCta }} →
+        <NuxtLink :to="localePath(displayPrimaryLink)" class="btn btn-primary">
+          {{ displayPrimaryCta }} →
         </NuxtLink>
-        <NuxtLink :to="localePath(page.cta?.secondaryLink ?? '/')" class="btn btn-outline-white">
-          {{ page.cta?.secondaryCta }}
+        <NuxtLink :to="localePath(displaySecondaryLink)" class="btn btn-outline-white">
+          {{ displaySecondaryCta }}
         </NuxtLink>
       </div>
     </div>

@@ -11,8 +11,8 @@ const { data: page } = await useAsyncData('student-life-page-' + route.path, () 
 useSeoMeta({
   title: () => page.value?.title ? `${page.value.title} - Campus Life & Dorms | MSI VGU` : 'Student Life & Campus Facilities - Materials Science and Innovation | VGU',
   ogTitle: () => page.value?.title ? `${page.value.title} - Campus Life & Dorms | MSI VGU` : 'Student Life & Campus Facilities - Materials Science and Innovation | VGU',
-  description: () => page.value?.description || 'Explore the dynamic student life at VGU. Discover state-of-the-art campus dormitories, sports facilities, student activities, and the green campus environment in Binh Duong.',
-  ogDescription: () => page.value?.description || 'Explore the dynamic student life at VGU. Discover state-of-the-art campus dormitories, sports facilities, student activities, and the green campus environment in Binh Duong.',
+  description: () => page.value?.meta?.description || 'Explore the dynamic student life at VGU. Discover state-of-the-art campus dormitories, sports facilities, student activities, and the green campus environment in Binh Duong.',
+  ogDescription: () => page.value?.meta?.description || 'Explore the dynamic student life at VGU. Discover state-of-the-art campus dormitories, sports facilities, student activities, and the green campus environment in Binh Duong.',
 })
 </script>
 
@@ -20,7 +20,7 @@ useSeoMeta({
   <main class="page-container">
     <template v-if="page">
       <!-- Premium Hero Banner -->
-      <PageHeader :title="page.title" :description="page.description" />
+      <PageHeader :title="page.title" :description="page.meta?.description" />
 
       <!-- Main Body Container -->
       <div class="container content-section">
@@ -74,7 +74,7 @@ useSeoMeta({
 }
 
 .prose :deep(h2) {
-  font-size: 1.8rem;
+  font-size: var(--font-size-3xl);
   font-weight: 700;
   color: var(--color-primary);
   margin-top: 2.5rem;
@@ -84,7 +84,7 @@ useSeoMeta({
 }
 
 .prose :deep(h3) {
-  font-size: 1.4rem;
+  font-size: var(--font-size-2xl);
   font-weight: 600;
   color: var(--color-primary);
   margin-top: 2rem;
@@ -92,7 +92,7 @@ useSeoMeta({
 }
 
 .prose :deep(p) {
-  font-size: 1.05rem;
+  font-size: var(--font-size-base);
   color: var(--color-gray-700);
   line-height: 1.7;
   margin-bottom: 1.5rem;
@@ -104,7 +104,7 @@ useSeoMeta({
 }
 
 .prose :deep(li) {
-  font-size: 1.05rem;
+  font-size: var(--font-size-base);
   color: var(--color-gray-700);
   line-height: 1.7;
   margin-bottom: 0.75rem;
