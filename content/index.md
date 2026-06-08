@@ -127,7 +127,7 @@ description: Starting with the 2026 intake, MSI adopts a flexible hybrid
   weekends deliver hands-on lab work and direct faculty interaction.
 headline: New Hybrid Learning Format
 subtitle: Balance Work & Study — German Academic Excellence
-totalHours: 20 Academic Hours / Week
+totalHours: "20"
 website: www.vgu.edu.vn
 ---
 ::

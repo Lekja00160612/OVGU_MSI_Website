@@ -15,7 +15,7 @@ const props = defineProps<{
   contact?: string
   website?: string
   schedule?: ScheduleRow[]
-  totalHours?: string
+  totalHours?: string | number
 }>()
 
 const pageData = inject('pageData', null) as any
@@ -129,6 +129,20 @@ const displayTotalHours = computed(() => props.totalHours ?? page.value.hybrid?.
   transition: box-shadow 200ms;
 }
 .schedule-row:hover { box-shadow: var(--shadow-sm); }
+@media (max-width: 639px) {
+  .schedule-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .schedule-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--color-gray-100);
+    padding-top: 0.5rem;
+    margin-top: 0.25rem;
+  }
+}
 .schedule-row--online  { border-left-color: var(--color-ovgu-blue); }
 .schedule-row--onsite  { border-left-color: var(--color-accent); }
 .schedule-day { font-weight: 700; color: var(--color-primary); font-size: 0.9rem; }

@@ -115,12 +115,25 @@ const currentModules = computed(() => {
 <style scoped>
 /* ══ CURRICULUM ══ */
 .curriculum-section { background: #fff; }
+.sem-tabs-container {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.sem-tabs-container::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
 .sem-tabs {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1rem;
-  margin-bottom: 2.5rem;
-  justify-content: center;
+  margin-bottom: 0;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  width: max-content;
+  min-width: 100%;
 }
 .sem-tab {
   display: flex;
@@ -134,11 +147,27 @@ const currentModules = computed(() => {
   cursor: pointer;
   transition: all 250ms var(--ease-out);
   min-width: 140px;
+  flex-shrink: 0;
 }
 .sem-tab:hover { border-color: var(--color-primary); }
 .sem-tab--active { background: var(--color-gray-50); box-shadow: var(--shadow-md); }
 .sem-tab-num { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 .sem-tab-theme { font-size: 0.72rem; color: var(--color-gray-500); font-weight: 500; }
+
+@media (min-width: 768px) {
+  .sem-tabs-container {
+    overflow: visible;
+    padding-bottom: 0;
+    margin-bottom: 2.5rem;
+  }
+  .sem-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+  }
+}
 
 .sem-panel {
   border-radius: var(--radius-xl);

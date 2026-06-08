@@ -130,7 +130,7 @@ description: Bắt đầu từ kỳ tuyển sinh 2026, MSI áp dụng mô hình 
   nghiệm thực hành và tương tác trực tiếp với giảng viên.
 headline: Mô Hình Học Tập Kết Hợp Mới
 subtitle: Cân Bằng Công Việc & Học Tập — Chất Lượng Học Thuật Đức
-totalHours: 20 Tiết Học / Tuần
+totalHours: "20"
 website: www.vgu.edu.vn
 ---
 ::
