@@ -5,7 +5,7 @@ room: "Room 105 - Advanced Materials Lab"
 category: "Microscopy & Imaging"
 description: "Enables ultra-high resolution electron imaging combined with chemical composition mapping (EDS) and crystallographic orientation analysis (EBSD)."
 images:
-  - "/images/labs/scanning-electron-microscope-semedsebsd/SEM+EDS+EBSD.jpg"
+  - "/images/labs/scanning-electron-microscope-semedsebsd/SEM EDS EBSD.jpg"
 pdfs:
   - title: "Equipment Operating Procedure"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"

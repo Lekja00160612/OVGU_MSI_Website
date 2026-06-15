@@ -5,7 +5,7 @@ room: "Room 105 - Advanced Materials Lab"
 category: "Synthesis & Processing"
 description: "Used for high-energy grinding of materials into nano-powders and evaluating rotary abrasion resistance."
 images:
-  - "/images/labs/planetary-ball-mill-abrasion-tester/Planetary ball mill+ Rotary abrasion tester.jpg"
+  - "/images/labs/planetary-ball-mill-abrasion-tester/Planetary ball mill Rotary abrasion tester.jpg"
 pdfs:
   - title: "Equipment Operating Procedure"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"

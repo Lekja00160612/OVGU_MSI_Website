@@ -13,7 +13,7 @@ posterComponent: "VguMasterInfoDay2026"
 
 # Reusable configuration fields (Overriding Vue defaults)
 bgImages:
-  - "/images/labs/scanning-electron-microscope-semedsebsd/SEM+EDS+EBSD.jpg"
+  - "/images/labs/scanning-electron-microscope-semedsebsd/SEM EDS EBSD.jpg"
   - "/images/labs/cleanroom-facility/Cleanroom.jpg"
   - "/images/labs/automated-material-microscope/Automated Material Microscope.jpg"
   - "/images/labs/glovebox-workstations/Glovebox Workstations.jpg"
@@ -36,7 +36,7 @@ bgImages:
   - "/images/labs/micro-hardness-tester/Micro Hardness tester.jpg"
   - "/images/labs/mili-q-water-purification-system/Mili-Q water purification system.jpg"
   - "/images/labs/oxidation-furnace/oxidation furnace.jpg"
-  - "/images/labs/planetary-ball-mill-abrasion-tester/Planetary ball mill+ Rotary abrasion tester.jpg"
+  - "/images/labs/planetary-ball-mill-abrasion-tester/Planetary ball mill Rotary abrasion tester.jpg"
   - "/images/labs/plasma-cleaner/plasma Cleaner.jpg"
   - "/images/labs/reactive-ion-etching-rie-system/RIE etching.jpg"
   - "/images/labs/refrigerator-freezer-4-to-18c/Refrigator 4 to -18 degree Celsius.jpg"
