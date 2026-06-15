@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useRoute, useI18n, useAsyncData, createError, useSeoMeta } from '#imports'
+import { useRoute, useI18n, useAsyncData, createError, useSeoMeta, computed } from '#imports'
+import VguMasterInfoDay2026 from '~/components/content/posters/VguMasterInfoDay2026.vue'
 
 const route = useRoute()
 const localePath = useLocalePath()
@@ -17,6 +18,16 @@ if (!activity.value) {
   throw createError({ statusCode: 404, statusMessage: 'Activity not found', fatal: true })
 }
 
+// Map of custom poster components
+const posterComponents: Record<string, any> = {
+  VguMasterInfoDay2026
+}
+
+const resolvedPoster = computed(() => {
+  const componentName = activity.value?.posterComponent
+  return componentName ? posterComponents[componentName] : null
+})
+
 useSeoMeta({
   title: () => activity.value?.title ? `${activity.value.title} - Academic Activities | MSI VGU` : 'Academic Activity | MSI VGU',
   ogTitle: () => activity.value?.title ? `${activity.value.title} - Academic Activities | MSI VGU` : 'Academic Activity | MSI VGU',
@@ -26,8 +37,16 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="activity-detail-page">
-    <div class="container py-12">
+  <div class="activity-detail-page" :class="{ 'invitation-detail-page': activity?.invitation }">
+    <!-- If invitation flag is true and custom component exists, render the poster -->
+    <component 
+      v-if="activity?.invitation && resolvedPoster" 
+      :is="resolvedPoster" 
+      :activity="activity" 
+    />
+    
+    <!-- Fallback standard blog-style layout -->
+    <div v-else class="container py-12">
       <NuxtLink :to="localePath('/academic-activities')" class="back-link">
         &larr; {{ t('activities.back_to_activities') }}
       </NuxtLink>
@@ -57,6 +76,17 @@ useSeoMeta({
 .activity-detail-page {
   background: var(--color-gray-50);
   min-height: 80vh;
+}
+.invitation-detail-page {
+  background: transparent !important;
+  min-height: auto !important;
+}
+@media print {
+  .invitation-detail-page {
+    background: transparent !important;
+    min-height: auto !important;
+    padding: 0 !important;
+  }
 }
 .py-12 {
   padding-top: 2rem;

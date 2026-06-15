@@ -1,8 +1,85 @@
 <script setup lang="ts">
+import { onMounted, watch } from 'vue'
+import { useAsyncData, useToast, useRuntimeConfig, queryCollection } from '#imports'
+
 const { t, locale, setLocale } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
 const mobileMenuOpen = ref(false)
+
+// Query all invitation activities that are not expired yet
+const { data: allActivities } = await useAsyncData('active-invitations-raw', () =>
+  queryCollection('activities').all()
+)
+
+const activeInvitations = computed(() => {
+  if (!allActivities.value) return []
+  const today = new Date().toISOString().split('T')[0] // 'YYYY-MM-DD'
+  return allActivities.value.filter((act: any) => {
+    const isInvitation = !!act.invitation || !!act.meta?.invitation
+    if (!isInvitation) return false
+    const expiry = act.expiryDate || act.eventDate || act.date || ''
+    return expiry >= today
+  })
+})
+
+const toast = useToast()
+const config = useRuntimeConfig()
+
+const showAcademicActivitiesToast = () => {
+  const path = route.path.replace(/\/$/, '')
+  // Matches '/academic-activities' or any subpath under it
+  const isAcademicActivities = path.endsWith('/academic-activities') || path.includes('/academic-activities/')
+
+  if (isAcademicActivities) {
+    const events = activeInvitations.value
+    if (!events || events.length === 0) return
+    
+    events.slice(0, 2).forEach((event: any) => {
+      const eventTargetRoute = localePath(event.path.replace('/_activities', '/academic-activities'))
+      
+      // Skip showing the toast if the user is already on the detail page of this specific event
+      if (route.path.replace(/\/$/, '') === eventTargetRoute.replace(/\/$/, '')) {
+        return
+      }
+      
+      const title = locale.value === 'vi' ? (event.title_vi || event.title) : event.title
+      const desc = locale.value === 'vi'
+        ? `Sự kiện: ${event.eventDate_vi || event.eventDate || event.date}`
+        : `Upcoming: ${event.eventDate || event.date}`
+
+      toast.add({
+        id: `event-toast-${event.path.replace(/\//g, '-')}-${Date.now()}`,
+        title: title,
+        description: desc,
+        icon: 'i-heroicons-ticket',
+        color: 'primary',
+        duration: config.public.eventToastDurationMs || 6000,
+        close: true,
+        actions: [
+          {
+            label: locale.value === 'vi' ? 'Xem vé →' : 'View Ticket →',
+            to: eventTargetRoute,
+            color: 'primary',
+            variant: 'solid',
+            size: 'xs',
+          }
+        ]
+      })
+    })
+  }
+}
+
+onMounted(() => {
+  // Watch both route.path and activeInvitations client-side to trigger toast on every visit
+  watch(
+    [() => route.path, activeInvitations],
+    () => {
+      showAcademicActivitiesToast()
+    },
+    { immediate: true }
+  )
+})
 
 const navLinks = computed(() => [
   { label: t('nav.potential_candidates'), to: localePath('/future-students') },

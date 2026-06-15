@@ -53,7 +53,7 @@ const page = computed(() => pageData.value?.meta ?? {})
     
     <!-- Intro -->
     <div class="container intro-section text-center">
-      <div class="intro-text">
+      <div class="intro-text text-left">
         <ContentRenderer v-if="pageData" :value="pageData" />
       </div>
     </div>

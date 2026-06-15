@@ -108,7 +108,7 @@ const hasGermanLecturer = (mod: any) => {
     <PageHeader :title="pageData?.title || 'Program Structure'" :description="pageData?.meta?.description || pageData?.meta?.subtitle" />
     
     <div class="container intro-section text-center">
-      <div class="intro-text">
+      <div class="intro-text text-left">
         <ContentRenderer v-if="pageData" :value="pageData" />
       </div>
       <div class="cta-wrapper mt-12 mb-16">

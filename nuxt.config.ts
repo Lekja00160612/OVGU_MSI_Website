@@ -43,6 +43,13 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', '@nuxt/ui', '@nuxt/image', '@nuxtjs/i18n', 'nuxt-studio'],
   css: ['~/assets/css/main.css'],
   colorMode: { preference: 'light' },
+  ui: {
+    // Tell Nuxt UI v4 where the CSS entry point is (where @import "@nuxt/ui" lives)
+    // This ensures component styles are correctly injected.
+    theme: {
+      colors: ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'neutral']
+    }
+  },
   i18n: {
     langDir: 'locales',
     locales: [
@@ -68,6 +75,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      eventToastIntervalMs: 86400000, // 24 hours
+      eventToastDurationMs: 6000, // 6 seconds auto turn off
       mdc: {
         headings: {
           anchorLinks: {

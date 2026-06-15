@@ -66,7 +66,29 @@ export default defineContentConfig({
         image: z.string(),
         date: z.string(),
         description: z.string().optional(),
-        highlighted: z.boolean().optional()
+        highlighted: z.boolean().optional(),
+        invitation: z.boolean().optional().default(false),
+        ticketLink: z.string().optional(),
+        eventDate: z.string().optional(),
+        expiryDate: z.string().optional(),
+        posterComponent: z.string().optional(),
+        bgImages: z.array(z.string()).optional(),
+        collageImages: z.array(z.string()).optional(),
+        schedule: z.array(z.object({
+          time: z.string(),
+          title: z.string(),
+          title_vi: z.string().optional(),
+          desc: z.string().optional(),
+          desc_vi: z.string().optional()
+        })).optional(),
+        focusTitle: z.string().optional(),
+        focusTitle_vi: z.string().optional(),
+        focusText: z.string().optional(),
+        focusText_vi: z.string().optional(),
+        shuttleBusInfo: z.string().optional(),
+        shuttleBusInfo_vi: z.string().optional(),
+        freeBadgeText: z.string().optional(),
+        freeBadgeText_vi: z.string().optional()
       })
     }),
     modules: defineCollection({
