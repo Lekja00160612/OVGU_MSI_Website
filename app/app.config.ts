@@ -11,6 +11,12 @@ export default defineAppConfig({
         // bg-default → our dark navy | ring-default → orange accent ring | rounded-lg → rounded-xl
         root: 'relative group overflow-hidden bg-[#0f2240] shadow-[0_12px_40px_rgba(0,0,0,.55),0_2px_10px_rgba(232,119,34,.12)] rounded-xl ring-1 ring-[rgba(232,119,34,.3)] p-4 flex gap-2.5 focus:outline-none border-l-[3px] border-l-[#e87722]',
 
+        // Structural slots: required because app.config overrides are not deep-merged for slots
+        wrapper: 'w-0 flex-1 flex flex-col',
+        actions: 'flex gap-1.5 shrink-0',
+        avatar: 'shrink-0',
+        avatarSize: '2xl',
+
         // text-highlighted → white | text-sm font-medium preserved
         title: 'text-sm font-bold text-white tracking-tight',
 

@@ -512,7 +512,7 @@ function triggerPrint() {
 .poster-container {
   width: 100%;
   max-width: 920px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   border-radius: var(--radius-3xl, 32px);
@@ -536,7 +536,7 @@ function triggerPrint() {
   grid-template-rows: repeat(8, 1fr);
   grid-auto-flow: dense; /* Packs different sized cards cleanly together without gaps */
   gap: 4px;
-  opacity: 0.28; /* Visibly high density backdrop! */
+  opacity: 0.08; /* Subtle watermark layout backdrop for text visibility */
   z-index: -2;
   pointer-events: none;
 }
@@ -595,10 +595,9 @@ function triggerPrint() {
   overflow: hidden;
   border: 1.5px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.1) inset;
-  transition: all 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1), border-color 300ms ease, box-shadow 300ms ease, opacity 300ms ease;
+  will-change: transform;
   display: flex;
   flex-direction: column;
   pointer-events: auto; /* Allow hovering on screen */
@@ -733,7 +732,7 @@ function triggerPrint() {
 }
 .poster-subtitle {
   font-size: 0.98rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
@@ -785,7 +784,7 @@ function triggerPrint() {
   display: flex;
   flex-direction: column;
   font-size: 0.98rem;
-  color: #1f2937;
+  color: #0f2240;
   line-height: 1.45;
 }
 .info-label {
@@ -898,7 +897,7 @@ function triggerPrint() {
 }
 .timeline-desc {
   font-size: 0.88rem;
-  color: #4b5563;
+  color: #1f2937;
   line-height: 1.45;
   margin: 0;
 }
@@ -926,7 +925,7 @@ function triggerPrint() {
 }
 .focus-card-text {
   font-size: 0.92rem;
-  color: #374151;
+  color: #0f2240;
   line-height: 1.65;
   margin: 0;
 }
@@ -988,7 +987,7 @@ function triggerPrint() {
 }
 .register-subtitle {
   font-size: 0.92rem;
-  color: #4b5563;
+  color: #1f2937;
   margin: 0;
 }
 .free-badge {
@@ -1008,7 +1007,7 @@ function triggerPrint() {
   grid-template-columns: 1fr;
   gap: 0.35rem 1.25rem;
   font-size: 0.85rem;
-  color: #4b5563;
+  color: #1f2937;
   margin-top: 0.85rem;
 }
 @media (min-width: 480px) {
