@@ -416,10 +416,12 @@ function triggerPrint() {
         
         <!-- QR CODE MODULE -->
         <div class="footer-right">
-          <div class="qr-box">
-            <QrCode :value="ticketLink" :margin="1" color-dark="#0f2240" />
-          </div>
-          <span class="qr-text">{{ locale === 'vi' ? 'Quét mã để đăng ký' : 'Scan to Register' }}</span>
+          <a :href="ticketLink" target="_blank" rel="noopener noreferrer" class="qr-link" :title="locale === 'vi' ? 'Nhấp để đăng ký' : 'Click to Register'">
+            <div class="qr-box">
+              <QrCode :value="ticketLink" :margin="1" color-dark="#0f2240" />
+            </div>
+            <span class="qr-text">{{ locale === 'vi' ? 'Nhấp hoặc Quét để đăng ký' : 'Click or Scan to Register' }}</span>
+          </a>
         </div>
       </div>
 
@@ -999,8 +1001,19 @@ function triggerPrint() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
   width: 150px;
+}
+.qr-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.qr-link:hover {
+  transform: scale(1.06);
 }
 .qr-box {
   width: 130px;
@@ -1010,6 +1023,11 @@ function triggerPrint() {
   border-radius: var(--radius-2xl, 16px);
   box-shadow: 0 6px 16px rgba(15, 34, 64, 0.08);
   border: 1px solid rgba(15, 34, 64, 0.08);
+  transition: border-color 200ms, box-shadow 200ms;
+}
+.qr-link:hover .qr-box {
+  border-color: #e87722;
+  box-shadow: 0 10px 24px rgba(232, 119, 34, 0.18);
 }
 .qr-box :deep(svg) {
   width: 100%;
@@ -1022,6 +1040,11 @@ function triggerPrint() {
   color: #0f2240;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  transition: color 200ms;
+  text-align: center;
+}
+.qr-link:hover .qr-text {
+  color: #e87722;
 }
 
 /* INFOBAR */
