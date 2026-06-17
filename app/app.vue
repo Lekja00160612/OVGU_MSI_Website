@@ -1,5 +1,5 @@
 <template>
-  <UApp>
+  <UApp :toaster="{ expand: true }">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

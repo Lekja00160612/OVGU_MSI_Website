@@ -50,19 +50,29 @@ const showAcademicActivitiesToast = () => {
 
       toast.add({
         id: `event-toast-${event.path.replace(/\//g, '-')}-${Date.now()}`,
+        class: 'custom-invitation-toast',
         title: title,
         description: desc,
         icon: 'i-heroicons-ticket',
         color: 'primary',
         duration: config.public.eventToastDurationMs || 6000,
         close: true,
+        ui: {
+          root: 'relative group overflow-hidden bg-[#0f2240] shadow-[0_12px_40px_rgba(0,0,0,.55),0_2px_10px_rgba(232,119,34,.12)] rounded-xl ring-1 ring-[rgba(232,119,34,.3)] p-5 pb-7 flex gap-3.5 focus:outline-none border-l-[4px] border-l-[#e87722] items-start',
+          wrapper: 'w-0 flex-1 flex flex-col',
+          title: 'text-sm font-bold text-white tracking-tight pr-8',
+          description: 'text-xs text-slate-300 leading-relaxed mt-1.5',
+          icon: 'shrink-0 size-5 text-[#e87722] mt-0.5',
+          close: 'p-0.5 text-slate-400 hover:text-[#e87722] transition-colors duration-150 absolute top-4 right-4',
+          actions: 'flex gap-1.5 shrink-0 items-start mt-4'
+        },
         actions: [
           {
             label: locale.value === 'vi' ? 'Xem vé →' : 'View Ticket →',
             to: eventTargetRoute,
             color: 'primary',
             variant: 'solid',
-            size: 'xs',
+            size: 'sm',
           }
         ]
       })
@@ -702,5 +712,72 @@ a.btn,
 .mobile-contact-cta,
 .lang-btn {
   font-family: var(--font-sans) !important;
+}
+</style>
+
+<style>
+/* ═══════════════ CUSTOM TOAST OVERRIDES ═══════════════ */
+.custom-invitation-toast {
+  background-color: #0f2240 !important;
+  padding: 1.25rem 1.25rem 1.375rem 1.25rem !important; /* pt-5 px-5 pb-5.5 */
+  border-left: 4px solid #e87722 !important;
+  gap: 0.875rem !important;
+}
+
+.custom-invitation-toast [data-slot="wrapper"] {
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  align-items: center !important;
+  gap: 0.5rem 1rem !important;
+  width: 100% !important;
+}
+
+.custom-invitation-toast [data-slot="title"] {
+  grid-column: span 2 !important;
+  padding-right: 2rem !important;
+  color: #ffffff !important;
+}
+
+.custom-invitation-toast [data-slot="description"] {
+  margin-top: 0 !important;
+  color: #cbd5e1 !important;
+}
+
+.custom-invitation-toast [data-slot="icon"] {
+  color: #e87722 !important;
+  margin-top: 0.125rem !important;
+}
+
+.custom-invitation-toast [data-slot="close"] {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  color: #94a3b8 !important;
+}
+
+.custom-invitation-toast [data-slot="close"]:hover {
+  color: #e87722 !important;
+}
+
+.custom-invitation-toast [data-slot="actions"] {
+  margin-top: 0 !important;
+}
+
+.custom-invitation-toast [data-slot="actions"] a,
+.custom-invitation-toast [data-slot="actions"] button {
+  background-color: #e87722 !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1.25rem !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  transition: background-color 150ms ease !important;
+}
+
+.custom-invitation-toast [data-slot="actions"] a:hover,
+.custom-invitation-toast [data-slot="actions"] button:hover {
+  background-color: #d66613 !important;
 }
 </style>
