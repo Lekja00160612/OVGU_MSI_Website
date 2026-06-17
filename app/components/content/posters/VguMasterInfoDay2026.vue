@@ -25,9 +25,9 @@ const displayDate = computed(() => {
 
 const displayTime = computed(() => {
   if (locale.value === 'vi') {
-    return props.activity?.eventTime_vi || '8:30 Sáng - 2:00 Chiều (bao gồm tham quan phòng Lab)'
+    return props.activity?.eventTime_vi || '8:30 Sáng - 4:00 Chiều (bao gồm tham quan phòng Lab)'
   }
-  return props.activity?.eventTime || '8:30 AM - 2:00 PM (incorporating lab tour)'
+  return props.activity?.eventTime || '8:30 AM - 4:00 PM (incorporating lab tour)'
 })
 
 const displayAddress = computed(() => {
@@ -109,28 +109,7 @@ const timelineItems = computed(() => {
       desc: locale.value === 'vi' ? (item.desc_vi || item.desc) : item.desc
     }))
   }
-
-  // Default Master Info Day Schedule
-  if (locale.value === 'vi') {
-    return [
-      { time: '8:30 - 9:00', title: 'Đăng ký & Kết nối', desc: 'Gặp gỡ cựu sinh viên VGU tại sảnh đón tiếp.' },
-      { time: '9:00 - 9:30', title: 'Tổng quan Tuyển sinh Thạc sĩ VGU', desc: 'Giới thiệu các chương trình thạc sĩ & định hướng MSI.' },
-      { time: '9:30 - 10:00', title: 'Trò chuyện cùng Cựu sinh viên', desc: '"Hơn cả một tấm bằng" - Chia sẻ thực tế từ cựu học viên.' },
-      { time: '10:00 - 10:30', title: 'Tiệc trà & Giao lưu', desc: 'Giải lao và kết nối trực tiếp với giảng viên.' },
-      { time: '10:30 - 12:00', title: 'THAM QUAN PHÒNG LAB MSI', desc: 'Trực tiếp khám phá các trang thiết bị phân tích hiện đại bậc nhất.' },
-      { time: '12:00 - 1:30', title: 'Trình diễn Lab & Tư vấn 1-1', desc: 'Xem thử nghiệm thực tế & tư vấn học bổng DAAD, hồ sơ nhập học.' },
-      { time: '1:30 - 2:00', title: 'Giải đáp thắc mắc & Bế mạc', desc: 'Trao đổi tự do cùng Giám đốc chương trình và kết thúc.' }
-    ]
-  }
-  return [
-    { time: '8:30 - 9:00', title: 'Check-in & Connections', desc: 'Meet VGU alumni at the reception hall.' },
-    { time: '9:00 - 9:30', title: 'VGU Masters Admissions Overview', desc: 'Introducing master programs & MSI overview.' },
-    { time: '9:30 - 10:00', title: 'Alumni Talk', desc: '"More than a degree" - Real sharing from graduates.' },
-    { time: '10:00 - 10:30', title: 'Tea Break & Networking', desc: 'Relax and talk with professors and peers.' },
-    { time: '10:30 - 12:00', title: 'MATERIALS SCIENCE (MSI) LAB TOUR', desc: 'Explore state-of-the-art laboratory facilities.' },
-    { time: '12:00 - 1:30', title: 'Extended Lab Demos & 1-1 Counseling', desc: 'See real-time experiments & DAAD scholarship guidance.' },
-    { time: '1:30 - 2:00', title: 'Final Questions & Closing', desc: 'Open Q&A session with Academic Coordinators.' }
-  ]
+  return []
 })
 
 const freeBadgeText = computed(() => {
@@ -428,7 +407,7 @@ function triggerPrint() {
             {{ freeBadgeText }}
           </div>
           <div class="contact-details-grid">
-            <div><strong>{{ locale === 'vi' ? 'Trang web' : 'Website' }}:</strong> www.vgu.edu.vn</div>
+            <div><strong>{{ locale === 'vi' ? 'Trang web' : 'Website' }}:</strong> msi.vgu.edu.vn</div>
             <div><strong>Hotline:</strong> 0988 629 705</div>
             <div><strong>General Email:</strong> masterinfo@vgu.edu.vn</div>
             <div><strong>MSI Email:</strong> msi.info@vgu.edu.vn</div>
@@ -1106,4 +1085,344 @@ function triggerPrint() {
   height: 20px;
 }
 
+@media print {
+  /* 5. Central invitation ticket fits exactly into A4 (180mm x 277mm) */
+  .poster-container {
+    width: 180mm !important;
+    height: 277mm !important;
+    max-width: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 4mm 8mm 3mm 8mm !important; /* Compact padding */
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    gap: 1.5mm !important; /* Overrides screen gap: 2.5rem */
+    overflow: hidden !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  /* 6. Asymmetric collage backdrop */
+  .poster-bg-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+    grid-template-rows: repeat(8, 1fr) !important;
+    grid-auto-flow: dense !important;
+    opacity: 0.12 !important;
+    display: grid !important;
+  }
+
+  .bg-img {
+    filter: grayscale(15%) brightness(92%) contrast(115%) !important;
+  }
+
+  /* 7. Compact header banner for print */
+  .poster-header {
+    margin: -4mm -8mm 0 -8mm !important; /* Match container padding */
+    padding: 4mm 8mm 3mm 8mm !important;
+    background: #091322 !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #e87722 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .header-logos {
+    margin-bottom: 2mm !important;
+    padding-bottom: 1.5mm !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .logo-capsule {
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    padding: 1.2mm 2.5mm !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .logo-vgu {
+    height: 22px !important;
+    width: auto !important;
+    filter: none !important;
+  }
+
+  .logo-ovgu {
+    height: 24px !important;
+    width: auto !important;
+    filter: none !important;
+  }
+
+  .poster-main-title {
+    font-size: 13pt !important;
+    margin-bottom: 0.5mm !important;
+  }
+
+  .highlight-text {
+    color: #e87722 !important;
+  }
+
+  .poster-subtitle {
+    font-size: 7.5pt !important;
+    line-height: 1.3 !important;
+  }
+
+  /* 8. Save the Date section in print */
+  .date-hero-section {
+    display: grid !important;
+    grid-template-columns: 1.25fr 0.75fr !important;
+    gap: 3mm !important;
+    padding: 0 2mm !important;
+  }
+
+  .save-date-card {
+    border: 1px solid rgba(30, 58, 95, 0.15) !important;
+    border-radius: 6px !important;
+    padding: 2mm 3mm !important;
+    background: #f9fafb !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .save-title {
+    font-size: 8pt !important;
+    margin-bottom: 1mm !important;
+    border-bottom: 2px solid #e87722 !important;
+  }
+
+  .info-list {
+    gap: 0.8mm !important;
+  }
+
+  .info-text {
+    font-size: 7.2pt !important;
+  }
+
+  .info-icon {
+    font-size: 8.5pt !important;
+  }
+
+  .hero-image-wrap {
+    border-radius: 6px !important;
+    height: 25mm !important; /* Reduced to 25mm */
+    overflow: hidden !important;
+  }
+
+  /* 9. Timeline & focus split columns */
+  .middle-layout {
+    display: grid !important;
+    grid-template-columns: 1.15fr 0.85fr !important;
+    gap: 3mm !important;
+    padding: 0 2mm !important;
+  }
+
+  .schedule-column {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .section-title {
+    font-size: 8pt !important;
+    margin-bottom: 1.5mm !important;
+    border-left-width: 4px !important;
+    padding-left: 0.4rem !important;
+  }
+
+  .timeline-container {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .timeline-item {
+    gap: 1mm !important;
+  }
+
+  .timeline-badge-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .timeline-badge {
+    width: 7px !important;
+    height: 7px !important;
+    border-width: 1px !important;
+    box-shadow: none !important;
+    margin-top: 2px !important;
+  }
+
+  .badge-dot {
+    width: 3px !important;
+    height: 3px !important;
+  }
+
+  .timeline-line {
+    background: rgba(232, 119, 34, 0.15) !important;
+    margin: 4px 0 !important;
+  }
+
+  .timeline-content-col {
+    padding-bottom: 0.5mm !important;
+  }
+
+  .timeline-time {
+    font-size: 6.5pt !important;
+    padding: 0px 2px !important;
+    color: #ffffff !important;
+    background: #e87722 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .timeline-title {
+    font-size: 7.2pt !important;
+    margin-bottom: 0.1mm !important;
+  }
+
+  .timeline-desc {
+    font-size: 6.8pt !important;
+    line-height: 1.15 !important;
+  }
+
+  /* 10. Focus card & collage in print */
+  .details-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2mm !important; /* Overrides screen gap: 2rem */
+  }
+
+  .focus-card {
+    border: 1px solid rgba(232, 119, 34, 0.2) !important;
+    background: rgba(232, 119, 34, 0.02) !important;
+    border-radius: 6px !important;
+    padding: 2mm 3mm !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .focus-card-title {
+    font-size: 7.5pt !important;
+    margin-bottom: 0.5mm !important;
+  }
+
+  .focus-card-text {
+    font-size: 6.8pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .collage-container {
+    gap: 1mm !important;
+  }
+
+  .collage-item {
+    height: 15mm !important; /* Reduced to 15mm */
+    border-radius: 4px !important;
+    border: 1px solid #ffffff !important;
+  }
+
+  /* 11. Footer ticket registration & QR box */
+  .poster-footer-card {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 2mm 3mm !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(30, 58, 95, 0.2) !important;
+    background: #f9fafb !important;
+    margin: 0 2mm !important;
+    gap: 3mm !important; /* Compact gap */
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .footer-left {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.4mm !important;
+  }
+
+  .register-title {
+    font-size: 9.5pt !important;
+  }
+
+  .register-subtitle {
+    font-size: 7pt !important;
+  }
+
+  .free-badge {
+    background: #0f2240 !important;
+    color: #ffffff !important;
+    font-size: 6pt !important;
+    padding: 1px 4px !important;
+    margin-top: 0.1mm !important;
+  }
+
+  .contact-details-grid {
+    grid-template-columns: 1fr 1fr !important;
+    font-size: 6pt !important;
+    margin-top: 0.8mm !important;
+    gap: 0.2mm 1mm !important;
+  }
+
+  .footer-right {
+    width: 22mm !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.5mm !important;
+  }
+
+  .qr-box {
+    width: 18mm !important; /* Reduced to 18mm */
+    height: 18mm !important;
+    border-radius: 4px !important;
+    padding: 0.5mm !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 34, 64, 0.08) !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+
+  .qr-box svg,
+  .qr-box :deep(svg) {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  .qr-text {
+    font-size: 5.5pt !important;
+  }
+
+  /* 12. Bottom infobar */
+  .bottom-infobar {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-top: 1.5mm !important;
+    margin-bottom: 0 !important;
+    border-top-style: dashed !important;
+  }
+
+  .shuttle-info {
+    font-size: 7pt !important;
+  }
+
+  .footer-watermark-text {
+    font-size: 6.5pt !important;
+  }
+}
 </style>

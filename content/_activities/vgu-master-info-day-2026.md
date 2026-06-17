@@ -8,7 +8,7 @@ image: "/images/academic_activities/Khanh-Optical-Microscope-Use.jpg"
 description: "Exploring Your Future in Materials Science. Welcoming Future Students of the Master Of MATERIALS SCIENCE (MSI) Program!"
 highlighted: true
 invitation: true
-ticketLink: "https://vgu.edu.vn/vi/master-info-day-2026"
+ticketLink: "https://forms.gle/5WfKExTXf72uRGJL9"
 posterComponent: "VguMasterInfoDay2026"
 
 # Reusable configuration fields (Overriding Vue defaults)
@@ -101,12 +101,12 @@ schedule:
     title_vi: "Ăn trưa"
     desc: "Networking lunch with professors and students."
     desc_vi: "Ăn trưa và giao lưu cùng giảng viên và học viên."
-  - time: "12:30 - 14:30"
+  - time: "12:30 - 15:30"
     title: "Lab Tour"
     title_vi: "Tham quan phòng Lab MSI"
     desc: "Tour state-of-the-art laboratory facilities."
     desc_vi: "Trực tiếp khám phá các trang thiết bị phân tích hiện đại bậc nhất."
-  - time: "14:30 - 15:00"
+  - time: "15:30 - 16:00"
     title: "Q&A & Discussion"
     title_vi: "Hỏi đáp & Thảo luận"
     desc: "Open Q&A session with Academic Coordinators."
