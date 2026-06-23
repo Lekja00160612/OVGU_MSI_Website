@@ -1,6 +1,6 @@
 ---
 title: "VGU Master Information Day 2026 & Extensive Materials Science (MSI) Lab Tour"
-category: "Achievements & Events"
+category: "Lab Works"
 date: "2026-06-15"
 eventDate: "Sunday, 28 June 2026"
 eventDate_vi: "Chủ Nhật, 28 Tháng 6, 2026"
