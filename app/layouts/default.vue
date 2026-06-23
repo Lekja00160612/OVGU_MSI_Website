@@ -272,6 +272,32 @@ const scrollToFooter = () => {
           </ul>
         </div>
 
+        <!-- Quick Resources -->
+        <div class="footer-col">
+          <h4 class="footer-heading">{{ locale === 'vi' ? 'TÀI NGUYÊN NHANH' : 'QUICK RESOURCES' }}</h4>
+          <ul class="footer-links footer-links--resources">
+            <li>
+              <a href="/Documents/Booklet MSI (updated 06.2026).pdf" target="_blank" rel="noopener noreferrer" class="footer-resource-link">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="res-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span>{{ locale === 'vi' ? 'Cẩm nang MSI (PDF)' : 'MSI Booklet (PDF)' }}</span>
+              </a>
+              <span class="res-note">{{ locale === 'vi' ? '↳ Không có thông tin học bổng' : '↳ No scholarship info' }}</span>
+            </li>
+            <li>
+              <a href="/Documents/MSI leaflet 2026.pdf" target="_blank" rel="noopener noreferrer" class="footer-resource-link">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="res-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span>{{ locale === 'vi' ? 'Tờ rơi MSI (PDF)' : 'MSI Leaflet (PDF)' }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="/Documents/MSI_Scholarships.pptx" target="_blank" rel="noopener noreferrer" class="footer-resource-link footer-resource-link--accent">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="res-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>{{ locale === 'vi' ? 'Học bổng MSI (PPTX)' : 'MSI Scholarships (PPTX)' }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
         <div class="footer-col footer-contact-col">
           <h4 class="footer-heading">{{ t('footer.contact') }}</h4>
           <p class="contact-welcome">
@@ -480,7 +506,7 @@ const scrollToFooter = () => {
   padding-bottom: 3rem;
 }
 @media (min-width: 640px) { .footer-top { grid-template-columns: repeat(2,1fr); } }
-@media (min-width: 1024px) { .footer-top { grid-template-columns: 2fr 2fr 1.5fr; } }
+@media (min-width: 1024px) { .footer-top { grid-template-columns: 2fr 2fr 1.5fr 1.5fr; } }
 
 .footer-tagline { font-size:0.875rem; color:rgba(255,255,255,.55); line-height:1.65; margin-bottom:1.25rem; max-width:260px; z-index: 2; }
 
@@ -506,8 +532,32 @@ const scrollToFooter = () => {
 
 .footer-links { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem; }
 .footer-links--merged { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1rem; }
+.footer-links--resources { gap: 0.625rem; }
 .footer-link { font-size:0.875rem; color:rgba(255,255,255,.55); text-decoration:none; transition:color 200ms; }
 .footer-link:hover { color:#fff; }
+
+.footer-resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,.6);
+  text-decoration: none;
+  transition: color 200ms, transform 200ms;
+  font-weight: 500;
+}
+.footer-resource-link:hover { color: #fff; transform: translateX(3px); }
+.footer-resource-link--accent { color: var(--color-accent-light); }
+.footer-resource-link--accent:hover { color: #fff; }
+.res-icon { flex-shrink: 0; opacity: 0.7; }
+.res-note {
+  display: block;
+  font-size: 0.71rem;
+  color: rgba(255,255,255,.3);
+  padding-left: 1.15rem;
+  margin-top: 2px;
+  font-style: italic;
+}
 
 .footer-address { font-size:0.875rem; color:rgba(255,255,255,.55); line-height:1.7; font-style:normal; margin-bottom:0.875rem; }
 .footer-email { font-size:0.875rem; font-weight:600; color:var(--color-accent-light); text-decoration:none; transition:color 200ms; }

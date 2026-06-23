@@ -28,6 +28,9 @@ useSeoMeta({
           <ContentRenderer :value="page" class="prose" />
         </div>
       </div>
+
+      <!-- MSI Program Documents download section -->
+      <MsiDocuments />
     </template>
     <template v-else>
       <div class="not-found container section">
@@ -40,6 +43,7 @@ useSeoMeta({
       </div>
     </template>
   </main>
+
 </template>
 
 <style scoped>
