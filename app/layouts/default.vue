@@ -263,7 +263,7 @@ const scrollToFooter = () => {
           </div>
         </div>
 
-        <div class="footer-col" style="grid-column: span 2;">
+        <div class="footer-col footer-col--links">
           <h4 class="footer-heading">{{ t('footer.quick_links') }}</h4>
           <ul class="footer-links footer-links--merged">
             <li v-for="link in navLinks" :key="link.to">
@@ -507,6 +507,15 @@ const scrollToFooter = () => {
 }
 @media (min-width: 640px) { .footer-top { grid-template-columns: repeat(2,1fr); } }
 @media (min-width: 1024px) { .footer-top { grid-template-columns: 2fr 2fr 1.5fr 1.5fr; } }
+
+.footer-col--links {
+  grid-column: span 1;
+}
+@media (min-width: 640px) {
+  .footer-col--links {
+    grid-column: span 2;
+  }
+}
 
 .footer-tagline { font-size:0.875rem; color:rgba(255,255,255,.55); line-height:1.65; margin-bottom:1.25rem; max-width:260px; z-index: 2; }
 
