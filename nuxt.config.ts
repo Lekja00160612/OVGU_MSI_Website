@@ -5,6 +5,9 @@ import { join } from 'path'
 export default defineNuxtConfig({
   app: {
     head: {
+      meta: [
+        { name: 'google-site-verification', content: 'wRP2u_y_uQV0Xm--5w99O6nBEhK1ChT7XyY35vZKYmc' }
+      ],
       link: [
         {
           rel: 'icon',
