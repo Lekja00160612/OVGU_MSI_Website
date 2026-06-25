@@ -290,9 +290,9 @@ const scrollToFooter = () => {
               </a>
             </li>
             <li>
-              <a href="/Documents/MSI_Scholarships.pptx" target="_blank" rel="noopener noreferrer" class="footer-resource-link footer-resource-link--accent">
+              <a href="/Documents/MSI_Scholarships_Brochure.pdf" target="_blank" rel="noopener noreferrer" class="footer-resource-link footer-resource-link--accent">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="res-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span>{{ locale === 'vi' ? 'Học bổng MSI (PPTX)' : 'MSI Scholarships (PPTX)' }}</span>
+                <span>{{ locale === 'vi' ? 'Học bổng MSI (PDF)' : 'MSI Scholarships (PDF)' }}</span>
               </a>
             </li>
           </ul>
