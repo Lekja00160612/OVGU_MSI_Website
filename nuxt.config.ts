@@ -58,6 +58,7 @@ export default defineNuxtConfig({
     }
   },
   i18n: {
+    baseUrl: 'https://msi.vgu.edu.vn',
     langDir: 'locales',
     locales: [
       { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },

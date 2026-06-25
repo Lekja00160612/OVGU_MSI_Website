@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/crawl_activities.js",
+    "prebuild": "node scripts/crawl_activities.js && node scripts/generate_sitemap.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
