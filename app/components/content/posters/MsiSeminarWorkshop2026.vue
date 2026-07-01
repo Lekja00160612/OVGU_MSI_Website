@@ -136,18 +136,24 @@ function triggerPrint() {
       <!-- HEADER WITH CURVY DIVIDER AND LOGOS -->
       <div class="poster-header">
         <div class="header-logos-row">
-          <!-- VGU Logo - Prominent -->
-          <div class="logo-capsule vgu-primary-capsule">
-            <NuxtImg src="/Logo/VGU_Logo.png" alt="VGU Logo" class="logo-vgu" />
+          <div class="logo-row-vgu">
+            <!-- VGU Logo - Prominent -->
+            <div class="logo-capsule vgu-primary-capsule">
+              <NuxtImg src="/Logo/VGU_Logo.png" alt="VGU Logo" class="logo-vgu" />
+            </div>
           </div>
-          <div class="logo-coop-label">in cooperation with</div>
-          <!-- OVGU Logo -->
-          <div class="logo-capsule ovgu-secondary-capsule">
-            <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU Logo" class="logo-ovgu" />
-          </div>
-          <!-- NTNU Logo -->
-          <div class="logo-capsule ntnu-secondary-capsule">
-            <NuxtImg src="/Logo/Norwegian University of Science and Technology.jpg" alt="NTNU Logo" class="logo-ntnu" />
+          <div class="logo-row-partners">
+            <span class="logo-coop-label">in cooperation with</span>
+            <div class="partner-logos-wrap">
+              <!-- OVGU Logo -->
+              <div class="logo-capsule ovgu-secondary-capsule">
+                <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU Logo" class="logo-ovgu" />
+              </div>
+              <!-- NTNU Logo -->
+              <div class="logo-capsule ntnu-secondary-capsule">
+                <NuxtImg src="/Logo/Norwegian University of Science and Technology.jpg" alt="NTNU Logo" class="logo-ntnu" />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -475,12 +481,49 @@ function triggerPrint() {
 
 .header-logos-row {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.4rem;
   margin-bottom: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.6rem;
+  width: 100%;
+}
+.logo-row-vgu {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.logo-row-partners {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.partner-logos-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .header-logos-row {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.25rem;
+    padding-bottom: 0.5rem;
+  }
+  .logo-row-vgu {
+    width: auto;
+  }
+  .logo-row-partners {
+    gap: 1.25rem;
+  }
+  .partner-logos-wrap {
+    gap: 1.25rem;
+  }
 }
 .logo-capsule {
   background: #ffffff;
@@ -1161,8 +1204,21 @@ function triggerPrint() {
   }
 
   .header-logos-row {
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 3mm !important;
     margin-bottom: 2mm !important;
     padding-bottom: 1.5mm !important;
+  }
+  .logo-row-vgu {
+    width: auto !important;
+  }
+  .logo-row-partners {
+    flex-direction: row !important;
+    gap: 3mm !important;
+  }
+  .partner-logos-wrap {
     gap: 3mm !important;
   }
 
