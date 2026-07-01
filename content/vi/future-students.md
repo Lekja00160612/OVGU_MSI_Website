@@ -198,4 +198,4 @@ nodes:
 >
 > **— Nguyễn Sơn Tùng, Học bổng DAAD, Khóa 2024 · Cựu sinh viên ngành Trí tuệ Nhân tạo**
 
-Muốn nghe chia sẻ thực tế? **Liên hệ trực tiếp Sơn Tùng qua Zalo: [+84 969 363 642](tel:+84969363642)** — anh ấy sẵn sàng chia sẻ trải nghiệm và trả lời mọi câu hỏi của bạn.
+Muốn nghe chia sẻ thực tế? **Liên hệ trực tiếp Sơn Tùng qua Zalo: [+84 969 363 642](https://zalo.me/0969363642)** — anh ấy sẵn sàng chia sẻ trải nghiệm và trả lời mọi câu hỏi của bạn.

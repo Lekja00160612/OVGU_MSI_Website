@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useRoute, useI18n, useAsyncData, createError, useSeoMeta, computed } from '#imports'
-import VguMasterInfoDay2026 from '~/components/content/posters/VguMasterInfoDay2026.vue'
+import { defineAsyncComponent } from 'vue'
 
 const route = useRoute()
 const localePath = useLocalePath()
@@ -18,14 +17,10 @@ if (!activity.value) {
   throw createError({ statusCode: 404, statusMessage: 'Activity not found', fatal: true })
 }
 
-// Map of custom poster components
-const posterComponents: Record<string, any> = {
-  VguMasterInfoDay2026
-}
-
 const resolvedPoster = computed(() => {
   const componentName = activity.value?.posterComponent
-  return componentName ? posterComponents[componentName] : null
+  if (!componentName) return null
+  return defineAsyncComponent(() => import(`../../components/content/posters/${componentName}.vue`))
 })
 
 useSeoMeta({

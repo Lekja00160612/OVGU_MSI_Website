@@ -197,4 +197,4 @@ nodes:
 >
 > **— Nguyễn Sơn Tùng, DAAD Scholarship Recipient, Intake 2024 · Former AI Undergraduate**
 
-Want first-hand insight? **Contact Sơn Tùng directly on Zalo: [+84 969 363 642](tel:+84969363642)** — he is happy to share his experience and answer your questions.
+Want first-hand insight? **Contact Sơn Tùng directly on Zalo: [+84 969 363 642](https://zalo.me/0969363642)** — he is happy to share his experience and answer your questions.

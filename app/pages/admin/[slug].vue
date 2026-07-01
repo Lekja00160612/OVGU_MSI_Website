@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import VguMasterInfoDay2026 from '~/components/content/posters/VguMasterInfoDay2026.vue'
-import VguMasterInfoDay2026Facebook from '~/components/content/posters/VguMasterInfoDay2026Facebook.vue'
+import { defineAsyncComponent, h } from 'vue'
+
 /**
  * Admin poster preview page — /admin/{event}
  *
@@ -32,15 +32,25 @@ const { data: activity, status } = await useAsyncData(
   () => queryCollection('activities').path(contentPath.value).first()
 )
 
-// Map activity's posterComponent name to components
-// Extend this map as new poster components are added
-const POSTER_MAP: Record<string, string> = {
-  VguMasterInfoDay2026: 'VguMasterInfoDay2026',
+const FallbackComponent = {
+  render() {
+    return h('div', { class: 'admin-not-found no-print' }, [
+      h('p', 'No Facebook layout available for this poster.')
+    ])
+  }
 }
 
-const portraitComponent = computed(() => {
-  const name = activity.value?.posterComponent
-  return name && POSTER_MAP[name] ? POSTER_MAP[name] : null
+const resolvedPoster = computed(() => {
+  const componentName = activity.value?.posterComponent || 'VguMasterInfoDay2026'
+  return defineAsyncComponent(() => import(`../../components/content/posters/${componentName}.vue`))
+})
+
+const resolvedFacebookPoster = computed(() => {
+  const componentName = activity.value?.posterComponent || 'VguMasterInfoDay2026'
+  return defineAsyncComponent(() => 
+    import(`../../components/content/posters/${componentName}Facebook.vue`)
+      .catch(() => FallbackComponent)
+  )
 })
 </script>
 
@@ -101,17 +111,20 @@ const portraitComponent = computed(() => {
     <template v-else>
 
       <!-- Facebook format -->
-      <VguMasterInfoDay2026Facebook
-        v-if="format === 'facebook' && (activity.posterComponent === 'VguMasterInfoDay2026' || !activity.posterComponent)"
-        :activity="activity"
-      />
+      <template v-if="format === 'facebook'">
+        <component 
+          v-if="resolvedFacebookPoster" 
+          :is="resolvedFacebookPoster" 
+          :activity="activity" 
+        />
+      </template>
 
       <!-- Portrait format (fallback to the original portrait poster) -->
       <template v-else-if="format === 'portrait' || !format">
-        <!-- If the activity has a known posterComponent, render it -->
-        <VguMasterInfoDay2026
-          v-if="activity.posterComponent === 'VguMasterInfoDay2026' || !activity.posterComponent"
-          :activity="activity"
+        <component 
+          v-if="resolvedPoster" 
+          :is="resolvedPoster" 
+          :activity="activity" 
         />
         <div v-else class="admin-not-found no-print">
           <p>No portrait poster component mapped for <code>{{ activity.posterComponent }}</code>.</p>
