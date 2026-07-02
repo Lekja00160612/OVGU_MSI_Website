@@ -339,7 +339,7 @@ function triggerPrint() {
               <div class="qr-display-row">
                 <a :href="ticketLink" target="_blank" rel="noopener noreferrer" class="qr-container">
                   <div class="qr-canvas">
-                    <QrCode :value="ticketLink" :margin="1" color-dark="#0f2240" />
+                    <QrCode :value="ticketLink" :margin="1" color-dark="#000000" />
                   </div>
                   <span class="qr-scan-label">Scan to Register</span>
                 </a>
@@ -1004,7 +1004,7 @@ function triggerPrint() {
   background: #ffffff;
   padding: 0.4rem;
   border-radius: 8px;
-  border: 1px solid rgba(15, 34, 64, 0.08);
+  border: 2px solid #e87722; /* Highlighted Orange Border */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1485,6 +1485,13 @@ function triggerPrint() {
     line-height: 1.15 !important;
     padding-left: 1.5mm !important;
   }
+  .qr-display-row {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin-top: 1mm !important;
+    margin-bottom: 1mm !important;
+  }
   .qr-container {
     gap: 0.8mm !important;
     flex-shrink: 0 !important;
@@ -1495,6 +1502,7 @@ function triggerPrint() {
     aspect-ratio: 1 / 1 !important;
     border-radius: 4px !important;
     padding: 0.8mm !important;
+    border: 0.5mm solid #e87722 !important; /* Highlighted Orange Border */
     flex-shrink: 0 !important;
     display: flex !important;
     align-items: center !important;
