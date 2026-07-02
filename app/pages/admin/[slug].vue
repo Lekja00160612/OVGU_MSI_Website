@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent, h } from 'vue'
+import { defineAsyncComponent, h, computed, ref } from 'vue'
 
 /**
  * Admin poster preview page — /admin/{event}
@@ -8,24 +8,65 @@ import { defineAsyncComponent, h } from 'vue'
  * Currently supports:
  *   - "portrait" poster  (default, the original A4 component)
  *   - "facebook" post    (landscape 1200×630, Facebook-friendly)
- *
- * Example URLs:
- *   /admin/vgu-master-info-day-2026            → portrait poster
- *   /admin/vgu-master-info-day-2026?format=facebook → Facebook post
+ *   - "pagedjs" preview  (A4 print formatting polyfill using Paged.js)
+ *   - "typst" PDF        (Typeset PDF document link/iframe)
  */
-
-// noindex / nofollow — admin only, never crawled
-useSeoMeta({
-  title: 'Admin Poster Preview | MSI',
-  robots: 'noindex, nofollow'
-})
 
 const route = useRoute()
 const slug  = computed(() => route.params.slug as string)
 const format = computed(() => (route.query.format as string) || 'portrait')
+const isClean = computed(() => route.query.clean === 'true')
+
+// noindex / nofollow — admin only, never crawled
+useSeoMeta({
+  title: isClean.value ? `Print Clean | ${slug.value}` : 'Admin Poster Preview | MSI',
+  robots: 'noindex, nofollow'
+})
+
+// Inject Paged.js legacy script if we are in clean print preview mode
+useHead(() => {
+  if (isClean.value) {
+    return {
+      script: [
+        {
+          src: 'https://unpkg.com/pagedjs/dist/paged.legacy.js',
+          defer: true
+        }
+      ],
+      style: [
+        {
+          children: `
+            /* Fix page margin and display for Paged.js inside iframe */
+            html, body {
+              background: #ffffff !important;
+              margin: 0 !important;
+              padding: 0 !important;
+            }
+            .pagedjs_pages {
+              background: #f8fafc !important;
+              padding: 30px 0 !important;
+              min-height: 100vh;
+              box-sizing: border-box;
+            }
+            .pagedjs_page {
+              background: white !important;
+              box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+              margin: 0 auto 30px auto !important;
+              border: 1px solid rgba(15, 23, 42, 0.06) !important;
+            }
+            /* Hide default Paged.js page headers/footers */
+            .pagedjs_margin {
+              display: none !important;
+            }
+          `
+        }
+      ]
+    }
+  }
+  return {}
+})
 
 // Load the activity data from the _activities collection using the slug.
-// Activities are stored under /_activities/{slug} in the CMS.
 const contentPath = computed(() => `/_activities/${slug.value}`)
 const { data: activity, status } = await useAsyncData(
   `admin-poster-${slug.value}`,
@@ -52,10 +93,31 @@ const resolvedFacebookPoster = computed(() => {
       .catch(() => FallbackComponent)
   )
 })
+
+// Print function for the Paged.js iframe preview
+const iframeRef = ref<HTMLIFrameElement | null>(null)
+const printIframe = () => {
+  if (iframeRef.value && iframeRef.value.contentWindow) {
+    iframeRef.value.contentWindow.focus()
+    iframeRef.value.contentWindow.print()
+  }
+}
 </script>
 
 <template>
-  <div class="admin-poster-page">
+  <!-- Clean view: only render raw poster component for Paged.js parsing inside iframe -->
+  <template v-if="isClean">
+    <div class="clean-print-wrapper">
+      <component 
+        v-if="resolvedPoster" 
+        :is="resolvedPoster" 
+        :activity="activity" 
+      />
+    </div>
+  </template>
+
+  <!-- Admin dashboard view with toolbar -->
+  <div v-else class="admin-poster-page">
 
     <!-- ── Top admin toolbar ───────────────────────────────────────────── -->
     <div class="admin-toolbar no-print">
@@ -71,7 +133,7 @@ const resolvedFacebookPoster = computed(() => {
         </div>
 
         <div class="toolbar-right">
-          <!-- Format switcher -->
+          <!-- Format switcher tabs -->
           <div class="format-tabs">
             <NuxtLink
               :to="`/admin/${slug}`"
@@ -86,6 +148,21 @@ const resolvedFacebookPoster = computed(() => {
               :class="{ active: format === 'facebook' }"
             >
               📘 Facebook Post
+            </NuxtLink>
+            <NuxtLink
+              :to="`/admin/${slug}?format=pagedjs`"
+              class="fmt-tab"
+              :class="{ active: format === 'pagedjs' }"
+            >
+              📄 Paged.js Preview
+            </NuxtLink>
+            <NuxtLink
+              v-if="slug === 'msi-seminar-workshop-2026'"
+              :to="`/admin/${slug}?format=typst`"
+              class="fmt-tab"
+              :class="{ active: format === 'typst' }"
+            >
+              📄 Typst Vector PDF
             </NuxtLink>
           </div>
         </div>
@@ -117,6 +194,53 @@ const resolvedFacebookPoster = computed(() => {
           :is="resolvedFacebookPoster" 
           :activity="activity" 
         />
+      </template>
+
+      <!-- Paged.js format -->
+      <template v-else-if="format === 'pagedjs'">
+        <div class="pagedjs-container no-print">
+          <div class="pagedjs-header-panel">
+            <div class="panel-left">
+              <h3>Paged.js A4 Print Preview</h3>
+              <p>Polished layout rendering standard HTML/CSS exactly as it will print on physical paper. Paged.js handles all margins and dimensions natively.</p>
+            </div>
+            <div class="panel-right">
+              <button @click="printIframe" class="print-trigger-btn">
+                🖨️ Print Poster (Paged.js)
+              </button>
+            </div>
+          </div>
+          <div class="pagedjs-viewer-frame">
+            <iframe 
+              ref="iframeRef"
+              :src="`/admin/${slug}?clean=true`" 
+              class="pagedjs-iframe" 
+            />
+          </div>
+        </div>
+      </template>
+
+      <!-- Typst format -->
+      <template v-else-if="format === 'typst'">
+        <div class="typst-container no-print">
+          <div class="typst-header-panel">
+            <div class="panel-left">
+              <h3>Typst Compiled Vector PDF</h3>
+              <p>Generated dynamically using Typst's modern typesetting CLI. Zero print engine/browser inconsistencies.</p>
+            </div>
+            <div class="panel-right">
+              <a href="/posters/msi-seminar-workshop-2026.pdf" download class="dl-btn pdf-btn">
+                📥 Download PDF (Vector)
+              </a>
+              <a href="/posters/msi-seminar-workshop-2026.png" download class="dl-btn png-btn">
+                📥 Download PNG (300 DPI)
+              </a>
+            </div>
+          </div>
+          <div class="pdf-viewer-frame">
+            <iframe src="/posters/msi-seminar-workshop-2026.pdf" class="pdf-iframe" />
+          </div>
+        </div>
       </template>
 
       <!-- Portrait format (fallback to the original portrait poster) -->
@@ -297,6 +421,129 @@ const resolvedFacebookPoster = computed(() => {
 .back-btn-lg:hover {
   background: #d96512;
   transform: translateY(-2px);
+}
+
+/* ── Typst Panel ─────────────────────────────────────────────────────────── */
+.typst-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem 3rem 1.5rem;
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+}
+.typst-header-panel {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.panel-left h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+}
+.panel-left p {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+.panel-right {
+  display: flex;
+  gap: 0.75rem;
+}
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.65rem 1.2rem;
+  border-radius: 8px;
+  transition: transform 200ms, opacity 200ms;
+}
+.dl-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+.pdf-btn {
+  background: #e87722;
+  color: #ffffff;
+}
+.png-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.pdf-viewer-frame {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  height: 800px;
+  overflow: hidden;
+}
+.pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Paged.js Panel ──────────────────────────────────────────────────────── */
+.pagedjs-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem 3rem 1.5rem;
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+}
+.pagedjs-header-panel {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.print-trigger-btn {
+  background: #e87722;
+  color: #ffffff;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 200ms, transform 200ms;
+}
+.print-trigger-btn:hover {
+  background-color: #d96512;
+  transform: translateY(-2px);
+}
+.pagedjs-viewer-frame {
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  height: 900px;
+  overflow: hidden;
+}
+.pagedjs-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Clean Print Wrapper ─────────────────────────────────────────────────── */
+.clean-print-wrapper {
+  background: #ffffff !important;
+  min-height: 100vh;
 }
 
 /* ── Print: hide toolbar ─────────────────────────────────────────────────── */

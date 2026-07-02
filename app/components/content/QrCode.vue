@@ -29,6 +29,7 @@ async function generateQr() {
     const svgString = await QRCode.toString(props.value, {
       type: 'svg',
       margin: props.margin,
+      width: 500, // Force high-resolution vector coordinate space (prevents blurry upscaling on print)
       color: {
         dark: props.colorDark,
         light: props.colorLight
