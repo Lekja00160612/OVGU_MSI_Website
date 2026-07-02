@@ -1109,6 +1109,17 @@ function triggerPrint() {
 }
 
 @media print {
+  * {
+    text-shadow: none !important;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  img {
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+  }
+
   /* 5. Central invitation ticket fits exactly into A4 (180mm x 277mm) */
   .poster-container {
     width: 180mm !important;

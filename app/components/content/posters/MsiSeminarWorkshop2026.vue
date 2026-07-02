@@ -1174,6 +1174,17 @@ function triggerPrint() {
     background: #ffffff !important;
   }
 
+  * {
+    text-shadow: none !important;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  img {
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+  }
+
   .poster-page-wrapper {
     background: transparent !important;
     padding: 0 !important;
