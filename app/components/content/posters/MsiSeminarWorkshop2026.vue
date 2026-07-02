@@ -1016,8 +1016,13 @@ function triggerPrint() {
   display: block;
 }
 .qr-canvas :deep(svg) path {
-  fill: #000000 !important;
   stroke: none !important;
+}
+.qr-canvas :deep(svg) path:not([fill="#ffffff"]) {
+  fill: #000000 !important;
+}
+.qr-canvas :deep(svg) path[fill="#ffffff"] {
+  fill: #ffffff !important;
 }
 .qr-scan-label {
   font-size: 0.68rem;
@@ -1518,8 +1523,13 @@ function triggerPrint() {
     display: block !important;
   }
   .qr-canvas :deep(svg) path {
-    fill: #000000 !important;
     stroke: none !important;
+  }
+  .qr-canvas :deep(svg) path:not([fill="#ffffff"]) {
+    fill: #000000 !important;
+  }
+  .qr-canvas :deep(svg) path[fill="#ffffff"] {
+    fill: #ffffff !important;
   }
   .qr-scan-label {
     font-size: 5pt !important;
