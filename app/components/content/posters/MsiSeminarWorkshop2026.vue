@@ -1015,6 +1015,10 @@ function triggerPrint() {
   height: 100% !important;
   display: block;
 }
+.qr-canvas :deep(svg) path {
+  fill: #000000 !important;
+  stroke: none !important;
+}
 .qr-scan-label {
   font-size: 0.68rem;
   font-weight: 800;
@@ -1512,6 +1516,10 @@ function triggerPrint() {
     width: 100% !important;
     height: 100% !important;
     display: block !important;
+  }
+  .qr-canvas :deep(svg) path {
+    fill: #000000 !important;
+    stroke: none !important;
   }
   .qr-scan-label {
     font-size: 5pt !important;
