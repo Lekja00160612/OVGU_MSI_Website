@@ -1015,14 +1015,17 @@ function triggerPrint() {
   height: 100% !important;
   display: block;
 }
-.qr-canvas :deep(svg) path {
+.qr-canvas :deep(svg) rect {
+  fill: #ffffff !important;
   stroke: none !important;
 }
 .qr-canvas :deep(svg) path:not([fill="#ffffff"]) {
   fill: #000000 !important;
+  stroke: #000000 !important;
 }
 .qr-canvas :deep(svg) path[fill="#ffffff"] {
   fill: #ffffff !important;
+  stroke: none !important;
 }
 .qr-scan-label {
   font-size: 0.68rem;
@@ -1522,14 +1525,17 @@ function triggerPrint() {
     height: 100% !important;
     display: block !important;
   }
-  .qr-canvas :deep(svg) path {
+  .qr-canvas :deep(svg) rect {
+    fill: #ffffff !important;
     stroke: none !important;
   }
   .qr-canvas :deep(svg) path:not([fill="#ffffff"]) {
     fill: #000000 !important;
+    stroke: #000000 !important;
   }
   .qr-canvas :deep(svg) path[fill="#ffffff"] {
     fill: #ffffff !important;
+    stroke: none !important;
   }
   .qr-scan-label {
     font-size: 5pt !important;
@@ -1587,17 +1593,28 @@ function triggerPrint() {
   }
 
   .poster-footer-strip {
-    background: #091322 !important;
+    background-color: #091322 !important;
     padding: 2mm 8mm !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
   }
   .footer-badge {
     font-size: 5pt !important;
     padding: 0.2mm 1.5mm !important;
+    background-color: #e87722 !important;
+    color: #ffffff !important;
+    border-radius: 2px !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
   }
   .footer-motto {
     font-size: 5pt !important;
+    color: #8a99ad !important; /* Solid light gray-blue (replaces transparent rgba) */
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
   }
 }
 </style>
