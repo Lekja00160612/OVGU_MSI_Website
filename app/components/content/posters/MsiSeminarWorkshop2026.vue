@@ -995,10 +995,12 @@ function triggerPrint() {
   align-items: center;
   gap: 0.35rem;
   text-decoration: none;
+  flex-shrink: 0;
 }
 .qr-canvas {
   width: 100px;
   height: 100px;
+  aspect-ratio: 1 / 1;
   background: #ffffff;
   padding: 0.4rem;
   border-radius: 8px;
@@ -1006,10 +1008,12 @@ function triggerPrint() {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 .qr-canvas :deep(svg) {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
 }
 .qr-scan-label {
   font-size: 0.68rem;
@@ -1483,12 +1487,23 @@ function triggerPrint() {
   }
   .qr-container {
     gap: 0.8mm !important;
+    flex-shrink: 0 !important;
   }
   .qr-canvas {
     width: 16mm !important;
     height: 16mm !important;
+    aspect-ratio: 1 / 1 !important;
     border-radius: 4px !important;
     padding: 0.8mm !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .qr-canvas :deep(svg) {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
   }
   .qr-scan-label {
     font-size: 5pt !important;
