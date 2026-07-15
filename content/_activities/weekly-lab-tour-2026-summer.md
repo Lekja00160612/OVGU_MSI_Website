@@ -1,22 +1,23 @@
 ---
-title: "VGU Master Information Day 2026 & Extensive Materials Science (MSI) Lab Tour"
-category: "Academic Activities"
-date: "2026-06-15"
-eventDate: "Sunday, 28 June 2026"
-eventDate_vi: "Chủ Nhật, 28 Tháng 6, 2026"
-eventTime: "8:30 AM – 4:00 PM (incorporating lab tour)"
-eventTime_vi: "8:30 Sáng – 4:00 Chiều (bao gồm tham quan phòng Lab)"
+title: "Weekly Lab Tour 2026 Summer"
+category: "Achievements & Events"
+date: "2026-07-15"
+eventDate: "Every Friday, 9:00 AM – 11:30 AM (until 30 August 2026)"
+eventDate_vi: "Thứ Sáu Hằng Tuần, 9:00 Sáng – 11:30 Trưa (đến 30 Tháng 8, 2026)"
+eventTime: "9:00 AM – 11:30 AM"
+eventTime_vi: "9:00 Sáng – 11:30 Trưa"
 eventAddress: "VGU Campus, Ring Road 4, Ben Cat, Binh Duong"
 eventAddress_vi: "Khuôn viên VGU, Đường Vành Đai 4, Bến Cát, Bình Dương"
-expiryDate: "2026-06-28"
-image: "/images/academic_activities/Khanh-Optical-Microscope-Use.jpg"
-description: "Exploring Your Future in Materials Science. Welcoming Future Students of the Master Of MATERIALS SCIENCE (MSI) Program!"
+expiryDate: "2026-08-30"
+image: "/images/academic_activities/weekly lab tour 2026 summer.png"
+description: "Join our guided weekly lab tours at VGU this summer! Explore state-of-the-art laboratory facilities, experience live equipment demonstrations, and get academic consultation on the MSI Master program."
 highlighted: true
 invitation: true
-ticketLink: "https://forms.gle/5WfKExTXf72uRGJL9"
+ticketLink: "https://docs.google.com/forms/d/e/1FAIpQLSeBs0C4UGEJ7r_lerzvOivWcY5X_-h_lGuTqkid0M128CoDBg/viewform"
 posterComponent: "VguMasterInfoDay2026"
+useImageAsPoster: true
 
-# Reusable configuration fields (Overriding Vue defaults)
+# High-tech equipment & student activity images copied from Info Day
 bgImages:
   - "/images/labs/scanning-electron-microscope-semedsebsd/SEM EDS EBSD.jpg"
   - "/images/labs/cleanroom-facility/Cleanroom.jpg"
@@ -64,10 +65,10 @@ collageImages:
   - "/images/academic_activities/polymer-labs-cover.jpg"
   - "/images/academic_activities/knauf-trip-cover.jpg"
 
-focusTitle: "SPECIAL FOCUS: MATERIALS SCIENCE (MSI)"
-focusTitle_vi: "TIÊU ĐIỂM: KHOA HỌC VẬT LIỆU (MSI)"
-focusText: "Discover the curriculum of the Master Of Science in Materials Science (MSI), including core topics and specializations in functional materials or processing technology. Tour our state-of-the-art laboratory facilities, see advanced microscope demonstrations and scientific experiments, and connect directly with MSI faculty and current students."
-focusText_vi: "Khám phá chương trình đào tạo Thạc sĩ KHOA HỌC VẬT LIỆU (MSI), bao gồm các môn học cốt lõi và định hướng chuyên sâu về vật liệu chức năng hoặc công nghệ chế tạo. Tham quan cơ sở phòng thí nghiệm hiện đại, xem trình diễn kính hiển vi tiên tiến cùng các thí nghiệm khoa học, và kết nối trực tiếp với giảng viên cùng học viên MSI."
+focusTitle: "SPECIAL FOCUS: GUIDED LAB TOUR & PROGRAM BRIEFING"
+focusTitle_vi: "TIÊU ĐIỂM: THAM QUAN PHÒNG LAB & GIỚI THIỆU CHƯƠNG TRÌNH"
+focusText: "Experience hands-on materials science experiments! Get a guided tour through VGU's modern laboratories, including cleanrooms, microscopy facilities, and advanced chemical synthesis suites. Talk directly to academic mentors and current students to understand the MSI double-degree Master's curriculum."
+focusText_vi: "Trải nghiệm các thí nghiệm khoa học vật liệu thực tế! Tham quan phòng thí nghiệm hiện đại của VGU bao gồm phòng sạch quang khắc, tổ hợp kính hiển vi cao cấp và các phòng tổng hợp hóa học tiên tiến. Gặp gỡ trực tiếp giảng viên và học viên để được giải đáp về chương trình cấp bằng kép MSI."
 
 shuttleBusInfo: "Free Shuttle Bus from Ho Con Rua, District 3, HCMC to VGU available"
 shuttleBusInfo_vi: "Có xe đưa đón miễn phí từ Hồ Con Rùa, Quận 3, TP.HCM đến VGU"
@@ -76,34 +77,36 @@ freeBadgeText: "FREE Event Open to All"
 freeBadgeText_vi: "SỰ KIỆN MIỄN PHÍ DÀNH CHO TẤT CẢ"
 
 schedule:
-  - time: "8:30 - 9:00"
-    title: "Check-In & Connections"
-    title_vi: "Đăng ký & Kết nối"
-    desc: "Meet VGU alumni at the reception hall."
-    desc_vi: "Gặp gỡ cựu sinh viên VGU tại sảnh đón tiếp."
-  - time: "9:00 - 9:30"
-    title: "VGU Masters Admissions Overview"
-    title_vi: "Tổng quan Tuyển sinh Thạc sĩ VGU"
-    desc: "Introducing master programs."
-    desc_vi: "Giới thiệu các chương trình đào tạo thạc sĩ."
-  - time: "9:30 – 10:30"
-    title: "MSI Lab Tour for Researchers"
-    title_vi: "Tham quan Lab dành cho Nhà nghiên cứu"
-    desc: ""
-    desc_vi: ""
-  - time: "10:00 – 10:30"
-    title: "Q&A & Discussion"
-    title_vi: "Hỏi đáp & Thảo luận"
-    desc: "Open Q&A session with Academic Coordinators."
-    desc_vi: "Trao đổi tự do cùng Điều phối chương trình."
-  - time: "10:30 – 11:30"
-    title: "MSI Lab Tour for Target MSI Students"
-    title_vi: "Tham quan Lab dành cho Sinh viên MSI"
-    desc: "Laboratory Excursion: Scanning Electron Microscope (SEM) and Clean Room Photolithography."
-    desc_vi: "Tham quan: Kính hiển vi điện tử quét (SEM) và Phòng sạch Quang khắc."
-
+  - time: "9:00 - 9:15"
+    title: "Reception & Welcome Briefing"
+    title_vi: "Đón tiếp & Khởi động"
+    desc: "Gathering at the main lobby."
+    desc_vi: "Tập trung tại sảnh chính."
+  - time: "9:15 - 10:45"
+    title: "Guided Lab Tour & Live Demonstrations"
+    title_vi: "Tham quan phòng Lab & Trình diễn thiết bị"
+    desc: "Exploring state-of-the-art research facilities."
+    desc_vi: "Trải nghiệm thực tế tại các phòng nghiên cứu hiện đại."
+  - time: "10:45 - 11:00"
+    title: "Tea Break & Networking"
+    title_vi: "Tiệc trà & Kết nối"
+    desc: "Connect with current students and faculty."
+    desc_vi: "Giao lưu cùng giảng viên và học viên."
+  - time: "11:00 - 11:30"
+    title: "Q&A & Academic Consultation"
+    title_vi: "Thảo luận & Tư vấn học thuật"
+    desc: "Detailed MSI program overview & admissions advisory."
+    desc_vi: "Giải đáp thắc mắc & Giới thiệu chi tiết chương trình MSI."
 ---
 
-# VGU Master Information Day 2026 & Extensive Materials Science (MSI) Lab Tour
+# MSI Weekly Lab Tour — Summer 2026
 
-Join us for the Master Info Day 2026! Tour our state-of-the-art laboratory facilities, see advanced microscope demonstrations and scientific experiments, and connect directly with MSI faculty and current students.
+Join us for the Weekly Lab Tour at VGU Binh Duong campus this Summer!
+
+Explore our high-tech laboratories:
+- Scanning Electron Microscopy (SEM)
+- Cleanroom & Micro/Nanolithography
+- Polymer and Biomaterials labs
+- X-Ray Diffraction (XRD) and characterization suites
+
+Meet our faculty members and students, ask questions, and learn more about applying for the **Master of Science in Materials Science & Innovation (MSI)** joint program with Otto von Guericke University Magdeburg, Germany.

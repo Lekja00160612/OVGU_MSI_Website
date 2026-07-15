@@ -12,35 +12,36 @@ const { locale, t } = useI18n()
 const localePath = useLocalePath()
 
 // Crucial schema fields
-const ticketLink = computed(() => props.activity?.ticketLink || 'https://vgu.edu.vn')
-const coverImage = computed(() => props.activity?.image || '/images/academic_activities/daad-scholarships-cover.jpg')
+const ticketLink = computed(() => props.activity?.meta?.ticketLink || props.activity?.ticketLink || 'https://vgu.edu.vn')
+const coverImage = computed(() => props.activity?.meta?.image || props.activity?.image || '/images/academic_activities/daad-scholarships-cover.jpg')
 
 // Fallback/Default date formatted based on locale
 const displayDate = computed(() => {
   if (locale.value === 'vi') {
-    return props.activity?.eventDate_vi || props.activity?.eventDate || 'Chủ Nhật, 28 Tháng 6, 2026'
+    return props.activity?.meta?.eventDate_vi || props.activity?.eventDate_vi || props.activity?.meta?.eventDate || props.activity?.eventDate || 'Chủ Nhật, 28 Tháng 6, 2026'
   }
-  return props.activity?.eventDate || 'Sunday, 28 June 2026'
+  return props.activity?.meta?.eventDate || props.activity?.eventDate || 'Sunday, 28 June 2026'
 })
 
 const displayTime = computed(() => {
   if (locale.value === 'vi') {
-    return props.activity?.eventTime_vi || '8:30 Sáng - 4:00 Chiều (bao gồm tham quan phòng Lab)'
+    return props.activity?.meta?.eventTime_vi || props.activity?.eventTime_vi || '8:30 Sáng - 4:00 Chiều (bao gồm tham quan phòng Lab)'
   }
-  return props.activity?.eventTime || '8:30 AM - 4:00 PM (incorporating lab tour)'
+  return props.activity?.meta?.eventTime || props.activity?.eventTime || '8:30 AM - 4:00 PM (incorporating lab tour)'
 })
 
 const displayAddress = computed(() => {
   if (locale.value === 'vi') {
-    return props.activity?.eventAddress_vi || 'Khuôn viên VGU, Đường Vành Đai 4, Bến Cát, Bình Dương'
+    return props.activity?.meta?.eventAddress_vi || props.activity?.eventAddress_vi || 'Khuôn viên VGU, Đường Vành Đai 4, Bến Cát, Bình Dương'
   }
-  return props.activity?.eventAddress || 'VGU Campus, Ring Road 4, Ben Cat, Binh Duong'
+  return props.activity?.meta?.eventAddress || props.activity?.eventAddress || 'VGU Campus, Ring Road 4, Ben Cat, Binh Duong'
 })
 
 // Dynamic background images collage
 const bgImagesList = computed(() => {
-  if (props.activity?.bgImages && props.activity.bgImages.length > 0) {
-    return props.activity.bgImages
+  const images = props.activity?.meta?.bgImages || props.activity?.bgImages
+  if (images && images.length > 0) {
+    return images
   }
   // Standard list of 26 high-tech laboratory equipment images from this website
   return [
@@ -75,8 +76,9 @@ const bgImagesList = computed(() => {
 
 // Dynamic collage images (middle right column)
 const collageImagesList = computed(() => {
-  if (props.activity?.collageImages && props.activity.collageImages.length >= 3) {
-    return props.activity.collageImages.slice(0, 3)
+  const images = props.activity?.meta?.collageImages || props.activity?.collageImages
+  if (images && images.length >= 3) {
+    return images.slice(0, 3)
   }
   return [
     '/images/academic_activities/sem-xrd-tour-cover.jpg',
@@ -88,22 +90,23 @@ const collageImagesList = computed(() => {
 // Dynamic event focus fields
 const focusTitleText = computed(() => {
   if (locale.value === 'vi') {
-    return props.activity?.focusTitle_vi || 'TIÊU ĐIỂM ĐẶC BIỆT: KHOA HỌC VẬT LIỆU (MSI)'
+    return props.activity?.meta?.focusTitle_vi || props.activity?.focusTitle_vi || 'TIÊU ĐIỂM ĐẶC BIỆT: KHOA HỌC VẬT LIỆU (MSI)'
   }
-  return props.activity?.focusTitle || 'SPECIAL FOCUS: MATERIALS SCIENCE (MSI)'
+  return props.activity?.meta?.focusTitle || props.activity?.focusTitle || 'SPECIAL FOCUS: MATERIALS SCIENCE (MSI)'
 })
 
 const focusBodyText = computed(() => {
   if (locale.value === 'vi') {
-    return props.activity?.focusText_vi || 'Khám phá chương trình đào tạo Thạc sĩ Khoa học Vật liệu & Đổi mới (MSI) liên kết Đức tại VGU. Xem trực tiếp các buổi thử nghiệm, trình diễn thiết bị kính hiển vi cao cấp và trao đổi trực tiếp cùng đội ngũ giảng viên, chuyên gia đầu ngành từ Đức.'
+    return props.activity?.meta?.focusText_vi || props.activity?.focusText_vi || 'Khám phá chương trình đào tạo Thạc sĩ Khoa học Vật liệu & Đổi mới (MSI) liên kết Đức tại VGU. Xem trực tiếp các buổi thử nghiệm, trình diễn thiết bị kính hiển vi cao cấp và trao đổi trực tiếp cùng đội ngũ giảng viên, chuyên gia đầu ngành từ Đức.'
   }
-  return props.activity?.focusText || 'Discover the curriculum of the Master of Science in Materials Science (MSI) program. Tour our state-of-the-art laboratory facilities, see advanced microscope demonstrations and scientific experiments, and connect directly with MSI faculty and current students.'
+  return props.activity?.meta?.focusText || props.activity?.focusText || 'Discover the curriculum of the Master of Science in Materials Science (MSI) program. Tour our state-of-the-art laboratory facilities, see advanced microscope demonstrations and scientific experiments, and connect directly with MSI faculty and current students.'
 })
 
 // Dynamic timeline schedule
 const timelineItems = computed(() => {
-  if (props.activity?.schedule && props.activity.schedule.length > 0) {
-    return props.activity.schedule.map((item: any) => ({
+  const schedule = props.activity?.meta?.schedule || props.activity?.schedule
+  if (schedule && schedule.length > 0) {
+    return schedule.map((item: any) => ({
       time: item.time,
       title: locale.value === 'vi' ? (item.title_vi || item.title) : item.title,
       desc: locale.value === 'vi' ? (item.desc_vi || item.desc) : item.desc
@@ -114,16 +117,16 @@ const timelineItems = computed(() => {
 
 const freeBadgeText = computed(() => {
   if (locale.value === 'vi') {
-    return props.activity?.freeBadgeText_vi || 'SỰ KIỆN MIỄN PHÍ DÀNH CHO TẤT CẢ'
+    return props.activity?.meta?.freeBadgeText_vi || props.activity?.freeBadgeText_vi || 'SỰ KIỆN MIỄN PHÍ DÀNH CHO TẤT CẢ'
   }
-  return props.activity?.freeBadgeText || 'FREE Event Open to All'
+  return props.activity?.meta?.freeBadgeText || props.activity?.freeBadgeText || 'FREE Event Open to All'
 })
 
 const shuttleBusText = computed(() => {
   if (locale.value === 'vi') {
-    return props.activity?.shuttleBusInfo_vi || 'Có xe đưa đón miễn phí từ Hồ Con Rùa, Quận 3, TP.HCM đến VGU'
+    return props.activity?.meta?.shuttleBusInfo_vi || props.activity?.shuttleBusInfo_vi || 'Có xe đưa đón miễn phí từ Hồ Con Rùa, Quận 3, TP.HCM đến VGU'
   }
-  return props.activity?.shuttleBusInfo || 'Free Shuttle Bus from Ho Con Rua, District 3, HCMC to VGU available'
+  return props.activity?.meta?.shuttleBusInfo || props.activity?.shuttleBusInfo || 'Free Shuttle Bus from Ho Con Rua, District 3, HCMC to VGU available'
 })
 
 // Metadata for Lab Equipments
@@ -209,6 +212,148 @@ const cardPresets = [
   { top: '90%', rightOffset: '-15px', rotate: 'rotate(8deg)', scale: 0.82, z: 2 }
 ]
 
+// Function to resolve human readable title from image filename or path
+function getImageTitle(path: string, currentLocale: string) {
+  if (!path) return ''
+  
+  // Extract filename without extension
+  const parts = path.split('/')
+  const filenameWithExt = parts[parts.length - 1]
+  const filename = filenameWithExt.substring(0, filenameWithExt.lastIndexOf('.')) || filenameWithExt
+  
+  // Helper to clean up generic names
+  const cleanGeneric = (name: string) => {
+    return name
+      .replace(/[-_]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  }
+
+  const lowerPath = path.toLowerCase()
+  
+  // 1. Academic activities / tour photos
+  if (lowerPath.includes('sem-xrd-tour-img-1')) {
+    return currentLocale === 'vi' ? 'Chuẩn bị mẫu SEM' : 'SEM Sample Preparation'
+  }
+  if (lowerPath.includes('sem-xrd-tour-img-2')) {
+    return currentLocale === 'vi' ? 'Phân tích vi cấu trúc' : 'Microstructure Analysis'
+  }
+  if (lowerPath.includes('sem-xrd-tour-img-3')) {
+    return currentLocale === 'vi' ? 'Thiết bị nhiễu xạ XRD' : 'XRD Diffractometer Suite'
+  }
+  if (lowerPath.includes('polymer-labs-img-1')) {
+    return currentLocale === 'vi' ? 'Khảo sát độ bền kéo' : 'Tensile Strength Testing'
+  }
+  if (lowerPath.includes('polymer-labs-img-2')) {
+    return currentLocale === 'vi' ? 'Gia công mẫu Polymer' : 'Polymer Processing'
+  }
+  if (lowerPath.includes('polymer-labs-img-3')) {
+    return currentLocale === 'vi' ? 'Thiết bị đo độ cứng' : 'Hardness Measurement'
+  }
+  if (lowerPath.includes('research-labs-img-1')) {
+    return currentLocale === 'vi' ? 'Cân phân tích độ ẩm' : 'Moisture Analyzer'
+  }
+  if (lowerPath.includes('research-labs-img-3')) {
+    return currentLocale === 'vi' ? 'Tổng hợp vật liệu vô cơ' : 'Inorganic Synthesis'
+  }
+  if (lowerPath.includes('research-labs-img-4')) {
+    return currentLocale === 'vi' ? 'Hệ thống đo quang học' : 'Optical Measurement System'
+  }
+  if (lowerPath.includes('research-labs-img-5')) {
+    return currentLocale === 'vi' ? 'Phân tích nhiệt vi sai' : 'Thermal Analysis System'
+  }
+  if (lowerPath.includes('khanh-optical-microscope')) {
+    return currentLocale === 'vi' ? 'Quan sát kính hiển vi quang học' : 'Optical Microscopy Session'
+  }
+  if (lowerPath.includes('knauf-trip-img-2')) {
+    return currentLocale === 'vi' ? 'Dây chuyền sản xuất Knauf' : 'Knauf Production Line'
+  }
+  
+  // 2. Specific laboratory equipments
+  if (lowerPath.includes('analytical-balance')) {
+    return currentLocale === 'vi' ? 'Cân phân tích kỹ thuật' : 'Analytical Balance'
+  }
+  if (lowerPath.includes('automated-material-microscope')) {
+    return currentLocale === 'vi' ? 'Kính hiển vi vật liệu tự động' : 'Automated Material Microscope'
+  }
+  if (lowerPath.includes('cleanroom')) {
+    return currentLocale === 'vi' ? 'Phòng sạch Class 100' : 'Class 100 Cleanroom'
+  }
+  if (lowerPath.includes('convection-oven')) {
+    return currentLocale === 'vi' ? 'Tủ sấy đối lưu' : 'Convection Oven'
+  }
+  if (lowerPath.includes('deionized-water-purifier') || lowerPath.includes('water purifier')) {
+    return currentLocale === 'vi' ? 'Máy lọc nước khử ion' : 'Deionized Water Purifier'
+  }
+  if (lowerPath.includes('differential-scanning-calorimeter') || lowerPath.includes('dsc')) {
+    return currentLocale === 'vi' ? 'Nhiệt lượng kế quét vi sai (DSC)' : 'Differential Scanning Calorimeter (DSC)'
+  }
+  if (lowerPath.includes('e-beam-evaporator')) {
+    return currentLocale === 'vi' ? 'Hệ bốc bay chùm tia điện tử E-beam' : 'E-beam Evaporator'
+  }
+  if (lowerPath.includes('environmental-chamber') || lowerPath.includes('environment chamber')) {
+    return currentLocale === 'vi' ? 'Tủ thử nghiệm môi trường' : 'Environmental Chamber'
+  }
+  if (lowerPath.includes('flammable-storage')) {
+    return currentLocale === 'vi' ? 'Tủ lưu trữ hóa chất chống cháy' : 'Flammable Storage Cabinet'
+  }
+  if (lowerPath.includes('freezer-25c') || lowerPath.includes('freezer -25')) {
+    return currentLocale === 'vi' ? 'Tủ đông sâu phòng Lab -25°C' : 'Deep Freezer -25°C'
+  }
+  if (lowerPath.includes('fume-hood')) {
+    return currentLocale === 'vi' ? 'Tủ hút khí độc phòng thí nghiệm' : 'Fume Hood Ventilation'
+  }
+  if (lowerPath.includes('glovebox')) {
+    return currentLocale === 'vi' ? 'Hệ thống hộp găng tay thao tác' : 'Glovebox Workstation'
+  }
+  if (lowerPath.includes('high-temperature-chamber-furnace') || lowerPath.includes('furnace')) {
+    return currentLocale === 'vi' ? 'Lò nung nhiệt độ cao' : 'High Temperature Furnace'
+  }
+  if (lowerPath.includes('hotplate')) {
+    return currentLocale === 'vi' ? 'Bếp gia nhiệt kỹ thuật số' : 'Precision Lab Hotplate'
+  }
+  if (lowerPath.includes('ipce') || lowerPath.includes('photon-to-current')) {
+    return currentLocale === 'vi' ? 'Hệ đo hiệu suất điện lượng quang tử' : 'IPCE Efficiency System'
+  }
+  if (lowerPath.includes('infrared-thermometer')) {
+    return currentLocale === 'vi' ? 'Nhiệt kế hồng ngoại từ xa' : 'Infrared Thermometer'
+  }
+  if (lowerPath.includes('laser-diffraction') || lowerPath.includes('particle-size')) {
+    return currentLocale === 'vi' ? 'Máy phân tích kích thước hạt laser' : 'Laser Particle Size Analyzer'
+  }
+  if (lowerPath.includes('magnetic-stirrer')) {
+    return currentLocale === 'vi' ? 'Máy khuấy từ gia nhiệt' : 'Magnetic Stirrer'
+  }
+  if (lowerPath.includes('micro-hardness-tester')) {
+    return currentLocale === 'vi' ? 'Thiết bị đo độ cứng tế vi' : 'Micro-Hardness Tester'
+  }
+  if (lowerPath.includes('micro-raman-spectrometer') || lowerPath.includes('raman')) {
+    return currentLocale === 'vi' ? 'Quang phổ kế vi Raman' : 'Micro-Raman Spectrometer'
+  }
+  if (lowerPath.includes('microlithography')) {
+    return currentLocale === 'vi' ? 'Hệ thống quang khắc vi mô' : 'Microlithography System'
+  }
+  if (lowerPath.includes('mili-q')) {
+    return currentLocale === 'vi' ? 'Hệ lọc nước siêu sạch Mili-Q' : 'Mili-Q Purification System'
+  }
+  if (lowerPath.includes('nanolithography')) {
+    return currentLocale === 'vi' ? 'Hệ thống khắc nano lithography' : 'Nanolithography System'
+  }
+  if (lowerPath.includes('oxidation-furnace')) {
+    return currentLocale === 'vi' ? 'Lò oxy hóa khuếch tán' : 'Oxidation Furnace'
+  }
+  if (lowerPath.includes('scanning-electron-microscope') || lowerPath.includes('sem+eds+ebsd') || lowerPath.includes('sem eds ebsd')) {
+    return currentLocale === 'vi' ? 'Kính hiển vi điện tử quét SEM' : 'Scanning Electron Microscope (SEM)'
+  }
+  if (lowerPath.includes('x-ray-fluorescence') || lowerPath.includes('xrf')) {
+    return currentLocale === 'vi' ? 'Quang phổ huỳnh quang tia X (XRF)' : 'X-ray Fluorescence Spectrometer (XRF)'
+  }
+
+  // Fallback to formatted filename
+  const cleaned = cleanGeneric(filename)
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1)
+}
+
 // Compute full properties of 40 floating elements
 const floatingCardsList = computed(() => {
   const list = []
@@ -218,7 +363,7 @@ const floatingCardsList = computed(() => {
   for (let i = 0; i < Math.min(40, cardPresets.length); i++) {
     const preset = cardPresets[i]
     const imgUrl = images[i % images.length]
-    const equipment = labEquipmentData[i % labEquipmentData.length]
+    const titleText = getImageTitle(imgUrl, locale.value)
     
     const styleObj: any = {
       top: preset.top,
@@ -235,7 +380,7 @@ const floatingCardsList = computed(() => {
     
     list.push({
       src: imgUrl,
-      label: locale.value === 'vi' ? equipment.vi : equipment.en,
+      label: titleText,
       style: styleObj
     })
   }
@@ -275,7 +420,7 @@ function triggerPrint() {
     </div>
 
     <!-- MAIN POSTER CONTAINER (Sized for print and screen) -->
-    <div class="poster-container">
+    <div class="poster-container" :class="{ 'poster-container-image-only': activity?.meta?.useImageAsPoster || activity?.useImageAsPoster }">
       
       <!-- BACKGROUND collage grid for premium design -->
       <div class="poster-bg-grid">
@@ -289,149 +434,159 @@ function triggerPrint() {
         <div class="bg-overlay" />
       </div>
 
-      <!-- TOP BANNER HEADER -->
-      <div class="poster-header">
-        <div class="header-logos">
-          <!-- VGU & OVGU logos placed in white background capsules to preserve brand colors on screen and print -->
-          <div class="logo-capsule">
-            <NuxtImg src="/Logo/VGU_Logo.png" alt="VGU Logo" class="logo-vgu" />
-          </div>
-          <div class="logo-capsule">
-            <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU Logo" class="logo-ovgu" />
-          </div>
-        </div>
-        <h1 class="poster-main-title">
-          {{ locale === 'vi' ? 'NGÀY HỘI THÔNG TIN THẠC SĨ VGU 2026' : 'VGU MASTER INFORMATION DAY 2026' }}
-          <span class="highlight-text">&amp; {{ locale === 'vi' ? 'CHUYẾN THAM QUAN PHÒNG THÍ NGHIỆM (MSI) MỞ RỘNG' : 'EXTENSIVE MATERIALS SCIENCE (MSI) LAB TOUR' }}</span>
-        </h1>
-        <p class="poster-subtitle">
-          {{ locale === 'vi' ? 'Khám phá tương lai của bạn trong ngành Khoa học Vật liệu. Chào đón các học viên tương lai của chương trình Thạc sĩ Khoa học Vật liệu & Đổi mới (MSI)!' : 'Exploring Your Future in Materials Science. Welcoming Future Students of the Master Of MATERIALS SCIENCE (MSI) Program!' }}
-        </p>
+      <!-- Image-only mode for poster (e.g. Weekly Lab Tour 2026 Summer) -->
+      <div v-if="activity?.meta?.useImageAsPoster || activity?.useImageAsPoster" class="poster-image-only-mode">
+        <a :href="ticketLink" target="_blank" rel="noopener noreferrer" class="poster-image-link" :title="locale === 'vi' ? 'Nhấp để đăng ký' : 'Click to Register'">
+          <NuxtImg :src="coverImage" alt="Poster Image" class="poster-main-image" />
+        </a>
       </div>
 
-      <!-- SAVE THE DATE & QUICK CARD SECTION -->
-      <div class="date-hero-section">
-        <div class="save-date-card">
-          <h2 class="save-title">SAVE THE DATE</h2>
-          <div class="info-list">
-            <div class="info-item">
-              <span class="info-icon">📅</span>
-              <div class="info-text">
-                <strong class="info-label">{{ locale === 'vi' ? 'Thời gian' : 'Date' }}:</strong>
-                <span>{{ displayDate }}</span>
-              </div>
+      <!-- Detailed interactive ticket layout -->
+      <template v-else>
+        <!-- TOP BANNER HEADER -->
+        <div class="poster-header">
+          <div class="header-logos">
+            <!-- VGU & OVGU logos placed in white background capsules to preserve brand colors on screen and print -->
+            <div class="logo-capsule">
+              <NuxtImg src="/Logo/VGU_Logo.png" alt="VGU Logo" class="logo-vgu" />
             </div>
-            <div class="info-item">
-              <span class="info-icon">🕒</span>
-              <div class="info-text">
-                <strong class="info-label">{{ locale === 'vi' ? 'Giờ giấc' : 'Time' }}:</strong>
-                <span>{{ displayTime }}</span>
-              </div>
-            </div>
-            <div class="info-item">
-              <span class="info-icon">📍</span>
-              <div class="info-text">
-                <strong class="info-label">{{ locale === 'vi' ? 'Địa điểm' : 'Address' }}:</strong>
-                <span>{{ displayAddress }}</span>
-              </div>
+            <div class="logo-capsule">
+              <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU Logo" class="logo-ovgu" />
             </div>
           </div>
-        </div>
-        <div class="hero-image-wrap">
-          <NuxtImg :src="coverImage" alt="Event Banner Image" class="hero-banner-img" />
-        </div>
-      </div>
-
-      <!-- MIDDLE SPLIT SECTION: TIMELINE VS DETAILS -->
-      <div class="middle-layout">
-        
-        <!-- LEFT: SCHEDULE TIMELINE -->
-        <div class="schedule-column">
-          <h3 class="section-title">
-            <span class="title-icon">⏱️</span>
-            {{ locale === 'vi' ? 'Chương Trình Chi Tiết' : 'Event Schedule' }}
-          </h3>
-          <div class="timeline-container">
-            <div 
-              v-for="(item, idx) in timelineItems" 
-              :key="idx" 
-              class="timeline-item"
-            >
-              <div class="timeline-badge-col">
-                <div class="timeline-badge">
-                  <span class="badge-dot" />
-                </div>
-                <div v-if="idx < timelineItems.length - 1" class="timeline-line" />
-              </div>
-              <div class="timeline-content-col">
-                <span class="timeline-time">{{ item.time }}</span>
-                <h4 class="timeline-title">{{ item.title }}</h4>
-                <p class="timeline-desc">{{ item.desc }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT: SPECIAL FOCUS & IMAGE COLLAGE -->
-        <div class="details-column">
-          <div class="focus-card">
-            <h4 class="focus-card-title">
-              {{ focusTitleText }}
-            </h4>
-            <p class="focus-card-text">
-              {{ focusBodyText }}
-            </p>
-          </div>
-
-          <!-- Collage of Laboratory/Event Images -->
-          <div class="collage-container">
-            <div 
-              v-for="(imgUrl, collageIdx) in collageImagesList" 
-              :key="collageIdx" 
-              :class="`collage-item collage-item-${collageIdx + 1}`"
-            >
-              <NuxtImg :src="imgUrl" :alt="`Lab collage image ${collageIdx + 1}`" class="collage-img" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BOTTOM REGISTRATION & FOOTER CARD -->
-      <div class="poster-footer-card">
-        <div class="footer-left">
-          <h3 class="register-title">{{ locale === 'vi' ? 'ĐĂNG KÝ NGAY!' : 'REGISTER NOW!' }}</h3>
-          <p class="register-subtitle">
-            {{ locale === 'vi' ? 'Số lượng chỗ ngồi có hạn. Hãy đăng ký ngay để giữ chỗ và sắp xếp xe đưa đón.' : 'Limited seats. Ensure your spot & bus transfer.' }}
+          <h1 class="poster-main-title">
+            {{ locale === 'vi' ? 'NGÀY HỘI THÔNG TIN THẠC SĨ VGU 2026' : 'VGU MASTER INFORMATION DAY 2026' }}
+            <span class="highlight-text">&amp; {{ locale === 'vi' ? 'CHUYẾN THAM QUAN PHÒNG THÍ NGHIỆM (MSI) MỞ RỘNG' : 'EXTENSIVE MATERIALS SCIENCE (MSI) LAB TOUR' }}</span>
+          </h1>
+          <p class="poster-subtitle">
+            {{ locale === 'vi' ? 'Khám phá tương lai của bạn trong ngành Khoa học Vật liệu. Chào đón các học viên tương lai của chương trình Thạc sĩ Khoa học Vật liệu & Đổi mới (MSI)!' : 'Exploring Your Future in Materials Science. Welcoming Future Students of the Master Of MATERIALS SCIENCE (MSI) Program!' }}
           </p>
-          <div class="free-badge">
-            {{ freeBadgeText }}
-          </div>
-          <div class="contact-details-grid">
-            <div><strong>{{ locale === 'vi' ? 'Trang web' : 'Website' }}:</strong> msi.vgu.edu.vn</div>
-            <div><strong>Hotline:</strong> 0988 629 705</div>
-            <div><strong>General Email:</strong> masterinfo@vgu.edu.vn</div>
-            <div><strong>MSI Email:</strong> msi.info@vgu.edu.vn</div>
-          </div>
         </div>
-        
-        <!-- QR CODE MODULE -->
-        <div class="footer-right">
-          <a :href="ticketLink" target="_blank" rel="noopener noreferrer" class="qr-link" :title="locale === 'vi' ? 'Nhấp để đăng ký' : 'Click to Register'">
-            <div class="qr-box">
-              <QrCode :value="ticketLink" :margin="1" color-dark="#0f2240" />
-            </div>
-            <span class="qr-text">{{ locale === 'vi' ? 'Nhấp hoặc Quét để đăng ký' : 'Click or Scan to Register' }}</span>
-          </a>
-        </div>
-      </div>
 
-      <!-- FOOTER BOTTOM INFOBAR -->
-      <div class="bottom-infobar">
-        <span class="shuttle-info">
-          🚌 {{ shuttleBusText }}
-        </span>
-        <div class="footer-watermark-text">WORK READY - WORLD READY</div>
-      </div>
+        <!-- SAVE THE DATE & QUICK CARD SECTION -->
+        <div class="date-hero-section">
+          <div class="save-date-card">
+            <h2 class="save-title">SAVE THE DATE</h2>
+            <div class="info-list">
+              <div class="info-item">
+                <span class="info-icon">📅</span>
+                <div class="info-text">
+                  <strong class="info-label">{{ locale === 'vi' ? 'Thời gian' : 'Date' }}:</strong>
+                  <span>{{ displayDate }}</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="info-icon">🕒</span>
+                <div class="info-text">
+                  <strong class="info-label">{{ locale === 'vi' ? 'Giờ giấc' : 'Time' }}:</strong>
+                  <span>{{ displayTime }}</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="info-icon">📍</span>
+                <div class="info-text">
+                  <strong class="info-label">{{ locale === 'vi' ? 'Địa điểm' : 'Address' }}:</strong>
+                  <span>{{ displayAddress }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-image-wrap">
+            <NuxtImg :src="coverImage" alt="Event Banner Image" class="hero-banner-img" />
+          </div>
+        </div>
+
+        <!-- MIDDLE SPLIT SECTION: TIMELINE VS DETAILS -->
+        <div class="middle-layout">
+          
+          <!-- LEFT: SCHEDULE TIMELINE -->
+          <div class="schedule-column">
+            <h3 class="section-title">
+              <span class="title-icon">⏱️</span>
+              {{ locale === 'vi' ? 'Chương Trình Chi Tiết' : 'Event Schedule' }}
+            </h3>
+            <div class="timeline-container">
+              <div 
+                v-for="(item, idx) in timelineItems" 
+                :key="idx" 
+                class="timeline-item"
+              >
+                <div class="timeline-badge-col">
+                  <div class="timeline-badge">
+                    <span class="badge-dot" />
+                  </div>
+                  <div v-if="idx < timelineItems.length - 1" class="timeline-line" />
+                </div>
+                <div class="timeline-content-col">
+                  <span class="timeline-time">{{ item.time }}</span>
+                  <h4 class="timeline-title">{{ item.title }}</h4>
+                  <p class="timeline-desc">{{ item.desc }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: SPECIAL FOCUS & IMAGE COLLAGE -->
+          <div class="details-column">
+            <div class="focus-card">
+              <h4 class="focus-card-title">
+                {{ focusTitleText }}
+              </h4>
+              <p class="focus-card-text">
+                {{ focusBodyText }}
+              </p>
+            </div>
+
+            <!-- Collage of Laboratory/Event Images -->
+            <div class="collage-container">
+              <div 
+                v-for="(imgUrl, collageIdx) in collageImagesList" 
+                :key="collageIdx" 
+                :class="`collage-item collage-item-${collageIdx + 1}`"
+              >
+                <NuxtImg :src="imgUrl" :alt="`Lab collage image ${collageIdx + 1}`" class="collage-img" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM REGISTRATION & FOOTER CARD -->
+        <div class="poster-footer-card">
+          <div class="footer-left">
+            <h3 class="register-title">{{ locale === 'vi' ? 'ĐĂNG KÝ NGAY!' : 'REGISTER NOW!' }}</h3>
+            <p class="register-subtitle">
+              {{ locale === 'vi' ? 'Số lượng chỗ ngồi có hạn. Hãy đăng ký ngay để giữ chỗ và sắp xếp xe đưa đón.' : 'Limited seats. Ensure your spot & bus transfer.' }}
+            </p>
+            <div class="free-badge">
+              {{ freeBadgeText }}
+            </div>
+            <div class="contact-details-grid">
+              <div><strong>{{ locale === 'vi' ? 'Trang web' : 'Website' }}:</strong> msi.vgu.edu.vn</div>
+              <div><strong>Hotline:</strong> 0988 629 705</div>
+              <div><strong>General Email:</strong> masterinfo@vgu.edu.vn</div>
+              <div><strong>MSI Email:</strong> msi.info@vgu.edu.vn</div>
+            </div>
+          </div>
+          
+          <!-- QR CODE MODULE -->
+          <div class="footer-right">
+            <a :href="ticketLink" target="_blank" rel="noopener noreferrer" class="qr-link" :title="locale === 'vi' ? 'Nhấp để đăng ký' : 'Click to Register'">
+              <div class="qr-box">
+                <QrCode :value="ticketLink" :margin="1" color-dark="#0f2240" />
+              </div>
+              <span class="qr-text">{{ locale === 'vi' ? 'Nhấp hoặc Quét để đăng ký' : 'Click or Scan to Register' }}</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- FOOTER BOTTOM INFOBAR -->
+        <div class="bottom-infobar">
+          <span class="shuttle-info">
+            🚌 {{ shuttleBusText }}
+          </span>
+          <div class="footer-watermark-text">WORK READY - WORLD READY</div>
+        </div>
+      </template>
 
     </div>
 
@@ -506,6 +661,38 @@ function triggerPrint() {
   gap: 2.5rem;
   position: relative;
   z-index: 5;
+}
+.poster-container-image-only {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Image-only Mode Styles */
+.poster-image-only-mode {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.poster-image-link {
+  display: block;
+  width: 100%;
+  transition: transform 250ms ease;
+}
+.poster-image-link:hover {
+  transform: scale(1.01);
+}
+.poster-main-image {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  display: block;
 }
 
 /* Background grid styling */
@@ -1120,6 +1307,30 @@ function triggerPrint() {
     image-rendering: crisp-edges !important;
   }
 
+  /* Image-only print mode styling */
+  .poster-image-only-mode {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10 !important;
+  }
+
+  .poster-image-link {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  .poster-main-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
   /* 5. Central invitation ticket fits exactly into A4 (180mm x 277mm) */
   .poster-container {
     width: 180mm !important;
@@ -1138,6 +1349,14 @@ function triggerPrint() {
     overflow: hidden !important;
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
+  }
+
+  .poster-container-image-only {
+    width: 210mm !important;
+    height: 297mm !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
   }
 
   /* 6. Asymmetric collage backdrop */

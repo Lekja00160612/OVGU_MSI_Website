@@ -19,7 +19,10 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links: []
+links:
+  - title: "Weekly Lab Tour 2026 Summer"
+    url: "/academic-activities/weekly-lab-tour-2026-summer"
+    description: "Activity from 2026-07-15"
 ---
 
 - Introduction of micro/nanotechnology
