@@ -1,6 +1,6 @@
 ---
 title: "Weekly Lab Tour 2026 Summer"
-category: "Achievements & Events"
+category: "Lab Works"
 date: "2026-07-15"
 eventDate: "Every Friday, 9:00 AM – 11:30 AM (until 30 August 2026)"
 eventDate_vi: "Thứ Sáu Hằng Tuần, 9:00 Sáng – 11:30 Trưa (đến 30 Tháng 8, 2026)"
