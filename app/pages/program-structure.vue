@@ -286,6 +286,11 @@ const hasGermanLecturer = (mod: any) => {
       </div>
     </div>
 
+    <!-- MASTER THESIS DEMO TOPICS -->
+    <div class="container thesis-topics-wrapper">
+      <ThesisTopicsExplorer />
+    </div>
+
     <!-- ── Media Detail Modal (Native Implementation) ── -->
     <Teleport to="body">
       <Transition name="modal-fade">
@@ -640,7 +645,8 @@ const hasGermanLecturer = (mod: any) => {
 }
 
 /* ELECTIVES VIEW SWITCHER & LAYOUTS */
-.electives-container { max-width: 1050px; margin: 0 auto; }
+.electives-container { max-width: 1100px; margin: 4rem auto 2.5rem auto; }
+.thesis-topics-wrapper { max-width: 1100px; margin: 2rem auto 5rem auto; }
 .toggle-group {
   display: inline-flex;
 }
@@ -736,9 +742,9 @@ const hasGermanLecturer = (mod: any) => {
 .compact-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .compact-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -752,56 +758,57 @@ const hasGermanLecturer = (mod: any) => {
   background: #ffffff;
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-xl);
-  padding: 1.75rem;
+  padding: 2rem 1.75rem;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 140px;
+  min-height: 155px;
 }
 .compact-elective-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
   border-color: var(--color-primary-light);
 }
 .compact-elective-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
 }
 .compact-elective-title {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 700;
   color: var(--color-primary-dark);
+  line-height: 1.4;
 }
 
 /* Mobile Horizontal Slider */
 .electives-mobile-slider {
   width: 100%;
   overflow-x: auto;
-  padding: 0.5rem 0 1.5rem 0;
+  padding: 0.75rem 0 1.75rem 0;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
 .electives-horizontal-scroll {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;
   width: max-content;
   padding: 0 1rem;
 }
 .mobile-elective-card {
   scroll-snap-align: start;
-  flex: 0 0 280px; /* fixed width for slide cards */
+  flex: 0 0 310px; /* generous width for mobile slide cards */
   background: #ffffff;
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-xl);
-  padding: 1.75rem;
+  padding: 2rem 1.5rem;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 160px;
+  min-height: 175px;
 }
 .mobile-elective-card:hover {
   border-color: var(--color-primary-light);
@@ -817,7 +824,8 @@ const hasGermanLecturer = (mod: any) => {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-primary-dark);
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
 }
 
 /* Elective Detail Button */
