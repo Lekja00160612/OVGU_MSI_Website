@@ -31,7 +31,7 @@ groups:
             email: daniel.juhre@ovgu.de
             is_management: true
             management_role: Program Director
-          - name: Marc Ulrich
+          - name: M.Sc. Marc Ulrich
             roles: Research Assistant (Chair of Computational Mechanics)
             image: /Lecturer_Avatar/Marc Ulrich.png
             email: marc.ulrich@ovgu.de

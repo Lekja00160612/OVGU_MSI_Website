@@ -31,7 +31,7 @@ groups:
             email: daniel.juhre@ovgu.de
             is_management: true
             management_role: Giám đốc Chương trình
-          - name: Marc Ulrich
+          - name: M.Sc. Marc Ulrich
             roles: Trợ lý Nghiên cứu (Bộ môn Cơ học Tính toán)
             image: /Lecturer_Avatar/Marc Ulrich.png
             email: marc.ulrich@ovgu.de

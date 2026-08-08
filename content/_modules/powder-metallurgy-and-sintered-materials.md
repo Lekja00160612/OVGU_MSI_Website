@@ -11,7 +11,7 @@ description: |
   • Additive manufacturing methods
   • Examples of powder metallurgical products and parts in engineering and biomedical applications
 lecturers:
-  - "Prof. Dr.-Ing. Mania Krüger"
+  - "Prof. Dr.-Ing. Manja Krüger"
   - "Dr.-Ing. Georg Hasemann"
 images: []
 pdfs:

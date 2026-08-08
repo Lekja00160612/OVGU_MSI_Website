@@ -13,7 +13,7 @@ description: |
   • Phase transitions and phase transformations in solids
   • Strengthening mechanisms in complex material systems
 lecturers:
-  - "Prof. Dr.-Ing. Mania Krüger"
+  - "Prof. Dr.-Ing. Manja Krüger"
   - "Dr.-Ing. Georg Hasemann"
   - "Dr.-Ing. Sebastian Hütter"
 images: []
