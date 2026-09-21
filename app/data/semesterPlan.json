@@ -1,0 +1,76 @@
+{
+  "academic_year": "2026-2027",
+  "term": "Winter Semester 2026/2027",
+  "intakes": [
+    {
+      "id": "intake-3-2026",
+      "name": "Intake 2026",
+      "semester_number": 1,
+      "schedule": [
+        {
+          "module_slug": "solid-state-physics",
+          "start_date": "2026-09-18",
+          "end_date": "2026-10-11"
+        },
+        {
+          "module_slug": "polymers",
+          "start_date": "2026-10-24",
+          "end_date": "2026-11-11",
+          "notes": "Shared lecture block with Intake 2025"
+        },
+        {
+          "module_slug": "continuum-mechanics",
+          "start_date": "2026-11-20",
+          "end_date": "2026-12-08",
+          "notes": "Shared lecture block with Intake 2025"
+        },
+        {
+          "module_slug": "micro-nano-fabrication-technology",
+          "start_date": "2026-12-18",
+          "end_date": "2027-01-04"
+        },
+        {
+          "module_slug": "mechanics-of-materials-and-fracture-mechanics",
+          "start_date": "2027-01-08",
+          "end_date": "2027-01-24"
+        },
+        {
+          "module_slug": "engineering-ceramics",
+          "start_date": "2027-02-19",
+          "end_date": "2027-03-16"
+        }
+      ]
+    },
+    {
+      "id": "intake-2-2025",
+      "name": "Intake 2025",
+      "semester_number": 3,
+      "schedule": [
+        {
+          "module_slug": "glass",
+          "start_date": "2026-09-28",
+          "end_date": "2026-10-16"
+        },
+        {
+          "module_slug": "polymers",
+          "start_date": "2026-10-24",
+          "end_date": "2026-11-11",
+          "notes": "Shared lecture block with Intake 2026"
+        },
+        {
+          "module_slug": "continuum-mechanics",
+          "start_date": "2026-11-20",
+          "end_date": "2026-12-08",
+          "notes": "Shared lecture block with Intake 2026"
+        },
+        {
+          "module_slug": "team-project",
+          "start_date": "2026-10-01",
+          "end_date": "2027-02-28",
+          "display_date": "October 2026 – February 2027",
+          "is_semester_long": true
+        }
+      ]
+    }
+  ]
+}

@@ -226,6 +226,11 @@ const hasGermanLecturer = (mod: any) => {
       </div>
     </div>
 
+    <!-- SEMESTER TIMETABLE & LSF SCHEDULE -->
+    <div class="container semester-timetable-wrapper">
+      <SemesterTimetable />
+    </div>
+
     <!-- ELECTIVE COURSES -->
     <div v-if="electiveModules.length > 0" class="container electives-container">
       <div class="electives-header">

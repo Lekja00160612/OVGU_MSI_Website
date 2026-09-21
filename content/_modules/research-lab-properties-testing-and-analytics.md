@@ -21,7 +21,10 @@ images: []
 pdfs:
   - title: "Module Handbook (PDF)"
     url: "/Documents/MODULE CATALOGUE MSI.pdf"
-links: []
+links:
+  - title: "MSI2025 and GPE2025 Explore the Connection Between Materials and Production Through Additive Manufacturing"
+    url: "/academic-activities/msi2025-and-gpe2025-explore-the-connection-between-materials-and-production-through-additive-manufacturing"
+    description: "Activity from 2026-08-11"
 ---
 
 - Introduction to different materials labs e.g.

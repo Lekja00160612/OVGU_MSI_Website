@@ -56,6 +56,27 @@ A prestigious scholarship program supporting talented master students at VGU, in
 
 A prestigious scholarship sponsored by the German Academic Exchange Service (DAAD) for study **directly at VGU** — so you benefit from German funding without leaving Vietnam.
 
+> [!IMPORTANT]
+> **🌟 Call for Applications — DAAD Sur-Place Scholarship (Intake 2026)**
+> 
+> Official scholarship call sponsored by the DAAD and OVGU Magdeburg (Chair of Computational Mechanics, Prof. Dr.-Ing. Daniel Juhre) for Materials Science master students directly at VGU:
+> 
+> - **Duration & Support:** 12 months full on-site scholarship directly at VGU
+> - **Eligibility Requirements:**
+>   - Currently enrolled in the Materials Science program at VGU
+>   - Good to excellent academic performance
+>   - Strong interest in scientific research (Computational Mechanics, Ceramics, Metallic Materials, High-Temperature Alloys)
+>   - Good to excellent English language skills (social/cultural engagement is considered a plus)
+> - **Application Package:**
+>   1. Transcript of Records (Master Program Materials Science)
+>   2. Language Certificate
+>   3. Curriculum Vitae (CV)
+>   4. Motivational Letter (*"Who are you, what are your interests?"*)
+> - **Application Deadline:** **15/01/2027**
+> - **Coordinator Contact:** `marc.ulrich@ovgu.de` & `msi.info@vgu.edu.vn`
+> 
+> 👉 **[Download Official 2026 DAAD Sur-Place Scholarship Call & Guidelines (PDF)](/Documents/Scholarships/MATERIALS%20SCIENCE_SCHOLARSHIPS_Application_2026.pdf)**
+
 ::daad-scholarship-card
 ---
 keyFacts:
@@ -83,6 +104,29 @@ opportunityTitle: YOUR OPPORTUNITY AT VIETNAMESE-GERMAN UNIVERSITY
 ### DAAD Mobility Scholarship — Study & Research in Germany
 
 Through the VGU–OVGU–DAAD partnership, high-performing MSI students can carry out study semesters or their **Master's Thesis research at OVGU Magdeburg** — fully funded. This is the path that has already taken MSI students to Germany.
+
+> [!IMPORTANT]
+> **✈️ DAAD Mobility Scholarship — Study & Master's Thesis Stay in Germany**
+> 
+> Highly qualified MSI master students have the opportunity to study and conduct original Master's Thesis research directly at Otto von Guericke University Magdeburg (OVGU) in Germany:
+> 
+> - **Duration:** 1 to 2 Semesters at OVGU Magdeburg (Germany)
+> - **Scholarship Benefits:**
+>   - Comprehensive financial and academic support (monthly living stipend + travel allowance)
+>   - Direct active involvement in ongoing research projects in modern, state-of-the-art laboratory facilities
+>   - Joint thesis supervision by OVGU and VGU faculty (Computational Mechanics, Ceramics, Metal Materials, High-Temperature Aerospace Alloys)
+>   - Cultural immersion, German language training, and global academic networking
+> - **Eligibility Requirements:**
+>   - Currently enrolled in the MSI master program with good to excellent academic performance
+>   - Convincing research/thesis proposal and strong interest in international collaboration
+>   - Good to excellent English language skills
+> - **Application Documents:** Motivation letter, CV, transcripts of records, and relevant supporting certificates
+> - **Coordinator Contacts:**
+>   - M.Sc. Marc Ulrich (`marc.ulrich@ovgu.de` / OVGU Magdeburg)
+>   - Dr. Nguyen Xuan Thanh (`thanh.nx@vgu.edu.vn` / VGU)
+>   - Academic Coordinator (`msi.info@vgu.edu.vn`)
+> 
+> 👉 **[Download DAAD Mobility Scholarship Brochure (PDF)](/Documents/Scholarships/Mobility_Scholarship%20Brochure%20MSI_Thanh_Marc.pdf)**
 
 ::daad-scholarship-card
 ---

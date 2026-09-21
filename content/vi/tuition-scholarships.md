@@ -56,6 +56,27 @@ Chương trình học bổng được tài trợ bởi Association of Friends an
 
 Học bổng danh giá được tài trợ bởi Cơ quan Trao đổi Học thuật Đức (DAAD) cho chương trình học **trực tiếp tại VGU** — bạn nhận được tài trợ từ Đức mà không cần rời Việt Nam.
 
+> [!IMPORTANT]
+> **🌟 Thông Báo Tuyển Chọn — Học Bổng DAAD Sur-Place (Khóa 2026)**
+> 
+> Thông báo tuyển chọn học bổng chính thức do DAAD và Đại học OVGU Magdeburg (Bộ môn Cơ học tính toán, GS. TS.-Ing. Daniel Juhre) tài trợ cho học viên thạc sĩ Khoa học Vật liệu trực tiếp tại VGU:
+> 
+> - **Thời gian & Quyền lợi:** Tài trợ 12 tháng sinh hoạt phí trọn gói trực tiếp tại cơ sở VGU
+> - **Điều kiện & Tiêu chí xét chọn:**
+>   - Đang theo học hoặc trúng tuyển chương trình Thạc sĩ Khoa học Vật liệu tại VGU
+>   - Thành tích học tập tốt đến xuất sắc
+>   - Đam mê nghiên cứu khoa học (Cơ học tính toán, Gốm tiên tiến, Vật liệu kim loại & y sinh, Hợp kim nhiệt độ cao)
+>   - Kỹ năng tiếng Anh tốt đến xuất sắc (hoạt động xã hội/văn hóa là điểm cộng)
+> - **Bộ hồ sơ đăng ký:**
+>   1. Bảng điểm (Transcript of records) bậc Đại học / Thạc sĩ
+>   2. Chứng chỉ tiếng Anh
+>   3. Sơ yếu lý lịch (CV)
+>   4. Thư bày tỏ nguyện vọng (*"Bạn là ai, định hướng nghiên cứu của bạn là gì?"*)
+> - **Hạn chót nộp hồ sơ:** **15/01/2027**
+> - **Liên hệ điều phối:** `marc.ulrich@ovgu.de` & `msi.info@vgu.edu.vn`
+> 
+> 👉 **[Tải Thông Báo Tuyển Chọn & Mẫu Đơn Học Bổng 2026 (PDF)](/Documents/Scholarships/MATERIALS%20SCIENCE_SCHOLARSHIPS_Application_2026.pdf)**
+
 ::daad-scholarship-card
 ---
 coverImage: "/images/scholarships/MSI_Surplace_Scholarship.png"
@@ -83,6 +104,29 @@ fileLabel: "Tải Tài Liệu Giới Thiệu (PPTX)"
 ### Học Bổng Trao Đổi DAAD — Học Tập & Nghiên Cứu tại Đức
 
 Thông qua quan hệ đối tác VGU–OVGU–DAAD, học viên MSI xuất sắc có thể thực hiện các kỳ học hoặc **nghiên cứu Luận văn Thạc sĩ tại OVGU Magdeburg** — được tài trợ toàn phần. Đây là con đường đã đưa học viên MSI sang Đức thành công.
+
+> [!IMPORTANT]
+> **✈️ Học Bổng Trao Đổi DAAD Mobility — Học Tập & Làm Luận Văn Thạc Sĩ tại ĐH OVGU Đức**
+> 
+> Học viên Thạc sĩ MSI có thành tích xuất sắc có cơ hội sang học tập và thực hiện đề tài nghiên cứu Luận văn Thạc sĩ trực tiếp tại Đại học Otto von Guericke Magdeburg (OVGU), CHLB Đức:
+> 
+> - **Thời gian:** 1 đến 2 Học kỳ tại ĐH Otto von Guericke Magdeburg (CHLB Đức)
+> - **Quyền lợi học bổng:**
+>   - Hỗ trợ tài chính và học thuật toàn diện (sinh hoạt phí hàng tháng tại Đức + chi phí vé máy bay)
+>   - Trực tiếp tham gia các dự án nghiên cứu đang triển khai trong hệ thống phòng thí nghiệm hiện đại của OVGU
+>   - Được đồng hướng dẫn luận văn bởi các Giáo sư Đức tại OVGU và VGU (Cơ học tính toán, Gốm tiên tiến, Kim loại, Hợp kim hàng không vũ trụ)
+>   - Trải nghiệm văn hóa quốc tế, học tiếng Đức và mở rộng mạng lưới học thuật toàn cầu
+> - **Điều kiện tham gia:**
+>   - Học viên MSI có kết quả học tập tốt đến xuất sắc
+>   - Có đề cương nghiên cứu/luận văn thuyết phục và tinh thần học hỏi quốc tế
+>   - Kỹ năng tiếng Anh vững vàng
+> - **Hồ sơ gồm:** Thư bày tỏ nguyện vọng (Motivation letter), CV, bảng điểm và các chứng chỉ liên quan
+> - **Đầu mối liên hệ:**
+>   - ThS. Marc Ulrich (`marc.ulrich@ovgu.de` / ĐH OVGU Magdeburg)
+>   - TS. Nguyễn Xuân Thành (`thanh.nx@vgu.edu.vn` / VGU)
+>   - Điều phối viên đào tạo (`msi.info@vgu.edu.vn`)
+> 
+> 👉 **[Tải Tài Liệu Giới Thiệu Học Bổng Trao Đổi DAAD Mobility (PDF)](/Documents/Scholarships/Mobility_Scholarship%20Brochure%20MSI_Thanh_Marc.pdf)**
 
 ::daad-scholarship-card
 ---
