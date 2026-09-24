@@ -14,13 +14,17 @@ const props = withDefaults(defineProps<{
   keyFacts?: KeyFact[]
   fileUrl?: string
   fileLabel?: string
+  applicationUrl?: string
+  applicationLabel?: string
 }>(), {
   labelImage: '/images/scholarships/MSI_DAAD_Label.png',
   opportunityTitle: 'YOUR OPPORTUNITY AT VIETNAMESE-GERMAN UNIVERSITY',
   description: '',
   keyFacts: () => [],
   fileUrl: '',
-  fileLabel: 'More Details'
+  fileLabel: 'Download Brochure',
+  applicationUrl: '',
+  applicationLabel: 'Download Application 2026'
 })
 
 const activeIndex = ref(0)
@@ -149,11 +153,30 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Detail action button -->
-    <div v-if="fileUrl" class="card-footer-actions">
-      <a :href="fileUrl" class="detail-download-btn" download target="_blank">
-        <span class="btn-icon">📥</span>
-        <span class="btn-text">{{ fileLabel }}</span>
+    <!-- Detail and Application action buttons -->
+    <div v-if="applicationUrl || fileUrl" class="card-footer-actions">
+      <a 
+        v-if="applicationUrl" 
+        :href="applicationUrl" 
+        class="action-btn application-btn" 
+        download 
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="btn-icon">📋</span>
+        <span class="btn-text">{{ applicationLabel || 'Official Application 2026 (PDF)' }}</span>
+      </a>
+      <a 
+        v-if="fileUrl" 
+        :href="fileUrl" 
+        class="action-btn brochure-btn" 
+        :class="{ 'is-secondary': applicationUrl }"
+        download 
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="btn-icon">📖</span>
+        <span class="btn-text">{{ fileLabel || 'Download Brochure (PDF)' }}</span>
       </a>
     </div>
   </div>
@@ -411,26 +434,67 @@ onUnmounted(() => {
 .card-footer-actions {
   padding: 1.5rem;
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: center;
+  align-items: center;
   border-top: 1px solid var(--color-gray-100);
+  background: var(--color-gray-50);
 }
 
-.detail-download-btn {
-  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
-  color: var(--color-white) !important;
+.action-btn {
   font-weight: 700;
   font-size: 0.95rem;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 1.6rem;
   border-radius: var(--radius-full);
   text-decoration: none !important;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  box-shadow: 0 4px 12px rgba(232, 119, 34, 0.2);
   transition: all var(--duration-base) var(--ease-out);
+  cursor: pointer;
+  text-align: center;
 }
 
-.detail-download-btn:hover {
+.action-btn .btn-icon {
+  font-size: 1.1rem;
+}
+
+.application-btn {
+  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
+  color: var(--color-white) !important;
+  box-shadow: 0 4px 12px rgba(232, 119, 34, 0.25);
+  border: 1.5px solid transparent;
+}
+
+.application-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(232, 119, 34, 0.4);
+}
+
+.brochure-btn {
+  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
+  color: var(--color-white) !important;
+  box-shadow: 0 4px 12px rgba(232, 119, 34, 0.2);
+  border: 1.5px solid transparent;
+}
+
+.brochure-btn.is-secondary {
+  background: var(--color-white);
+  color: var(--color-primary) !important;
+  border: 1.5px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.brochure-btn.is-secondary:hover {
+  background: var(--color-primary);
+  color: var(--color-white) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 56, 101, 0.25);
+}
+
+.brochure-btn:not(.is-secondary):hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(232, 119, 34, 0.4);
 }

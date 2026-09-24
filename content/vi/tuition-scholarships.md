@@ -75,7 +75,9 @@ Học bổng danh giá được tài trợ bởi Cơ quan Trao đổi Học thu�
 > - **Hạn chót nộp hồ sơ:** **15/01/2027**
 > - **Liên hệ điều phối:** `marc.ulrich@ovgu.de` & `msi.info@vgu.edu.vn`
 > 
-> 👉 **[Tải Thông Báo Tuyển Chọn & Mẫu Đơn Học Bổng 2026 (PDF)](/Documents/Scholarships/MATERIALS%20SCIENCE_SCHOLARSHIPS_Application_2026.pdf)**
+> 📥 **Tài liệu tải về chính thức:**
+> - 📋 **[Tải Thông Báo Tuyển Chọn & Mẫu Đơn Học Bổng 2026 (PDF)](/Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf)** *(Chứa đầy đủ hạn chót nộp đơn, tiêu chí và giới thiệu 4 bộ môn nghiên cứu OVGU)*
+> - 📖 **[Tải Tài Liệu Giới Thiệu Học Bổng Sur-Place (PDF)](/Documents/Scholarships/MSI%20Sur_Place_scholarship_brochure.pdf)** | [Bản Trình Chiếu (PPTX)](/Documents/Scholarships/MSI%20Sur_Place_scholarship_brochure.pptx)
 
 ::daad-scholarship-card
 ---
@@ -94,8 +96,10 @@ keyFacts:
     value: "Quy trình tuyển chọn minh bạch dựa trên chất lượng"
   - label: "TRỌNG TÂM:"
     value: "Tiến độ học thuật, định hướng nghiên cứu và trao đổi quốc tế"
+applicationUrl: "/Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf"
+applicationLabel: "Tải Đơn Ứng Tuyển 2026 (PDF)"
 fileUrl: "/Documents/Scholarships/MSI Sur_Place_scholarship_brochure.pdf"
-fileLabel: "Tải Tài Liệu Giới Thiệu (PPTX)"
+fileLabel: "Tải Brochure (PDF)"
 ---
 ::
 
@@ -121,12 +125,17 @@ Thông qua quan hệ đối tác VGU–OVGU–DAAD, học viên MSI xuất sắc
 >   - Có đề cương nghiên cứu/luận văn thuyết phục và tinh thần học hỏi quốc tế
 >   - Kỹ năng tiếng Anh vững vàng
 > - **Hồ sơ gồm:** Thư bày tỏ nguyện vọng (Motivation letter), CV, bảng điểm và các chứng chỉ liên quan
+> - **Lịch trình tuyển chọn & Hạn chót:**
+>   - Đợt tuyển chọn chính thức mở vào **Tháng 11**, phỏng vấn ứng viên trong **Tháng 12**
+>   - Hạn chót nộp hồ sơ: **15/11/2026** *(theo văn bản thông báo tuyển chọn chính thức bên dưới)*
 > - **Đầu mối liên hệ:**
 >   - ThS. Marc Ulrich (`marc.ulrich@ovgu.de` / ĐH OVGU Magdeburg)
 >   - TS. Nguyễn Xuân Thành (`thanh.nx@vgu.edu.vn` / VGU)
 >   - Điều phối viên đào tạo (`msi.info@vgu.edu.vn`)
 > 
-> 👉 **[Tải Tài Liệu Giới Thiệu Học Bổng Trao Đổi DAAD Mobility (PDF)](/Documents/Scholarships/Mobility_Scholarship%20Brochure%20MSI_Thanh_Marc.pdf)**
+> 📥 **Tài liệu tải về chính thức:**
+> - 📋 **[Tải Thông Báo Tuyển Chọn & Hướng Dẫn Nghiên Cứu OVGU 2026 (PDF)](/Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf)** *(Chứa hạn chót, quy trình tuyển chọn & hướng nghiên cứu 4 bộ môn tại OVGU)*
+> - 📖 **[Tải Tài Liệu Giới Thiệu Học Bổng Trao Đổi DAAD Mobility (PDF)](/Documents/Scholarships/Mobility_Scholarship%20Brochure%20MSI_Thanh_Marc.pdf)**
 
 ::daad-scholarship-card
 ---
@@ -145,7 +154,9 @@ keyFacts:
     value: "Cạnh tranh, do Hội đồng liên hợp VGU-OVGU xét duyệt"
   - label: "TRỌNG TÂM:"
     value: "Đợt nghiên cứu, đồng hướng dẫn luận văn và trải nghiệm học thuật tại Đức"
+applicationUrl: "/Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf"
+applicationLabel: "Tải Đơn Ứng Tuyển 2026 (PDF)"
 fileUrl: "/Documents/Scholarships/Mobility_Scholarship Brochure MSI_Thanh_Marc.pdf"
-fileLabel: "Tải Tài Liệu Giới Thiệu (PDF)"
+fileLabel: "Tải Brochure Trao Đổi (PDF)"
 ---
 ::

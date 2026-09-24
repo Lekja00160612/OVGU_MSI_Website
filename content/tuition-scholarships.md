@@ -75,7 +75,9 @@ A prestigious scholarship sponsored by the German Academic Exchange Service (DAA
 > - **Application Deadline:** **15/01/2027**
 > - **Coordinator Contact:** `marc.ulrich@ovgu.de` & `msi.info@vgu.edu.vn`
 > 
-> 👉 **[Download Official 2026 DAAD Sur-Place Scholarship Call & Guidelines (PDF)](/Documents/Scholarships/MATERIALS%20SCIENCE_SCHOLARSHIPS_Application_2026.pdf)**
+> 📥 **Official Downloads:**
+> - 📋 **[Download Official 2026 Materials Science Scholarship Call & Application Guidelines (PDF)](/Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf)** *(Contains full research chair profiles, requirements & official deadlines)*
+> - 📖 **[Download Sur-Place Scholarship Brochure (PDF)](/Documents/Scholarships/MSI%20Sur_Place_scholarship_brochure.pdf)** | [PPTX Presentation](/Documents/Scholarships/MSI%20Sur_Place_scholarship_brochure.pptx)
 
 ::daad-scholarship-card
 ---
@@ -92,8 +94,10 @@ keyFacts:
     value: Academic progress, research orientation and international exchange
 coverImage: /images/scholarships/MSI_Surplace_Scholarship.png
 description: This scholarship supports talented Materials Science students directly at the Vietnamese-German University. It is designed for students who want to strengthen their academic profile, deepen their scientific skills, and become part of an international German-Vietnamese academic environment — all within their study program at VGU.
-fileLabel: Download Brochure (PPTX)
+applicationUrl: /Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf
+applicationLabel: Official Application 2026 (PDF)
 fileUrl: /Documents/Scholarships/MSI Sur_Place_scholarship_brochure.pdf
+fileLabel: Download Brochure (PDF)
 labelImage: /images/scholarships/MSI_DAAD_Label.png
 opportunityTitle: YOUR OPPORTUNITY AT VIETNAMESE-GERMAN UNIVERSITY
 ---
@@ -114,19 +118,24 @@ Through the VGU–OVGU–DAAD partnership, high-performing MSI students can carr
 > - **Scholarship Benefits:**
 >   - Comprehensive financial and academic support (monthly living stipend + travel allowance)
 >   - Direct active involvement in ongoing research projects in modern, state-of-the-art laboratory facilities
->   - Joint thesis supervision by OVGU and VGU faculty (Computational Mechanics, Ceramics, Metal Materials, High-Temperature Aerospace Alloys)
+>   - Joint thesis supervision by OVGU and VGU faculty (Computational Mechanics, Ceramics, Metallic Materials, High-Temperature Aerospace Alloys)
 >   - Cultural immersion, German language training, and global academic networking
 > - **Eligibility Requirements:**
 >   - Currently enrolled in the MSI master program with good to excellent academic performance
 >   - Convincing research/thesis proposal and strong interest in international collaboration
 >   - Good to excellent English language skills
 > - **Application Documents:** Motivation letter, CV, transcripts of records, and relevant supporting certificates
+> - **Key Application Timeline & Deadlines:**
+>   - Official application call opens in **November** with applicant interviews within **December**
+>   - Application Deadline: **15/11/2026** *(as published in the official 2026 application document below)*
 > - **Coordinator Contacts:**
 >   - M.Sc. Marc Ulrich (`marc.ulrich@ovgu.de` / OVGU Magdeburg)
 >   - Dr. Nguyen Xuan Thanh (`thanh.nx@vgu.edu.vn` / VGU)
 >   - Academic Coordinator (`msi.info@vgu.edu.vn`)
 > 
-> 👉 **[Download DAAD Mobility Scholarship Brochure (PDF)](/Documents/Scholarships/Mobility_Scholarship%20Brochure%20MSI_Thanh_Marc.pdf)**
+> 📥 **Official Downloads:**
+> - 📋 **[Download Official 2026 Materials Science Scholarship Call & Research Chairs Guide (PDF)](/Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf)** *(Contains deadlines, application procedure & focus areas across all 4 OVGU chairs)*
+> - 📖 **[Download DAAD Mobility Scholarship Brochure (PDF)](/Documents/Scholarships/Mobility_Scholarship%20Brochure%20MSI_Thanh_Marc.pdf)**
 
 ::daad-scholarship-card
 ---
@@ -143,8 +152,10 @@ keyFacts:
     value: Research stay, joint thesis supervision and German academic experience
 coverImage: /images/scholarships/MSI_Mobility_Scholarship.png
 description: This mobility scholarship supports highly qualified MSI students to carry out study semesters or master thesis research projects at Otto von Guericke University Magdeburg (OVGU) in Germany. It aims to foster international scientific exchange and academic excellence.
-fileLabel: Download Brochure (PDF)
+applicationUrl: /Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf
+applicationLabel: Official Application 2026 (PDF)
 fileUrl: /Documents/Scholarships/Mobility_Scholarship Brochure MSI_Thanh_Marc.pdf
+fileLabel: Download Mobility Brochure (PDF)
 labelImage: /images/scholarships/MSI_DAAD_Label.png
 opportunityTitle: YOUR OPPORTUNITY TO STUDY IN GERMANY
 ---

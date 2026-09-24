@@ -2,6 +2,18 @@
 const localePath = useLocalePath()
 const route = useRoute()
 
+// Check if route is a static document file mistakenly intercepted by vue-router
+const isDocPath = computed(() => {
+  const p = route.path.toLowerCase()
+  return p.startsWith('/documents/') || p.endsWith('.pdf') || p.endsWith('.pptx') || p.endsWith('.xlsx')
+})
+
+if (isDocPath.value) {
+  if (import.meta.client) {
+    window.location.replace(route.fullPath)
+  }
+}
+
 // Resolve content page based on current route path
 const { data: page } = await useAsyncData('page-' + route.path, () =>
   queryCollection('content').path(route.path).first()
