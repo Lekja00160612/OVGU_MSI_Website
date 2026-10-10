@@ -11,48 +11,115 @@ const MODULES_DIR = 'content/_modules';
 // Weighted category keyword maps for fallback
 const FALLBACK_CATEGORIES = [
   {
-    name: 'Industry Adventures',
+    name: 'Achievements & Events',
     keywords: [
-      { term: 'field trip', weight: 4 },
-      { term: 'excursion', weight: 4 },
-      { term: 'visit', weight: 3 },
-      { term: 'factory', weight: 3 },
-      { term: 'plant', weight: 3 },
-      { term: 'company', weight: 3 },
-      { term: 'knauf', weight: 5 },
-      { term: 'kraft', weight: 5 },
-      { term: 'bosch', weight: 5 },
-      { term: 'corporation', weight: 3 },
-      { term: 'guest speaker', weight: 3 }
+      { term: 'master info day', weight: 8 },
+      { term: 'information day', weight: 7 },
+      { term: 'orientation', weight: 6 },
+      { term: 'open day', weight: 6 },
+      { term: 'scholarship', weight: 6 },
+      { term: 'daad', weight: 7 },
+      { term: 'gyss', weight: 7 },
+      { term: 'global young scientists summit', weight: 8 },
+      { term: 'nobel', weight: 6 },
+      { term: 'award', weight: 5 },
+      { term: 'awarded', weight: 5 },
+      { term: 'winner', weight: 5 },
+      { term: 'win', weight: 4 },
+      { term: 'q1', weight: 6 },
+      { term: 'publication', weight: 5 },
+      { term: 'weekly lab tour', weight: 6 },
+      { term: 'ceremony', weight: 4 },
+      { term: 'competition', weight: 4 }
+    ],
+    negativeKeywords: [
+      { term: 'hands-on lab training', weight: 4 },
+      { term: 'tensile testing', weight: 3 },
+      { term: 'metallography', weight: 3 }
     ]
   },
   {
-    name: 'Lab Works',
+    name: 'Industrial Visits',
     keywords: [
-      { term: 'lab', weight: 3 },
-      { term: 'laboratory', weight: 3 },
-      { term: 'sem', weight: 3 },
-      { term: 'xrd', weight: 3 },
-      { term: 'microscopy', weight: 3 },
-      { term: 'characterization', weight: 3 },
-      { term: 'hands-on', weight: 3 },
-      { term: 'training', weight: 2 },
-      { term: 'equipment', weight: 2 }
+      { term: 'field trip', weight: 7 },
+      { term: 'excursion', weight: 7 },
+      { term: 'visit', weight: 4 },
+      { term: 'industrial visit', weight: 8 },
+      { term: 'factory', weight: 5 },
+      { term: 'plant', weight: 5 },
+      { term: 'company', weight: 4 },
+      { term: 'knauf', weight: 8 },
+      { term: 'vina kraft', weight: 8 },
+      { term: 'kraft', weight: 5 },
+      { term: 'bosch', weight: 8 },
+      { term: 'mekong concrete', weight: 8 },
+      { term: 'long an', weight: 6 },
+      { term: 'aac plant', weight: 7 },
+      { term: 'paper mill', weight: 6 }
+    ],
+    negativeKeywords: [
+      { term: 'research lab', weight: 3 },
+      { term: 'on-campus', weight: 3 }
+    ]
+  },
+  {
+    name: 'Lab Trainings',
+    keywords: [
+      { term: 'lab training', weight: 8 },
+      { term: 'laboratory training', weight: 8 },
+      { term: 'hands-on', weight: 5 },
+      { term: 'quenching', weight: 6 },
+      { term: 'tempering', weight: 6 },
+      { term: 'heat treatment', weight: 6 },
+      { term: 'sem', weight: 5 },
+      { term: 'xrd', weight: 5 },
+      { term: 'microscopy', weight: 4 },
+      { term: 'characterization', weight: 4 },
+      { term: 'tensile testing', weight: 6 },
+      { term: 'rheometry', weight: 6 },
+      { term: 'sintering', weight: 6 },
+      { term: 'powder metallurgy', weight: 6 },
+      { term: 'metallography', weight: 6 },
+      { term: 'ball milling', weight: 6 },
+      { term: 'properties testing', weight: 6 },
+      { term: 'additive manufacturing', weight: 5 }
+    ],
+    negativeKeywords: [
+      { term: 'master info day', weight: 8 },
+      { term: 'info day', weight: 7 },
+      { term: 'information day', weight: 7 },
+      { term: 'open day', weight: 6 },
+      { term: 'field trip', weight: 5 },
+      { term: 'scholarship', weight: 6 },
+      { term: 'daad', weight: 6 },
+      { term: 'gyss', weight: 6 }
     ]
   },
   {
     name: 'Academic Lectures',
     keywords: [
-      { term: 'colloquium', weight: 3 },
-      { term: 'seminar', weight: 3 },
-      { term: 'lecture', weight: 3 },
-      { term: 'presentation', weight: 2 },
-      { term: 'talk', weight: 3 },
-      { term: 'scholarship', weight: 3 },
-      { term: 'daad', weight: 4 },
-      { term: 'gyss', weight: 4 },
-      { term: 'presentation skills', weight: 3 },
-      { term: 'soft skills', weight: 2 }
+      { term: 'flying faculty', weight: 7 },
+      { term: 'lecture', weight: 6 },
+      { term: 'colloquium', weight: 6 },
+      { term: 'seminar', weight: 6 },
+      { term: 'symposium', weight: 6 },
+      { term: 'workshop', weight: 4 },
+      { term: 'scientific presentation', weight: 6 },
+      { term: 'research presentation', weight: 5 },
+      { term: 'guest lecture', weight: 7 },
+      { term: 'guest speaker', weight: 5 },
+      { term: 'fracture mechanics', weight: 5 },
+      { term: 'constitutive modeling', weight: 6 },
+      { term: 'continuum mechanics', weight: 4 },
+      { term: 'solid state', weight: 4 },
+      { term: 'structural ceramics', weight: 5 }
+    ],
+    negativeKeywords: [
+      { term: 'field trip', weight: 6 },
+      { term: 'factory visit', weight: 6 },
+      { term: 'hands-on lab training', weight: 4 },
+      { term: 'scholarship award', weight: 5 },
+      { term: 'daad award', weight: 5 }
     ]
   }
 ];
@@ -325,16 +392,23 @@ function classifyFallback(title, bodyText) {
   const combinedText = title + '\n\n' + bodyText;
 
   // 1. Classify Category
-  let bestCategory = 'Other Activities';
-  let maxCatScore = 0;
-  const categoryThreshold = 2;
+  let bestCategory = 'Achievements & Events';
+  let maxCatScore = -999;
+  const categoryThreshold = 1;
 
   for (const cat of FALLBACK_CATEGORIES) {
     let score = 0;
     for (const kw of cat.keywords) {
       const bodyCount = getTermScore(bodyText, kw.term);
       const titleCount = getTermScore(title, kw.term);
-      score += (bodyCount * kw.weight) + (titleCount * kw.weight * 2);
+      score += (bodyCount * kw.weight) + (titleCount * kw.weight * 3);
+    }
+    if (cat.negativeKeywords) {
+      for (const neg of cat.negativeKeywords) {
+        const bodyCount = getTermScore(bodyText, neg.term);
+        const titleCount = getTermScore(title, neg.term);
+        score -= (bodyCount * neg.weight) + (titleCount * neg.weight * 3);
+      }
     }
     if (score > maxCatScore && score >= categoryThreshold) {
       maxCatScore = score;
@@ -352,13 +426,13 @@ function classifyFallback(title, bodyText) {
     for (const kw of mapping.positive) {
       const bodyCount = getTermScore(bodyText, kw.term);
       const titleCount = getTermScore(title, kw.term);
-      score += (bodyCount * kw.weight) + (titleCount * kw.weight * 2);
+      score += (bodyCount * kw.weight) + (titleCount * kw.weight * 3);
     }
     // Negative terms
     for (const kw of mapping.negative) {
       const bodyCount = getTermScore(bodyText, kw.term);
       const titleCount = getTermScore(title, kw.term);
-      score -= (bodyCount * kw.weight) + (titleCount * kw.weight * 2);
+      score -= (bodyCount * kw.weight) + (titleCount * kw.weight * 3);
     }
 
     if (score >= moduleThreshold) {
@@ -379,13 +453,13 @@ function classifyFallback(title, bodyText) {
 async function classifyWithGemini(title, bodyText, apiKey) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
   
-  const prompt = `You are an AI classifier for an academic website. Classify the following academic activity (title and body content) into one of the categories and match it to one or more relevant modules.
+  const prompt = `You are an AI classifier for the VGU Materials Science and Innovation (MSI) Master website. Classify the following academic activity into exactly one of the 4 official categories and match it to one or more relevant modules.
 
 Categories:
-- "Academic Lectures": Seminars, lectures, academic talks, colloquiums, presentation skills, scholarships (DAAD, GYSS, etc.).
-- "Industry Adventures": Excursions, field trips, company/factory visits, guest speakers from industry.
-- "Lab Works": Hands-on lab work, experimental training, operating specific instruments (SEM, XRD, TEM), characterization labs.
-- "Other Activities": Any other activity that doesn't fit the above.
+- "Achievements & Events": Scholarships (DAAD awards, student achievements), prestigious summits (GYSS, Nobel Laureates), Master Information Day, orientation events, open day campus tours for prospective candidates, research publication milestones (Q1 papers), competitions, and student awards.
+- "Lab Trainings": Hands-on laboratory training sessions, experimental coursework, instrument operation (SEM, XRD, tensile testing, heat treatment, sintering, metallography, rheometry), characterization labs for enrolled students.
+- "Industrial Visits": Off-campus field trips, excursions, factory or company plant tours (Knauf, Vina Kraft, Mekong Concrete, Long An AAC, Bosch).
+- "Academic Lectures": Academic courses taught by flying faculty, guest lectures, scientific seminars, colloquia, conferences, academic workshops, concluding student presentations.
 
 Modules (match only if the activity is directly relevant, max 2 modules):
 - "continuum-mechanics": Continuum mechanics, stress, strain, elasticity, plasticity, tensor, finite element method (FEM)
@@ -422,7 +496,7 @@ ${bodyText}`;
         properties: {
           category: {
             type: "STRING",
-            enum: ["Academic Lectures", "Industry Adventures", "Lab Works", "Other Activities"]
+            enum: ["Achievements & Events", "Lab Trainings", "Industrial Visits", "Academic Lectures"]
           },
           modules: {
             type: "ARRAY",
@@ -1015,8 +1089,12 @@ ${markdownBody}
 
     console.log('\nScraping job completed successfully.');
     
-    // Rebuild all module links to ensure complete consistency
-    await rebuildAllLinks();
+    // Link rebuilding is opt-in to prevent clobbering manually curated module links
+    if (process.argv.includes('--rebuild-links')) {
+      await rebuildAllLinks();
+    } else {
+      console.log('Tip: Use "python scripts/master_classify_activities.py --apply" for classification.');
+    }
   } catch (err) {
     console.error('An error occurred during crawling:', err);
   }

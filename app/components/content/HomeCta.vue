@@ -26,56 +26,50 @@ const displaySecondaryLink = computed(() => props.secondaryLink ?? page.value.ct
 
 <template>
   <section
-    class="cta-section"
+    class="relative bg-cover bg-center bg-no-repeat overflow-hidden"
     :style="{ backgroundImage: `url(${displayBackgroundImage})` }"
   >
-    <div class="cta-overlay" />
-    <div class="container cta-inner">
-      <div v-if="displayBadge" class="badge badge-white">{{ displayBadge }}</div>
-      <h2 v-if="displayHeadline" class="cta-title">{{ displayHeadline }}</h2>
-      <p v-if="displayDescription" class="cta-desc">{{ displayDescription }}</p>
-      <div class="cta-actions">
-        <NuxtLink :to="localePath(displayPrimaryLink)" class="btn btn-primary">
-          {{ displayPrimaryCta }} →
-        </NuxtLink>
-        <NuxtLink :to="localePath(displaySecondaryLink)" class="btn btn-outline-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0A162D]/90 to-[#1E3A5F]/85" />
+    <div class="relative z-10 text-center py-20 px-4 sm:px-6 max-w-4xl mx-auto flex flex-col items-center gap-6">
+      <UBadge
+        v-if="displayBadge"
+        color="neutral"
+        variant="subtle"
+        size="lg"
+        class="bg-white/15 text-white border border-white/30 backdrop-blur-md font-bold px-4 py-1.5 rounded-full uppercase tracking-wider text-xs"
+      >
+        {{ displayBadge }}
+      </UBadge>
+      
+      <h2 v-if="displayHeadline" class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-2xl text-balance">
+        {{ displayHeadline }}
+      </h2>
+      
+      <p v-if="displayDescription" class="text-sm sm:text-base text-slate-200/85 max-w-xl leading-relaxed">
+        {{ displayDescription }}
+      </p>
+      
+      <div class="flex flex-wrap gap-4 justify-center mt-2">
+        <UButton
+          :to="localePath(displayPrimaryLink)"
+          size="xl"
+          color="primary"
+          variant="solid"
+          trailing-icon="i-lucide-arrow-right"
+          class="font-bold shadow-xl hover:-translate-y-0.5 transition-all text-white px-8 py-3.5 rounded-full cursor-pointer"
+        >
+          {{ displayPrimaryCta }}
+        </UButton>
+        <UButton
+          :to="localePath(displaySecondaryLink)"
+          size="xl"
+          color="neutral"
+          variant="outline"
+          class="font-bold bg-white/10 hover:bg-white text-white hover:text-[#0F2240] border-2 border-white/40 hover:border-white backdrop-blur-md shadow-md hover:-translate-y-0.5 transition-all px-8 py-3.5 rounded-full cursor-pointer"
+        >
           {{ displaySecondaryCta }}
-        </NuxtLink>
+        </UButton>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-/* ══ CTA ══ */
-.cta-section {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.cta-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(10,22,45,0.88) 0%, rgba(30,58,95,0.80) 100%);
-}
-.cta-inner {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 6rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-.cta-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
-  color: #fff;
-  max-width: 640px;
-  line-height: 1.1;
-}
-.cta-desc { font-size: 1.05rem; color: rgba(255,255,255,.72); max-width: 520px; line-height: 1.7; }
-.cta-actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
-</style>

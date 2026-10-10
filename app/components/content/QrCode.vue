@@ -1,3 +1,7 @@
+<!--
+  Component: QrCode
+  Description: Generates and renders a scalable SVG QR code with customizable colors and margins.
+-->
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 import QRCode from 'qrcode'
@@ -29,7 +33,7 @@ async function generateQr() {
     const svgString = await QRCode.toString(props.value, {
       type: 'svg',
       margin: props.margin,
-      width: 500, // Force high-resolution vector coordinate space (prevents blurry upscaling on print)
+      width: 500, // High-resolution vector coordinate space
       color: {
         dark: props.colorDark,
         light: props.colorLight
@@ -45,30 +49,11 @@ onMounted(() => {
   generateQr()
 })
 
-watch(() => props.value, () => {
-  generateQr()
-})
-watch(() => props.colorDark, () => {
-  generateQr()
-})
-watch(() => props.colorLight, () => {
+watch([() => props.value, () => props.colorDark, () => props.colorLight], () => {
   generateQr()
 })
 </script>
 
 <template>
-  <div class="qr-code-wrapper" v-html="qrSvg" />
+  <div class="inline-block w-full h-full [&_svg]:w-full [&_svg]:h-full [&_svg]:block" v-html="qrSvg" />
 </template>
-
-<style scoped>
-.qr-code-wrapper {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-}
-.qr-code-wrapper :deep(svg) {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-</style>

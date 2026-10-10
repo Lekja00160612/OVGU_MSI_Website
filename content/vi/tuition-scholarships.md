@@ -57,7 +57,7 @@ Chương trình học bổng được tài trợ bởi Association of Friends an
 Học bổng danh giá được tài trợ bởi Cơ quan Trao đổi Học thuật Đức (DAAD) cho chương trình học **trực tiếp tại VGU** — bạn nhận được tài trợ từ Đức mà không cần rời Việt Nam.
 
 > [!IMPORTANT]
-> **🌟 Thông Báo Tuyển Chọn — Học Bổng DAAD Sur-Place (Khóa 2026)**
+> **Thông Báo Tuyển Chọn — Học Bổng DAAD Sur-Place (Khóa 2026)**
 > 
 > Thông báo tuyển chọn học bổng chính thức do DAAD và Đại học OVGU Magdeburg (Bộ môn Cơ học tính toán, GS. TS.-Ing. Daniel Juhre) tài trợ cho học viên thạc sĩ Khoa học Vật liệu trực tiếp tại VGU:
 > 
@@ -110,7 +110,7 @@ fileLabel: "Tải Brochure (PDF)"
 Thông qua quan hệ đối tác VGU–OVGU–DAAD, học viên MSI xuất sắc có thể thực hiện các kỳ học hoặc **nghiên cứu Luận văn Thạc sĩ tại OVGU Magdeburg** — được tài trợ toàn phần. Đây là con đường đã đưa học viên MSI sang Đức thành công.
 
 > [!IMPORTANT]
-> **✈️ Học Bổng Trao Đổi DAAD Mobility — Học Tập & Làm Luận Văn Thạc Sĩ tại ĐH OVGU Đức**
+> **Học Bổng Trao Đổi DAAD Mobility — Học Tập & Làm Luận Văn Thạc Sĩ tại ĐH OVGU Đức**
 > 
 > Học viên Thạc sĩ MSI có thành tích xuất sắc có cơ hội sang học tập và thực hiện đề tài nghiên cứu Luận văn Thạc sĩ trực tiếp tại Đại học Otto von Guericke Magdeburg (OVGU), CHLB Đức:
 > 

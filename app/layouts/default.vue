@@ -1,6 +1,93 @@
+<!--
+  Component: DefaultLayout
+  Description: Global application layout featuring sticky 2-line desktop navigation, mobile slideover drawer, language switcher, invitation toast notifications, and dark navy footer.
+  Data Sources: Nuxt Content 'activities' collection for dynamic event toasts.
+  Nuxt UI Primitives: USlideover, UButton, UIcon, useToast.
+-->
 <script setup lang="ts">
-import { onMounted, watch } from 'vue'
-import { useAsyncData, useToast, useRuntimeConfig, queryCollection } from '#imports'
+import { onMounted, onBeforeUnmount, watch, computed, ref } from 'vue'
+import { useAsyncData, useToast, useRuntimeConfig, queryCollection, useHead } from '#imports'
+
+// Global Schema.org JSON-LD Structured Data for search engines & AI agents
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: computed(() => JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            '@id': 'https://msi.vgu.edu.vn/#website',
+            'url': 'https://msi.vgu.edu.vn',
+            'name': 'Master of Science in Materials Science and Innovation (MSI)',
+            'description': 'Official double degree Master of Science program co-delivered by Vietnamese-German University (VGU) and Otto von Guericke University Magdeburg (OVGU).',
+            'inLanguage': ['en', 'vi']
+          },
+          {
+            '@type': 'CollegeOrUniversity',
+            '@id': 'https://msi.vgu.edu.vn/#vgu',
+            'name': 'Vietnamese-German University',
+            'alternateName': 'VGU',
+            'url': 'https://vgu.edu.vn',
+            'logo': 'https://msi.vgu.edu.vn/Logo/VGU_Logo.png',
+            'address': {
+              '@type': 'PostalAddress',
+              'streetAddress': 'Ring road 4, Quarter 4, Thoi Hoa Ward',
+              'addressLocality': 'Ben Cat City',
+              'addressRegion': 'Binh Duong Province',
+              'addressCountry': 'VN'
+            }
+          },
+          {
+            '@type': 'CollegeOrUniversity',
+            '@id': 'https://msi.vgu.edu.vn/#ovgu',
+            'name': 'Otto von Guericke University Magdeburg',
+            'alternateName': 'OVGU',
+            'url': 'https://www.ovgu.de',
+            'logo': 'https://msi.vgu.edu.vn/Logo/OVGU_Logo.png',
+            'address': {
+              '@type': 'PostalAddress',
+              'streetAddress': 'Universitätsplatz 2',
+              'addressLocality': 'Magdeburg',
+              'postalCode': '39106',
+              'addressCountry': 'DE'
+            }
+          },
+          {
+            '@type': 'EducationalOccupationalProgram',
+            '@id': 'https://msi.vgu.edu.vn/#program',
+            'name': 'Master of Science in Materials Science and Innovation',
+            'alternateName': 'MSI Double Master Degree',
+            'description': 'A prestigious German-accredited double Master degree program co-delivered by VGU and OVGU Magdeburg, featuring block-modular hybrid schedules, DAAD scholarships, and hands-on laboratory research training.',
+            'url': 'https://msi.vgu.edu.vn',
+            'provider': [
+              { '@id': 'https://msi.vgu.edu.vn/#vgu' },
+              { '@id': 'https://msi.vgu.edu.vn/#ovgu' }
+            ],
+            'educationalCredentialAwarded': 'Double Master of Science (M.Sc.) Degrees from VGU and OVGU Magdeburg',
+            'timeToComplete': 'P2Y',
+            'numberOfCredits': 120,
+            'educationalProgramMode': 'hybrid',
+            'programPrerequisites': 'Bachelor degree in Engineering, Materials Science, Physics, Chemistry, or related STEM fields.',
+            'offers': [
+              {
+                '@type': 'Offer',
+                'category': 'DAAD Sur-Place Scholarship',
+                'description': 'Full tuition fee waiver plus monthly living allowance during studies at VGU campus.'
+              },
+              {
+                '@type': 'Offer',
+                'category': 'DAAD Mobility Scholarship',
+                'description': 'Funding for Semester 4 master thesis research stay at OVGU Magdeburg, Germany.'
+              }
+            ]
+          }
+        ]
+      }))
+    }
+  ]
+})
 
 const { t, locale, setLocale } = useI18n()
 const localePath = useLocalePath()
@@ -28,7 +115,6 @@ const config = useRuntimeConfig()
 
 const showAcademicActivitiesToast = () => {
   const path = route.path.replace(/\/$/, '')
-  // Matches '/academic-activities' or any subpath under it
   const isAcademicActivities = path.endsWith('/academic-activities') || path.includes('/academic-activities/')
 
   if (isAcademicActivities) {
@@ -38,7 +124,7 @@ const showAcademicActivitiesToast = () => {
     events.slice(0, 2).forEach((event: any) => {
       const eventTargetRoute = localePath(event.path.replace('/_activities', '/academic-activities'))
       
-      // Skip showing the toast if the user is already on the detail page of this specific event
+      // Skip showing toast if already on the detail page of this specific event
       if (route.path.replace(/\/$/, '') === eventTargetRoute.replace(/\/$/, '')) {
         return
       }
@@ -50,7 +136,6 @@ const showAcademicActivitiesToast = () => {
 
       toast.add({
         id: `event-toast-${event.path.replace(/\//g, '-')}-${Date.now()}`,
-        class: 'custom-invitation-toast',
         title: title,
         description: desc,
         icon: 'i-heroicons-ticket',
@@ -81,7 +166,6 @@ const showAcademicActivitiesToast = () => {
 }
 
 onMounted(() => {
-  // Watch both route.path and activeInvitations client-side to trigger toast on every visit
   watch(
     [() => route.path, activeInvitations],
     () => {
@@ -91,22 +175,137 @@ onMounted(() => {
   )
 })
 
-const navLinks = computed(() => [
-  { label: t('nav.potential_candidates'), to: localePath('/future-students') },
-  { label: t('nav.program_structure'), to: localePath('/program-structure') },
-  { label: t('nav.academic_activities'), to: localePath('/academic-activities') },
-  { label: t('nav.partners_lecturers'), to: localePath('/partners-lecturers') },
-  { label: t('nav.tuition_scholarships'), to: localePath('/tuition-scholarships') },
-  { label: t('nav.laboratories_research'), to: localePath('/laboratories-research') },
-  { label: t('nav.student_life'), to: localePath('/student-life') },
+// Sub-routes for dropdown navigation
+const futureSubLinks = computed(() => [
+  { label: locale.value === 'vi' ? 'Tổng Quan Tuyển Sinh & Điều Kiện' : 'Admission & Eligibility Overview', to: localePath('/future-students'), icon: 'i-lucide-user-check' },
+  { label: locale.value === 'vi' ? 'Lộ Trình Tuyển Sinh (Sơ Đồ)' : 'Application Pathways Explorer', to: localePath('/future-students/pathways'), icon: 'i-lucide-git-branch' },
+  { label: locale.value === 'vi' ? 'Chia Sẻ Học Viên & Sự Nghiệp' : 'Student Experience & Career Pathways', to: localePath('/future-students/alumni'), icon: 'i-lucide-users' },
+  { label: locale.value === 'vi' ? 'Học Phí & Học Bổng Toàn Phần' : 'Tuition & DAAD Scholarships', to: localePath('/tuition-scholarships'), icon: 'i-lucide-award' },
 ])
 
+const programSubLinks = computed(() => [
+  { label: locale.value === 'vi' ? 'Tổng Quan Khung Đào Tạo (120 ECTS)' : 'Degree Blueprint & Overview', to: localePath('/program-structure'), icon: 'i-lucide-layout-dashboard' },
+  { label: locale.value === 'vi' ? 'Sổ Tay Môn Học & Đề Cương' : 'Course Handbook & Syllabi', to: localePath('/program-structure/modules'), icon: 'i-lucide-book-open' },
+  { label: locale.value === 'vi' ? 'Thời Khóa Biểu Học Kỳ' : 'Semester Timetable', to: localePath('/program-structure/timetable'), icon: 'i-lucide-calendar' },
+  { label: locale.value === 'vi' ? 'Đề Tài Luận Văn Tốt Nghiệp' : 'Master Thesis Topics', to: localePath('/program-structure/thesis'), icon: 'i-lucide-graduation-cap' },
+])
+
+const labsSubLinks = computed(() => [
+  { label: locale.value === 'vi' ? 'Tổng Quan Phòng Thí Nghiệm & Nghiên Cứu' : 'Laboratories & Research Overview', to: localePath('/laboratories-research'), icon: 'i-lucide-flask-conical' },
+  { label: locale.value === 'vi' ? '22+ Thiết Bị Phân Tích (SEM, XRD)' : 'Characterization Equipment (22+)', to: localePath('/laboratories-research/equipment'), icon: 'i-lucide-microscope' },
+  { label: locale.value === 'vi' ? '6 Bộ Môn Nghiên Cứu OVGU' : 'OVGU Partner Research Chairs', to: localePath('/laboratories-research/chairs'), icon: 'i-lucide-atom' },
+])
+
+const partnersSubLinks = computed(() => [
+  { label: locale.value === 'vi' ? 'Đối Tác Học Thuật (Giảng Viên & Bộ Môn)' : 'Academic Partners (Faculty & Chairs)', to: localePath('/academic-partners'), icon: 'i-lucide-graduation-cap' },
+  { label: locale.value === 'vi' ? 'Đối Tác Doanh Nghiệp (Kiến Tập Thực Địa)' : 'Industrial Partners (Plant Visits & Connections)', to: localePath('/industrial-partners'), icon: 'i-lucide-building-2' },
+])
+
+const studentLifeSubLinks = computed(() => [
+  { label: locale.value === 'vi' ? 'Đời Sống Sinh Viên Tại VGU' : 'Campus Life at VGU Binh Duong', to: localePath('/student-life'), icon: 'i-lucide-building-2' },
+  { label: locale.value === 'vi' ? 'Hành Trình Sang Đức (OVGU)' : 'Path to Germany Relocation Guide', to: localePath('/student-life/germany-relocation'), icon: 'i-lucide-plane-takeoff' },
+])
+
+// Navigation links divided into balanced 2 rows for desktop
+const navLinks = computed(() => [
+  { label: t('nav.potential_candidates'), to: localePath('/future-students'), menuKey: 'future', subLinks: futureSubLinks.value },
+  { label: t('nav.program_structure'), to: localePath('/program-structure'), menuKey: 'program', subLinks: programSubLinks.value },
+  { label: t('nav.academic_activities'), to: localePath('/academic-activities') },
+  { label: t('nav.partners_lecturers'), to: localePath('/academic-partners'), menuKey: 'partners', subLinks: partnersSubLinks.value },
+  { label: t('nav.tuition_scholarships'), to: localePath('/tuition-scholarships') },
+  { label: t('nav.laboratories_research'), to: localePath('/laboratories-research'), menuKey: 'labs', subLinks: labsSubLinks.value },
+  { label: t('nav.student_life'), to: localePath('/student-life'), menuKey: 'life', subLinks: studentLifeSubLinks.value },
+])
+
+const navRowTop = computed(() => navLinks.value.slice(0, 4))
+const navRowBottom = computed(() => navLinks.value.slice(4))
+
 const isActive = (to: string) => route.path === to
-const toggleLanguage = () => {
-  setLocale(locale.value === 'en' ? 'vi' : 'en')
-  mobileMenuOpen.value = false
+const isLinkActive = (link: any) => {
+  if (link.subLinks) {
+    return route.path === link.to || route.path.startsWith(link.to + '/') || link.subLinks.some((sub: any) => route.path === sub.to || route.path.startsWith(sub.to + '/'))
+  }
+  return route.path === link.to
 }
-watch(() => route.path, () => { mobileMenuOpen.value = false })
+
+// Robust dropdown management: Hover preview + Click-to-pin + Click-outside
+const activeDropdown = ref<string | null>(null)
+const isPinnedDropdown = ref<boolean>(false)
+let dropdownCloseTimer: any = null
+
+function openDropdown(key: string) {
+  if (dropdownCloseTimer) {
+    clearTimeout(dropdownCloseTimer)
+    dropdownCloseTimer = null
+  }
+  activeDropdown.value = key
+}
+
+function scheduleCloseDropdown() {
+  if (isPinnedDropdown.value) return // User intentionally clicked; remain pinned open!
+  if (dropdownCloseTimer) clearTimeout(dropdownCloseTimer)
+  dropdownCloseTimer = setTimeout(() => {
+    activeDropdown.value = null
+  }, 350) // Generous 350ms window allows natural cursor movement
+}
+
+function toggleDropdown(key: string, event?: Event) {
+  if (event) {
+    event.stopPropagation()
+  }
+  if (dropdownCloseTimer) {
+    clearTimeout(dropdownCloseTimer)
+    dropdownCloseTimer = null
+  }
+  if (activeDropdown.value === key) {
+    activeDropdown.value = null
+    isPinnedDropdown.value = false
+  } else {
+    activeDropdown.value = key
+    isPinnedDropdown.value = true // Pin open until clicking outside or choosing an item
+  }
+}
+
+function closeDropdown() {
+  if (dropdownCloseTimer) clearTimeout(dropdownCloseTimer)
+  activeDropdown.value = null
+  isPinnedDropdown.value = false
+}
+
+const handleGlobalClick = (e: MouseEvent) => {
+  const target = e.target as HTMLElement | null
+  if (!target || !target.closest('[data-dropdown-container]')) {
+    closeDropdown()
+  }
+}
+
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    closeDropdown()
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('click', handleGlobalClick)
+  window.addEventListener('keydown', handleKeyDown)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('click', handleGlobalClick)
+  window.removeEventListener('keydown', handleKeyDown)
+})
+
+watch(() => route.fullPath, () => {
+  closeDropdown()
+})
+
+const mobileExpandedMap = ref<Record<string, boolean>>({
+  future: false,
+  program: false,
+  partners: false,
+  labs: false,
+  life: false
+})
 
 const scrollToFooter = () => {
   const footer = document.getElementById('site-footer')
@@ -117,726 +316,497 @@ const scrollToFooter = () => {
 </script>
 
 <template>
-  <div class="layout-root">
+  <div class="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
 
-    <!-- HEADER -->
-    <header class="site-header">
-      <div class="header-inner container">
+    <!-- === SECTION: Sticky Header & Navigation === -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 py-2 min-h-[72px]">
 
-        <!-- MSI Logo only -->
-        <NuxtLink :to="localePath('/')" class="brand-link" aria-label="MSI Home">
-          <div class="brand-logo-wrapper">
+        <!-- MSI Brand Logo -->
+        <NuxtLink :to="localePath('/')" class="shrink-0 flex items-center" aria-label="MSI Home">
+          <div class="bg-white px-2 py-1 border-2 border-slate-100 rounded-xl shadow-xs hover:border-orange-500 hover:shadow-md transition-all -my-4 z-10">
             <NuxtImg
               src="/Logo/LOGO_MSI_Full_color.png"
               alt="MSI – Materials Science Program"
-              class="brand-logo"
+              class="h-14 sm:h-16 lg:h-18 w-auto object-contain block"
               width="210"
               height="78"
             />
           </div>
         </NuxtLink>
 
-        <!-- Desktop Nav — grouped into 2 equal lines -->
-        <nav class="desktop-nav" aria-label="Main navigation">
-          <div class="nav-row">
-            <NuxtLink
-              v-for="link in navLinks.slice(0, 4)"
-              :key="link.to"
-              :to="link.to"
-              :prefetch="true"
-              class="nav-link"
-              :class="{ 'nav-link--active': isActive(link.to) }"
-            >
-              {{ link.label }}
-            </NuxtLink>
+        <!-- Desktop Navigation: Strictly 2 equal lines, matching logo height -->
+        <nav class="hidden lg:flex flex-col items-center justify-center gap-1.5 flex-1 py-1" aria-label="Main navigation">
+          <!-- Row 1: 4 links -->
+          <div class="flex items-center justify-center gap-1.5 flex-nowrap">
+            <template v-for="link in navRowTop" :key="link.to">
+              <!-- Dropdown for links with sub-routes -->
+              <div
+                v-if="link.subLinks"
+                data-dropdown-container
+                class="relative"
+                @mouseenter="openDropdown(link.menuKey!)"
+                @mouseleave="scheduleCloseDropdown"
+              >
+                <div
+                  class="text-xs xl:text-sm font-semibold rounded-full transition-all duration-150 whitespace-nowrap inline-flex items-center select-none"
+                  :class="isLinkActive(link)
+                    ? 'bg-orange-50 text-orange-600 font-bold shadow-xs'
+                    : 'text-slate-700 hover:text-orange-600 hover:bg-slate-100'"
+                >
+                  <NuxtLink
+                    :to="link.to"
+                    class="pl-2.5 pr-1 py-1 cursor-pointer"
+                    @click="closeDropdown"
+                  >
+                    {{ link.label }}
+                  </NuxtLink>
+                  <button
+                    type="button"
+                    class="pr-2 pl-0.5 py-1 text-slate-400 hover:text-orange-600 cursor-pointer inline-flex items-center"
+                    :aria-expanded="activeDropdown === link.menuKey"
+                    :aria-label="`Toggle ${link.label} menu`"
+                    @click.stop="toggleDropdown(link.menuKey!, $event)"
+                  >
+                    <UIcon
+                      name="i-lucide-chevron-down"
+                      class="size-3 transition-transform duration-200"
+                      :class="{ 'rotate-180 text-orange-600': activeDropdown === link.menuKey }"
+                    />
+                  </button>
+                </div>
+
+                <!-- Floating Dropdown Sub-menu with seamless padding bridge & hit area -->
+                <Transition name="fade">
+                  <div
+                    v-if="activeDropdown === link.menuKey"
+                    class="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 z-50"
+                    @mouseenter="openDropdown(link.menuKey!)"
+                    @mouseleave="scheduleCloseDropdown"
+                  >
+                    <!-- Invisible top hit extension bridge (guarantees zero mouseleave gap) -->
+                    <div class="absolute -top-2 inset-x-0 h-4 bg-transparent" />
+                    <div class="bg-white rounded-2xl shadow-xl border border-slate-200/90 py-2 flex flex-col gap-1 relative z-10">
+                      <NuxtLink
+                        v-for="sub in link.subLinks"
+                        :key="sub.to"
+                        :to="sub.to"
+                        class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded-xl mx-1.5 transition-colors"
+                        :class="isActive(sub.to)
+                          ? 'bg-orange-50 text-orange-600 font-bold'
+                          : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'"
+                        @click="closeDropdown"
+                      >
+                        <UIcon :name="sub.icon" class="size-4 shrink-0 text-orange-500" />
+                        <span class="truncate">{{ sub.label }}</span>
+                      </NuxtLink>
+                    </div>
+                  </div>
+                </Transition>
+              </div>
+
+              <!-- Standard Row 1 Link without sub-menu -->
+              <NuxtLink
+                v-else
+                :to="link.to"
+                :prefetch="true"
+                class="text-xs xl:text-sm font-semibold px-2.5 py-1 rounded-full transition-all duration-150 whitespace-nowrap"
+                :class="isActive(link.to)
+                  ? 'bg-orange-50 text-orange-600 font-bold shadow-xs'
+                  : 'text-slate-700 hover:text-orange-600 hover:bg-slate-100'"
+              >
+                {{ link.label }}
+              </NuxtLink>
+            </template>
           </div>
-          <div class="nav-row">
-            <NuxtLink
-              v-for="link in navLinks.slice(4)"
-              :key="link.to"
-              :to="link.to"
-              :prefetch="true"
-              class="nav-link"
-              :class="{ 'nav-link--active': isActive(link.to) }"
-            >
-              {{ link.label }}
-            </NuxtLink>
+
+          <!-- Row 2: 3 links (with sub-menus for Labs and Student Life) -->
+          <div class="flex items-center justify-center gap-1.5 flex-nowrap">
+            <template v-for="link in navRowBottom" :key="link.to">
+              <!-- Dropdown for links with sub-routes in Row 2 -->
+              <div
+                v-if="link.subLinks"
+                data-dropdown-container
+                class="relative"
+                @mouseenter="openDropdown(link.menuKey!)"
+                @mouseleave="scheduleCloseDropdown"
+              >
+                <div
+                  class="text-xs xl:text-sm font-semibold rounded-full transition-all duration-150 whitespace-nowrap inline-flex items-center select-none"
+                  :class="isLinkActive(link)
+                    ? 'bg-orange-50 text-orange-600 font-bold shadow-xs'
+                    : 'text-slate-700 hover:text-orange-600 hover:bg-slate-100'"
+                >
+                  <NuxtLink
+                    :to="link.to"
+                    class="pl-2.5 pr-1 py-1 cursor-pointer"
+                    @click="closeDropdown"
+                  >
+                    {{ link.label }}
+                  </NuxtLink>
+                  <button
+                    type="button"
+                    class="pr-2 pl-0.5 py-1 text-slate-400 hover:text-orange-600 cursor-pointer inline-flex items-center"
+                    :aria-expanded="activeDropdown === link.menuKey"
+                    :aria-label="`Toggle ${link.label} menu`"
+                    @click.stop="toggleDropdown(link.menuKey!, $event)"
+                  >
+                    <UIcon
+                      name="i-lucide-chevron-down"
+                      class="size-3 transition-transform duration-200"
+                      :class="{ 'rotate-180 text-orange-600': activeDropdown === link.menuKey }"
+                    />
+                  </button>
+                </div>
+
+                <!-- Floating Dropdown Sub-menu with seamless padding bridge & hit area -->
+                <Transition name="fade">
+                  <div
+                    v-if="activeDropdown === link.menuKey"
+                    class="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 z-50"
+                    @mouseenter="openDropdown(link.menuKey!)"
+                    @mouseleave="scheduleCloseDropdown"
+                  >
+                    <!-- Invisible top hit extension bridge (guarantees zero mouseleave gap) -->
+                    <div class="absolute -top-2 inset-x-0 h-4 bg-transparent" />
+                    <div class="bg-white rounded-2xl shadow-xl border border-slate-200/90 py-2 flex flex-col gap-1 relative z-10">
+                      <NuxtLink
+                        v-for="sub in link.subLinks"
+                        :key="sub.to"
+                        :to="sub.to"
+                        class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded-xl mx-1.5 transition-colors"
+                        :class="isActive(sub.to)
+                          ? 'bg-orange-50 text-orange-600 font-bold'
+                          : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'"
+                        @click="closeDropdown"
+                      >
+                        <UIcon :name="sub.icon" class="size-4 shrink-0 text-orange-500" />
+                        <span class="truncate">{{ sub.label }}</span>
+                      </NuxtLink>
+                    </div>
+                  </div>
+                </Transition>
+              </div>
+
+              <!-- Standard Row 2 Link without sub-menu (Tuition & Scholarships) -->
+              <NuxtLink
+                v-else
+                :to="link.to"
+                :prefetch="true"
+                class="text-xs xl:text-sm font-semibold px-2.5 py-1 rounded-full transition-all duration-150 whitespace-nowrap"
+                :class="isActive(link.to)
+                  ? 'bg-orange-50 text-orange-600 font-bold shadow-xs'
+                  : 'text-slate-700 hover:text-orange-600 hover:bg-slate-100'"
+              >
+                {{ link.label }}
+              </NuxtLink>
+            </template>
           </div>
         </nav>
 
-        <!-- Language switcher + mobile toggle -->
-        <div class="header-controls">
+        <!-- Header Controls: Language Switcher, Contact CTA, Mobile Drawer Button -->
+        <div class="flex items-center gap-2.5 shrink-0 ml-auto lg:ml-0">
           <!-- Contact Us CTA -->
-          <a
-            href="#site-footer"
-            class="contact-cta"
-            @click.prevent="scrollToFooter"
+          <UButton
+            color="primary"
+            variant="outline"
+            size="xs"
+            class="hidden lg:inline-flex font-bold rounded-full text-xs px-3.5 py-1.5 hover:bg-orange-50"
+            @click="scrollToFooter"
           >
             {{ t('nav.contact_us') }}
-          </a>
+          </UButton>
 
-          <!-- Language buttons (EN / VI) -->
-          <div class="lang-switcher">
+          <!-- Language Switcher Pill (EN / VI) -->
+          <div class="inline-flex items-center gap-0.5 bg-slate-100 border border-slate-200 rounded-full p-0.5">
             <button
-              class="lang-btn"
-              :class="{ 'lang-btn--active': locale === 'en' }"
+              class="px-2 py-0.5 text-xs font-bold rounded-full transition-all duration-150 cursor-pointer"
+              :class="locale === 'en' ? 'bg-orange-500 text-white shadow-xs' : 'text-slate-600 hover:text-orange-600'"
               @click="setLocale('en')"
-            >EN</button>
-            <span class="lang-sep">|</span>
+            >
+              EN
+            </button>
+            <span class="text-slate-300 text-xs select-none">|</span>
             <button
-              class="lang-btn"
-              :class="{ 'lang-btn--active': locale === 'vi' }"
+              class="px-2 py-0.5 text-xs font-bold rounded-full transition-all duration-150 cursor-pointer"
+              :class="locale === 'vi' ? 'bg-orange-500 text-white shadow-xs' : 'text-slate-600 hover:text-orange-600'"
               @click="setLocale('vi')"
-            >VI</button>
+            >
+              VI
+            </button>
           </div>
 
-          <!-- Hamburger (mobile only) -->
-          <button
-            class="mobile-menu-btn"
-            @click="mobileMenuOpen = !mobileMenuOpen"
-            :aria-expanded="mobileMenuOpen"
-            aria-label="Toggle menu"
-          >
-            <span class="hamburger" :class="{ 'hamburger--open': mobileMenuOpen }">
-              <span /><span /><span />
-            </span>
-          </button>
+          <!-- Mobile Menu Trigger -->
+          <UButton
+            icon="i-lucide-menu"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+            class="lg:hidden"
+            aria-label="Toggle navigation menu"
+            @click="mobileMenuOpen = true"
+          />
         </div>
       </div>
 
-      <!-- Mobile Drawer -->
-      <Transition name="slide-down">
-        <nav v-if="mobileMenuOpen" class="mobile-nav" aria-label="Mobile navigation">
-          <div class="mobile-nav-inner">
-            <NuxtLink
-              v-for="link in navLinks"
-              :key="link.to"
-              :to="link.to"
-              class="mobile-nav-link"
-              :class="{ 'mobile-nav-link--active': isActive(link.to) }"
-            >{{ link.label }}</NuxtLink>
-            <div class="mobile-nav-divider" />
-            <a
-              href="#site-footer"
-              class="mobile-contact-cta"
-              @click.prevent="scrollToFooter(); mobileMenuOpen = false"
+      <!-- Mobile Navigation Drawer -->
+      <USlideover
+        v-model:open="mobileMenuOpen"
+        side="right"
+        :title="locale === 'vi' ? 'Điều hướng MSI' : 'MSI Navigation'"
+        :ui="{
+          content: 'w-[85vw] max-w-sm bg-white shadow-2xl flex flex-col',
+          header: 'border-b border-slate-100 p-4 font-bold text-slate-800 flex items-center justify-between',
+          body: 'p-4 flex flex-col justify-between flex-1 overflow-y-auto'
+        }"
+      >
+        <template #body>
+          <div class="flex flex-col gap-1.5 py-1">
+            <template v-for="link in navLinks" :key="link.to">
+              <!-- Collapsible for links with sub-routes in Mobile Drawer -->
+              <div v-if="link.subLinks" class="flex flex-col">
+                <button
+                  type="button"
+                  class="flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition-all duration-150 cursor-pointer text-left"
+                  :class="isLinkActive(link)
+                    ? 'bg-orange-50 text-orange-600 font-bold'
+                    : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'"
+                  @click="mobileExpandedMap[link.menuKey!] = !mobileExpandedMap[link.menuKey!]"
+                >
+                  <span>{{ link.label }}</span>
+                  <UIcon
+                    name="i-lucide-chevron-down"
+                    class="size-4 transition-transform duration-200"
+                    :class="mobileExpandedMap[link.menuKey!] ? 'rotate-180 text-orange-600' : 'text-slate-400'"
+                  />
+                </button>
+
+                <div v-show="mobileExpandedMap[link.menuKey!]" class="pl-3 py-1 flex flex-col gap-1 border-l-2 border-orange-300 ml-4 my-1">
+                  <NuxtLink
+                    v-for="sub in link.subLinks"
+                    :key="sub.to"
+                    :to="sub.to"
+                    class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold transition-colors"
+                    :class="isActive(sub.to)
+                      ? 'bg-orange-100 text-orange-700 font-bold'
+                      : 'text-slate-600 hover:text-orange-600 hover:bg-slate-100'"
+                    @click="mobileMenuOpen = false"
+                  >
+                    <UIcon :name="sub.icon" class="size-3.5 text-orange-500 shrink-0" />
+                    <span>{{ sub.label }}</span>
+                  </NuxtLink>
+                </div>
+              </div>
+
+              <!-- Standard Nav Links -->
+              <NuxtLink
+                v-else
+                :to="link.to"
+                class="flex items-center px-4 py-3 rounded-xl font-medium text-sm transition-all duration-150"
+                :class="isActive(link.to)
+                  ? 'bg-orange-50 text-orange-600 font-bold shadow-xs'
+                  : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'"
+                @click="mobileMenuOpen = false"
+              >
+                {{ link.label }}
+              </NuxtLink>
+            </template>
+
+            <div class="my-3 border-t border-slate-100" />
+
+            <UButton
+              color="primary"
+              variant="solid"
+              size="md"
+              block
+              icon="i-lucide-mail"
+              class="font-bold shadow-sm rounded-full"
+              @click="scrollToFooter(); mobileMenuOpen = false"
             >
               {{ t('nav.contact_us') }}
-            </a>
-            <div class="mobile-nav-divider" />
-            <div class="mobile-lang-row">
-              <button class="mobile-lang-btn" :class="{ active: locale === 'en' }" @click="setLocale('en'); mobileMenuOpen=false">English</button>
-              <button class="mobile-lang-btn" :class="{ active: locale === 'vi' }" @click="setLocale('vi'); mobileMenuOpen=false">Tiếng Việt</button>
+            </UButton>
+          </div>
+
+          <!-- Mobile Language Switcher -->
+          <div class="pt-4 border-t border-slate-100 mt-4">
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Language / Ngôn ngữ</div>
+            <div class="grid grid-cols-2 gap-2">
+              <UButton
+                :color="locale === 'en' ? 'primary' : 'neutral'"
+                :variant="locale === 'en' ? 'solid' : 'outline'"
+                size="sm"
+                block
+                class="font-semibold rounded-lg"
+                @click="setLocale('en'); mobileMenuOpen = false"
+              >
+                English
+              </UButton>
+              <UButton
+                :color="locale === 'vi' ? 'primary' : 'neutral'"
+                :variant="locale === 'vi' ? 'solid' : 'outline'"
+                size="sm"
+                block
+                class="font-semibold rounded-lg"
+                @click="setLocale('vi'); mobileMenuOpen = false"
+              >
+                Tiếng Việt
+              </UButton>
             </div>
           </div>
-        </nav>
-      </Transition>
+        </template>
+      </USlideover>
     </header>
 
-    <Transition name="fade">
-      <div v-if="mobileMenuOpen" class="mobile-overlay" @click="mobileMenuOpen = false" />
-    </Transition>
-
-    <!-- MAIN -->
-    <main class="site-main">
+    <!-- === SECTION: Main Page Content === -->
+    <main class="flex-1">
       <slot />
     </main>
 
-    <!-- FOOTER -->
-    <footer class="site-footer" id="site-footer">
-      <div class="footer-watermark"></div>
-      <div class="footer-top container">
+    <!-- === SECTION: Global Footer === -->
+    <footer id="site-footer" class="bg-[#0f2240] text-slate-300 relative overflow-hidden border-t-4 border-t-orange-500 pt-16 pb-12 sm:pt-20 sm:pb-16 font-sans">
+      <!-- Decorative Backdrop Glow -->
+      <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div class="absolute -left-20 -top-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div class="footer-brand">
-          <p class="footer-tagline">{{ t('footer.subtitle') }}</p>
-          <div class="footer-uni-logos">
-            <a href="https://www.ovgu.de" target="_blank" rel="noopener noreferrer" aria-label="OVGU Website">
-              <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU" class="footer-uni-logo footer-uni-logo--ovgu" width="140" height="auto" />
-            </a>
-            <a href="https://vgu.edu.vn" target="_blank" rel="noopener noreferrer" aria-label="VGU Website">
-              <NuxtImg src="/Logo/VGU_Logo.png" alt="VGU" class="footer-uni-logo footer-uni-logo--vgu" width="auto" height="36" />
-            </a>
-          </div>
-          <div class="footer-uni-links">
-            <a href="https://vgu.edu.vn" target="_blank" rel="noopener noreferrer" class="uni-link">Vietnamese-German University (VGU)</a>
-            <a href="https://www.ovgu.de" target="_blank" rel="noopener noreferrer" class="uni-link">Otto von Guericke University Magdeburg (OVGU)</a>
-          </div>
-        </div>
-
-        <div class="footer-col footer-col--links">
-          <h4 class="footer-heading">{{ t('footer.quick_links') }}</h4>
-          <ul class="footer-links footer-links--merged">
-            <li v-for="link in navLinks" :key="link.to">
-              <NuxtLink :to="link.to" class="footer-link">{{ link.label }}</NuxtLink>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Quick Resources -->
-        <div class="footer-col">
-          <h4 class="footer-heading">{{ locale === 'vi' ? 'TÀI NGUYÊN NHANH' : 'QUICK RESOURCES' }}</h4>
-          <ul class="footer-links footer-links--resources">
-            <li>
-              <a href="/Documents/Booklet MSI (updated 06.2026).pdf" target="_blank" rel="noopener noreferrer" class="footer-resource-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="res-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>{{ locale === 'vi' ? 'Cẩm nang MSI (PDF)' : 'MSI Booklet (PDF)' }}</span>
-              </a>
-              <span class="res-note">{{ locale === 'vi' ? '↳ Không có thông tin học bổng' : '↳ No scholarship info' }}</span>
-            </li>
-            <li>
-              <a href="/Documents/MSI leaflet 2026.pdf" target="_blank" rel="noopener noreferrer" class="footer-resource-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="res-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>{{ locale === 'vi' ? 'Tờ rơi MSI (PDF)' : 'MSI Leaflet (PDF)' }}</span>
-              </a>
-            </li>
-            <li>
-              <a href="/Documents/MSI_Scholarships_Brochure.pdf" target="_blank" rel="noopener noreferrer" class="footer-resource-link footer-resource-link--accent">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="res-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span>{{ locale === 'vi' ? 'Học bổng MSI (PDF)' : 'MSI Scholarships (PDF)' }}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="footer-col footer-contact-col">
-          <h4 class="footer-heading">{{ t('footer.contact') }}</h4>
-          <p class="contact-welcome">
-            {{ t('footer.welcome_message') }}
-          </p>
-          <address class="footer-address">
-            Vietnamese-German University<br>
-            Ring road 4, Quarter 4<br>
-            Thoi Hoa Ward, Ben Cat Town<br>
-            Ho Chi Minh City, Vietnam
-          </address>
-          <div class="contact-methods">
-            <a href="mailto:msi.info@vgu.edu.vn" class="footer-email-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <span>msi.info@vgu.edu.vn</span>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61577622987645" target="_blank" rel="noopener noreferrer" class="footer-facebook-link">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-              <span>{{ t('footer.facebook_fanpage') }}</span>
-            </a>
-          </div>
-        </div>
+      <!-- MSI Wordmark Watermark: larger, positioned towards the bottom of the footer -->
+      <div class="absolute inset-0 flex items-end justify-center pointer-events-none overflow-hidden select-none pb-0">
+        <NuxtImg
+          src="/Logo/MSI_Word_Only.png"
+          alt=""
+          aria-hidden="true"
+          class="w-[500px] sm:w-[680px] md:w-[840px] lg:w-[980px] xl:w-[1100px] h-auto object-contain opacity-[0.08] sm:opacity-[0.10] pointer-events-none select-none filter drop-shadow-[0_0_30px_rgba(232,119,34,0.12)] transform translate-y-6 sm:translate-y-8"
+        />
       </div>
 
-      <div class="footer-bottom">
-        <div class="container footer-bottom-inner">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <!-- 4-Column Footer Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-slate-700/60">
+
+          <!-- Column 1: Brand & Joint Universities -->
+          <div class="flex flex-col">
+            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
+              {{ t('footer.subtitle') }}
+            </p>
+            <div class="inline-flex items-center gap-4 bg-white px-4 py-2.5 rounded-2xl shadow-sm border border-slate-100 mb-6 w-fit">
+              <a href="https://vgu.edu.vn" target="_blank" rel="noopener noreferrer" aria-label="VGU Website" class="inline-flex items-center hover:opacity-85 transition-opacity">
+                <NuxtImg src="/Logo/VGU_Logo.png" alt="Vietnamese-German University (VGU)" class="h-8 sm:h-9 w-auto object-contain" />
+              </a>
+              <div class="h-6 w-px bg-slate-200" aria-hidden="true" />
+              <a href="https://www.ovgu.de" target="_blank" rel="noopener noreferrer" aria-label="OVGU Website" class="inline-flex items-center hover:opacity-85 transition-opacity">
+                <NuxtImg src="/Logo/OVGU_Logo.png" alt="Otto von Guericke University Magdeburg (OVGU)" class="h-8 sm:h-9 w-auto object-contain" />
+              </a>
+            </div>
+            <div class="flex flex-col gap-1.5 text-xs text-slate-400">
+              <a href="https://vgu.edu.vn" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                Vietnamese-German University (VGU)
+              </a>
+              <a href="https://www.ovgu.de" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+                Otto von Guericke University Magdeburg (OVGU)
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-orange-400 mb-4">
+              {{ t('footer.quick_links') }}
+            </h4>
+            <ul class="space-y-2 text-xs sm:text-sm">
+              <li v-for="link in navLinks" :key="link.to">
+                <NuxtLink :to="link.to" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                  <UIcon name="i-lucide-chevron-right" class="size-3.5 text-orange-400 shrink-0" />
+                  <span>{{ link.label }}</span>
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Quick Resources (Official PDF Downloads) -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-orange-400 mb-4">
+              {{ locale === 'vi' ? 'TÀI NGUYÊN NHANH' : 'QUICK RESOURCES' }}
+            </h4>
+            <ul class="space-y-3 text-xs sm:text-sm">
+              <li>
+                <a
+                  href="/Documents/Booklet MSI (updated 06.2026).pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-slate-300 hover:text-white transition-colors flex items-center gap-2 font-medium"
+                >
+                  <UIcon name="i-lucide-file-text" class="size-4 text-orange-400 shrink-0" />
+                  <span>{{ locale === 'vi' ? 'Cẩm nang MSI (PDF)' : 'MSI Booklet (PDF)' }}</span>
+                </a>
+                <span class="text-slate-500 text-[11px] block pl-6">
+                  {{ locale === 'vi' ? '↳ Không có thông tin học bổng' : '↳ No scholarship info' }}
+                </span>
+              </li>
+              <li>
+                <a
+                  href="/Documents/MSI leaflet 2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-slate-300 hover:text-white transition-colors flex items-center gap-2 font-medium"
+                >
+                  <UIcon name="i-lucide-file-text" class="size-4 text-orange-400 shrink-0" />
+                  <span>{{ locale === 'vi' ? 'Tờ rơi MSI (PDF)' : 'MSI Leaflet (PDF)' }}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/Documents/MSI_Scholarships_Brochure.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-2 font-semibold"
+                >
+                  <UIcon name="i-lucide-download" class="size-4 text-orange-400 shrink-0" />
+                  <span>{{ locale === 'vi' ? 'Học bổng MSI (PDF)' : 'MSI Scholarships (PDF)' }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Contact & Social Info -->
+          <div class="flex flex-col">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-orange-400 mb-4">
+              {{ t('footer.contact') }}
+            </h4>
+            <p class="text-xs text-slate-400 leading-relaxed mb-3">
+              {{ t('footer.welcome_message') }}
+            </p>
+            <address class="not-italic text-xs text-slate-400 leading-relaxed mb-4">
+              Vietnamese-German University<br>
+              Ring road 4, Quarter 4<br>
+              Thoi Hoa Ward, Ben Cat Town<br>
+              Ho Chi Minh City, Vietnam
+            </address>
+            <div class="flex flex-col gap-2.5 text-xs">
+              <a href="mailto:msi.info@vgu.edu.vn" class="inline-flex items-center gap-2 text-slate-300 hover:text-orange-400 transition-colors">
+                <UIcon name="i-lucide-mail" class="size-4 text-orange-400 shrink-0" />
+                <span>msi.info@vgu.edu.vn</span>
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61577622987645"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-slate-300 hover:text-orange-400 transition-colors"
+              >
+                <UIcon name="i-lucide-facebook" class="size-4 text-orange-400 shrink-0" />
+                <span>{{ t('footer.facebook_fanpage') }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Copyright Row -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <span>&copy; {{ new Date().getFullYear() }} Vietnamese-German University &amp; OVGU Magdeburg. All rights reserved.</span>
-          <div class="footer-bottom-links">
-            <a href="#" class="footer-bottom-link">Privacy Policy</a>
-            <a href="#" class="footer-bottom-link">Imprint</a>
+          <div class="flex items-center gap-4">
+            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition-colors">Imprint</a>
           </div>
         </div>
       </div>
     </footer>
   </div>
 </template>
-
-<style scoped>
-/* ═══════════════ LAYOUT ═══════════════ */
-.layout-root { display:flex; flex-direction:column; min-height:100vh; }
-
-/* ═══════════════ HEADER ═══════════════ */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255,255,255,0.96);
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
-  border-bottom: 1px solid rgba(30,58,95,.10);
-  box-shadow: 0 2px 16px rgba(30,58,95,.07);
-}
-
-.header-inner {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  min-height: var(--nav-height);
-  flex-wrap: wrap;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
-/* Desktop Nav */
-.desktop-nav {
-  display: none;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-}
-.nav-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-@media (min-width: 1100px) { .desktop-nav { display: flex; } }
-
-.nav-link {
-  position: relative;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--color-gray-700);
-  text-decoration: none;
-  padding: 0.4rem 0.6rem;
-  transition: color 200ms;
-  white-space: nowrap;
-  border-radius: var(--radius-sm);
-}
-.nav-link::after {
-  content:'';
-  position:absolute;
-  bottom:0;
-  left:0.6rem;
-  right:0.6rem;
-  height:2px;
-  background: var(--color-accent);
-  border-radius:2px;
-  transform:scaleX(0);
-  transition: transform 200ms var(--ease-out);
-}
-.nav-link:hover { color: var(--color-primary); }
-.nav-link:hover::after { transform: scaleX(1); }
-.nav-link--active { color: var(--color-primary); font-weight: 700; }
-.nav-link--active::after { transform: scaleX(1); }
-
-/* Controls */
-.header-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: auto;
-  flex-shrink: 0;
-}
-
-.lang-switcher {
-  display: flex;
-  align-items: center;
-  gap: 0.15rem;
-  background: var(--color-gray-100);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-full);
-  padding: 0.15rem 0.4rem;
-}
-.lang-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-gray-500);
-  padding: 0.15rem 0.35rem;
-  border-radius: var(--radius-full);
-  transition: all 200ms;
-}
-.lang-btn:hover { color: var(--color-primary); }
-.lang-btn--active {
-  background: var(--color-primary);
-  color: #fff !important;
-  padding: 0.15rem 0.45rem;
-}
-.lang-sep { color: var(--color-gray-300); font-size: 0.65rem; user-select:none; }
-
-/* Hamburger */
-.mobile-menu-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px; height: 38px;
-  background: var(--color-gray-100);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all 200ms;
-}
-@media (min-width: 1100px) { .mobile-menu-btn { display: none; } }
-.mobile-menu-btn:hover { background: var(--color-primary-50); border-color: var(--color-primary); }
-
-.hamburger { display:flex; flex-direction:column; gap:5px; width:18px; }
-.hamburger span { display:block; height:2px; background:var(--color-gray-700); border-radius:2px; transition:all 300ms var(--ease-out); transform-origin:center; }
-.hamburger--open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-.hamburger--open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-.hamburger--open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-
-/* Mobile Nav */
-.mobile-nav { border-top:1px solid var(--color-gray-200); background:#fff; box-shadow:var(--shadow-lg); }
-.mobile-nav-inner { display:flex; flex-direction:column; padding:1rem 1.5rem 1.5rem; gap:0.25rem; max-width:480px; margin:0 auto; }
-.mobile-nav-link { display:block; font-size:0.95rem; font-weight:500; color:var(--color-gray-700); text-decoration:none; padding:0.625rem 0.75rem; border-radius:var(--radius-md); transition:all 200ms; }
-.mobile-nav-link:hover, .mobile-nav-link--active { background:var(--color-primary-50); color:var(--color-primary); font-weight:600; }
-.mobile-nav-divider { height:1px; background:var(--color-gray-200); margin:0.5rem 0; }
-.mobile-lang-row { display:flex; gap:0.5rem; }
-.mobile-lang-btn { flex:1; padding:0.5rem; font-size:0.875rem; font-weight:600; border:1px solid var(--color-gray-200); border-radius:var(--radius-md); background:#fff; color:var(--color-gray-600); cursor:pointer; transition:all 200ms; }
-.mobile-lang-btn.active { background:var(--color-primary); color:#fff; border-color:var(--color-primary); }
-.mobile-overlay { position:fixed; inset:0; background:rgba(0,0,0,.25); z-index:99; backdrop-filter:blur(2px); }
-
-/* ═══════════════ MAIN ═══════════════ */
-.site-main { flex:1; }
-
-/* ═══════════════ FOOTER ═══════════════ */
-.site-footer { position: relative; background: var(--color-primary-dark); color: #e2e8f0; overflow: hidden; }
-
-.footer-watermark {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/Logo/LOGO_MSI_Dark.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.footer-top {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  padding-top: 4rem;
-  padding-bottom: 3rem;
-}
-@media (min-width: 640px) { .footer-top { grid-template-columns: repeat(2,1fr); } }
-@media (min-width: 1024px) { .footer-top { grid-template-columns: 2fr 2fr 1.5fr 1.5fr; } }
-
-.footer-col--links {
-  grid-column: span 1;
-}
-@media (min-width: 640px) {
-  .footer-col--links {
-    grid-column: span 2;
-  }
-}
-
-.footer-tagline { font-size:0.875rem; color:rgba(255,255,255,.55); line-height:1.65; margin-bottom:1.25rem; max-width:260px; z-index: 2; }
-
-.footer-uni-logos {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  background: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-  width: fit-content;
-}
-.footer-uni-logo {
-  height: 36px;
-  width: auto;
-  object-fit: contain;
-  transition: opacity 200ms;
-}
-.footer-uni-logo:hover { opacity: 0.8; }
-
-.footer-heading { font-family:var(--font-sans); font-size:0.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:0.875rem; }
-
-.footer-links { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem; }
-.footer-links--merged { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1rem; }
-.footer-links--resources { gap: 0.625rem; }
-.footer-link { font-size:0.875rem; color:rgba(255,255,255,.55); text-decoration:none; transition:color 200ms; }
-.footer-link:hover { color:#fff; }
-
-.footer-resource-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.82rem;
-  color: rgba(255,255,255,.6);
-  text-decoration: none;
-  transition: color 200ms, transform 200ms;
-  font-weight: 500;
-}
-.footer-resource-link:hover { color: #fff; transform: translateX(3px); }
-.footer-resource-link--accent { color: var(--color-accent-light); }
-.footer-resource-link--accent:hover { color: #fff; }
-.res-icon { flex-shrink: 0; opacity: 0.7; }
-.res-note {
-  display: block;
-  font-size: 0.71rem;
-  color: rgba(255,255,255,.3);
-  padding-left: 1.15rem;
-  margin-top: 2px;
-  font-style: italic;
-}
-
-.footer-address { font-size:0.875rem; color:rgba(255,255,255,.55); line-height:1.7; font-style:normal; margin-bottom:0.875rem; }
-.footer-email { font-size:0.875rem; font-weight:600; color:var(--color-accent-light); text-decoration:none; transition:color 200ms; }
-.footer-email:hover { color:#fff; }
-
-.footer-bottom { border-top:1px solid rgba(255,255,255,.06); background:rgba(0,0,0,.2); }
-.footer-bottom-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.75rem; padding-top:1.25rem; padding-bottom:1.25rem; font-size:0.78rem; color:rgba(255,255,255,.3); }
-.footer-bottom-links { display:flex; gap:1.25rem; }
-.footer-bottom-link { color:rgba(255,255,255,.3); text-decoration:none; transition:color 200ms; }
-.footer-bottom-link:hover { color:rgba(255,255,255,.6); }
-
-/* ═══════════════ TRANSITIONS ═══════════════ */
-.slide-down-enter-active, .slide-down-leave-active { transition:all 300ms var(--ease-out); overflow:hidden; }
-.slide-down-enter-from, .slide-down-leave-to { opacity:0; transform:translateY(-8px); }
-.fade-enter-active, .fade-leave-active { transition:opacity 300ms; }
-.fade-enter-from, .fade-leave-to { opacity:0; }
-
-/* ═══════════════ CONTACT US CTA & FOOTER ENHANCEMENTS ═══════════════ */
-.contact-cta {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  border: 1.5px solid var(--color-accent);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-full);
-  text-decoration: none;
-  transition: all 250ms var(--ease-out);
-  white-space: nowrap;
-}
-.contact-cta:hover {
-  background: var(--color-accent);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(232, 119, 34, 0.25);
-  transform: translateY(-1px);
-}
-.contact-cta:active {
-  transform: translateY(0);
-}
-
-.mobile-contact-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #fff;
-  background: var(--color-accent);
-  border: 1.5px solid var(--color-accent);
-  padding: 0.625rem 1rem;
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  text-align: center;
-  transition: all 200ms;
-}
-.mobile-contact-cta:hover {
-  background: var(--color-accent-dark);
-  border-color: var(--color-accent-dark);
-}
-
-.footer-contact-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-contact-col .footer-heading {
-  color: var(--color-accent-light) !important;
-  position: relative;
-  padding-bottom: 6px;
-  margin-bottom: 1.25rem;
-  display: inline-block;
-  width: fit-content;
-}
-
-.footer-contact-col .footer-heading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 24px;
-  height: 2px;
-  background: var(--color-accent);
-  border-radius: var(--radius-full);
-}
-
-.contact-welcome {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.6;
-  border-left: 2px solid var(--color-accent);
-  padding-left: 0.75rem;
-  margin-bottom: 1.25rem;
-}
-
-.contact-methods {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-}
-
-.footer-email-link,
-.footer-facebook-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-accent-light);
-  text-decoration: none;
-  transition: all 200ms ease;
-  width: fit-content;
-}
-
-.footer-email-link:hover,
-.footer-facebook-link:hover {
-  color: #fff;
-  transform: translateX(4px);
-}
-
-.contact-icon {
-  flex-shrink: 0;
-  stroke: currentColor;
-}
-
-.footer-uni-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin-top: 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1rem;
-  max-width: 280px;
-}
-
-.uni-link {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.45);
-  text-decoration: none;
-  transition: color 200ms;
-  line-height: 1.4;
-}
-
-.uni-link:hover {
-  color: #fff;
-}
-
-@media (max-width: 480px) {
-  .contact-cta {
-    padding: 0.2rem 0.55rem;
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-inner {
-    flex-wrap: nowrap;
-    gap: 0.5rem;
-  }
-  .brand-logo-wrapper {
-    margin-top: -6px;
-    margin-bottom: -6px;
-    padding: 0.1rem 0.25rem;
-    border-radius: var(--radius-sm);
-  }
-  .brand-logo {
-    height: 38px !important;
-    width: auto !important;
-  }
-}
-
-.brand-link {
-  margin-left: -0.5rem !important;
-}
-
-/* Intermediate screens navigation adjustment */
-@media (min-width: 1100px) and (max-width: 1300px) {
-  .nav-link {
-    font-size: 0.75rem !important;
-    padding: 0.3rem 0.45rem !important;
-  }
-  .header-inner {
-    gap: 0.75rem !important;
-  }
-  .brand-logo-wrapper {
-    padding: 0.1rem 0.35rem !important;
-  }
-  .brand-logo {
-    height: 60px !important;
-  }
-}
-
-/* Global button and link font override to guarantee Be Vietnam Pro */
-button,
-input,
-select,
-textarea,
-.btn,
-a.btn,
-.contact-cta,
-.mobile-contact-cta,
-.lang-btn {
-  font-family: var(--font-sans) !important;
-}
-</style>
-
-<style>
-/* ═══════════════ CUSTOM TOAST OVERRIDES ═══════════════ */
-.custom-invitation-toast {
-  background-color: #0f2240 !important;
-  padding: 1.25rem 1.25rem 1.375rem 1.25rem !important; /* pt-5 px-5 pb-5.5 */
-  border-left: 4px solid #e87722 !important;
-  gap: 0.875rem !important;
-}
-
-.custom-invitation-toast [data-slot="wrapper"] {
-  display: grid !important;
-  grid-template-columns: 1fr auto !important;
-  align-items: center !important;
-  gap: 0.5rem 1rem !important;
-  width: 100% !important;
-}
-
-.custom-invitation-toast [data-slot="title"] {
-  grid-column: span 2 !important;
-  padding-right: 2rem !important;
-  color: #ffffff !important;
-}
-
-.custom-invitation-toast [data-slot="description"] {
-  margin-top: 0 !important;
-  color: #cbd5e1 !important;
-}
-
-.custom-invitation-toast [data-slot="icon"] {
-  color: #e87722 !important;
-  margin-top: 0.125rem !important;
-}
-
-.custom-invitation-toast [data-slot="close"] {
-  position: absolute !important;
-  top: 1rem !important;
-  right: 1rem !important;
-  color: #94a3b8 !important;
-}
-
-.custom-invitation-toast [data-slot="close"]:hover {
-  color: #e87722 !important;
-}
-
-.custom-invitation-toast [data-slot="actions"] {
-  margin-top: 0 !important;
-}
-
-.custom-invitation-toast [data-slot="actions"] a,
-.custom-invitation-toast [data-slot="actions"] button {
-  background-color: #e87722 !important;
-  color: #ffffff !important;
-  border-radius: 6px !important;
-  font-weight: 600 !important;
-  padding: 0.25rem 0.75rem !important;
-  font-size: 0.75rem !important;
-  line-height: 1.25rem !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-  transition: background-color 150ms ease !important;
-}
-
-.custom-invitation-toast [data-slot="actions"] a:hover,
-.custom-invitation-toast [data-slot="actions"] button:hover {
-  background-color: #d66613 !important;
-}
-</style>

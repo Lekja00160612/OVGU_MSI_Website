@@ -19,8 +19,44 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/academic-activities" />
   </url>
   <url>
+    <loc>https://msi.vgu.edu.vn/future-students/alumni</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/future-students/alumni" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/future-students/alumni" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/future-students/alumni" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/vi/future-students/alumni</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/future-students/alumni" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/future-students/alumni" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/future-students/alumni" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/future-students/pathways</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/future-students/pathways" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/future-students/pathways" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/future-students/pathways" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/vi/future-students/pathways</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/future-students/pathways" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/future-students/pathways" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/future-students/pathways" />
+  </url>
+  <url>
     <loc>https://msi.vgu.edu.vn/future-students</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/future-students" />
@@ -29,7 +65,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/future-students</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/future-students" />
@@ -38,7 +74,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn" />
@@ -47,12 +83,48 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn" />
     <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/laboratories-research/chairs</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/laboratories-research/chairs" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/laboratories-research/chairs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/laboratories-research/chairs" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/vi/laboratories-research/chairs</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/laboratories-research/chairs" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/laboratories-research/chairs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/laboratories-research/chairs" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/laboratories-research/equipment</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/laboratories-research/equipment" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/laboratories-research/equipment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/laboratories-research/equipment" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/vi/laboratories-research/equipment</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/laboratories-research/equipment" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/laboratories-research/equipment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/laboratories-research/equipment" />
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/laboratories-research</loc>
@@ -74,7 +146,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/partners-lecturers</loc>
-    <lastmod>2026-08-08</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/partners-lecturers" />
@@ -83,7 +155,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/partners-lecturers</loc>
-    <lastmod>2026-08-08</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/partners-lecturers" />
@@ -91,8 +163,62 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/partners-lecturers" />
   </url>
   <url>
+    <loc>https://msi.vgu.edu.vn/program-structure/modules</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/program-structure/modules" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/program-structure/modules" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/program-structure/modules" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/vi/program-structure/modules</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/program-structure/modules" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/program-structure/modules" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/program-structure/modules" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/program-structure/thesis</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/program-structure/thesis" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/program-structure/thesis" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/program-structure/thesis" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/vi/program-structure/thesis</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/program-structure/thesis" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/program-structure/thesis" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/program-structure/thesis" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/program-structure/timetable</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/program-structure/timetable" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/program-structure/timetable" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/program-structure/timetable" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/vi/program-structure/timetable</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/program-structure/timetable" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/program-structure/timetable" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/program-structure/timetable" />
+  </url>
+  <url>
     <loc>https://msi.vgu.edu.vn/program-structure</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/program-structure" />
@@ -101,7 +227,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/program-structure</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/program-structure" />
@@ -109,8 +235,26 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/program-structure" />
   </url>
   <url>
+    <loc>https://msi.vgu.edu.vn/student-life/germany-relocation</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/student-life/germany-relocation" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/student-life/germany-relocation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/student-life/germany-relocation" />
+  </url>
+  <url>
+    <loc>https://msi.vgu.edu.vn/vi/student-life/germany-relocation</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/student-life/germany-relocation" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://msi.vgu.edu.vn/vi/student-life/germany-relocation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://msi.vgu.edu.vn/student-life/germany-relocation" />
+  </url>
+  <url>
     <loc>https://msi.vgu.edu.vn/student-life</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/student-life" />
@@ -119,7 +263,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/student-life</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/student-life" />
@@ -128,7 +272,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/tuition-scholarships</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/tuition-scholarships" />
@@ -137,7 +281,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/tuition-scholarships</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/tuition-scholarships" />
@@ -146,7 +290,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/biocalorimetry-for-the-biotechnological-use-of-natural-and-synthetic-macromolecules</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/biocalorimetry-for-the-biotechnological-use-of-natural-and-synthetic-macromolecules" />
@@ -155,7 +299,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/biocalorimetry-for-the-biotechnological-use-of-natural-and-synthetic-macromolecules</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/biocalorimetry-for-the-biotechnological-use-of-natural-and-synthetic-macromolecules" />
@@ -164,7 +308,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/construction-materials-trip</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/construction-materials-trip" />
@@ -173,7 +317,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/construction-materials-trip</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/construction-materials-trip" />
@@ -182,7 +326,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/daad-scholarships-2024</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/daad-scholarships-2024" />
@@ -191,7 +335,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/daad-scholarships-2024</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/daad-scholarships-2024" />
@@ -200,7 +344,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/daad-scholarships</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/daad-scholarships" />
@@ -209,7 +353,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/daad-scholarships</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/daad-scholarships" />
@@ -218,7 +362,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/engineering-ceramics</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/engineering-ceramics" />
@@ -227,7 +371,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/engineering-ceramics</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/engineering-ceramics" />
@@ -236,7 +380,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/flying-faculty</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/flying-faculty" />
@@ -245,7 +389,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/flying-faculty</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/flying-faculty" />
@@ -254,7 +398,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/fracture-mechanics</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/fracture-mechanics" />
@@ -263,7 +407,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/fracture-mechanics</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/fracture-mechanics" />
@@ -272,7 +416,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/gyss-2026</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/gyss-2026" />
@@ -281,7 +425,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/gyss-2026</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/gyss-2026" />
@@ -290,7 +434,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/heat-treatment</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/heat-treatment" />
@@ -299,7 +443,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/heat-treatment</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/heat-treatment" />
@@ -308,7 +452,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/knauf-trip</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/knauf-trip" />
@@ -317,7 +461,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/knauf-trip</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/knauf-trip" />
@@ -326,7 +470,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/micro-nano-scale</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/micro-nano-scale" />
@@ -335,7 +479,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/micro-nano-scale</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/micro-nano-scale" />
@@ -344,7 +488,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/msi-seminar-workshop-2026</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/msi-seminar-workshop-2026" />
@@ -353,7 +497,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/msi-seminar-workshop-2026</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/msi-seminar-workshop-2026" />
@@ -362,7 +506,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/msi2025-and-gpe2025-explore-the-connection-between-materials-and-production-through-additive-manufacturing</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/msi2025-and-gpe2025-explore-the-connection-between-materials-and-production-through-additive-manufacturing" />
@@ -371,7 +515,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/msi2025-and-gpe2025-explore-the-connection-between-materials-and-production-through-additive-manufacturing</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/msi2025-and-gpe2025-explore-the-connection-between-materials-and-production-through-additive-manufacturing" />
@@ -380,7 +524,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/non-metallic-binders</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/non-metallic-binders" />
@@ -389,7 +533,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/non-metallic-binders</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/non-metallic-binders" />
@@ -398,7 +542,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/polymer-labs</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/polymer-labs" />
@@ -407,7 +551,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/polymer-labs</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/polymer-labs" />
@@ -416,7 +560,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/powder-metallurgy</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/powder-metallurgy" />
@@ -425,7 +569,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/powder-metallurgy</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/powder-metallurgy" />
@@ -434,7 +578,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/program-overview</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/program-overview" />
@@ -443,7 +587,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/program-overview</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/program-overview" />
@@ -452,7 +596,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/research-labs</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/research-labs" />
@@ -461,7 +605,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/research-labs</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/research-labs" />
@@ -470,7 +614,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/sem-xrd-tour</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/sem-xrd-tour" />
@@ -479,7 +623,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/sem-xrd-tour</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/sem-xrd-tour" />
@@ -488,7 +632,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/vgu-master-info-day-2026</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/vgu-master-info-day-2026" />
@@ -497,7 +641,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/vgu-master-info-day-2026</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/vgu-master-info-day-2026" />
@@ -506,7 +650,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/vina-kraft-trip</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/vina-kraft-trip" />
@@ -515,7 +659,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/vina-kraft-trip</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/vina-kraft-trip" />
@@ -524,7 +668,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/academic-activities/weekly-lab-tour-2026-summer</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/weekly-lab-tour-2026-summer" />
@@ -533,7 +677,7 @@
   </url>
   <url>
     <loc>https://msi.vgu.edu.vn/vi/academic-activities/weekly-lab-tour-2026-summer</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://msi.vgu.edu.vn/academic-activities/weekly-lab-tour-2026-summer" />

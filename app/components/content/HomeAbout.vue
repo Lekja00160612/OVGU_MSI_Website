@@ -25,95 +25,57 @@ const displayDegree2Value = computed(() => props.degree2Value ?? t('home.degree2
 </script>
 
 <template>
-  <section class="section about-section">
-    <div class="container about-grid">
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <!-- Left: Text -->
-      <div class="about-text">
-        <h2 v-if="displayHeadline" class="about-title">{{ displayHeadline }}</h2>
-        <div v-if="displaySubtitle" class="about-tag">{{ displaySubtitle }}</div>
-        <p v-if="displayParagraph1" class="about-body">{{ displayParagraph1 }}</p>
-        <p v-if="displayParagraph2" class="about-body">{{ displayParagraph2 }}</p>
+      <div class="flex flex-col">
+        <h2 v-if="displayHeadline" class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-2">
+          {{ displayHeadline }}
+        </h2>
+        <div v-if="displaySubtitle" class="inline-block text-xs font-bold tracking-widest uppercase text-primary-600 mb-6">
+          {{ displaySubtitle }}
+        </div>
+        <p v-if="displayParagraph1" class="text-sm sm:text-base text-slate-600 leading-relaxed mb-4">
+          {{ displayParagraph1 }}
+        </p>
+        <p v-if="displayParagraph2" class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          {{ displayParagraph2 }}
+        </p>
       </div>
 
       <!-- Right: Degree Card -->
-      <div class="about-visual">
-        <div class="degree-card">
-          <div class="degree-card-header">
-            <NuxtImg src="/Logo/LOGO_MSI_Full_color.png" alt="MSI" class="degree-msi-logo" />
-          </div>
-          <div class="degree-card-body">
-            <div class="degree-item">
-              <div class="degree-dot degree-dot--blue" />
-              <div>
-                <div class="degree-label">{{ displayDegree1Label }}</div>
-                <div class="degree-value">{{ displayDegree1Value }}</div>
-              </div>
-            </div>
-            <div class="degree-divider" />
-            <div class="degree-item">
-              <div class="degree-dot degree-dot--orange" />
-              <div>
-                <div class="degree-label">{{ displayDegree2Label }}</div>
-                <div class="degree-value">{{ displayDegree2Value }}</div>
-              </div>
+      <div class="flex justify-center">
+        <UCard
+          variant="outline"
+          class="shadow-xl overflow-hidden border border-slate-200/80 rounded-3xl w-full max-w-md"
+          :ui="{
+            header: 'bg-[#1E3A5F] p-8 flex items-center justify-center',
+            body: 'p-6 sm:p-8 flex flex-col gap-5'
+          }"
+        >
+          <template #header>
+            <NuxtImg src="/Logo/LOGO_MSI_Full_color.png" alt="MSI" class="h-20 sm:h-24 w-auto object-contain brightness-0 invert" />
+          </template>
+
+          <div class="flex items-start gap-4">
+            <div class="size-3.5 rounded-full bg-sky-500 mt-1 shrink-0 ring-4 ring-sky-100" />
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">{{ displayDegree1Label }}</div>
+              <div class="text-base font-semibold text-[#1E3A5F] leading-snug">{{ displayDegree1Value }}</div>
             </div>
           </div>
-        </div>
+
+          <div class="h-px bg-slate-100" />
+
+          <div class="flex items-start gap-4">
+            <div class="size-3.5 rounded-full bg-[#E87722] mt-1 shrink-0 ring-4 ring-orange-100" />
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">{{ displayDegree2Label }}</div>
+              <div class="text-base font-semibold text-[#1E3A5F] leading-snug">{{ displayDegree2Value }}</div>
+            </div>
+          </div>
+        </UCard>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-/* ══ ABOUT ══ */
-.about-section { background: #fff; }
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-@media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; } }
-
-.about-title {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  color: var(--color-primary);
-  margin: 0.75rem 0 0.5rem;
-}
-.about-tag {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 1.25rem;
-}
-.about-body { color: var(--color-gray-600); line-height: 1.75; margin-bottom: 1rem; font-size: 0.975rem; }
-
-/* Degree Card */
-.degree-card {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--color-gray-200);
-  max-height: 420px;
-  overflow-y: auto;
-}
-.degree-card-header {
-  background: var(--color-primary);
-  padding: 3rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.degree-msi-logo { height: 90px; width: auto; object-fit: contain; filter: brightness(0) invert(1); }
-.degree-card-body { padding: 1.75rem; display:flex; flex-direction:column; gap:1.25rem; }
-.degree-item { display:flex; align-items:flex-start; gap:1rem; }
-.degree-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; margin-top:4px; }
-.degree-dot--blue   { background: var(--color-ovgu-blue); }
-.degree-dot--orange { background: var(--color-accent); }
-.degree-label { font-size:0.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-gray-400); margin-bottom:2px; }
-.degree-value { font-size:0.9rem; font-weight:600; color:var(--color-primary); line-height:1.4; }
-.degree-divider { height:1px; background:var(--color-gray-200); }
-</style>

@@ -469,21 +469,21 @@ function triggerPrint() {
             <h2 class="save-title">SAVE THE DATE</h2>
             <div class="info-list">
               <div class="info-item">
-                <span class="info-icon">📅</span>
+                <UIcon name="i-lucide-calendar" class="size-4 text-orange-500 shrink-0" />
                 <div class="info-text">
                   <strong class="info-label">{{ locale === 'vi' ? 'Thời gian' : 'Date' }}:</strong>
                   <span>{{ displayDate }}</span>
                 </div>
               </div>
               <div class="info-item">
-                <span class="info-icon">🕒</span>
+                <UIcon name="i-lucide-clock" class="size-4 text-orange-500 shrink-0" />
                 <div class="info-text">
                   <strong class="info-label">{{ locale === 'vi' ? 'Giờ giấc' : 'Time' }}:</strong>
                   <span>{{ displayTime }}</span>
                 </div>
               </div>
               <div class="info-item">
-                <span class="info-icon">📍</span>
+                <UIcon name="i-lucide-map-pin" class="size-4 text-orange-500 shrink-0" />
                 <div class="info-text">
                   <strong class="info-label">{{ locale === 'vi' ? 'Địa điểm' : 'Address' }}:</strong>
                   <span>{{ displayAddress }}</span>
@@ -581,8 +581,9 @@ function triggerPrint() {
 
         <!-- FOOTER BOTTOM INFOBAR -->
         <div class="bottom-infobar">
-          <span class="shuttle-info">
-            🚌 {{ shuttleBusText }}
+          <span class="shuttle-info inline-flex items-center gap-1.5">
+            <UIcon name="i-lucide-bus" class="size-4 shrink-0 text-orange-400" />
+            <span>{{ shuttleBusText }}</span>
           </span>
           <div class="footer-watermark-text">WORK READY - WORLD READY</div>
         </div>

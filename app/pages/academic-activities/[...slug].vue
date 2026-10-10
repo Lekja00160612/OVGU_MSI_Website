@@ -29,6 +29,71 @@ useSeoMeta({
   description: () => activity.value?.meta?.description || activity.value?.description || 'Read about the latest academic activities, field trips, guest lectures, and lab trainings in the Materials Science & Innovation program.',
   ogDescription: () => activity.value?.meta?.description || activity.value?.description || 'Read about the latest academic activities, field trips, guest lectures, and lab trainings in the Materials Science & Innovation program.',
 })
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: computed(() => {
+        if (!activity.value) return ''
+        const act = activity.value
+        const isEvent = !!act.invitation || !!act.meta?.invitation || !!act.eventDate
+        const fullUrl = `https://msi.vgu.edu.vn${route.path}`
+        const imgUrl = (act.meta?.image || act.image) 
+          ? `https://msi.vgu.edu.vn${act.meta?.image || act.image}`
+          : 'https://msi.vgu.edu.vn/Thumbnail/MATERIALS%20SCIENCE_THUMB.png'
+
+        if (isEvent) {
+          return JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Event',
+            'name': act.title,
+            'url': fullUrl,
+            'startDate': act.eventDate || act.date,
+            'description': act.meta?.description || act.description,
+            'image': imgUrl,
+            'eventStatus': 'https://schema.org/EventScheduled',
+            'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+            'location': {
+              '@type': 'Place',
+              'name': 'Vietnamese-German University (VGU)',
+              'address': {
+                '@type': 'PostalAddress',
+                'streetAddress': 'Ring road 4, Quarter 4, Thoi Hoa Ward',
+                'addressLocality': 'Ben Cat City',
+                'addressRegion': 'Binh Duong Province',
+                'addressCountry': 'VN'
+              }
+            },
+            'organizer': {
+              '@type': 'CollegeOrUniversity',
+              'name': 'Materials Science and Innovation Program, VGU & OVGU',
+              'url': 'https://msi.vgu.edu.vn'
+            }
+          })
+        }
+
+        return JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'NewsArticle',
+          'headline': act.title,
+          'url': fullUrl,
+          'datePublished': act.meta?.date || act.date,
+          'image': [imgUrl],
+          'description': act.meta?.description || act.description,
+          'publisher': {
+            '@type': 'CollegeOrUniversity',
+            'name': 'Vietnamese-German University',
+            'logo': {
+              '@type': 'ImageObject',
+              'url': 'https://msi.vgu.edu.vn/Logo/VGU_Logo.png'
+            }
+          }
+        })
+      })
+    }
+  ]
+})
 </script>
 
 <template>
@@ -41,164 +106,37 @@ useSeoMeta({
     />
     
     <!-- Fallback standard blog-style layout -->
-    <div v-else class="container py-12">
-      <NuxtLink :to="localePath('/academic-activities')" class="back-link">
-        &larr; {{ t('activities.back_to_activities') }}
-      </NuxtLink>
+    <div v-else class="max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-16">
+      <UButton
+        :to="localePath('/academic-activities')"
+        color="primary"
+        variant="ghost"
+        size="sm"
+        icon="i-lucide-arrow-left"
+        class="mb-6 font-semibold"
+      >
+        {{ t('activities.back_to_activities') }}
+      </UButton>
 
-      <div v-if="activity" class="activity-content-card">
-        <div class="activity-header">
-          <div class="activity-meta">
-            <span class="activity-category">{{ activity.meta?.category || activity.category }}</span>
-            <span class="activity-date">{{ activity.meta?.date || activity.date }}</span>
+      <div v-if="activity" class="bg-white rounded-3xl border border-slate-200 shadow-xs p-6 sm:p-10 md:p-12">
+        <div class="mb-8 text-center max-w-2xl mx-auto">
+          <div class="flex items-center justify-center gap-2 mb-4">
+            <UBadge color="primary" variant="subtle" size="sm" class="font-bold">
+              {{ activity.meta?.category || activity.category }}
+            </UBadge>
+            <span class="text-xs text-slate-400 font-medium">{{ activity.meta?.date || activity.date }}</span>
           </div>
-          <h1 class="activity-title">{{ activity.title }}</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">{{ activity.title }}</h1>
         </div>
 
-        <div v-if="activity.meta?.image || activity.image" class="activity-hero-image">
-          <NuxtImg :src="activity.meta?.image || activity.image" :alt="activity.title" class="hero-img" />
+        <div v-if="activity.meta?.image || activity.image" class="w-full h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden mb-8 bg-slate-100 border border-slate-100">
+          <NuxtImg :src="activity.meta?.image || activity.image" :alt="activity.title" class="w-full h-full object-cover" />
         </div>
 
-        <div class="activity-body prose max-w-none">
+        <div class="prose max-w-none text-slate-700">
           <ContentRenderer :value="activity" />
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.activity-detail-page {
-  background: var(--color-gray-50);
-  min-height: 80vh;
-}
-.invitation-detail-page {
-  background: transparent !important;
-  min-height: auto !important;
-}
-@media print {
-  .invitation-detail-page {
-    background: transparent !important;
-    min-height: auto !important;
-    padding: 0 !important;
-  }
-}
-.py-12 {
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-}
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--color-primary);
-  font-weight: 600;
-  text-decoration: none;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-  transition: color 200ms, transform 200ms;
-}
-.back-link:hover {
-  color: var(--color-accent);
-  transform: translateX(-4px);
-}
-
-.activity-content-card {
-  --card-padding-x: 3rem;
-  --card-padding-y: 3rem;
-  background: #fff;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-gray-200);
-  padding: var(--card-padding-y) var(--card-padding-x);
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .activity-content-card {
-    --card-padding-x: 0px;
-    --card-padding-y: 0px;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-  }
-}
-
-.activity-header {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  .activity-header {
-    margin-bottom: 1.25rem;
-  }
-}
-
-.activity-meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-
-.activity-category {
-  background: var(--color-accent);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.3rem 0.85rem;
-  border-radius: var(--radius-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.activity-date {
-  color: var(--color-gray-500);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.activity-title {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  font-weight: 800;
-  color: var(--color-primary-dark);
-  line-height: 1.2;
-}
-
-.activity-hero-image {
-  margin: 0 calc(-1 * var(--card-padding-x)) 2.5rem calc(-1 * var(--card-padding-x));
-  height: 400px;
-  background: var(--color-gray-100);
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .activity-hero-image {
-    height: 220px;
-    margin-bottom: 1.5rem;
-    border-radius: var(--radius-lg);
-  }
-}
-
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.activity-body {
-  font-size: 1.05rem;
-  color: var(--color-gray-800);
-  line-height: 1.75;
-}
-
-@media (max-width: 768px) {
-  .activity-body {
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-}
-</style>

@@ -38,14 +38,10 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="page-activities">
+  <div class="min-h-[80vh] bg-slate-50 pb-16">
     <ContentRenderer v-if="pageData" :value="pageData" />
-    <div v-else class="container" style="min-height:60vh;display:flex;align-items:center;justify-content:center">
-      <p>Loading…</p>
+    <div v-else class="max-w-7xl mx-auto px-4 min-h-[60vh] flex items-center justify-center">
+      <p class="text-slate-500 font-medium">Loading…</p>
     </div>
   </div>
 </template>
-
-<style scoped>
-.page-activities { min-height: 80vh; background: var(--color-gray-50); padding-bottom: 4rem; }
-</style>

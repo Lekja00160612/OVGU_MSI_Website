@@ -34,59 +34,40 @@ const iconMap: Record<string, string> = {
 </script>
 
 <template>
-  <section class="section features-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 v-if="displayHeadline" class="section-title">{{ displayHeadline }}</h2>
-        <p v-if="displaySubtitle" class="section-subtitle">{{ displaySubtitle }}</p>
+  <section class="py-20 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 v-if="displayHeadline" class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3">
+          {{ displayHeadline }}
+        </h2>
+        <p v-if="displaySubtitle" class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          {{ displaySubtitle }}
+        </p>
       </div>
-      <div class="features-grid">
-        <div v-for="f in displayFeatures" :key="f.id" class="feature-card card" :class="{ 'feature-card--featured': f.featured }">
-          <div class="feature-icon-wrap">
-            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path :d="iconMap[f.icon] ?? iconMap.diploma" />
-            </svg>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <UCard
+          v-for="f in displayFeatures"
+          :key="f.id"
+          variant="outline"
+          class="hover:-translate-y-1 hover:shadow-xl transition-all duration-200 border-slate-200/80 rounded-2xl flex flex-col bg-white"
+          :class="{ 'border-t-4 !border-t-primary-500 bg-gradient-to-b from-white to-primary-50/20': f.featured }"
+          :ui="{ body: 'p-6 sm:p-7 flex flex-col justify-between h-full' }"
+        >
+          <div>
+            <div class="size-12 rounded-xl bg-orange-50 flex items-center justify-center mb-4 text-orange-600">
+              <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path :d="iconMap[f.icon] ?? iconMap.diploma" />
+              </svg>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 mb-2">{{ f.title }}</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">{{ f.description }}</p>
           </div>
-          <h3 class="feature-title">{{ f.title }}</h3>
-          <p class="feature-desc">{{ f.description }}</p>
-          <NuxtLink v-if="f.link" :to="localePath(f.link)" class="feature-link" :class="{ 'feature-link--featured': f.featured }">
+          <NuxtLink v-if="f.link" :to="localePath(f.link)" class="text-xs font-bold text-primary-600 hover:text-primary-700 inline-flex items-center gap-1 mt-auto">
             {{ t('home.view_feature', { title: f.title }) }} &rarr;
           </NuxtLink>
-        </div>
+        </UCard>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-/* ══ FEATURES / WHY CHOOSE ══ */
-.features-section { background: var(--color-gray-50); }
-.features-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-@media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2,1fr); } }
-@media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3,1fr); } }
-
-.feature-card {
-  padding: 1.75rem;
-  max-height: 420px;
-  overflow-y: auto;
-}
-.feature-icon-wrap {
-  width: 48px; height: 48px;
-  border-radius: var(--radius-md);
-  background: var(--color-primary-50);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 1.125rem;
-  color: var(--color-primary);
-  transition: background 250ms;
-}
-.feature-card:hover .feature-icon-wrap { background: var(--color-primary); color: #fff; }
-.feature-icon-svg { width: 24px; height: 24px; }
-.feature-title { font-size: 1rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.625rem; }
-.feature-desc { font-size: 0.875rem; color: var(--color-gray-600); line-height: 1.65; margin-bottom: 1rem; }
-.feature-link { font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-decoration: none; }
-.feature-link:hover { text-decoration: underline; color: var(--color-ovgu-blue); }
-</style>

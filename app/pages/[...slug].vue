@@ -29,144 +29,29 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="page-container">
+  <main class="min-h-[80vh] bg-slate-50 pb-20 font-sans">
     <template v-if="page">
       <!-- Premium Hero Banner -->
       <PageHeader :title="page.title" :description="page.meta?.description" />
 
       <!-- Main Body Container -->
-      <div class="container content-section">
-        <div class="prose-wrapper">
-          <ContentRenderer :value="page" class="prose" />
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 mt-8">
+        <div class="bg-white p-6 sm:p-10 md:p-12 rounded-3xl border border-slate-200 shadow-xs">
+          <ContentRenderer :value="page" class="prose max-w-none text-slate-700" />
         </div>
       </div>
     </template>
     <template v-else>
-      <div class="not-found container section">
-        <div class="not-found-inner">
-          <div class="not-found-icon">📄</div>
-          <h1>Content not found</h1>
-          <p>This page hasn't been set up yet, or the translation is missing.</p>
-          <NuxtLink :to="localePath('/')" class="btn btn-primary">← Back to Home</NuxtLink>
+      <div class="flex items-center justify-center min-h-[50vh] px-4 py-16">
+        <div class="text-center max-w-md p-8 bg-white border border-slate-200 rounded-2xl shadow-sm">
+          <UIcon name="i-lucide-file-text" class="size-12 text-slate-300 mb-4" />
+          <h1 class="text-2xl font-bold text-slate-900 mb-2">Content not found</h1>
+          <p class="text-slate-600 mb-6 text-sm">This page hasn't been set up yet, or the translation is missing.</p>
+          <UButton :to="localePath('/')" color="primary" variant="solid" size="md" icon="i-lucide-arrow-left" class="font-bold rounded-xl shadow-xs">
+            Back to Home
+          </UButton>
         </div>
       </div>
     </template>
   </main>
 </template>
-
-<style scoped>
-.page-container {
-  min-height: 80vh;
-  background: var(--color-gray-50);
-  padding-bottom: 5rem;
-}
-
-.content-section {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.prose-wrapper {
-  background: #ffffff;
-  padding: 3rem;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--color-gray-200);
-}
-
-@media (max-width: 768px) {
-  .prose-wrapper {
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-  }
-}
-
-.prose :deep(h2) {
-  font-size: var(--font-size-3xl);
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-top: 2.5rem;
-  margin-bottom: 1.25rem;
-  border-bottom: 2px solid var(--color-gray-100);
-  padding-bottom: 0.5rem;
-}
-
-.prose :deep(h3) {
-  font-size: var(--font-size-2xl);
-  font-weight: 600;
-  color: var(--color-primary);
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-.prose :deep(p) {
-  font-size: var(--font-size-base);
-  color: var(--color-gray-700);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-
-.prose :deep(ul), .prose :deep(ol) {
-  margin-bottom: 1.5rem;
-  padding-left: 1.5rem;
-}
-
-.prose :deep(li) {
-  font-size: var(--font-size-base);
-  color: var(--color-gray-700);
-  line-height: 1.7;
-  margin-bottom: 0.75rem;
-}
-
-.prose :deep(strong) {
-  color: var(--color-primary);
-}
-
-.prose :deep(blockquote) {
-  border-left: 4px solid var(--color-accent);
-  background: var(--color-gray-50);
-  padding: 1.25rem 1.5rem;
-  margin: 2rem 0;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-
-.prose :deep(blockquote p) {
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--color-gray-700);
-  margin: 0;
-}
-
-.not-found {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.not-found-inner {
-  text-align: center;
-  padding: 4rem 2rem;
-  max-width: 480px;
-}
-
-.not-found-icon {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.not-found-inner h1 {
-  font-size: 1.75rem;
-  color: var(--color-gray-900);
-  margin-bottom: 0.75rem;
-}
-
-.not-found-inner p {
-  color: var(--color-gray-600);
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-</style>

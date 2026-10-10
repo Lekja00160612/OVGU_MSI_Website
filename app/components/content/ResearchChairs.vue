@@ -196,100 +196,119 @@ const goToSlide = (idx: number) => {
 </script>
 
 <template>
-  <div class="research-chairs">
+  <div class="w-full max-w-4xl mx-auto flex flex-col gap-6">
     <!-- Slide Card -->
-    <div class="slide-wrapper">
+    <div class="w-full">
       <div
-        class="slide-card"
+        class="rounded-3xl p-6 sm:p-8 text-white shadow-xl relative min-h-[440px] flex flex-col justify-between overflow-hidden transition-all duration-300"
         :style="{
-          backgroundImage: `linear-gradient(rgba(15, 34, 64, 0.85), rgba(15, 34, 64, 0.95)), url(${activeChair.cover_image})`,
+          backgroundImage: `linear-gradient(rgba(15, 34, 64, 0.88), rgba(15, 34, 64, 0.96)), url(${activeChair.cover_image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }"
         :key="activeChair.id"
       >
-        <!-- Badge counter -->
-        <div class="slide-badge">
-          {{ activeSlideIndex + 1 }} / {{ chairsList.length }}
+        <!-- Top row: Title + counter badge -->
+        <div class="flex items-start justify-between gap-4">
+          <h3 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-tight">
+            {{ activeTitle }}
+          </h3>
+          <UBadge color="neutral" variant="subtle" size="xs" class="bg-white/20 text-white font-bold backdrop-blur-md shrink-0">
+            {{ activeSlideIndex + 1 }} / {{ chairsList.length }}
+          </UBadge>
         </div>
 
-        <!-- Title -->
-        <h3 class="slide-title">{{ activeTitle }}</h3>
-
-        <!-- Head info with circular avatar -->
-        <div class="slide-head-row">
-          <img
+        <!-- Head info with prominent portrait -->
+        <div class="flex items-center gap-4 my-4">
+          <NuxtImg
+            v-if="activeChair.head_avatar"
             :src="activeChair.head_avatar"
             :alt="activeChair.head"
-            class="slide-head-avatar"
-            onerror="this.src='/Lecturer_Avatar/default.jpg'"
+            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover ring-4 ring-orange-500/40 shadow-lg shrink-0"
+            loading="lazy"
           />
-          <div class="slide-head-info">
-            <span class="slide-head-label">{{ locale === 'vi' ? 'Trưởng bộ môn' : 'Head of Chair' }}</span>
-            <span class="slide-head-name">{{ activeChair.head }}</span>
+          <div class="flex flex-col">
+            <span class="text-xs uppercase tracking-wider text-orange-400 font-extrabold mb-0.5">
+              {{ locale === 'vi' ? 'Trưởng bộ môn / Giám đốc nghiên cứu' : 'Head of Chair & Research Director' }}
+            </span>
+            <span class="text-lg sm:text-xl font-black text-white leading-tight">
+              {{ activeChair.head }}
+            </span>
           </div>
         </div>
 
-        <!-- Topics list — scrollable -->
-        <div class="slide-topics-box">
-          <h4 class="topics-heading">{{ locale === 'vi' ? 'Hướng nghiên cứu chính' : 'Core Research Focus Areas' }}</h4>
-          <ul class="topics-list">
-            <li v-for="(topic, idx) in activeTopics" :key="idx" class="topic-item">
-              <span class="topic-bullet" aria-hidden="true">•</span>
-              {{ topic }}
+        <!-- Topics list -->
+        <div class="bg-black/25 backdrop-blur-sm p-4 rounded-2xl border border-white/10 my-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-orange-300 mb-2">
+            {{ locale === 'vi' ? 'Hướng nghiên cứu chính' : 'Core Research Focus Areas' }}
+          </h4>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-200">
+            <li v-for="(topic, idx) in activeTopics" :key="idx" class="flex items-start gap-1.5">
+              <span class="text-orange-400 font-bold">•</span>
+              <span>{{ topic }}</span>
             </li>
           </ul>
         </div>
 
         <!-- Projects & Introduction Link -->
-        <div class="slide-footer">
-          <div class="slide-footer-content">
-            <div class="footer-text-wrap" v-if="activeProjects">
-              <strong class="footer-label">{{ locale === 'vi' ? 'Dự án tiêu biểu: ' : 'Sample Projects: ' }}</strong>
-              <span class="footer-text">{{ activeProjects }}</span>
-            </div>
-            <div class="footer-actions flex gap-2 flex-wrap shrink-0">
-              <a
-                v-if="activeChair.pdf_introduction"
-                :href="activeChair.pdf_introduction"
-                target="_blank"
-                rel="noopener"
-                class="intro-pdf-btn"
-              >
-                📄 {{ locale === 'vi' ? 'Giới thiệu (PDF)' : 'Intro (PDF)' }}
-              </a>
-              <a
-                v-if="activeChair.link_to_introduction"
-                :href="activeChair.link_to_introduction"
-                target="_blank"
-                rel="noopener"
-                class="intro-btn"
-              >
-                {{ $t('labs.visit_chair') }} &rarr;
-              </a>
-            </div>
+        <div class="pt-4 border-t border-white/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-2">
+          <div v-if="activeProjects" class="text-xs text-slate-200">
+            <strong class="text-white">{{ locale === 'vi' ? 'Dự án tiêu biểu: ' : 'Sample Projects: ' }}</strong>
+            <span>{{ activeProjects }}</span>
+          </div>
+          <div class="flex gap-2 flex-wrap shrink-0">
+            <UButton
+              v-if="activeChair.pdf_introduction"
+              :href="activeChair.pdf_introduction"
+              target="_blank"
+              external
+              rel="noopener"
+              icon="i-lucide-file-text"
+              color="primary"
+              variant="subtle"
+              size="xs"
+              class="font-bold rounded-lg bg-white/20 text-white hover:bg-white/30"
+            >
+              {{ locale === 'vi' ? 'Giới thiệu (PDF)' : 'Intro (PDF)' }}
+            </UButton>
+            <UButton
+              v-if="activeChair.link_to_introduction"
+              :href="activeChair.link_to_introduction"
+              target="_blank"
+              external
+              rel="noopener"
+              trailing-icon="i-lucide-arrow-right"
+              color="primary"
+              variant="solid"
+              size="xs"
+              class="font-bold rounded-lg shadow-xs"
+            >
+              {{ $t('labs.visit_chair') }}
+            </UButton>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Controls: Prev | Dots | Next -->
-    <div class="carousel-controls">
-      <button
-        class="control-btn"
+    <div class="flex items-center justify-center gap-4">
+      <UButton
+        icon="i-lucide-chevron-left"
+        color="neutral"
+        variant="outline"
+        size="sm"
+        class="rounded-full"
         aria-label="Previous chair"
         @click="prevSlide"
-      >
-        ←
-      </button>
+      />
 
-      <div class="dot-track" role="tablist" aria-label="Chair slides">
+      <div class="flex items-center gap-1.5" role="tablist" aria-label="Chair slides">
         <button
           v-for="(chair, idx) in chairsList"
           :key="chair.id"
-          class="dot"
-          :class="{ 'dot--active': idx === activeSlideIndex }"
+          class="h-2 rounded-full transition-all duration-300 cursor-pointer"
+          :class="idx === activeSlideIndex ? 'w-6 bg-primary-600' : 'w-2 bg-slate-300 hover:bg-slate-400'"
           :aria-label="`Go to ${chair.title}`"
           :aria-selected="idx === activeSlideIndex"
           role="tab"
@@ -297,302 +316,15 @@ const goToSlide = (idx: number) => {
         />
       </div>
 
-      <button
-        class="control-btn"
+      <UButton
+        icon="i-lucide-chevron-right"
+        color="neutral"
+        variant="outline"
+        size="sm"
+        class="rounded-full"
         aria-label="Next chair"
         @click="nextSlide"
-      >
-        →
-      </button>
+      />
     </div>
   </div>
 </template>
-
-<style scoped>
-.research-chairs {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* ── Slide card ──────────────────────────── */
-.slide-wrapper {
-  perspective: 1000px;
-}
-
-.slide-card {
-  border-radius: var(--radius-xl, 16px);
-  padding: 2rem 2.25rem;
-  color: #fff;
-  box-shadow: var(--shadow-lg, 0 10px 40px rgba(0,0,0,.18));
-  position: relative;
-  height: 440px;
-  display: flex;
-  flex-direction: column;
-  animation: slideIn 350ms var(--ease-out, cubic-bezier(0.16,1,0.3,1)) forwards;
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0)   scale(1);    }
-}
-
-.slide-badge {
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  font-size: 0.78rem;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.18);
-  padding: 0.2rem 0.7rem;
-  border-radius: var(--radius-full, 9999px);
-  backdrop-filter: blur(4px);
-  letter-spacing: 0.04em;
-}
-
-.slide-title {
-  font-size: 1.65rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 1.25rem;
-  color: #fff;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-/* Head info row with circular avatar */
-.slide-head-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.15rem;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 0.6rem 1.15rem;
-  border-radius: var(--radius-lg, 12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  align-self: flex-start;
-}
-
-.slide-head-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--color-accent, #e87722);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  flex-shrink: 0;
-}
-
-.slide-head-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.slide-head-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.05em;
-}
-
-.slide-head-name {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* Topics box — scrollable */
-.slide-topics-box {
-  flex: 1;
-  margin-bottom: 1rem;
-}
-.topics-heading {
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.75);
-  margin-bottom: 0.5rem;
-}
-.topics-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 110px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.3) transparent;
-}
-.topics-list::-webkit-scrollbar { width: 4px; }
-.topics-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
-.topic-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.95);
-}
-.topic-bullet {
-  flex-shrink: 0;
-  font-size: 1.1rem;
-  color: var(--color-accent, #e87722);
-  margin-top: -0.1rem;
-  line-height: 1;
-}
-
-/* Footer */
-.slide-footer {
-  border-top: 1px solid rgba(255,255,255,0.2);
-  padding-top: 1.1rem;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.85);
-  line-height: 1.6;
-}
-.slide-footer-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-@media (min-width: 640px) {
-  .slide-footer-content {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
-.footer-text-wrap {
-  flex: 1;
-  padding-right: 1rem;
-}
-.footer-label { color: rgba(255,255,255,0.95); }
-.footer-text { font-style: italic; }
-
-.footer-actions {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  align-items: center;
-  align-self: flex-start;
-}
-
-.intro-pdf-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.55rem 1.35rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-lg, 12px);
-  text-decoration: none;
-  transition: all 200ms;
-  white-space: nowrap;
-}
-.intro-pdf-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: #fff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-}
-
-.intro-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 1.35rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #fff;
-  background: var(--color-accent);
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-lg, 12px);
-  text-decoration: none;
-  transition: all 200ms;
-  white-space: nowrap;
-  align-self: flex-start;
-}
-.intro-btn:hover {
-  background: var(--color-accent-dark, #c95e0a);
-  border-color: var(--color-accent-dark, #c95e0a);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(232, 119, 34, 0.25);
-}
-
-/* ── Controls ────────────────────────────── */
-.carousel-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-}
-.control-btn {
-  background: #fff;
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
-  transition: all 200ms;
-  color: var(--color-primary, #1e3a5f);
-  flex-shrink: 0;
-}
-.control-btn:hover {
-  background: var(--color-primary, #1e3a5f);
-  color: #fff;
-  border-color: var(--color-primary, #1e3a5f);
-}
-
-.dot-track {
-  display: flex;
-  gap: 0.45rem;
-  align-items: center;
-}
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-gray-300, #d1d5db);
-  border: none;
-  cursor: pointer;
-  transition: background 200ms, width 200ms, border-radius 200ms;
-  padding: 0;
-}
-.dot--active {
-  background: var(--color-primary, #1e3a5f);
-  width: 24px;
-  border-radius: 4px;
-}
-
-@media (max-width: 640px) {
-  .slide-card {
-    padding: 1.75rem 1.5rem;
-    height: auto !important;
-    min-height: 440px;
-  }
-  .slide-title { font-size: 1.35rem; }
-  .slide-head-row {
-    padding: 0.5rem 0.75rem;
-    gap: 0.75rem;
-  }
-  .slide-head-avatar {
-    width: 40px;
-    height: 40px;
-  }
-}
-</style>

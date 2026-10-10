@@ -3,12 +3,17 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/crawl_activities.js && node scripts/generate_sitemap.js",
+    "prebuild": "node scripts/generate_sitemap.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "crawl": "node scripts/crawl_activities.js",
+    "classify": "py scripts/master_classify_activities.py --apply",
+    "classify:check": "py scripts/master_classify_activities.py --check",
+    "verify:links": "node scripts/verify_links.js",
+    "sitemap": "node scripts/generate_sitemap.js"
   },
   "dependencies": {
     "better-sqlite3": "^12.10.0",

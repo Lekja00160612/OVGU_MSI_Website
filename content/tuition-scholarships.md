@@ -57,10 +57,10 @@ A prestigious scholarship program supporting talented master students at VGU, in
 A prestigious scholarship sponsored by the German Academic Exchange Service (DAAD) for study **directly at VGU** — so you benefit from German funding without leaving Vietnam.
 
 > [!IMPORTANT]
-> **🌟 Call for Applications — DAAD Sur-Place Scholarship (Intake 2026)**
-> 
+> **Call for Applications — DAAD Sur-Place Scholarship (Intake 2026)**
+>
 > Official scholarship call sponsored by the DAAD and OVGU Magdeburg (Chair of Computational Mechanics, Prof. Dr.-Ing. Daniel Juhre) for Materials Science master students directly at VGU:
-> 
+>
 > - **Duration & Support:** 12 months full on-site scholarship directly at VGU
 > - **Eligibility Requirements:**
 >   - Currently enrolled in the Materials Science program at VGU
@@ -74,8 +74,9 @@ A prestigious scholarship sponsored by the German Academic Exchange Service (DAA
 >   4. Motivational Letter (*"Who are you, what are your interests?"*)
 > - **Application Deadline:** **15/01/2027**
 > - **Coordinator Contact:** `marc.ulrich@ovgu.de` & `msi.info@vgu.edu.vn`
-> 
+>
 > 📥 **Official Downloads:**
+>
 > - 📋 **[Download Official 2026 Materials Science Scholarship Call & Application Guidelines (PDF)](/Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf)** *(Contains full research chair profiles, requirements & official deadlines)*
 > - 📖 **[Download Sur-Place Scholarship Brochure (PDF)](/Documents/Scholarships/MSI%20Sur_Place_scholarship_brochure.pdf)** | [PPTX Presentation](/Documents/Scholarships/MSI%20Sur_Place_scholarship_brochure.pptx)
 
@@ -92,12 +93,16 @@ keyFacts:
     value: Quality-based and transparent selection
   - label: "FOCUS:"
     value: Academic progress, research orientation and international exchange
-coverImage: /images/scholarships/MSI_Surplace_Scholarship.png
-description: This scholarship supports talented Materials Science students directly at the Vietnamese-German University. It is designed for students who want to strengthen their academic profile, deepen their scientific skills, and become part of an international German-Vietnamese academic environment — all within their study program at VGU.
-applicationUrl: /Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf
 applicationLabel: Official Application 2026 (PDF)
-fileUrl: /Documents/Scholarships/MSI Sur_Place_scholarship_brochure.pdf
+applicationUrl: /Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf
+coverImage: /images/scholarships/MSI_Surplace_Scholarship.png
+description: This scholarship supports talented Materials Science students
+  directly at the Vietnamese-German University. It is designed for students who
+  want to strengthen their academic profile, deepen their scientific skills, and
+  become part of an international German-Vietnamese academic environment — all
+  within their study program at VGU.
 fileLabel: Download Brochure (PDF)
+fileUrl: /Documents/Scholarships/MSI Sur_Place_scholarship_brochure.pdf
 labelImage: /images/scholarships/MSI_DAAD_Label.png
 opportunityTitle: YOUR OPPORTUNITY AT VIETNAMESE-GERMAN UNIVERSITY
 ---
@@ -110,10 +115,10 @@ opportunityTitle: YOUR OPPORTUNITY AT VIETNAMESE-GERMAN UNIVERSITY
 Through the VGU–OVGU–DAAD partnership, high-performing MSI students can carry out study semesters or their **Master's Thesis research at OVGU Magdeburg** — fully funded. This is the path that has already taken MSI students to Germany.
 
 > [!IMPORTANT]
-> **✈️ DAAD Mobility Scholarship — Study & Master's Thesis Stay in Germany**
-> 
+> **DAAD Mobility Scholarship — Study & Master's Thesis Stay in Germany**
+>
 > Highly qualified MSI master students have the opportunity to study and conduct original Master's Thesis research directly at Otto von Guericke University Magdeburg (OVGU) in Germany:
-> 
+>
 > - **Duration:** 1 to 2 Semesters at OVGU Magdeburg (Germany)
 > - **Scholarship Benefits:**
 >   - Comprehensive financial and academic support (monthly living stipend + travel allowance)
@@ -132,8 +137,9 @@ Through the VGU–OVGU–DAAD partnership, high-performing MSI students can carr
 >   - M.Sc. Marc Ulrich (`marc.ulrich@ovgu.de` / OVGU Magdeburg)
 >   - Dr. Nguyen Xuan Thanh (`thanh.nx@vgu.edu.vn` / VGU)
 >   - Academic Coordinator (`msi.info@vgu.edu.vn`)
-> 
+>
 > 📥 **Official Downloads:**
+>
 > - 📋 **[Download Official 2026 Materials Science Scholarship Call & Research Chairs Guide (PDF)](/Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf)** *(Contains deadlines, application procedure & focus areas across all 4 OVGU chairs)*
 > - 📖 **[Download DAAD Mobility Scholarship Brochure (PDF)](/Documents/Scholarships/Mobility_Scholarship%20Brochure%20MSI_Thanh_Marc.pdf)**
 
@@ -150,12 +156,15 @@ keyFacts:
     value: Competitive, merit-based joint VGU-OVGU committee review
   - label: "FOCUS:"
     value: Research stay, joint thesis supervision and German academic experience
-coverImage: /images/scholarships/MSI_Mobility_Scholarship.png
-description: This mobility scholarship supports highly qualified MSI students to carry out study semesters or master thesis research projects at Otto von Guericke University Magdeburg (OVGU) in Germany. It aims to foster international scientific exchange and academic excellence.
-applicationUrl: /Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf
 applicationLabel: Official Application 2026 (PDF)
-fileUrl: /Documents/Scholarships/Mobility_Scholarship Brochure MSI_Thanh_Marc.pdf
+applicationUrl: /Documents/Scholarships/MATERIALS_SCIENCE_SCHOLARSHIPS_Application_2026.pdf
+coverImage: /images/scholarships/MSI_Mobility_Scholarship.png
+description: This mobility scholarship supports highly qualified MSI students to
+  carry out study semesters or master thesis research projects at Otto von
+  Guericke University Magdeburg (OVGU) in Germany. It aims to foster
+  international scientific exchange and academic excellence.
 fileLabel: Download Mobility Brochure (PDF)
+fileUrl: /Documents/Scholarships/Mobility_Scholarship Brochure MSI_Thanh_Marc.pdf
 labelImage: /images/scholarships/MSI_DAAD_Label.png
 opportunityTitle: YOUR OPPORTUNITY TO STUDY IN GERMANY
 ---

@@ -39,183 +39,110 @@ const displayActivities = computed(() => props.recentActivities ?? (pageData ? i
 </script>
 
 <template>
-  <section class="section activities-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 v-if="displayHeadline" class="section-title">{{ displayHeadline }}</h2>
+  <section class="py-20 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 v-if="displayHeadline" class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          {{ displayHeadline }}
+        </h2>
       </div>
 
-      <div v-if="displayActivities?.length" class="bento-grid">
-        <!-- Main large card -->
+      <div v-if="displayActivities?.length" class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
+        <!-- Main large card (7 cols) -->
         <NuxtLink
           v-if="displayActivities[0]"
           :to="localePath(displayActivities[0].path.replace('/_activities', '/academic-activities'))"
-          class="bento-main"
+          class="lg:col-span-7 group relative rounded-3xl overflow-hidden min-h-[360px] lg:min-h-[460px] flex flex-col justify-end p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
         >
-          <div class="bento-card bento-card--large">
-            <NuxtImg :src="displayActivities[0].meta?.image || displayActivities[0].image" class="bento-img" loading="lazy" />
-            <div class="bento-overlay" />
-            <div class="bento-content">
-              <span class="bento-tag">{{ displayActivities[0].meta?.category || displayActivities[0].category }}</span>
-              <h3 class="bento-title">{{ displayActivities[0].title }}</h3>
-              <p class="bento-desc">{{ displayActivities[0].meta?.description || displayActivities[0].description }}</p>
-            </div>
+          <NuxtImg :src="displayActivities[0].meta?.image || displayActivities[0].image" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+          <div class="relative z-10 flex flex-col gap-2">
+            <UBadge
+              color="primary"
+              variant="solid"
+              size="xs"
+              class="font-bold uppercase tracking-wider rounded-full shadow-xs w-fit"
+            >
+              {{ displayActivities[0].meta?.category || displayActivities[0].category }}
+            </UBadge>
+            <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-primary-300 transition-colors leading-snug">
+              {{ displayActivities[0].title }}
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-200/90 line-clamp-2 leading-relaxed">
+              {{ displayActivities[0].meta?.description || displayActivities[0].description }}
+            </p>
           </div>
         </NuxtLink>
 
-        <!-- Side column -->
-        <div class="bento-side">
+        <!-- Side column (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
           <NuxtLink
             v-if="displayActivities[1]"
             :to="localePath(displayActivities[1].path.replace('/_activities', '/academic-activities'))"
-            class="bento-card bento-card--wide"
+            class="group relative rounded-3xl overflow-hidden min-h-[200px] flex-1 flex flex-col justify-end p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
-            <NuxtImg :src="displayActivities[1].meta?.image || displayActivities[1].image" class="bento-img" loading="lazy" />
-            <div class="bento-overlay bento-overlay--light" />
-            <div class="bento-content">
-              <span class="bento-tag">{{ displayActivities[1].meta?.category || displayActivities[1].category }}</span>
-              <h3 class="bento-title">{{ displayActivities[1].title }}</h3>
+            <NuxtImg :src="displayActivities[1].meta?.image || displayActivities[1].image" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            <div class="relative z-10 flex flex-col gap-1.5">
+              <UBadge
+                color="primary"
+                variant="solid"
+                size="xs"
+                class="font-bold uppercase tracking-wider rounded-full shadow-xs w-fit"
+              >
+                {{ displayActivities[1].meta?.category || displayActivities[1].category }}
+              </UBadge>
+              <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-primary-300 transition-colors leading-snug">
+                {{ displayActivities[1].title }}
+              </h3>
             </div>
           </NuxtLink>
 
           <!-- Bottom row: cards 3 & 4 -->
-          <div class="bento-bottom-row">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <NuxtLink
               v-if="displayActivities[2]"
               :to="localePath(displayActivities[2].path.replace('/_activities', '/academic-activities'))"
-              class="bento-card"
+              class="group relative rounded-3xl overflow-hidden min-h-[160px] flex flex-col justify-end p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              <NuxtImg :src="displayActivities[2].meta?.image || displayActivities[2].image" class="bento-img" loading="lazy" />
-              <div class="bento-overlay bento-overlay--light" />
-              <div class="bento-content bento-content--bottom">
-                <h3 class="bento-title bento-title--small">{{ displayActivities[2].title }}</h3>
+              <NuxtImg :src="displayActivities[2].meta?.image || displayActivities[2].image" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div class="relative z-10">
+                <h3 class="text-xs sm:text-sm font-bold text-white group-hover:text-primary-300 transition-colors line-clamp-2 leading-snug">
+                  {{ displayActivities[2].title }}
+                </h3>
               </div>
             </NuxtLink>
 
             <NuxtLink
               v-if="displayActivities[3]"
               :to="localePath(displayActivities[3].path.replace('/_activities', '/academic-activities'))"
-              class="bento-card"
+              class="group relative rounded-3xl overflow-hidden min-h-[160px] flex flex-col justify-end p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              <NuxtImg :src="displayActivities[3].meta?.image || displayActivities[3].image" class="bento-img" loading="lazy" />
-              <div class="bento-overlay bento-overlay--light" />
-              <div class="bento-content bento-content--bottom">
-                <h3 class="bento-title bento-title--small">{{ displayActivities[3].title }}</h3>
+              <NuxtImg :src="displayActivities[3].meta?.image || displayActivities[3].image" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div class="relative z-10">
+                <h3 class="text-xs sm:text-sm font-bold text-white group-hover:text-primary-300 transition-colors line-clamp-2 leading-snug">
+                  {{ displayActivities[3].title }}
+                </h3>
               </div>
             </NuxtLink>
           </div>
         </div>
       </div>
 
-      <div class="activities-actions">
-        <NuxtLink :to="localePath('/academic-activities')" class="btn btn-primary" style="padding-left: 1rem; padding-right: 1rem;">
-          {{ t('home.explore_all') }} &rarr;
-        </NuxtLink>
+      <div class="text-center">
+        <UButton
+          :to="localePath('/academic-activities')"
+          size="lg"
+          color="primary"
+          variant="solid"
+          trailing-icon="i-lucide-arrow-right"
+          class="font-bold shadow-md rounded-full px-8 py-3 text-white cursor-pointer"
+        >
+          {{ t('home.explore_all') }}
+        </UButton>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-/* ══ ACADEMIC ACTIVITIES ══ */
-.activities-section { background: #fff; }
-.bento-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-  min-height: 500px;
-}
-.bento-grid a {
-  text-decoration: none !important;
-}
-@media (min-width: 900px) { .bento-grid { grid-template-columns: 1.15fr 1fr; } }
-.bento-main { display: flex; flex-direction: column; text-decoration: none !important; }
-.bento-side { display: flex; flex-direction: column; gap: 1.25rem; }
-.bento-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; flex: 1; }
-
-.bento-card {
-  position: relative;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 160px;
-  flex: 1;
-  background: var(--color-gray-100);
-}
-.bento-card--large { min-height: 260px; }
-.bento-card--wide  { min-height: 180px; }
-
-@media (min-width: 900px) {
-  .bento-card { min-height: 220px; }
-  .bento-card--large { min-height: 400px; }
-  .bento-card--wide  { min-height: 240px; }
-}
-.bento-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 500ms ease;
-}
-.bento-card:hover .bento-img { transform: scale(1.05); }
-
-.bento-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.4) 55%, transparent 100%);
-  z-index: 1;
-}
-.bento-overlay--light { background: linear-gradient(to top, rgba(15,23,42,0.85) 0%, transparent 100%); }
-
-.bento-content {
-  position: relative;
-  z-index: 2;
-  padding: 2rem;
-  color: #fff;
-}
-.bento-content--bottom { padding: 1.25rem; }
-.bento-tag {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  background: var(--color-accent);
-  color: #fff;
-  padding: 0.35rem 0.85rem;
-  border-radius: var(--radius-sm);
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-.bento-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-  transition: text-decoration 200ms;
-}
-.bento-main:hover .bento-title,
-.bento-card:hover .bento-title {
-  text-decoration: underline;
-  text-decoration-color: var(--color-accent);
-  text-underline-offset: 6px;
-}
-.bento-title--small { font-size: 1.2rem; }
-.bento-desc {
-  font-size: 1rem;
-  color: #f1f5f9;
-  line-height: 1.6;
-  max-width: 95%;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-}
-
-.activities-actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 2.5rem;
-}
-</style>

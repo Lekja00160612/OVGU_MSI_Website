@@ -20,93 +20,52 @@ const displayScholarshipsUrl = computed(() => props.scholarshipsUrl ?? '/tuition
 </script>
 
 <template>
-  <section class="hero" :style="{ backgroundImage: `url(${displayBackgroundImage})` }">
-    <div class="hero-overlay" />
-    <div class="container hero-content">
-      <div v-if="displayBadge" class="badge badge-white animate-fade-in">{{ displayBadge }}</div>
-      <h1 v-if="displayHeadline" class="hero-title animate-fade-in-up delay-100">{{ displayHeadline }}</h1>
-      <div class="hero-logos animate-fade-in-up delay-200">
-        <img src="/Logo/VGU_Logo.png" alt="VGU" class="hero-uni-logo" />
-        <span class="hero-logo-x">×</span>
-        <img src="/Logo/OVGU_Logo.png" alt="OVGU" class="hero-uni-logo" />
+  <section class="relative min-h-[60vh] md:min-h-[85vh] flex items-center justify-center bg-cover bg-no-repeat bg-[center_30%]" :style="{ backgroundImage: `url(${displayBackgroundImage})` }">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0A162D]/80 via-[#0A162D]/60 to-[#0A162D]/90" />
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-20 flex flex-col items-center text-center">
+      <UBadge
+        v-if="displayBadge"
+        color="neutral"
+        variant="subtle"
+        size="lg"
+        class="bg-white/15 text-white border border-white/30 backdrop-blur-md font-bold px-4 py-1.5 rounded-full uppercase tracking-wider text-xs"
+      >
+        {{ displayBadge }}
+      </UBadge>
+      
+      <h1 v-if="displayHeadline" class="font-extrabold text-white text-3xl sm:text-5xl md:text-6xl tracking-tight leading-tight my-6 max-w-4xl text-balance drop-shadow-md">
+        {{ displayHeadline }}
+      </h1>
+      
+      <div class="flex items-center gap-4 sm:gap-6 my-6 bg-white/95 backdrop-blur-md px-6 py-2.5 rounded-2xl shadow-lg border border-white/40">
+        <NuxtImg src="/Logo/VGU_Logo.png" alt="VGU" class="h-7 sm:h-9 w-auto object-contain" />
+        <span class="text-slate-400 font-bold text-lg select-none">×</span>
+        <NuxtImg src="/Logo/OVGU_Logo.png" alt="OVGU" class="h-7 sm:h-9 w-auto object-contain" />
       </div>
-      <div class="hero-actions animate-fade-in-up delay-300">
-        <NuxtLink :to="displayApplyUrl.startsWith('http') ? displayApplyUrl : localePath(displayApplyUrl)" class="btn btn-primary">{{ t('home.apply_now') }} →</NuxtLink>
-        <NuxtLink :to="localePath(displayScholarshipsUrl)" class="btn btn-outline-white">{{ t('home.view_scholarships') }}</NuxtLink>
+
+      <div class="flex flex-col sm:flex-row items-center gap-4 mt-6">
+        <UButton
+          :to="displayApplyUrl.startsWith('http') ? displayApplyUrl : localePath(displayApplyUrl)"
+          :external="displayApplyUrl.startsWith('http')"
+          :target="displayApplyUrl.startsWith('http') ? '_blank' : undefined"
+          size="xl"
+          color="primary"
+          variant="solid"
+          trailing-icon="i-lucide-arrow-right"
+          class="font-bold shadow-xl hover:-translate-y-0.5 transition-all text-white px-8 py-3.5 rounded-full cursor-pointer"
+        >
+          {{ t('home.apply_now') }}
+        </UButton>
+        <UButton
+          :to="localePath(displayScholarshipsUrl)"
+          size="xl"
+          color="neutral"
+          variant="outline"
+          class="font-bold bg-white/10 hover:bg-white text-white hover:text-[#0F2240] border-2 border-white/40 hover:border-white backdrop-blur-md shadow-md hover:-translate-y-0.5 transition-all px-8 py-3.5 rounded-full cursor-pointer"
+        >
+          {{ t('home.view_scholarships') }}
+        </UButton>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-/* ══ HERO ══ */
-.hero {
-  position: relative;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  background-size: cover;
-  background-position: center 30%;
-  background-repeat: no-repeat;
-}
-@media (min-width: 900px) {
-  .hero {
-    min-height: 88vh;
-  }
-}
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10,22,45,0.72) 0%,
-    rgba(10,22,45,0.55) 50%,
-    rgba(10,22,45,0.80) 100%
-  );
-}
-.hero-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.25rem;
-  padding: 3.5rem 1rem;
-}
-@media (min-width: 900px) {
-  .hero-content {
-    gap: 1.5rem;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-}
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5.5vw, 4.5rem);
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  max-width: 860px;
-  text-shadow: 0 2px 24px rgba(0,0,0,.3);
-}
-/* Glassmorphic logo strip */
-.hero-logos {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: var(--radius-full);
-  padding: 0.5rem 1.5rem;
-  backdrop-filter: blur(8px);
-}
-.hero-uni-logo {
-  height: 36px;
-  object-fit: contain;
-  opacity: 0.95;
-}
-.hero-logo-x { color: rgba(255,255,255,.6); font-size: 1.25rem; font-weight: 300; margin: 0 0.25rem; }
-.hero-actions { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
-</style>

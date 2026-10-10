@@ -5,6 +5,8 @@
     "program_structure": "Chương Trình Học",
     "academic_activities": "Trải Nghiệm Học Thuật",
     "partners_lecturers": "Đối Tác & Giảng Viên",
+    "academic_partners": "Đối Tác Học Thuật",
+    "industrial_partners": "Kết Nối Doanh Nghiệp",
     "tuition_scholarships": "Học Phí & Học Bổng",
     "laboratories_research": "Thiết Bị & Nghiên Cứu",
     "student_life": "Đời Sống Sinh Viên",
@@ -39,7 +41,16 @@
     "next": "Sau",
     "semester_long": "Học kỳ",
     "more_detail": "Thêm chi tiết",
-    "links_label": "Liên Kết Liên Quan"
+    "links_label": "Liên Kết Liên Quan",
+    "tab_curriculum": "Môn học Cốt lõi",
+    "tab_timetable": "Thời khóa biểu Học kỳ",
+    "tab_electives": "Môn học Tự chọn",
+    "tab_thesis": "Đề tài Luận văn Thạc sĩ",
+    "nav_blueprint": "Khung Đào Tạo",
+    "nav_handbook": "Sổ Tay Môn Học",
+    "nav_timetable": "Thời Khóa Biểu",
+    "nav_thesis": "Luận Văn Thạc Sĩ",
+    "nav_germany": "Hành Trình Sang Đức"
   },
   "footer": {
     "subtitle": "Chương trình liên kết giữa Trường Đại học Việt Đức (VGU) và Đại học Otto von Guericke Magdeburg (OVGU).",

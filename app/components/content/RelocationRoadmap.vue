@@ -2,17 +2,18 @@
 import { inject, ref, computed, watch } from 'vue'
 
 // pageData injected (not used directly — all steps data is local & self-contained)
-const { page } = inject('pageData') as any
+const pageData = inject('pageData', null) as any
+const page = pageData?.page
 
 // ── Stage tabs ──────────────────────────────────────────────────────────────
 const stageTabs = [
-  { key: 'stageA', label: 'Stage 1: Prep & Funding', icon: 'i-heroicons-banknotes-20-solid' },
-  { key: 'stageB', label: 'Stage 2: Travel & Bureaucracy', icon: 'i-heroicons-globe-europe-africa-20-solid' },
-  { key: 'stageC', label: 'Stage 3: Physical Enrollment', icon: 'i-heroicons-document-check-20-solid' }
+  { key: 'stageA', label: 'Stage 1: Prep & Funding', icon: 'i-lucide-coins' },
+  { key: 'stageB', label: 'Stage 2: Travel & Bureaucracy', icon: 'i-lucide-globe' },
+  { key: 'stageC', label: 'Stage 3: Physical Enrollment', icon: 'i-lucide-file-check' }
 ]
 
 // UTabs expects items with 'label' property
-const tabItems = stageTabs.map(t => ({ label: t.label, key: t.key }))
+const tabItems = stageTabs.map(t => ({ label: t.label, key: t.key, icon: t.icon }))
 
 const activeStageKey = ref('stageA')
 const selectedStepIndex = ref(0)
@@ -132,7 +133,6 @@ const overallProgress = computed(() =>
 )
 
 // ── SVG node data for each stage ────────────────────────────────────────────
-// (Positions pre-computed to avoid duplicating SVG markup in template)
 type SvgNode = {
   stepNum: number
   stepIndex: number
@@ -196,15 +196,15 @@ const arrowMarkerId = computed(() => {
 </script>
 
 <template>
-  <div class="relocation-roadmap">
+  <div class="w-full flex flex-col gap-8 my-6 font-sans">
 
-    <!-- Progress bar -->
-    <div class="progress-card">
-      <h3 class="progress-title">Overall Relocation &amp; Enrollment Readiness</h3>
-      <UProgress :value="overallProgress" color="primary" indicator class="progress-bar" />
-      <p class="progress-text">
+    <!-- Progress bar card -->
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs text-center max-w-2xl mx-auto w-full">
+      <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3">Overall Relocation &amp; Enrollment Readiness</h3>
+      <UProgress :value="overallProgress" color="primary" indicator class="my-3" />
+      <p class="text-xs sm:text-sm text-slate-600 font-medium mt-3">
         Completed
-        <strong class="progress-done">{{ completedCount }}</strong>
+        <strong class="text-primary-600 font-bold">{{ completedCount }}</strong>
         of
         <strong>{{ totalTasks }}</strong>
         critical preparation tasks.
@@ -212,7 +212,7 @@ const arrowMarkerId = computed(() => {
     </div>
 
     <!-- Stage Tabs -->
-    <div class="tabs-wrapper">
+    <div class="max-w-2xl mx-auto w-full">
       <UTabs
         v-model="activeStageKey"
         :items="tabItems"
@@ -221,14 +221,14 @@ const arrowMarkerId = computed(() => {
     </div>
 
     <!-- Main interactive grid -->
-    <div class="roadmap-grid">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- ── Desktop: SVG Diagram (left) ── -->
-      <div class="diagram-panel desktop-only">
-        <h4 class="diagram-hint">Click steps to inspect details &amp; checklists</h4>
+      <!-- Desktop: SVG Diagram (left) -->
+      <div class="hidden lg:block lg:col-span-7 bg-white border border-slate-200 rounded-3xl p-6 shadow-xs">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 text-center">Click steps to inspect details &amp; checklists</h4>
 
-        <div class="svg-container">
-          <svg viewBox="0 0 500 550" class="roadmap-svg" role="img" aria-label="Roadmap diagram">
+        <div class="w-full overflow-hidden flex justify-center">
+          <svg viewBox="0 0 500 550" class="w-full max-w-[460px] h-auto" role="img" aria-label="Roadmap diagram">
             <defs>
               <marker
                 :id="arrowMarkerId"
@@ -237,7 +237,7 @@ const arrowMarkerId = computed(() => {
                 markerWidth="6" markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--color-primary)" />
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#1E3A5F" />
               </marker>
               <filter :id="'hd-' + activeStageKey" x="-10%" y="-10%" width="120%" height="120%">
                 <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
@@ -251,7 +251,7 @@ const arrowMarkerId = computed(() => {
               :key="'arrow-' + ai"
               :d="arrow.d"
               fill="none"
-              stroke="var(--color-primary)"
+              stroke="#1E3A5F"
               stroke-width="3"
               stroke-dasharray="6,4"
               :marker-end="'url(#' + arrowMarkerId + ')'"
@@ -269,13 +269,13 @@ const arrowMarkerId = computed(() => {
                 :x="node.x" :y="node.y" :width="node.w" :height="node.h"
                 rx="12"
                 fill="#ffffff"
-                :stroke="selectedStepIndex === node.stepIndex ? 'var(--color-accent)' : 'var(--color-primary)'"
+                :stroke="selectedStepIndex === node.stepIndex ? '#E87722' : '#1E3A5F'"
                 stroke-width="3"
                 :filter="'url(#hd-' + activeStageKey + ')'"
               />
               <circle
                 :cx="node.cx" :cy="node.cy" :r="node.r"
-                :fill="selectedStepIndex === node.stepIndex ? 'var(--color-accent)' : 'var(--color-primary)'"
+                :fill="selectedStepIndex === node.stepIndex ? '#E87722' : '#1E3A5F'"
                 :filter="'url(#hd-' + activeStageKey + ')'"
               />
               <text
@@ -287,13 +287,13 @@ const arrowMarkerId = computed(() => {
               >{{ node.stepNum }}</text>
               <text
                 :x="node.cx + node.r + 10" :y="node.cy - 6"
-                :fill="selectedStepIndex === node.stepIndex ? 'var(--color-accent)' : 'var(--color-primary-dark)'"
+                :fill="selectedStepIndex === node.stepIndex ? '#E87722' : '#0F2240'"
                 font-size="13"
                 font-weight="bold"
               >{{ node.label }}</text>
               <text
                 :x="node.cx + node.r + 10" :y="node.cy + 12"
-                fill="var(--color-gray-500)"
+                fill="#64748B"
                 font-size="10.5"
               >{{ node.sub }}</text>
             </g>
@@ -301,26 +301,26 @@ const arrowMarkerId = computed(() => {
         </div>
       </div>
 
-      <!-- ── Desktop: Detail panel (right) ── -->
-      <div class="detail-panel desktop-only">
-        <div v-if="activeStep" class="detail-inner fade-in" :key="activeStep.id">
-          <span class="detail-label">Detailed Instructions</span>
-          <h3 class="detail-title">{{ activeStep.title }}</h3>
+      <!-- Desktop: Detail panel (right) -->
+      <div class="hidden lg:block lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 shadow-xs sticky top-24">
+        <div v-if="activeStep" class="flex flex-col gap-4" :key="activeStep.id">
+          <span class="text-xs font-bold uppercase tracking-wider text-primary-600">Detailed Instructions</span>
+          <h3 class="text-lg font-extrabold text-slate-900 leading-tight">{{ activeStep.title }}</h3>
 
-          <div class="detail-scroll-body">
-            <p class="detail-desc">{{ activeStep.desc }}</p>
+          <div class="flex flex-col gap-4">
+            <p class="text-sm text-slate-600 leading-relaxed">{{ activeStep.desc }}</p>
 
             <!-- Checklist checkbox -->
-            <div class="checklist-box">
-              <h4 class="checklist-heading">Required Action Check</h4>
-              <label class="checklist-label">
-                <UCheckbox v-model="userChecklist[activeStep.id]" />
-                <span class="checklist-text">{{ activeStep.todoText }}</span>
+            <div class="p-4 bg-orange-50/50 rounded-2xl border border-orange-100">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-orange-700 mb-2">Required Action Check</h4>
+              <label class="flex items-start gap-2.5 cursor-pointer">
+                <UCheckbox v-model="userChecklist[activeStep.id]" class="mt-0.5" />
+                <span class="text-xs font-semibold text-slate-700 leading-snug">{{ activeStep.todoText }}</span>
               </label>
             </div>
 
             <!-- External link -->
-            <div v-if="activeStep.link && activeStep.link !== '#'" class="link-btn-wrap">
+            <div v-if="activeStep.link && activeStep.link !== '#'">
               <UButton
                 :to="activeStep.link"
                 target="_blank"
@@ -329,8 +329,8 @@ const arrowMarkerId = computed(() => {
                 variant="solid"
                 size="md"
                 block
-                icon="i-heroicons-arrow-top-right-on-square-20-solid"
-                trailing
+                trailing-icon="i-lucide-external-link"
+                class="font-bold rounded-xl"
               >
                 Visit Official Portal / Resource
               </UButton>
@@ -339,37 +339,43 @@ const arrowMarkerId = computed(() => {
         </div>
       </div>
 
-      <!-- ── Mobile: Accordion list ── -->
-      <div class="mobile-only mobile-accordion-wrap">
-        <div class="mobile-accordion-card">
-          <h3 class="mobile-accordion-title">Relocation Roadmap Timeline</h3>
-          <div class="accordion-list">
+      <!-- Mobile: Accordion list -->
+      <div class="lg:hidden w-full">
+        <div class="bg-white border border-slate-200 rounded-3xl p-5 shadow-xs">
+          <h3 class="text-base font-extrabold text-slate-900 mb-4">Relocation Roadmap Timeline</h3>
+          <div class="flex flex-col gap-3">
             <details
               v-for="(step, idx) in currentSteps"
               :key="step.id"
-              class="accordion-item"
+              class="group rounded-2xl border border-slate-200 overflow-hidden bg-slate-50/50 p-4 open:bg-white open:shadow-xs transition-all"
             >
-              <summary class="accordion-summary">
-                <span class="accordion-num">{{ idx + 1 }}</span>
-                {{ step.title }}
-                <span v-if="userChecklist[step.id]" class="accordion-done">✓</span>
+              <summary class="flex items-center gap-3 font-bold text-slate-900 cursor-pointer text-sm list-none select-none">
+                <span class="size-6 rounded-full bg-orange-100 text-orange-700 font-extrabold text-xs flex items-center justify-center shrink-0">
+                  {{ idx + 1 }}
+                </span>
+                <span class="flex-1">{{ step.title }}</span>
+                <span v-if="userChecklist[step.id]" class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full shrink-0">✓ Ready</span>
               </summary>
-              <div class="accordion-body">
-                <p class="accordion-desc">{{ step.desc }}</p>
-                <div class="accordion-checklist">
-                  <label class="accordion-check-label">
-                    <input type="checkbox" v-model="userChecklist[step.id]" class="accent-primary" />
-                    <span>Ready: {{ step.todoText }}</span>
-                  </label>
-                </div>
-                <a
+              <div class="pt-4 border-t border-slate-100 mt-3 flex flex-col gap-3 text-xs text-slate-600">
+                <p class="leading-relaxed">{{ step.desc }}</p>
+                <label class="flex items-start gap-2 p-3 bg-orange-50/60 rounded-xl border border-orange-100 cursor-pointer">
+                  <UCheckbox v-model="userChecklist[step.id]" class="mt-0.5" />
+                  <span class="font-semibold text-slate-700">Ready: {{ step.todoText }}</span>
+                </label>
+                <UButton
                   v-if="step.link && step.link !== '#'"
                   :href="step.link"
                   target="_blank"
-                  class="accordion-link-btn"
+                  external
+                  rel="noopener"
+                  trailing-icon="i-lucide-arrow-right"
+                  color="primary"
+                  variant="subtle"
+                  size="xs"
+                  class="font-bold self-start rounded-lg"
                 >
-                  Visit Resource →
-                </a>
+                  Visit Resource
+                </UButton>
               </div>
             </details>
           </div>
@@ -379,252 +385,3 @@ const arrowMarkerId = computed(() => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.relocation-roadmap {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* ── Progress card ──────────────────────── */
-.progress-card {
-  background: #fff;
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  border-radius: var(--radius-xl, 16px);
-  padding: 1.75rem 2rem;
-  box-shadow: var(--shadow-sm);
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
-  width: 100%;
-}
-.progress-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-gray-900, #111827);
-  margin-bottom: 0.75rem;
-}
-.progress-bar { margin: 0.75rem 0; }
-.progress-text {
-  font-size: 0.9rem;
-  color: var(--color-gray-600, #4b5563);
-  font-weight: 500;
-}
-.progress-done { color: var(--color-primary, #1e3a5f); font-weight: 800; }
-
-/* ── Tabs ───────────────────────────────── */
-.tabs-wrapper {
-  max-width: 700px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-/* ── Main grid ──────────────────────────── */
-.roadmap-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.75rem;
-}
-
-@media (min-width: 900px) {
-  .roadmap-grid {
-    grid-template-columns: 1.25fr 1fr;
-    align-items: start;
-  }
-  .mobile-only { display: none !important; }
-  .desktop-only { display: block; }
-}
-
-.desktop-only { display: none; }
-.mobile-only { display: block; }
-
-/* ── Diagram panel ──────────────────────── */
-.diagram-panel {
-  background: #fff;
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  border-radius: var(--radius-2xl, 20px);
-  padding: 1.75rem;
-  box-shadow: var(--shadow-md);
-}
-.diagram-hint {
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--color-primary, #1e3a5f);
-  margin-bottom: 1.25rem;
-}
-.svg-container {
-  display: flex;
-  justify-content: center;
-}
-.roadmap-svg {
-  max-width: 460px;
-  width: 100%;
-  height: auto;
-}
-
-/* ── Detail panel ───────────────────────── */
-.detail-panel {
-  background: #fff;
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  border-radius: var(--radius-2xl, 20px);
-  padding: 2rem 2.25rem;
-  box-shadow: var(--shadow-md);
-  position: sticky;
-  top: 90px;
-}
-.detail-inner { display: flex; flex-direction: column; gap: 1rem; }
-.detail-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-accent, #e87722);
-  display: block;
-}
-.detail-title {
-  font-size: 1.45rem;
-  font-weight: 800;
-  color: var(--color-primary-dark, #0f2240);
-  line-height: 1.25;
-}
-.detail-scroll-body {
-  max-height: 400px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding-right: 0.25rem;
-}
-.detail-desc {
-  font-size: 0.92rem;
-  color: var(--color-gray-700, #374151);
-  line-height: 1.7;
-}
-.checklist-box {
-  background: var(--color-gray-50, #f9fafb);
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  border-radius: var(--radius-lg, 12px);
-  padding: 1.1rem 1.25rem;
-}
-.checklist-heading {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-primary, #1e3a5f);
-  margin-bottom: 0.65rem;
-}
-.checklist-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  cursor: pointer;
-  user-select: none;
-}
-.checklist-text {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--color-gray-800, #1f2937);
-  line-height: 1.45;
-}
-.link-btn-wrap {}
-
-/* ── Mobile accordion ───────────────────── */
-.mobile-accordion-wrap {}
-.mobile-accordion-card {
-  background: #fff;
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  border-radius: var(--radius-xl, 16px);
-  padding: 1.25rem;
-  box-shadow: var(--shadow-md);
-}
-.mobile-accordion-title {
-  text-align: center;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--color-primary, #1e3a5f);
-  margin-bottom: 1rem;
-}
-.accordion-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.accordion-item {
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  border-radius: var(--radius-md, 8px);
-  overflow: hidden;
-  background: #fff;
-}
-.accordion-summary {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1rem;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--color-primary-dark, #0f2240);
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-.accordion-summary::-webkit-details-marker { display: none; }
-.accordion-num {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--color-primary, #1e3a5f);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.accordion-done { margin-left: auto; color: var(--color-success-main); font-weight: 800; font-size: 0.85rem; }
-.accordion-body {
-  padding: 0 1rem 1rem;
-  border-top: 1px solid var(--color-gray-100, #f3f4f6);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.accordion-desc { font-size: 0.85rem; color: var(--color-gray-600, #4b5563); line-height: 1.6; }
-.accordion-checklist {
-  background: var(--color-gray-50, #f9fafb);
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  border-radius: var(--radius-md, 8px);
-  padding: 0.75rem;
-}
-.accordion-check-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-gray-700, #374151);
-  cursor: pointer;
-  user-select: none;
-}
-.accordion-link-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background: var(--color-primary, #1e3a5f);
-  color: #fff;
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-md, 8px);
-  text-decoration: none;
-  transition: background 150ms;
-}
-.accordion-link-btn:hover { background: var(--color-primary-dark, #0f2240); }
-
-/* Fade animation */
-.fade-in { animation: fadeIn 280ms ease forwards; }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-</style>

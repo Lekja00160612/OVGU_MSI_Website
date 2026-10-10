@@ -113,13 +113,18 @@ export default defineNuxtConfig({
       }
     },
   },
+  $production: {
+    nitro: {
+      preset: 'cloudflare_pages',
+    }
+  },
   nitro: {
-    preset: 'cloudflare_pages',
     prerender: {
       crawlLinks: true,
       routes: ['/', '/vi'],
       autoSubfolderIndex: false,
     },
+  },
     // PLEASE CHANGE CLOUDFLARE BUILD TO: npx nuxi generate
     // 
     // cloudflare: {
@@ -160,5 +165,4 @@ export default defineNuxtConfig({
     //     }
     //   }
     // }
-  },
 })

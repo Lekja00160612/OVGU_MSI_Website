@@ -1,3 +1,8 @@
+<!--
+  Component: InteractivePathway
+  Description: Interactive SVG academic pathway explorer with step tabs, animated connector lines, and detail cards.
+  Nuxt UI Primitives: UButton, UBadge.
+-->
 <script setup lang="ts">
 import { ref, computed, watch, useId } from 'vue'
 
@@ -209,47 +214,47 @@ const layoutArrows = computed(() => {
 
   return arrows
 })
-
 </script>
 
 <template>
-  <div class="interactive-pathway-widget" v-if="nodes && nodes.length > 0">
+  <div class="w-full flex flex-col gap-6 my-6 font-sans" v-if="nodes && nodes.length > 0">
     <!-- Pathway Guide Header -->
-    <div class="guide-header-card">
-      <h3 class="guide-title">
+    <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs text-center max-w-xl mx-auto w-full flex flex-col items-center gap-1">
+      <h3 class="text-lg font-extrabold text-slate-900 m-0">
         <template v-if="locale === 'vi'">
-          <span class="guide-accent-text">{{ currentNodes.length }} bước</span> trên hành trình của bạn
+          <span class="text-primary-600 font-extrabold">{{ currentNodes.length }} bước</span> trên hành trình của bạn
         </template>
         <template v-else>
-          <span class="guide-accent-text">{{ currentNodes.length }} steps</span> on your journey
+          <span class="text-primary-600 font-extrabold">{{ currentNodes.length }} steps</span> on your journey
         </template>
       </h3>
-      <p class="guide-subtitle">
+      <p class="text-sm text-slate-600 font-medium leading-relaxed m-0">
         {{ locale === 'vi' ? 'Theo dõi sơ đồ lộ trình dưới đây để chuẩn bị các thủ tục cần thiết.' : 'Follow the roadmap below to understand the process and prepare your steps.' }}
       </p>
     </div>
 
     <!-- Custom Tab Switcher Grid -->
-    <div class="tabs-grid" :style="{ '--tabs-count': computedTabs.length }">
-      <button
+    <div class="flex flex-wrap justify-center gap-2 mb-2">
+      <UButton
         v-for="tab in computedTabs"
         :key="tab.id"
-        type="button"
-        class="tab-btn"
-        :class="{ 'tab-btn--active': activeTabId === tab.id }"
+        :variant="activeTabId === tab.id ? 'solid' : 'outline'"
+        color="primary"
+        size="sm"
+        class="rounded-full font-semibold shadow-xs"
+        icon="i-lucide-clipboard-list"
         @click="activeTabId = tab.id"
       >
-        <span class="tab-btn-icon">📋</span>
-        <span class="tab-btn-label">{{ tab.label }}</span>
-      </button>
+        {{ tab.label }}
+      </UButton>
     </div>
 
     <!-- Main Workspace Layout -->
-    <div class="workspace-layout">
+    <div class="w-full flex flex-col gap-6">
       <!-- 1. Visual SVG Pathway (Horizontal & Scrollable) -->
-      <div class="pathway-visualizer">
-        <div class="svg-scroll-container">
-          <svg :viewBox="`0 0 ${svgWidth} ${svgHeight}`" class="excalidraw-svg" :style="{ width: svgWidth + 'px', height: svgHeight + 'px' }">
+      <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-inner overflow-x-auto">
+        <div class="flex justify-center min-w-fit mx-auto">
+          <svg :viewBox="`0 0 ${svgWidth} ${svgHeight}`" :style="{ width: svgWidth + 'px', height: svgHeight + 'px' }">
             <defs>
               <marker
                 id="marker-arrow"
@@ -258,7 +263,7 @@ const layoutArrows = computed(() => {
                 markerWidth="6" markerHeight="6"
                 orient="auto-start-reverse"
               >
-                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--color-primary)" />
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1E3A5F" />
               </marker>
               <!-- Rough hand-drawn effect overlay filter -->
               <filter :id="componentId" x="-10%" y="-10%" width="120%" height="120%">
@@ -284,18 +289,16 @@ const layoutArrows = computed(() => {
             <g
               v-for="node in layoutNodes"
               :key="node.id"
-              class="svg-node-group"
-              style="cursor: pointer;"
+              class="cursor-pointer transition-transform hover:scale-105"
               @click="selectedNodeIndex = node.index"
             >
               <!-- Node Circle -->
               <circle
                 :cx="node.cx" :cy="node.cy" :r="node.r"
-                :fill="selectedNodeIndex === node.index ? 'var(--color-accent)' : (node.color || 'var(--color-primary)')"
-                :stroke="selectedNodeIndex === node.index ? 'var(--color-accent-dark, #C95E0A)' : 'transparent'"
+                :fill="selectedNodeIndex === node.index ? '#E87722' : (node.color || '#1E3A5F')"
+                :stroke="selectedNodeIndex === node.index ? '#C95E0A' : 'transparent'"
                 stroke-width="3.5"
                 :filter="componentId ? `url(#${componentId})` : 'none'"
-                class="node-circle-elem"
               />
               
               <!-- Number Index -->
@@ -310,21 +313,19 @@ const layoutArrows = computed(() => {
               <!-- Node Labels (centered on top of the circle) -->
               <text
                 :x="node.cx" :y="node.cy - node.r - 20"
-                :fill="selectedNodeIndex === node.index ? 'var(--color-accent-dark)' : 'var(--color-primary-dark)'"
+                :fill="selectedNodeIndex === node.index ? '#C95E0A' : '#0F2240'"
                 font-size="12.5"
                 font-weight="800"
                 text-anchor="middle"
-                class="node-label-title"
               >{{ node.label }}</text>
               
               <text
                 :x="node.cx" :y="node.cy - node.r - 6"
-                fill="var(--color-gray-500)"
+                fill="#64748B"
                 font-size="10"
                 font-weight="600"
                 text-anchor="middle"
                 v-if="node.sub"
-                class="node-label-sub"
               >{{ node.sub }}</text>
             </g>
           </svg>
@@ -332,30 +333,30 @@ const layoutArrows = computed(() => {
       </div>
 
       <!-- 2. Detail View Panel (Fixed Height & Scrollable Vertically) -->
-      <div class="detail-panel" v-if="activeNode">
-        <div class="detail-panel-inner fade-in" :key="activeNode.id">
-          <div class="detail-header">
-            <span class="detail-stage-tag">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col max-w-2xl mx-auto w-full" v-if="activeNode">
+        <div class="flex flex-col gap-3" :key="activeNode.id">
+          <div>
+            <UBadge color="primary" variant="subtle" size="sm" class="mb-2">
               {{ locale === 'vi' ? `Bước ${selectedNodeIndex + 1} của ${currentNodes.length}` : `Step ${selectedNodeIndex + 1} of ${currentNodes.length}` }}
-            </span>
-            <h3 class="detail-node-title">{{ activeNode.label }}</h3>
-            <span class="detail-node-sub" v-if="activeNode.sub">{{ activeNode.sub }}</span>
+            </UBadge>
+            <h3 class="text-xl font-extrabold text-slate-900 mb-1">{{ activeNode.label }}</h3>
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider" v-if="activeNode.sub">{{ activeNode.sub }}</span>
           </div>
 
-          <div class="detail-scrollable-area">
+          <div class="flex flex-col gap-4 text-sm text-slate-700 leading-relaxed">
             <!-- Dynamic Parsed Markdown Content -->
-            <div class="parsed-markdown-content" v-html="parseMarkdown(activeNode.desc)"></div>
+            <div class="prose max-w-none text-slate-700 text-sm" v-html="parseMarkdown(activeNode.desc)"></div>
 
             <!-- Static Guidance Box -->
-            <div class="guidance-box">
-              <h4 class="guidance-title">
-                {{ locale === 'vi' ? '💡 Hướng dẫn / Chuẩn bị:' : '💡 Guidance / Preparation:' }}
+            <div class="p-4 rounded-xl bg-orange-50/70 border border-orange-200/60">
+              <h4 class="text-xs font-bold text-orange-900 uppercase tracking-wider mb-1">
+                {{ locale === 'vi' ? 'Hướng dẫn / Chuẩn bị:' : 'Guidance / Preparation:' }}
               </h4>
-              <p class="guidance-text">{{ activeNode.todoText }}</p>
+              <p class="text-sm font-medium text-orange-950 m-0">{{ activeNode.todoText }}</p>
             </div>
 
             <!-- Official Website Button Link -->
-            <div class="link-btn-wrapper" v-if="activeNode.link && activeNode.link !== '#'">
+            <div v-if="activeNode.link && activeNode.link !== '#'" class="mt-2">
               <UButton
                 :to="activeNode.link"
                 target="_blank"
@@ -364,8 +365,8 @@ const layoutArrows = computed(() => {
                 variant="solid"
                 size="md"
                 block
-                icon="i-heroicons-arrow-top-right-on-square-20-solid"
-                trailing
+                trailing-icon="i-lucide-external-link"
+                class="font-bold rounded-xl justify-center shadow-xs"
               >
                 {{ locale === 'vi' ? 'Đi đến Cổng Thông Tin Chính Thức' : 'Visit Official Portal / Resource' }}
               </UButton>
@@ -375,425 +376,30 @@ const layoutArrows = computed(() => {
       </div>
 
       <!-- 3. Navigation Buttons for easy progression -->
-      <div class="navigation-controls">
-        <button
-          type="button"
-          class="nav-control-btn"
+      <div class="flex justify-between items-center gap-3 max-w-2xl mx-auto w-full">
+        <UButton
+          color="neutral"
+          variant="outline"
+          size="sm"
+          icon="i-lucide-chevron-left"
+          class="font-semibold rounded-xl"
           :disabled="selectedNodeIndex === 0"
           @click="prevNode"
         >
-          &larr; {{ locale === 'vi' ? 'Trước' : 'Prev' }}
-        </button>
-        <button
-          type="button"
-          class="nav-control-btn nav-control-btn--primary"
+          {{ locale === 'vi' ? 'Trước' : 'Prev' }}
+        </UButton>
+        <UButton
+          color="primary"
+          variant="solid"
+          size="sm"
+          trailing-icon="i-lucide-chevron-right"
+          class="font-semibold rounded-xl shadow-xs"
           :disabled="selectedNodeIndex === currentNodes.length - 1"
           @click="nextNode"
         >
-          {{ locale === 'vi' ? 'Tiếp theo' : 'Next' }} &rarr;
-        </button>
+          {{ locale === 'vi' ? 'Tiếp theo' : 'Next' }}
+        </UButton>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.interactive-pathway-widget {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-  font-family: var(--font-sans);
-}
-
-:deep(button),
-:deep(a),
-:deep(text),
-:deep(.u-button),
-:deep(.tab-btn-label),
-:deep(.nav-control-btn) {
-  font-family: var(--font-sans) !important;
-}
-
-/* Guide Header Card (More Compact, No Icon) */
-.guide-header-card {
-  background: #ffffff;
-  border: 1px solid var(--color-gray-200, #e9ecef);
-  border-radius: var(--radius-lg, 16px);
-  padding: 1rem 1.5rem;
-  box-shadow: var(--shadow-sm);
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.guide-title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--color-primary-dark, #0F2240);
-  margin: 0;
-}
-
-.guide-subtitle {
-  font-size: 0.88rem;
-  color: var(--color-gray-600, #6c757d);
-  font-weight: 500;
-  line-height: 1.4;
-  margin: 0;
-}
-
-.guide-accent-text {
-  color: var(--color-accent, #E87722);
-  font-weight: 800;
-}
-
-/* Custom Tab Switcher */
-.tabs-grid {
-  display: grid;
-  grid-template-columns: repeat(var(--tabs-count, 2), 1fr);
-  gap: 1rem;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.tab-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1rem;
-  background: #ffffff;
-  border: 2px solid var(--color-gray-200, #e9ecef);
-  border-radius: var(--radius-md, 12px);
-  cursor: pointer;
-  transition: all var(--duration-base) var(--ease-out);
-  box-shadow: var(--shadow-xs);
-  text-align: center;
-}
-
-.tab-btn:hover {
-  border-color: var(--color-primary-light, #2E5280);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-}
-
-.tab-btn--active {
-  border-color: var(--color-accent, #E87722);
-  background: var(--color-accent-50, #FFF4EB);
-  box-shadow: var(--shadow-accent);
-}
-
-.tab-btn-icon {
-  font-size: 1.1rem;
-}
-
-.tab-btn-label {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: var(--color-primary-dark, #0F2240);
-}
-
-.tab-btn--active .tab-btn-label {
-  color: var(--color-accent-dark, #C95E0A);
-}
-
-/* Main Workspace Layout */
-.workspace-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-/* Visualizer (SVG scrollable) */
-.pathway-visualizer {
-  background: #ffffff;
-  border: 1px solid var(--color-gray-200, #e9ecef);
-  border-radius: var(--radius-xl, 16px);
-  padding: 1.25rem 1.5rem;
-  box-shadow: var(--shadow-sm);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.visualizer-header {
-  text-align: center;
-}
-
-.visualizer-hint {
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: var(--color-primary-light, #2E5280);
-  background: var(--color-primary-50, #EEF3FB);
-  padding: 0.3rem 0.85rem;
-  border-radius: var(--radius-full);
-}
-
-.svg-scroll-container {
-  width: 100%;
-  overflow-x: auto;
-  padding: 0.5rem 0;
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  justify-content: flex-start;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-gray-300, #cbd5e1) transparent;
-}
-
-.svg-scroll-container::-webkit-scrollbar {
-  height: 6px;
-}
-
-.svg-scroll-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.svg-scroll-container::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-300, #cbd5e1);
-  border-radius: 3px;
-}
-
-.excalidraw-svg {
-  flex-shrink: 0;
-}
-
-.node-circle-elem {
-  transition: all var(--duration-fast) ease;
-}
-
-.svg-node-group:hover .node-circle-elem {
-  stroke-width: 4.5px;
-  r: 30px;
-}
-
-.node-label-title, .node-label-sub {
-  transition: fill var(--duration-fast) ease;
-}
-
-.svg-node-group:hover .node-label-title {
-  fill: var(--color-accent, #E87722);
-}
-
-/* Detail Panel (Fixed Height & Scrollable Vertically) */
-.detail-panel {
-  background: #ffffff;
-  border: 1px solid var(--color-gray-200, #e9ecef);
-  border-radius: var(--radius-xl, 16px);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  height: 480px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.detail-panel-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.detail-header {
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--color-gray-100, #f1f3f5);
-  padding-bottom: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.detail-stage-tag {
-  font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-accent, #E87722);
-}
-
-.detail-node-title {
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--color-primary-dark, #0F2240);
-  line-height: 1.25;
-  margin: 0.15rem 0 0 0;
-}
-
-.detail-node-sub {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-gray-500);
-  display: block;
-  margin-top: 0.15rem;
-}
-
-.detail-scrollable-area {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-gray-300, #cbd5e1) transparent;
-}
-
-.detail-scrollable-area::-webkit-scrollbar {
-  width: 5px;
-}
-
-.detail-scrollable-area::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.detail-scrollable-area::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-300, #cbd5e1);
-  border-radius: 3px;
-}
-
-/* Compiled Markdown layout styles */
-.parsed-markdown-content :deep(.md-para) {
-  font-size: 0.92rem;
-  color: var(--color-gray-700);
-  line-height: 1.6;
-  margin-bottom: 0.75rem;
-  font-weight: 500;
-}
-
-.parsed-markdown-content :deep(.md-para:last-child) {
-  margin-bottom: 0;
-}
-
-.parsed-markdown-content :deep(.md-list) {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0.75rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.parsed-markdown-content :deep(.md-list li) {
-  padding-left: 1.25rem;
-  position: relative;
-  font-size: 0.88rem;
-  color: var(--color-gray-700);
-  font-weight: 500;
-}
-
-.parsed-markdown-content :deep(.md-list li::before) {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: var(--color-accent);
-  font-weight: 800;
-}
-
-.parsed-markdown-content :deep(.md-link) {
-  color: var(--color-accent);
-  text-decoration: none;
-  font-weight: 700;
-  border-bottom: 1.5px dashed var(--color-accent);
-  transition: all var(--duration-fast);
-}
-
-.parsed-markdown-content :deep(.md-link:hover) {
-  color: var(--color-accent-dark);
-  border-bottom-style: solid;
-}
-
-/* Guidance box (replaces progress checklist) */
-.guidance-box {
-  background: var(--color-gray-50, #f8f9fa);
-  border: 1px solid var(--color-gray-200, #e9ecef);
-  border-radius: var(--radius-md, 10px);
-  padding: 1rem;
-}
-
-.guidance-title {
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-primary-light, #2E5280);
-  margin: 0 0 0.5rem 0;
-}
-
-.guidance-text {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--color-gray-800, #343a40);
-  line-height: 1.4;
-  margin: 0;
-}
-
-.link-btn-wrapper {
-  width: 100%;
-}
-
-/* Navigation control buttons */
-.navigation-controls {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  width: 100%;
-}
-
-.nav-control-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 800;
-  border-radius: var(--radius-md, 10px);
-  background: #ffffff;
-  border: 1.5px solid var(--color-gray-200, #e9ecef);
-  color: var(--color-gray-700);
-  cursor: pointer;
-  transition: all var(--duration-fast);
-}
-
-.nav-control-btn:hover:not(:disabled) {
-  border-color: var(--color-gray-400);
-  background: var(--color-gray-50);
-}
-
-.nav-control-btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.nav-control-btn--primary {
-  background: var(--color-accent-50, #FFF4EB);
-  border-color: rgba(232, 119, 34, 0.2);
-  color: var(--color-accent-dark, #C95E0A);
-}
-
-.nav-control-btn--primary:hover:not(:disabled) {
-  background: var(--color-accent-100, #FFE5D1);
-  border-color: var(--color-accent);
-}
-
-/* Fade animation */
-.fade-in {
-  animation: fadeIn 280ms ease forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>

@@ -1,3 +1,27 @@
+<!--
+  =============================================================================
+  Component: ProseA.vue (Nuxt Content Prose Link Override)
+  =============================================================================
+  WHAT THIS COMPONENT IS:
+    This is an automatic Nuxt Content prose override for all standard markdown
+    hyperlinks written in the format `[link text](url)`.
+  
+  WHY IT EXISTS (CRITICAL ARCHITECTURAL PURPOSE):
+    By default, @nuxt/content renders markdown links as internal <NuxtLink>.
+    However, when an author links to static files like `/Documents/MODULE CATALOGUE MSI.pdf`,
+    Vue Router attempts to resolve it as a client-side JavaScript route. This
+    causes route resolution failures or breaks native file downloads!
+    
+    ProseA intercepts all markdown links:
+      1. Detects static documents (.pdf, .pptx, .xlsx, .docx, /Documents/, etc.)
+      2. Detects external URLs (http://, https://, mailto:, tel:)
+      3. Automatically attaches `:external="true"`, `target="_blank"`, and
+         `rel="noopener noreferrer"`.
+         
+    This guarantees that clicking any document in markdown initiates a clean,
+    native browser file download in a new tab without breaking single-page routing.
+  =============================================================================
+-->
 <script setup lang="ts">
 import { computed } from 'vue'
 

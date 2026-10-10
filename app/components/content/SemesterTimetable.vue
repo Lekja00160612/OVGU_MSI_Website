@@ -1,129 +1,232 @@
+<!--
+  Component: SemesterTimetable
+  Description: Interactive block-modular semester schedule and timetable explorer with cohort filters, monthly calendar grid, and detailed course schedule table.
+  Data Sources: Local cohort definitions, timetable JSON/computed module data.
+  Nuxt UI Primitives: UButton, UBadge.
+-->
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import defaultPlanData from '~/data/semesterPlan.json'
-
-const props = withDefaults(defineProps<{
-  initialIntake?: string
-}>(), {
-  initialIntake: 'intake-3-2026'
-})
 
 const { locale } = useI18n()
 const isVi = computed(() => locale.value === 'vi')
 
-// Query all official modules dynamically from Nuxt Content collection 'modules'
-const { data: contentModules } = await useAsyncData('timetable-content-modules', () =>
-  queryCollection('modules').all()
-)
-
-function findContentModule(slug: string) {
-  if (!contentModules.value) return null
-  return contentModules.value.find((m: any) => {
-    const stem = m.stem || m.path || ''
-    return stem.endsWith(`/${slug}`) || stem.endsWith(slug) || stem === slug
-  })
+// ── Cohort Intakes ───────────────────────────────────────────────────────────
+interface Intake {
+  id: string
+  name: string
+  intake_year: number
+  semester_number: number
 }
 
-function formatDisplayDate(start: string, end: string): string {
-  if (!start || !end) return ''
-  const [sy, sm, sd] = start.split('-')
-  const [ey, em, ed] = end.split('-')
-  return `${sd}/${sm}/${sy} – ${ed}/${em}/${ey}`
+const intakes: Intake[] = [
+  { id: 'intake-2026', name: 'Intake 2026', intake_year: 2026, semester_number: 1 },
+  { id: 'intake-2025', name: 'Intake 2025', intake_year: 2025, semester_number: 3 },
+]
+
+const selectedIntakeId = ref<string>('intake-2026')
+const activeModuleId = ref<string | null>(null)
+
+// ── Course Module Schedule Data ──────────────────────────────────────────────
+interface ScheduleModule {
+  id: string
+  intake_id: string
+  slug: string
+  title_en: string
+  title_vi: string
+  start_date: string // YYYY-MM-DD
+  end_date: string   // YYYY-MM-DD
+  display_date: string
+  is_semester_long?: boolean
+  lecturers: string[]
+  notes?: string
 }
 
-function slugToTitle(slug: string): string {
-  return slug
-    .split('-')
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ')
+const allScheduleModules: ScheduleModule[] = [
+  // Intake 2026 (Winter Semester 2026/2027 — Semester 1)
+  {
+    id: 'i26-continuum-mech',
+    intake_id: 'intake-2026',
+    slug: 'continuum-mechanics',
+    title_en: 'Continuum Mechanics',
+    title_vi: 'Cơ Học Môi Trường Liên Tục',
+    start_date: '2026-09-07',
+    end_date: '2026-09-19',
+    display_date: '07.09.2026 – 19.09.2026',
+    lecturers: ['Prof. Dr.-Ing. Manja Krüger', 'Dr. Nguyen Van A'],
+    notes: 'Shared lecture block with Intake 2025'
+  },
+  {
+    id: 'i26-mat-model-sim',
+    intake_id: 'intake-2026',
+    slug: 'material-modelling-and-simulation',
+    title_en: 'Material Modelling and Simulation',
+    title_vi: 'Mô Hình Hóa & Mô Phỏng Vật Liệu',
+    start_date: '2026-09-28',
+    end_date: '2026-10-10',
+    display_date: '28.09.2026 – 10.10.2026',
+    lecturers: ['Prof. Dr. Thorsten Halle', 'VGU Lab Team']
+  },
+  {
+    id: 'i26-mat-char',
+    intake_id: 'intake-2026',
+    slug: 'materials-characterization',
+    title_en: 'Materials Characterization',
+    title_vi: 'Đặc Tính Hóa Vật Liệu',
+    start_date: '2026-10-19',
+    end_date: '2026-10-31',
+    display_date: '19.10.2026 – 31.10.2026',
+    lecturers: ['Prof. Dr. Michael Scheffler', 'Dr. Le Thi B']
+  },
+  {
+    id: 'i26-solid-state-phys',
+    intake_id: 'intake-2026',
+    slug: 'solid-state-physics',
+    title_en: 'Solid State Physics',
+    title_vi: 'Vật Lý Chất Rắn',
+    start_date: '2026-11-09',
+    end_date: '2026-11-21',
+    display_date: '09.11.2026 – 21.11.2026',
+    lecturers: ['Prof. Dr. Jan Wiersig', 'OVGU Guest Lecturer']
+  },
+  {
+    id: 'i26-team-proj',
+    intake_id: 'intake-2026',
+    slug: 'team-project',
+    title_en: 'Team Project',
+    title_vi: 'Dự Án Nhóm Nghiên Cứu',
+    start_date: '2026-10-01',
+    end_date: '2027-01-30',
+    display_date: 'October 2026 – January 2027 (Parallel)',
+    is_semester_long: true,
+    lecturers: ['MSI Academic Coordinators', 'Faculty Advisors']
+  },
+
+  // Intake 2025 (Winter Semester 2026/2027 — Semester 3)
+  {
+    id: 'i25-adv-simulation-fem',
+    intake_id: 'intake-2025',
+    slug: 'advanced-simulation-fem-application-and-numerical-simulation',
+    title_en: 'Advanced Simulation: FEM & Numerical Simulation',
+    title_vi: 'Mô Phỏng Nâng Cao: Ứng Dụng FEM & Mô Phỏng Số',
+    start_date: '2026-09-07',
+    end_date: '2026-09-19',
+    display_date: '07.09.2026 – 19.09.2026',
+    lecturers: ['Prof. Dr. Daniel Juhre', 'Dr. Tran Van C'],
+    notes: 'Shared lecture block with Intake 2026'
+  },
+  {
+    id: 'i25-additive-mfg',
+    intake_id: 'intake-2025',
+    slug: 'additive-manufacturing',
+    title_en: 'Additive Manufacturing',
+    title_vi: 'Sản Xuất Đắp Dần (In 3D Kim Loại)',
+    start_date: '2026-10-05',
+    end_date: '2026-10-17',
+    display_date: '05.10.2026 – 17.10.2026',
+    lecturers: ['Prof. Dr. Thorsten Halle', 'Additive Lab Faculty']
+  },
+  {
+    id: 'i25-mech-materials-fracture',
+    intake_id: 'intake-2025',
+    slug: 'mechanics-of-materials-and-fracture-mechanics',
+    title_en: 'Mechanics of Materials & Fracture Mechanics',
+    title_vi: 'Cơ Học Vật Liệu & Cơ Học Phá Hủy',
+    start_date: '2026-10-26',
+    end_date: '2026-11-07',
+    display_date: '26.10.2026 – 07.11.2026',
+    lecturers: ['Prof. Dr.-Ing. Manja Krüger', 'Dr. Pham Van D']
+  },
+  {
+    id: 'i25-inorganic-binders',
+    intake_id: 'intake-2025',
+    slug: 'inorganic-non-metallic-binders',
+    title_en: 'Inorganic Non-Metallic Binders',
+    title_vi: 'Chất Kết Dính Vô Cơ Phi Kim',
+    start_date: '2026-11-16',
+    end_date: '2026-11-28',
+    display_date: '16.11.2026 – 28.11.2026',
+    lecturers: ['Prof. Dr. Michael Scheffler', 'Industry Specialists']
+  },
+  {
+    id: 'i25-research-lab-testing',
+    intake_id: 'intake-2025',
+    slug: 'research-lab-properties-testing-and-analytics',
+    title_en: 'Research Lab: Properties Testing & Analytics',
+    title_vi: 'Phòng Thí Nghiệm Nghiên Cứu: Đo Kiểm & Phân Tích',
+    start_date: '2026-10-01',
+    end_date: '2027-01-30',
+    display_date: 'October 2026 – January 2027 (Parallel)',
+    is_semester_long: true,
+    lecturers: ['Central Labs Team', 'Prof. Dr. Thorsten Halle']
+  }
+]
+
+// Distinct color assignments for modules
+const moduleColorMap: Record<string, string> = {
+  'continuum-mechanics': '#1E3A5F',
+  'material-modelling-and-simulation': '#E87722',
+  'materials-characterization': '#009FDF',
+  'solid-state-physics': '#2563EB',
+  'team-project': '#059669',
+  'advanced-simulation-fem-application-and-numerical-simulation': '#7C3AED',
+  'additive-manufacturing': '#DC2626',
+  'mechanics-of-materials-and-fracture-mechanics': '#D97706',
+  'inorganic-non-metallic-binders': '#475569',
+  'research-lab-properties-testing-and-analytics': '#0891B2'
 }
 
-// Intake Cohort Filter
-const selectedIntakeId = ref(props.initialIntake)
+function getModColor(slug: string): string {
+  return moduleColorMap[slug] || '#1E3A5F'
+}
 
-// Enriched Intakes drawing module titles and faculty directly from content/_modules
-const intakes = computed(() => {
-  return defaultPlanData.intakes.map(intake => {
-    const modules = intake.schedule.map((item, idx) => {
-      const contentMod = findContentModule(item.module_slug)
-      return {
-        id: `${intake.id}-${idx + 1}`,
-        intake_id: intake.id,
-        intake_name: intake.name,
-        semester_number: intake.semester_number,
-        slug: item.module_slug,
-        title: contentMod?.title || slugToTitle(item.module_slug),
-        lecturers: (contentMod?.lecturers as string[]) || [],
-        german_lecturer: contentMod?.german_lecturer ?? true,
-        start_date: item.start_date,
-        end_date: item.end_date,
-        display_date: item.display_date || formatDisplayDate(item.start_date, item.end_date),
-        is_semester_long: !!item.is_semester_long,
-        notes: item.notes || ''
-      }
-    })
-    return {
-      ...intake,
-      modules
-    }
-  })
-})
-
+// ── Computed Filtered Modules ────────────────────────────────────────────────
 const activeModules = computed(() => {
   if (selectedIntakeId.value === 'all') {
-    return intakes.value.flatMap(i => i.modules)
+    return allScheduleModules
   }
-  const found = intakes.value.find(i => i.id === selectedIntakeId.value)
-  return found ? found.modules : (intakes.value[0]?.modules || [])
+  return allScheduleModules.filter(m => m.intake_id === selectedIntakeId.value)
 })
 
-// Highlighted module
-const activeModuleId = ref<string | null>(null)
+function getModuleTitle(mod: ScheduleModule): string {
+  const baseTitle = isVi.value ? (mod.title_vi || mod.title_en) : mod.title_en
+  if (selectedIntakeId.value === 'all') {
+    const intakeTag = mod.intake_id === 'intake-2026' ? '_26' : '_25'
+    return `${baseTitle} (${intakeTag})`
+  }
+  return baseTitle
+}
 
 function toggleModule(id: string) {
   activeModuleId.value = activeModuleId.value === id ? null : id
 }
 
-// In All Cohorts view, append intake suffix (e.g. _26 for Intake 2026, _25 for Intake 2025)
-function getModuleTitle(mod: any): string {
-  if (selectedIntakeId.value === 'all') {
-    const suffix = mod.intake_name?.includes('2026') ? '_26' : mod.intake_name?.includes('2025') ? '_25' : ''
-    return `${mod.title}${suffix}`
-  }
-  return mod.title
-}
-
-// Calendar Month State (Defaults to September 2026)
+// ── Calendar Month View State ────────────────────────────────────────────────
 const currentYear = ref(2026)
 const currentMonth = ref(8) // 8 = September (0-indexed)
 
-const monthNamesEn = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-]
-const monthNamesVi = [
-  'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
-  'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
+const semesterMonths = [
+  { year: 2026, month: 8, label: '09/2026' },
+  { year: 2026, month: 9, label: '10/2026' },
+  { year: 2026, month: 10, label: '11/2026' },
+  { year: 2026, month: 11, label: '12/2026' },
+  { year: 2027, month: 0, label: '01/2027' }
 ]
 
 const currentMonthLabel = computed(() => {
-  const mName = isVi.value ? monthNamesVi[currentMonth.value] : monthNamesEn[currentMonth.value]
-  return `${mName} ${currentYear.value}`
+  const date = new Date(currentYear.value, currentMonth.value, 1)
+  const monthName = isVi.value
+    ? `Tháng ${currentMonth.value + 1}, ${currentYear.value}`
+    : date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+  return monthName
 })
 
-const semesterMonths = [
-  { year: 2026, month: 8, label: 'Sep 2026' },
-  { year: 2026, month: 9, label: 'Oct 2026' },
-  { year: 2026, month: 10, label: 'Nov 2026' },
-  { year: 2026, month: 11, label: 'Dec 2026' },
-  { year: 2027, month: 0, label: 'Jan 2027' },
-  { year: 2027, month: 1, label: 'Feb 2027' },
-  { year: 2027, month: 2, label: 'Mar 2027' }
-]
-
-function jumpToMonth(y: number, m: number) {
-  currentYear.value = y
-  currentMonth.value = m
+function nextMonth() {
+  if (currentMonth.value === 11) {
+    currentMonth.value = 0
+    currentYear.value++
+  } else {
+    currentMonth.value++
+  }
 }
 
 function prevMonth() {
@@ -135,68 +238,49 @@ function prevMonth() {
   }
 }
 
-function nextMonth() {
-  if (currentMonth.value === 11) {
-    currentMonth.value = 0
-    currentYear.value++
-  } else {
-    currentMonth.value++
-  }
+function jumpToMonth(year: number, month: number) {
+  currentYear.value = year
+  currentMonth.value = month
 }
 
-// Distinct, website brand-aligned colors keyed by official module slug
-const moduleColorMap: Record<string, string> = {
-  'solid-state-physics': '#1E3A5F', // MSI Navy
-  'polymers': '#E87722', // VGU Orange
-  'continuum-mechanics': '#009FDF', // OVGU Blue
-  'micro-nano-fabrication-technology': '#0F766E', // Deep Teal
-  'mechanics-of-materials-and-fracture-mechanics': '#991B1B', // Dark Red
-  'engineering-ceramics': '#5B21B6', // Deep Purple
-  'glass': '#0D9488', // Teal
-  'team-project': '#475569'  // Slate
-}
-
-function getModColor(slug: string): string {
-  return moduleColorMap[slug] || 'var(--color-primary, #1E3A5F)'
-}
-
-// Calendar Days Matrix
+// ── Calendar Grid Generation ─────────────────────────────────────────────────
 interface DayCell {
   dateStr: string
   dayNumber: number
   isCurrentMonth: boolean
   isToday: boolean
-  modules: any[]
+  modules: ScheduleModule[]
 }
 
-const calendarDays = computed<DayCell[]>(() => {
+const calendarDays = computed(() => {
   const year = currentYear.value
   const month = currentMonth.value
+  const firstDayOfMonth = new Date(year, month, 1)
+  const lastDayOfMonth = new Date(year, month + 1, 0)
+  const daysInMonth = lastDayOfMonth.getDate()
 
-  const firstDay = new Date(year, month, 1)
-  const lastDay = new Date(year, month + 1, 0)
-
-  let startDayOfWeek = firstDay.getDay() - 1
+  // Monday = 0, Sunday = 6
+  let startDayOfWeek = firstDayOfMonth.getDay() - 1
   if (startDayOfWeek === -1) startDayOfWeek = 6
 
   const days: DayCell[] = []
 
-  // Prev month padding
-  const prevMonthLastDay = new Date(year, month, 0).getDate()
+  // Trailing days from previous month
+  const prevMonthLastDate = new Date(year, month, 0).getDate()
   for (let i = startDayOfWeek - 1; i >= 0; i--) {
-    const d = new Date(year, month - 1, prevMonthLastDay - i)
+    const d = new Date(year, month - 1, prevMonthLastDate - i)
     days.push(makeDay(d, false))
   }
 
-  // Current month
-  for (let d = 1; d <= lastDay.getDate(); d++) {
-    const date = new Date(year, month, d)
-    days.push(makeDay(date, true))
+  // Days of current month
+  for (let i = 1; i <= daysInMonth; i++) {
+    const d = new Date(year, month, i)
+    days.push(makeDay(d, true))
   }
 
-  // Next month padding to complete row
-  const remaining = 7 - (days.length % 7)
-  if (remaining < 7) {
+  // Leading days of next month to complete the row
+  const remaining = (7 - (days.length % 7)) % 7
+  if (remaining > 0) {
     for (let i = 1; i <= remaining; i++) {
       const d = new Date(year, month + 1, i)
       days.push(makeDay(d, false))
@@ -243,13 +327,14 @@ const weekDayLabels = [
 </script>
 
 <template>
-  <section class="semester-schedule-root" id="semester-schedule">
-    <!-- SECTION TITLE & SUBTITLE -->
-    <div class="schedule-header">
-      <h2 class="schedule-title">
+  <section id="semester-schedule" class="my-14 pt-4 scroll-mt-24 font-sans max-w-6xl mx-auto px-4 sm:px-6">
+
+    <!-- === SECTION 1: Title & Overview === -->
+    <div class="text-center max-w-2xl mx-auto mb-7">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1e3a5f] tracking-tight mb-2">
         {{ isVi ? 'Kế Hoạch & Lịch Học Dự Kiến' : 'Prospective Semester Schedule' }}
       </h2>
-      <p class="schedule-subtitle">
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
         {{ isVi
           ? 'Kế hoạch học tập theo khối môn học cho học kỳ Mùa Đông 2026/2027.'
           : 'Block-modular curriculum schedule for Winter Semester 2026/2027.'
@@ -257,179 +342,208 @@ const weekDayLabels = [
       </p>
     </div>
 
-    <!-- OPEN LECTURES NOTICE (MSI BRANDED CALLOUT) -->
-    <div class="open-lectures-callout">
-      <div class="callout-header">
-        <strong class="callout-title">
+    <!-- === SECTION 2: Open Lectures Policy Notice === -->
+    <div class="bg-[#eef3fb] border border-[#cddaee] border-l-4 border-l-orange-500 rounded-xl p-4 sm:p-5 mb-6 shadow-xs">
+      <div class="mb-1">
+        <strong class="text-sm font-bold text-[#1e3a5f]">
           {{ isVi ? 'Thông báo về dự thính bài giảng mở:' : 'Open Lectures Policy:' }}
         </strong>
       </div>
-      <p class="callout-body">
+      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
         {{ isVi
           ? 'Tất cả các bài giảng chuyên đề Thạc sĩ MSI đều mở cửa cho sinh viên ngoài ngành tham dự (Kỹ thuật Cơ khí, Kỹ thuật Điện, CNTT, Vật lý...). Sinh viên có nhu cầu dự thính vui lòng gửi email về '
           : 'All MSI master lectures are open by default to guest students and auditors from other disciplines (e.g. Mechanical Engineering, Electrical Engineering, Computer Science, Physics). For guest attendance or syllabus materials, please contact '
         }}
-        <a href="mailto:msi.info@vgu.edu.vn" class="callout-email">msi.info@vgu.edu.vn</a>.
+        <a href="mailto:msi.info@vgu.edu.vn" class="text-orange-600 font-bold hover:underline">msi.info@vgu.edu.vn</a>.
       </p>
     </div>
 
-    <!-- CONTROLS BAR: COHORT SELECTOR & QUICK MONTH TABS -->
-    <div class="schedule-controls-card">
+    <!-- === SECTION 3: Controls Bar (Cohort & Month Selectors) === -->
+    <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 mb-6 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
       <!-- Cohort Selector -->
-      <div class="cohort-selector-group">
-        <span class="cohort-label">{{ isVi ? 'Khóa Học:' : 'Cohort:' }}</span>
+      <div class="flex items-center gap-3 flex-wrap">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">
+          {{ isVi ? 'Khóa Học:' : 'Cohort:' }}
+        </span>
         
-        <div class="cohort-buttons">
-          <button
+        <div class="flex items-center gap-2 flex-wrap">
+          <UButton
             v-for="intake in intakes"
             :key="intake.id"
-            type="button"
-            class="cohort-btn"
-            :class="{ 'cohort-btn--active': selectedIntakeId === intake.id }"
+            :color="selectedIntakeId === intake.id ? 'primary' : 'neutral'"
+            :variant="selectedIntakeId === intake.id ? 'solid' : 'outline'"
+            size="sm"
+            class="rounded-xl font-bold cursor-pointer"
             @click="selectedIntakeId = intake.id; activeModuleId = null"
           >
             <span>{{ intake.name }}</span>
-            <span class="cohort-btn-pill">
+            <UBadge
+              :color="selectedIntakeId === intake.id ? 'neutral' : 'primary'"
+              variant="subtle"
+              size="xs"
+              class="font-extrabold"
+            >
               {{ intake.semester_number === 1 ? (isVi ? 'Kỳ 1' : 'Sem 1') : (isVi ? 'Kỳ 3' : 'Sem 3') }}
-            </span>
-          </button>
+            </UBadge>
+          </UButton>
 
-          <button
-            type="button"
-            class="cohort-btn"
-            :class="{ 'cohort-btn--active': selectedIntakeId === 'all' }"
+          <UButton
+            :color="selectedIntakeId === 'all' ? 'primary' : 'neutral'"
+            :variant="selectedIntakeId === 'all' ? 'solid' : 'outline'"
+            size="sm"
+            class="rounded-xl font-bold cursor-pointer"
             @click="selectedIntakeId = 'all'; activeModuleId = null"
           >
-            <span>{{ isVi ? 'Tất Cả Khóa' : 'All Cohorts' }}</span>
-          </button>
+            {{ isVi ? 'Tất Cả Khóa' : 'All Cohorts' }}
+          </UButton>
         </div>
       </div>
 
-      <!-- Month Quick Navigation -->
-      <div class="month-selector-group">
-        <button
+      <!-- Quick Month Navigation -->
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <UButton
           v-for="sm in semesterMonths"
           :key="sm.label"
-          type="button"
-          class="month-btn"
-          :class="{ 'month-btn--active': currentYear === sm.year && currentMonth === sm.month }"
+          :color="currentYear === sm.year && currentMonth === sm.month ? 'primary' : 'neutral'"
+          :variant="currentYear === sm.year && currentMonth === sm.month ? 'solid' : 'ghost'"
+          size="xs"
+          class="rounded-lg font-bold cursor-pointer"
           @click="jumpToMonth(sm.year, sm.month)"
         >
           {{ sm.label }}
-        </button>
+        </UButton>
       </div>
     </div>
 
-    <!-- CALENDAR PANEL (FIXED HEIGHT, BREATHABLE, UNIFIED) -->
-    <div class="calendar-card">
+    <!-- === SECTION 4: Interactive Monthly Calendar Matrix === -->
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden mb-8">
       <!-- Calendar Nav Header -->
-      <div class="calendar-header-bar">
-        <h3 class="current-month-heading">
+      <div class="bg-slate-50/80 px-4 sm:px-6 py-3.5 border-b border-slate-200 flex items-center justify-between gap-4">
+        <h3 class="text-base sm:text-lg font-bold text-[#1e3a5f] tracking-tight">
           {{ currentMonthLabel }}
         </h3>
-        <div class="calendar-nav-controls">
-          <button type="button" class="cal-nav-btn" @click="prevMonth" :title="isVi ? 'Tháng trước' : 'Previous Month'">
-            &larr; {{ isVi ? 'Trước' : 'Prev' }}
-          </button>
-          <button type="button" class="cal-nav-btn cal-nav-btn--primary" @click="jumpToMonth(2026, 8)">
+        <div class="flex items-center gap-1.5">
+          <UButton
+            size="xs"
+            color="neutral"
+            variant="outline"
+            icon="i-lucide-chevron-left"
+            :title="isVi ? 'Tháng trước' : 'Previous Month'"
+            @click="prevMonth"
+          >
+            {{ isVi ? 'Trước' : 'Prev' }}
+          </UButton>
+          <UButton
+            size="xs"
+            color="primary"
+            variant="subtle"
+            @click="jumpToMonth(2026, 8)"
+          >
             {{ isVi ? 'Hôm Nay' : 'Today' }}
-          </button>
-          <button type="button" class="cal-nav-btn" @click="nextMonth" :title="isVi ? 'Tháng sau' : 'Next Month'">
-            {{ isVi ? 'Sau' : 'Next' }} &rarr;
-          </button>
+          </UButton>
+          <UButton
+            size="xs"
+            color="neutral"
+            variant="outline"
+            trailing-icon="i-lucide-chevron-right"
+            :title="isVi ? 'Tháng sau' : 'Next Month'"
+            @click="nextMonth"
+          >
+            {{ isVi ? 'Sau' : 'Next' }}
+          </UButton>
         </div>
       </div>
 
-      <!-- Weekday Headers -->
-      <div class="calendar-weekday-bar">
-        <div v-for="d in weekDayLabels" :key="d.key" class="weekday-cell">
-          <span class="weekday-text-full">{{ isVi ? d.vi : d.en }}</span>
-          <span class="weekday-text-short">{{ isVi ? d.vi : d.en.substring(0, 3) }}</span>
+      <!-- Weekday Headers (7 columns) -->
+      <div class="grid grid-cols-7 border-b border-slate-200 bg-slate-50/50 text-center text-xs font-bold text-slate-600">
+        <div v-for="d in weekDayLabels" :key="d.key" class="py-2.5 px-1 border-r border-slate-200 last:border-r-0">
+          <span class="hidden sm:inline">{{ isVi ? d.vi : d.en }}</span>
+          <span class="sm:hidden">{{ isVi ? d.vi : d.en.substring(0, 3) }}</span>
         </div>
       </div>
 
-      <!-- Calendar Month Grid (Fixed Height, Breathable Cells) -->
-      <div class="calendar-grid">
+      <!-- Calendar Month Grid (7 columns, auto-rows) -->
+      <div class="grid grid-cols-7 auto-rows-fr">
         <div
           v-for="(day, idx) in calendarDays"
           :key="idx"
-          class="calendar-day-cell"
-          :class="{
-            'calendar-day-cell--outside': !day.isCurrentMonth,
-            'calendar-day-cell--today': day.isToday
-          }"
+          class="min-h-[105px] sm:min-h-[120px] p-1.5 sm:p-2 border-b border-r border-slate-200 last:border-r-0 flex flex-col gap-1 transition-colors"
+          :class="[
+            !day.isCurrentMonth ? 'bg-slate-50/40 text-slate-400' : 'bg-white text-slate-800',
+            day.isToday ? 'bg-orange-50/20' : ''
+          ]"
         >
-          <div class="day-number-row">
-            <span class="day-number" :class="{ 'day-number--today': day.isToday }">
+          <!-- Day Number -->
+          <div class="flex justify-end">
+            <span
+              class="text-xs font-semibold px-1.5 py-0.5 rounded-full"
+              :class="day.isToday ? 'bg-orange-500 text-white font-bold' : ''"
+            >
               {{ day.dayNumber }}
             </span>
           </div>
 
-          <!-- Module Event Bars -->
-          <div class="day-events-container">
-            <div
+          <!-- Module Event Pills -->
+          <div class="flex-1 flex flex-col gap-1 overflow-y-auto max-h-[85px] sm:max-h-[100px]">
+            <button
               v-for="mod in day.modules"
               :key="mod.id"
-              class="calendar-event-pill"
+              class="text-[11px] leading-tight font-medium text-white px-1.5 py-1 rounded truncate text-left w-full transition-transform active:scale-95 shadow-2xs cursor-pointer"
               :style="{ backgroundColor: getModColor(mod.slug) }"
-              :class="{ 'calendar-event-pill--active': activeModuleId === mod.id }"
+              :class="activeModuleId === mod.id ? 'ring-2 ring-offset-1 ring-slate-900 font-bold' : 'opacity-95 hover:opacity-100'"
               @click="toggleModule(mod.id)"
               :title="`${getModuleTitle(mod)} (${mod.display_date})`"
             >
-              <span class="event-pill-text">{{ getModuleTitle(mod) }}</span>
-            </div>
+              {{ getModuleTitle(mod) }}
+            </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- PROSPECTIVE COURSE MODULES TABLE (NO LEARNING HOURS, NO ECTS, NO SYNTHETIC CODES) -->
-    <div class="modules-table-card">
-      <div class="table-card-header">
-        <div class="table-card-title">
+    <!-- === SECTION 5: Course Modules & Scheduled Dates Table === -->
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden mb-8">
+      <div class="px-5 py-4 border-b border-slate-200 bg-slate-50/80 flex items-center justify-between gap-4">
+        <h3 class="text-base sm:text-lg font-bold text-[#1e3a5f]">
           {{ isVi ? 'Danh Sách Các Khối Môn Học & Thời Gian Dự Kiến' : 'Prospective Course Modules & Scheduled Dates' }}
-        </div>
-        <div class="table-card-badge">
+        </h3>
+        <UBadge color="primary" variant="subtle" size="sm" class="font-bold">
           {{ activeModules.length }} {{ isVi ? 'khối môn' : 'modules' }}
-        </div>
+        </UBadge>
       </div>
 
-      <div class="table-card-body">
-        <table class="unified-schedule-table">
-          <thead>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase text-[11px] tracking-wider">
             <tr>
-              <th class="col-th col-th-module">{{ isVi ? 'Tên Môn Học' : 'Module' }}</th>
-              <th class="col-th col-th-dates">{{ isVi ? 'Thời Gian Dự Kiến' : 'Scheduled Dates' }}</th>
-              <th class="col-th col-th-lecturers">{{ isVi ? 'Giảng Viên Phụ Trách' : 'Lecturer(s)' }}</th>
+              <th class="py-3 px-4">{{ isVi ? 'Tên Môn Học' : 'Module' }}</th>
+              <th class="py-3 px-4">{{ isVi ? 'Thời Gian Dự Kiến' : 'Scheduled Dates' }}</th>
+              <th class="py-3 px-4">{{ isVi ? 'Giảng Viên Phụ Trách' : 'Lecturer(s)' }}</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="divide-y divide-slate-100">
             <tr
               v-for="mod in activeModules"
               :key="mod.id"
-              class="table-row-item"
-              :class="{ 'table-row-item--highlighted': activeModuleId === mod.id }"
+              class="hover:bg-slate-50/80 cursor-pointer transition-colors"
+              :class="activeModuleId === mod.id ? 'bg-orange-50/40 font-semibold' : ''"
               @click="toggleModule(mod.id)"
             >
-              <!-- Module Title -->
-              <td class="col-td col-module-info">
-                <div class="module-title-line">
-                  <span class="module-accent-dot" :style="{ backgroundColor: getModColor(mod.slug) }"></span>
-                  <span class="module-title-text">{{ getModuleTitle(mod) }}</span>
-                </div>
+              <!-- Module Title & Color Dot -->
+              <td class="py-3.5 px-4 flex items-center gap-2.5">
+                <span class="size-2.5 rounded-full shrink-0" :style="{ backgroundColor: getModColor(mod.slug) }" />
+                <span class="text-slate-900">{{ getModuleTitle(mod) }}</span>
               </td>
 
               <!-- Scheduled Dates -->
-              <td class="col-td col-dates-info">
-                <span class="dates-highlight">{{ mod.display_date }}</span>
-                <div v-if="mod.notes" class="dates-note">{{ mod.notes }}</div>
+              <td class="py-3.5 px-4 text-slate-700">
+                <span class="font-semibold text-orange-600">{{ mod.display_date }}</span>
+                <div v-if="mod.notes" class="text-xs text-slate-500 mt-0.5">{{ mod.notes }}</div>
               </td>
 
               <!-- Lecturers -->
-              <td class="col-td col-lecturers-info">
-                <div class="lecturers-text">
-                  {{ mod.lecturers && mod.lecturers.length ? mod.lecturers.join(', ') : 'Faculty' }}
-                </div>
+              <td class="py-3.5 px-4 text-slate-600">
+                {{ mod.lecturers && mod.lecturers.length ? mod.lecturers.join(', ') : 'Faculty' }}
               </td>
             </tr>
           </tbody>
@@ -437,613 +551,24 @@ const weekDayLabels = [
       </div>
     </div>
 
-    <!-- FOOTER / DOWNLOAD GUIDE -->
-    <div class="schedule-footer-bar">
-      <div class="footer-note-text">
+    <!-- === SECTION 6: Footer Disclaimer & Download Guide === -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200">
+      <p class="text-xs sm:text-sm text-slate-600">
         {{ isVi ? 'Kế hoạch học tập có thể có điều chỉnh nhỏ theo thông báo của Ban Điều phối Đào tạo.' : 'Schedule is subject to minor adjustments by academic coordinators.' }}
-      </div>
-      <a
+      </p>
+      <UButton
         href="/Documents/Semester Plan/Semester_Plan_Template_Guide.xlsx"
         download
-        class="guide-download-link"
+        target="_blank"
+        external
+        icon="i-lucide-download"
+        color="primary"
+        variant="solid"
+        size="md"
+        class="font-bold rounded-xl shadow-xs shrink-0 cursor-pointer"
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="download-icon">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-        </svg>
-        <span>Download Semester Schedule Guide (XLSX)</span>
-      </a>
+        Download Semester Schedule Guide (XLSX)
+      </UButton>
     </div>
   </section>
 </template>
-
-<style scoped>
-/* ==========================================================================
-   SEMESTER TIMETABLE — UNIFIED WITH MSI DESIGN SYSTEM
-   - Fixed height, breathable cells
-   - MSI Navy (#1E3A5F), VGU Orange (#E87722), OVGU Blue (#009FDF)
-   - Clean typography matching Be Vietnam Pro
-   - No learning hours, no ECTS, no synthetic codes
-   ========================================================================== */
-
-.semester-schedule-root {
-  font-family: var(--font-sans, 'Be Vietnam Pro', system-ui, -apple-system, sans-serif);
-  margin-top: 3.5rem;
-  margin-bottom: 3.5rem;
-  padding-top: 1rem;
-  scroll-margin-top: 6rem;
-}
-
-/* Header */
-.schedule-header {
-  text-align: center;
-  max-width: 760px;
-  margin: 0 auto 1.75rem auto;
-}
-
-.schedule-title {
-  font-family: var(--font-display, 'Be Vietnam Pro', sans-serif);
-  font-size: clamp(1.6rem, 3vw, 2.25rem);
-  font-weight: 800;
-  color: var(--color-primary, #1E3A5F);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-}
-
-.schedule-subtitle {
-  font-size: 1rem;
-  color: var(--color-gray-600, #6c757d);
-  line-height: 1.6;
-}
-
-/* Open Lectures Notice Callout */
-.open-lectures-callout {
-  background-color: var(--color-primary-50, #EEF3FB);
-  border: 1px solid var(--color-primary-100, #CDDAEE);
-  border-left: 5px solid var(--color-accent, #E87722);
-  border-radius: var(--radius-md, 10px);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-xs, 0 1px 2px rgba(0, 0, 0, 0.05));
-}
-
-.callout-header {
-  margin-bottom: 0.25rem;
-}
-
-.callout-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--color-primary, #1E3A5F);
-}
-
-.callout-body {
-  font-size: 0.875rem;
-  color: var(--color-gray-700, #495057);
-  line-height: 1.65;
-  margin: 0;
-}
-
-.callout-email {
-  color: var(--color-accent, #E87722);
-  font-weight: 700;
-  text-decoration: underline;
-  transition: color 0.15s ease;
-}
-
-.callout-email:hover {
-  color: var(--color-accent-dark, #C95E0A);
-}
-
-/* Controls Card */
-.schedule-controls-card {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  background-color: #ffffff;
-  border: 1px solid var(--color-gray-200, #dee2e6);
-  border-radius: var(--radius-lg, 16px);
-  padding: 0.875rem 1.25rem;
-  margin-bottom: 1.75rem;
-  box-shadow: var(--shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.06));
-}
-
-.cohort-selector-group {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.cohort-label {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--color-primary, #1E3A5F);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.cohort-buttons {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.cohort-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border-radius: var(--radius-full, 9999px);
-  border: 1.5px solid var(--color-primary-100, #CDDAEE);
-  background-color: #ffffff;
-  color: var(--color-primary, #1E3A5F);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.cohort-btn:hover {
-  background-color: var(--color-primary-50, #EEF3FB);
-  border-color: var(--color-primary, #1E3A5F);
-}
-
-.cohort-btn--active {
-  background-color: var(--color-primary, #1E3A5F);
-  border-color: var(--color-primary, #1E3A5F);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(30, 58, 95, 0.25);
-}
-
-.cohort-btn-pill {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  padding: 0.1rem 0.45rem;
-  border-radius: var(--radius-full, 9999px);
-  background-color: var(--color-primary-50, #EEF3FB);
-  color: var(--color-primary, #1E3A5F);
-}
-
-.cohort-btn--active .cohort-btn-pill {
-  background-color: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-}
-
-/* Quick Month Tabs */
-.month-selector-group {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  overflow-x: auto;
-  max-width: 100%;
-}
-
-.month-btn {
-  padding: 0.4rem 0.75rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: var(--radius-full, 9999px);
-  border: 1px solid transparent;
-  background: transparent;
-  color: var(--color-gray-600, #6c757d);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s ease;
-}
-
-.month-btn:hover {
-  background-color: var(--color-gray-100, #f1f3f5);
-  color: var(--color-primary, #1E3A5F);
-}
-
-.month-btn--active {
-  background-color: var(--color-accent-50, #FFF4EB);
-  color: var(--color-accent-dark, #C95E0A);
-  font-weight: 700;
-  border-color: rgba(232, 119, 34, 0.25);
-}
-
-/* ==========================================================================
-   CALENDAR CARD (FIXED HEIGHT, BREATHABLE, UNIFIED)
-   ========================================================================== */
-
-.calendar-card {
-  background-color: #ffffff;
-  border: 1px solid var(--color-gray-200, #dee2e6);
-  border-radius: var(--radius-lg, 16px);
-  overflow: hidden;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.06));
-}
-
-/* Calendar Header Bar */
-.calendar-header-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.875rem 1.25rem;
-  background-color: var(--color-primary-50, #EEF3FB);
-  border-bottom: 1px solid var(--color-primary-100, #CDDAEE);
-}
-
-.current-month-heading {
-  font-family: var(--font-display, 'Be Vietnam Pro', sans-serif);
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--color-primary, #1E3A5F);
-  margin: 0;
-}
-
-.calendar-nav-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.cal-nav-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem 0.85rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  background-color: #ffffff;
-  border: 1px solid var(--color-primary-100, #CDDAEE);
-  border-radius: var(--radius-sm, 6px);
-  color: var(--color-primary, #1E3A5F);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.cal-nav-btn:hover {
-  background-color: var(--color-primary, #1E3A5F);
-  border-color: var(--color-primary, #1E3A5F);
-  color: #ffffff;
-}
-
-.cal-nav-btn--primary {
-  font-weight: 700;
-}
-
-/* Weekday Bar */
-.calendar-weekday-bar {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  background-color: #ffffff;
-  border-bottom: 1px solid var(--color-gray-200, #dee2e6);
-  text-align: center;
-}
-
-.weekday-cell {
-  padding: 0.65rem 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-gray-600, #6c757d);
-  border-right: 1px solid var(--color-gray-100, #f1f3f5);
-}
-
-.weekday-cell:last-child {
-  border-right: none;
-}
-
-.weekday-text-full {
-  display: inline;
-}
-.weekday-text-short {
-  display: none;
-}
-
-@media (max-width: 640px) {
-  .weekday-text-full {
-    display: none;
-  }
-  .weekday-text-short {
-    display: inline;
-  }
-}
-
-/* Calendar Days Grid: Fixed Height, Breathable */
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  background-color: var(--color-gray-200, #dee2e6);
-  gap: 1px;
-}
-
-.calendar-day-cell {
-  background-color: #ffffff;
-  height: 96px; /* FIXED HEIGHT */
-  min-height: 96px;
-  padding: 0.35rem 0.45rem;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-sizing: border-box;
-  transition: background-color 0.15s ease;
-}
-
-.calendar-day-cell--outside {
-  background-color: var(--color-gray-50, #f8f9fa);
-  opacity: 0.45;
-}
-
-.calendar-day-cell--today {
-  background-color: var(--color-primary-50, #EEF3FB);
-}
-
-.day-number-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.25rem;
-}
-
-.day-number {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-gray-800, #343a40);
-  line-height: 1;
-}
-
-.day-number--today {
-  color: var(--color-accent, #E87722);
-}
-
-.day-events-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  overflow-y: auto;
-  flex: 1;
-}
-
-/* Scrollbar for overflow in a single cell */
-.day-events-container::-webkit-scrollbar {
-  width: 3px;
-}
-.day-events-container::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-300, #dee2e6);
-  border-radius: 3px;
-}
-
-.calendar-event-pill {
-  padding: 0.25rem 0.45rem;
-  border-radius: 4px;
-  font-size: 0.71875rem;
-  font-weight: 600;
-  color: #ffffff;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.25;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-.calendar-event-pill:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-}
-
-.calendar-event-pill--active {
-  outline: 2px solid var(--color-accent, #E87722);
-  box-shadow: 0 0 0 3px rgba(232, 119, 34, 0.35);
-}
-
-.event-pill-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: block;
-}
-
-/* ==========================================================================
-   MODULES TABLE CARD (NO LEARNING HOURS, NO ECTS, NO SYNTHETIC CODES)
-   ========================================================================== */
-
-.modules-table-card {
-  background-color: #ffffff;
-  border: 1px solid var(--color-gray-200, #dee2e6);
-  border-radius: var(--radius-lg, 16px);
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.06));
-}
-
-.table-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.875rem 1.25rem;
-  background-color: var(--color-primary-50, #EEF3FB);
-  border-bottom: 1px solid var(--color-primary-100, #CDDAEE);
-}
-
-.table-card-title {
-  font-size: 0.875rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-primary, #1E3A5F);
-}
-
-.table-card-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-full, 9999px);
-  background-color: #ffffff;
-  color: var(--color-primary, #1E3A5F);
-  border: 1px solid var(--color-primary-100, #CDDAEE);
-}
-
-.table-card-body {
-  overflow-x: auto;
-  width: 100%;
-}
-
-.unified-schedule-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 0.875rem;
-}
-
-.col-th {
-  background-color: var(--color-gray-50, #f8f9fa);
-  color: var(--color-gray-700, #495057);
-  font-weight: 700;
-  padding: 0.875rem 1.25rem;
-  border-bottom: 1px solid var(--color-gray-200, #dee2e6);
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-}
-
-.col-th-module {
-  width: 38%;
-}
-
-.col-th-dates {
-  width: 28%;
-}
-
-.col-th-lecturers {
-  width: 34%;
-}
-
-.table-row-item {
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-  border-bottom: 1px solid var(--color-gray-100, #f1f3f5);
-}
-
-.table-row-item:hover {
-  background-color: var(--color-primary-50, #EEF3FB);
-}
-
-.table-row-item:last-child {
-  border-bottom: none;
-}
-
-.table-row-item--highlighted {
-  background-color: rgba(30, 58, 95, 0.06) !important;
-  box-shadow: inset 4px 0 0 var(--color-accent, #E87722);
-}
-
-.col-td {
-  padding: 1rem 1.25rem;
-  vertical-align: middle;
-  color: var(--color-gray-800, #343a40);
-  line-height: 1.5;
-}
-
-.module-title-line {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-.module-accent-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.module-title-text {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--color-primary, #1E3A5F);
-}
-
-.dates-highlight {
-  font-weight: 700;
-  color: var(--color-primary, #1E3A5F);
-}
-
-.dates-note {
-  font-size: 0.75rem;
-  color: var(--color-gray-600, #6c757d);
-  margin-top: 0.25rem;
-}
-
-.lecturers-text {
-  font-size: 0.875rem;
-  color: var(--color-gray-700, #495057);
-}
-
-/* ==========================================================================
-   FOOTER & GUIDE DOWNLOAD
-   ========================================================================== */
-
-.schedule-footer-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.5rem 0.25rem;
-  font-size: 0.8125rem;
-  color: var(--color-gray-600, #6c757d);
-}
-
-.footer-note-text {
-  font-style: italic;
-}
-
-.guide-download-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 700;
-  color: var(--color-primary, #1E3A5F);
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.guide-download-link:hover {
-  color: var(--color-accent, #E87722);
-}
-
-.download-icon {
-  width: 16px;
-  height: 16px;
-  stroke-width: 2.2;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .schedule-controls-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .month-selector-group {
-    width: 100%;
-    padding-bottom: 0.25rem;
-  }
-
-  .calendar-day-cell {
-    height: 80px;
-    min-height: 80px;
-    padding: 0.25rem;
-  }
-
-  .calendar-event-pill {
-    font-size: 0.65rem;
-    padding: 0.15rem 0.3rem;
-  }
-
-  .col-td {
-    padding: 0.75rem 0.875rem;
-  }
-}
-</style>

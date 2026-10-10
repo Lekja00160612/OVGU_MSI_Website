@@ -1,480 +1,166 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-/* =====================================================
-   MSI WEBSITE — GLOBAL DESIGN SYSTEM v2
-   Colors: MSI Navy #1E3A5F · VGU/MSI Orange #E87722
-   Font: Be Vietnam Pro
-   ===================================================== */
+/* ==========================================================================
+   VGU MSI Master's Program — Central Design System & Theme Configuration
+   Framework: Nuxt 4 · Tailwind CSS v4 · Nuxt UI v3
+   Official Palette: MSI Deep Navy (#1E3A5F) · VGU Orange (#E87722) · OVGU Cyan (#009FDF)
+   Typography: Be Vietnam Pro
+   ========================================================================== */
 
-/* ── CSS Custom Properties ── */
-:root {
-  /* Brand Colors — derived from MSI logo + logos */
-  --color-primary: #1E3A5F;
-  /* MSI/OVGU deep navy */
-  --color-primary-dark: #0F2240;
-  /* darker navy */
-  --color-primary-light: #2E5280;
-  /* medium navy */
-  --color-primary-50: #EEF3FB;
-  /* very light tint */
-  --color-primary-100: #CDDAEE;
-  /* light tint */
-
-  --color-accent: #E87722;
-  /* VGU/MSI orange */
-  --color-accent-dark: #C95E0A;
-  /* deeper orange */
-  --color-accent-light: #FFA855;
-  /* lighter orange */
-  --color-accent-50: #FFF4EB;
-  /* orange tint */
-
-  --color-ovgu-blue: #009FDF;
-  /* OVGU bright blue */
-  --color-ovgu-blue-dark: #007BB5;
-  --color-ovgu-blue-50: #e0f3fc;
-  /* OVGU light blue tint */
-
-  /* Semantic Feedback Colors */
-  --color-success-bg: #ecfdf5;
-  --color-success-border: #a7f3d0;
-  --color-success-text: #065f46;
-  --color-success-main: #10B981;
-
-  --color-danger-bg: #fee2e2;
-  --color-danger-border: #fca5a5;
-  --color-danger-text: #dc2626;
-
-  /* Neutrals */
-  --color-white: #ffffff;
-  --color-gray-50: #f8f9fa;
-  --color-gray-100: #f1f3f5;
-  --color-gray-200: #e9ecef;
-  --color-gray-300: #dee2e6;
-  --color-gray-400: #ced4da;
-  --color-gray-500: #adb5bd;
-  --color-gray-600: #6c757d;
-  --color-gray-700: #495057;
-  --color-gray-800: #343a40;
-  --color-gray-900: #212529;
-
-  /* Typography */
+@theme static {
+  /* Typography Tokens */
   --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
   --font-display: 'Be Vietnam Pro', system-ui, sans-serif;
 
-  --font-size-xs: 0.75rem;
-  /* 12px */
-  --font-size-sm: 0.875rem;
-  /* 14px */
-  --font-size-base: 1rem;
-  /* 16px */
-  --font-size-lg: 1.1rem;
-  /* 17.6px */
-  --font-size-xl: 1.25rem;
-  /* 20px */
-  --font-size-2xl: 1.5rem;
-  /* 24px */
-  --font-size-3xl: 1.875rem;
-  /* 30px */
-  --font-size-4xl: 2.25rem;
-  /* 36px */
-  --font-size-5xl: 3rem;
-  /* 48px */
+  /* Primary Palette: VGU / MSI Vibrant Orange (Main CTAs, Active States, Highlights) */
+  --color-primary-50: #FFF7ED;
+  --color-primary-100: #FFEDD5;
+  --color-primary-200: #FED7AA;
+  --color-primary-300: #FDBA74;
+  --color-primary-400: #FB923C;
+  --color-primary-500: #E87722;
+  --color-primary-600: #EA580C;
+  --color-primary-700: #C2410C;
+  --color-primary-800: #9A3412;
+  --color-primary-900: #7C2D12;
+  --color-primary-950: #431407;
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, .06);
-  --shadow-sm: 0 1px 4px rgba(0, 0, 0, .08), 0 2px 8px rgba(0, 0, 0, .04);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, .08), 0 2px 4px rgba(0, 0, 0, .04);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
-  /* slightly smaller shadow for tighter look */
-  --shadow-brand: 0 8px 32px rgba(30, 58, 95, .20);
-  --shadow-accent: 0 8px 32px rgba(232, 119, 34, .25);
+  /* Secondary Palette: OVGU Magdeburg Cyan (Partnership Accents, Badges) */
+  --color-secondary-50: #F0F9FF;
+  --color-secondary-100: #E0F2FE;
+  --color-secondary-200: #BAE6FD;
+  --color-secondary-300: #7DD3FC;
+  --color-secondary-400: #38BDF8;
+  --color-secondary-500: #009FDF;
+  --color-secondary-600: #0284C7;
+  --color-secondary-700: #0369A1;
+  --color-secondary-800: #075985;
+  --color-secondary-900: #0C4A6E;
+  --color-secondary-950: #082F49;
 
-  /* Transitions */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 400ms;
+  /* Neutral Scale: Clean Slate */
+  --color-neutral-50: #F8FAFC;
+  --color-neutral-100: #F1F5F9;
+  --color-neutral-200: #E2E8F0;
+  --color-neutral-300: #CBD5E1;
+  --color-neutral-400: #94A3B8;
+  --color-neutral-500: #64748B;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1E293B;
+  --color-neutral-900: #0F172A;
+  --color-neutral-950: #0A0F1D;
 
-  /* Radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+  /* Institutional Aliases */
+  --color-msi-navy: #1E3A5F;
+  --color-msi-dark: #0F2240;
+}
 
-  /* Layout */
+/* ── Core Design Tokens (CSS Variables for dynamic styles & posters) ── */
+:root {
+  --color-primary: #1E3A5F;
+  --color-primary-dark: #0F2240;
+  --color-primary-light: #2E5280;
+  --color-primary-50: #EEF3FB;
+  --color-primary-100: #CDDAEE;
+
+  --color-accent: #E87722;
+  --color-accent-dark: #C95E0A;
+  --color-accent-light: #FFA855;
+  --color-accent-50: #FFF4EB;
+
+  --color-ovgu-blue: #009FDF;
+  --color-ovgu-blue-50: #E0F3FC;
+
+  --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  --font-display: 'Be Vietnam Pro', system-ui, sans-serif;
+  
   --nav-height: 72px;
-  --container: 1200px;
 }
 
-/* ── Base Reset ── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ==========================================================================
+   Base Layer Resets & Typography
+   ========================================================================== */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: #0F172A;
+    background-color: #FFFFFF;
+    line-height: 1.6;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body, h1, h2, h3, h4, h5, h6, p, ul, ol, figure, blockquote, dl, dd {
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  /* ── Nuxt UI Button Styling Guarantees ── */
+  .prose [data-slot="base"],
+  .prose a[data-slot="base"],
+  [data-slot="base"] {
+    text-decoration: none !important;
+  }
+
+
 }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  color: var(--color-gray-900);
-  background: #fff;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-::selection {
-  background: var(--color-accent);
-  color: #fff;
-}
-
-/* ── Scrollbar ── */
+/* ── Custom Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-gray-100);
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-primary);
-  border-radius: 3px;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
 }
 
-/* ── Typography ── */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--color-primary);
-}
-
-h1 {
-  font-size: var(--font-size-4xl);
-}
-
-h2 {
-  font-size: var(--font-size-3xl);
-}
-
-h3 {
-  font-size: var(--font-size-2xl);
-}
-
-h4 {
-  font-size: var(--font-size-xl);
-}
-
-h5 {
-  font-size: var(--font-size-lg);
-}
-
-h6 {
-  font-size: var(--font-size-base);
-}
-
-/* ── Container ── */
-.container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 0.85rem;
-}
-
-@media (min-width: 768px) {
-  .container {
-    padding: 0 2rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    padding: 0 2.5rem;
-  }
-}
-
-/* ── Common Header Banner ── */
-.header-banner {
-  background: var(--color-primary-dark);
-  padding: 4rem 1rem;
-  color: #fff;
-  margin-bottom: 3rem;
-  text-align: center;
-}
-
-@media (min-width: 768px) {
-  .header-banner {
-    padding: 5rem 1.5rem;
-  }
-}
-
-.page-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-family: var(--font-display);
-  font-weight: 800;
-  margin-bottom: 1rem;
-  background-color: var(--color-accent);
-  padding: 0rem 0.5rem;
-  display: inline-block;
-  color: var(--color-white);
-}
-
-.page-subtitle {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.section {
-  padding: 3rem 0;
-}
-
-.section-sm {
-  padding: 1.5rem 0;
-}
-
-.section-lg {
-  padding: 4rem 0;
-}
-
-@media (min-width: 768px) {
-  .section {
-    padding: 5rem 0;
-  }
-
-  .section-sm {
-    padding: 2.5rem 0;
-  }
-
-  .section-lg {
-    padding: 7rem 0;
-  }
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.3rem 0.875rem;
-  border-radius: var(--radius-full);
-}
-
-.badge-primary {
-  background: var(--color-primary-50);
-  color: var(--color-primary);
-  border: 1px solid var(--color-primary-100);
-}
-
-.badge-accent {
-  background: var(--color-accent-50);
-  color: var(--color-accent-dark);
-  border: 1px solid rgba(232, 119, 34, .2);
-}
-
-.badge-white {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* ── Buttons — wrapped in @layer components to win over Tailwind utilities ── */
-@layer components {
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.875rem;
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    border: 2.5px solid transparent;
-    /* thicker border for visibility */
-    cursor: pointer;
-    transition: all var(--duration-base) var(--ease-out);
-    text-decoration: none !important;
-    white-space: nowrap;
-    border-radius: var(--radius-full);
-    padding: 1.125rem 2.5rem;
-    /* much more generous vertical padding */
-    line-height: 1.2;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    min-width: 180px;
-    /* ensure buttons have presence */
-  }
-
-  @media (min-width: 1024px) {
-    .btn {
-      padding: 1.375rem 3.5rem;
-      /* even larger on desktop */
-      font-size: 1.1rem;
-      min-width: 220px;
-    }
-  }
-
-  @media (min-width: 900px) {
-    .hero-content {
-      gap: 3.5rem;
-      /* much more space between logos and buttons */
-      padding-top: 8rem;
-      padding-bottom: 8rem;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .btn {
-      width: 100%;
-      padding: 1rem 2rem;
-      font-size: 0.95rem;
-      min-width: 0;
-    }
-  }
-
-  .btn:active {
-    transform: translateY(1px) scale(0.98);
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 55%, var(--color-accent-dark) 100%);
-    background-size: 150% 150%;
-    background-position: 0% 50%;
-    color: #fff !important;
-    border-color: transparent;
-    box-shadow: 0 6px 20px rgba(232, 119, 34, 0.3);
-  }
-
-  .btn-primary:hover {
-    background-position: 100% 50%;
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 32px rgba(232, 119, 34, 0.5);
-  }
-
-  .btn-outline-white {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: #fff !important;
-    border: 2.5px solid rgba(255, 255, 255, 0.45);
-    /* more prominent outline */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .btn-outline-white:hover {
-    background: #ffffff;
-    color: var(--color-primary-dark) !important;
-    border-color: #ffffff;
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 32px rgba(255, 255, 255, 0.4);
-  }
-
-  .btn-outline-primary {
-    background: transparent;
-    color: var(--color-primary) !important;
-    border: 2.5px solid var(--color-primary);
-  }
-
-  .btn-outline-primary:hover {
-    background: var(--color-primary);
-    color: #fff !important;
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 10px 28px rgba(30, 58, 95, 0.3);
-  }
-}
-
-/* ── Card ── */
-.card {
-  background: #fff;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--color-gray-200);
-  transition: all var(--duration-base) var(--ease-out);
-  overflow: hidden;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(30, 58, 95, .12);
-}
-
-.feature-card--featured {
-  border-top: 5px solid var(--color-accent);
-  background: linear-gradient(to bottom, #fff 0%, var(--color-primary-50) 100%);
-  position: relative;
-}
-
-.feature-card--featured::after {
-  content: 'What distinct Us';
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 0.65rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  background: var(--color-accent-50);
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radius-sm);
-  letter-spacing: 0.05em;
-}
-
-.feature-card--featured:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 48px rgba(30, 58, 95, 0.15);
-}
-
-/* ── Section Header ── */
-.section-header {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 2rem;
-  /* reduced from 3.5rem */
-}
-
-.section-title {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 800;
-  margin: 0.75rem 0 1rem;
-  color: var(--color-primary);
-}
-
-.section-subtitle {
-  font-size: 1rem;
-  color: var(--color-gray-600);
-  line-height: 1.75;
-}
-
-/* ── Prose ── */
+/* ==========================================================================
+   Prose Markdown Typography (@nuxt/content ContentRenderer)
+   ========================================================================== */
 .prose {
-  color: var(--color-gray-700);
+  color: #334155;
   line-height: 1.75;
 }
 
@@ -489,38 +175,35 @@ h6 {
 }
 
 .prose h2 {
-  font-size: var(--font-size-2xl);
-  margin: 2.5rem 0 1rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--color-accent);
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  padding-left: 0.875rem;
+  border-left: 4px solid var(--color-accent);
 }
 
 .prose h3 {
-  font-size: var(--font-size-xl);
-  margin: 1.75rem 0 0.5rem;
+  font-size: 1.25rem;
+  margin: 1.5rem 0 0.5rem;
 }
 
 .prose p {
-  font-size: var(--font-size-base);
+  font-size: 1rem;
   margin-bottom: 1.25rem;
-  color: var(--color-gray-700) !important;
+  color: #334155 !important;
 }
 
 .prose ul,
 .prose ol {
   padding-left: 0;
   margin-bottom: 1.25rem;
-}
-
-.prose ul {
   list-style: none;
 }
 
 .prose ul li {
-  font-size: var(--font-size-base);
+  font-size: 1rem;
   padding: 0.25rem 0 0.25rem 1.5rem;
   position: relative;
-  color: var(--color-gray-700) !important;
+  color: #334155 !important;
 }
 
 .prose ul li::before {
@@ -528,11 +211,12 @@ h6 {
   position: absolute;
   left: 0;
   color: var(--color-accent);
-  font-size: var(--font-size-sm);
+  font-size: 0.875rem;
+  font-weight: 700;
 }
 
 .prose ol li {
-  color: var(--color-gray-700) !important;
+  color: #334155 !important;
   margin-bottom: 0.5rem;
 }
 
@@ -544,184 +228,27 @@ h6 {
 .prose a {
   color: var(--color-accent);
   text-decoration: underline;
+  transition: color 150ms ease;
 }
 
 .prose a:hover {
   color: var(--color-accent-dark);
 }
 
-/* ── Animation ── */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.curriculum-actions,
-.activities-actions {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.curriculum-actions {
-  margin-top: 1.5rem;
-  /* tight but visible */
-}
-
-.activities-actions {
-  margin-top: 2rem;
-  /* tight but visible */
-}
-
-@media (max-width: 768px) {
-  .curriculum-actions {
-    margin-top: 1.25rem;
-  }
-
-  .activities-actions {
-    margin-top: 1.5rem;
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s var(--ease-out) both;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s var(--ease-out) both;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.75rem;
-  justify-content: center;
-  margin-top: 2rem;
-  /* reduced from 3rem */
-}
-
-.delay-100 {
-  animation-delay: 100ms;
-}
-
-.delay-200 {
-  animation-delay: 200ms;
-}
-
-.delay-300 {
-  animation-delay: 300ms;
-}
-
-.delay-400 {
-  animation-delay: 400ms;
-}
-
-.delay-500 {
-  animation-delay: 500ms;
-}
-
-/* ── Header Brand Logo Styles ── */
-.brand-link {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.brand-logo-wrapper {
-  background: #fff;
-  padding: 0.15rem 0.5rem;
-  border: 2px solid var(--color-primary-100);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transition: all 250ms ease;
-  margin-top: -22px;
-  margin-bottom: -22px;
-  z-index: 105;
-}
-
-.brand-logo-wrapper:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 32px rgba(232, 119, 34, 0.12);
-}
-
-.brand-logo {
-  height: 78px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-  filter: none;
-}
-
-/* Responsive Header Logo sizing for Mobile & Tablet viewports (under 1100px) */
-@media (max-width: 1099px) {
-  .brand-logo-wrapper {
-    margin-top: -10px;
-    margin-bottom: -10px;
-    padding: 0.1rem 0.3rem;
-    border-radius: var(--radius-sm);
-  }
-
-  .brand-logo {
-    height: 52px;
-  }
-}
-
-/* Fallback styles for markdown/prose images to prevent overflow and maintain clean styling */
 .prose img,
-.prose .prose-img-wrapper,
-.prose-content img,
-.prose-content .prose-img-wrapper,
-.activity-body img,
-.activity-body .prose-img-wrapper {
+.prose .prose-img-wrapper {
   max-width: 100% !important;
   height: auto;
-  border-radius: var(--radius-lg, 16px);
+  border-radius: 1rem;
   margin: 2rem auto;
   display: block;
-  box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.08));
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
 }
 
 /* ==========================================================================
-   GLOBAL PRINT STYLES
-   Hides site layout, forces single A4 page, and formats the invitation card.
+   Global Print Styles (Clean Single-Page A4 Documents and Notices)
    ========================================================================== */
 @media print {
-
-  /* 1. Hide default layout structures entirely */
   .no-print,
   .print-fab,
   .back-link-row,
@@ -729,26 +256,20 @@ h6 {
   .site-footer,
   header,
   footer,
-  .floating-bg-assets,
   [id^="headlessui-portal-root"],
   div[role="region"] {
     display: none !important;
   }
 
-  /* 2. Suppress browser's default header/footer (date, URL) by removing @page margins */
   @page {
     size: A4 portrait;
     margin: 0;
   }
 
-  /* 3. Lock layout height and prevent page breaks to fit exactly 1 page */
   html,
   body,
   #__nuxt,
-  .layout-root,
-  .site-main,
-  .activity-detail-page,
-  .invitation-detail-page {
+  .site-main {
     width: 210mm !important;
     height: 297mm !important;
     margin: 0 !important;
@@ -757,11 +278,8 @@ h6 {
     background: #ffffff !important;
     box-sizing: border-box !important;
     page-break-inside: avoid !important;
-    page-break-after: avoid !important;
-    page-break-before: avoid !important;
   }
 
-  /* 4. Page wrapper creates a 10mm top/bottom, 15mm left/right visual margin */
   .poster-page-wrapper {
     width: 210mm !important;
     height: 297mm !important;
@@ -774,7 +292,4 @@ h6 {
     align-items: center !important;
     overflow: hidden !important;
   }
-
-  /* [NOTE] Component-specific print styles for VguMasterInfoDay2026.vue have been moved directly into the component's style section to prevent leaks and make the component self-contained. */
 }
-

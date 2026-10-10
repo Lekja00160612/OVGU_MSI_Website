@@ -62,7 +62,12 @@ export default defineContentConfig({
       source: '_activities/*.md',
       schema: z.object({
         title: z.string(),
-        category: z.string().default('Other Activities'),
+        category: z.enum([
+          'Achievements & Events',
+          'Lab Trainings',
+          'Industrial Visits',
+          'Academic Lectures'
+        ]).default('Achievements & Events'),
         image: z.string(),
         date: z.string(),
         description: z.string().optional(),

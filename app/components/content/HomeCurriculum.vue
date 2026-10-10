@@ -1,3 +1,9 @@
+<!--
+  Component: HomeCurriculum
+  Description: Interactive homepage curriculum explorer with semester tabs and module breakdown cards.
+  Data Sources: Nuxt Content 'modules' collection or injected pageData.
+  Nuxt UI Primitives: UButton, UBadge, UIcon.
+-->
 <script setup lang="ts">
 interface Semester {
   number: number
@@ -48,62 +54,77 @@ const currentModules = computed(() => {
 </script>
 
 <template>
-  <section class="section curriculum-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 v-if="displayHeadline" class="section-title">{{ displayHeadline }}</h2>
-        <p v-if="displaySubtitle" class="section-subtitle">{{ displaySubtitle }}</p>
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h2 v-if="displayHeadline" class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3">
+          {{ displayHeadline }}
+        </h2>
+        <p v-if="displaySubtitle" class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          {{ displaySubtitle }}
+        </p>
       </div>
 
       <!-- Semester Tabs -->
-      <div class="sem-tabs-container scroll-x">
-        <div class="sem-tabs">
-          <UButton
-            v-for="(s, i) in displaySemesters"
-            :key="s.number"
-            variant="outline"
-            :class="['sem-tab', { 'sem-tab--active': activeTab === i }]"
-            :style="activeTab === i ? { borderColor: s.color, color: s.color } : {}"
-            @click="activeTab = i"
-          >
-            <span class="sem-tab-num">{{ s.label }}</span>
-            <span class="sem-tab-theme">{{ s.theme }}</span>
-          </UButton>
-        </div>
+      <div class="flex gap-3 overflow-x-auto justify-center pb-4 mb-8">
+        <UButton
+          v-for="(s, i) in displaySemesters"
+          :key="s.number"
+          :variant="activeTab === i ? 'solid' : 'outline'"
+          color="primary"
+          class="rounded-2xl px-5 py-3.5 flex flex-col items-center gap-1 font-semibold transition-all shadow-xs shrink-0 cursor-pointer"
+          @click="activeTab = i"
+        >
+          <span class="text-sm font-bold">{{ s.label }}</span>
+          <span class="text-xs opacity-80">{{ s.theme }}</span>
+        </UButton>
       </div>
 
       <!-- Semester Panel -->
-      <Transition name="fade" mode="out-in">
+      <Transition
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="opacity-0 translate-y-1.5"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-active-class="transition duration-150 ease-in"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-to-class="opacity-0 -translate-y-1.5"
+        mode="out-in"
+      >
         <div
           v-if="currentSemester"
           :key="activeTab"
-          class="sem-panel"
+          class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden max-w-4xl mx-auto"
         >
           <div
-            class="sem-panel-header"
-            :style="{ background: `linear-gradient(135deg, ${currentSemester.color} 0%, ${currentSemester.color}CC 100%)` }"
+            class="p-6 sm:p-8 text-white flex items-center gap-6"
+            :style="{ background: `linear-gradient(135deg, ${currentSemester.color} 0%, ${currentSemester.color}DD 100%)` }"
           >
-            <div class="sem-num-big">S{{ currentSemester.number }}</div>
+            <div class="text-4xl sm:text-5xl font-extrabold opacity-95">S{{ currentSemester.number }}</div>
             <div>
-              <div class="sem-panel-label">{{ currentSemester.label }}</div>
-              <div class="sem-panel-theme">{{ currentSemester.theme }}</div>
+              <div class="text-xs font-bold uppercase tracking-wider opacity-85">{{ currentSemester.label }}</div>
+              <div class="text-xl sm:text-2xl font-bold">{{ currentSemester.theme }}</div>
             </div>
           </div>
-          <div class="sem-modules-layout">
-            <ul class="sem-modules">
-              <li v-for="mod in currentModules" :key="mod.path" class="sem-module">
-                <span class="sem-module-dot" :style="{ background: currentSemester.color }" />
-                {{ mod.title }}
+          
+          <div class="p-6 sm:p-8 flex flex-col gap-6">
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <li v-for="mod in currentModules" :key="mod.path" class="p-3.5 rounded-xl border border-slate-100 bg-slate-50/70 flex items-center gap-3 text-sm font-semibold text-slate-800">
+                <span class="size-2.5 rounded-full shrink-0" :style="{ background: currentSemester.color }" />
+                <span>{{ mod.title }}</span>
               </li>
             </ul>
-            <div class="mt-8 mb-6 text-center">
-              <NuxtLink
+            
+            <div class="pt-4 border-t border-slate-100 text-center">
+              <UButton
                 :to="localePath('/program-structure')"
-                class="btn btn-curriculum"
-                :style="{ '--semester-color': currentSemester.color }"
+                size="lg"
+                color="primary"
+                variant="solid"
+                trailing-icon="i-lucide-arrow-right"
+                class="font-bold shadow-md rounded-full px-8 py-3 text-white cursor-pointer"
               >
-                {{ t('home.explore_full_program') }} →
-              </NuxtLink>
+                {{ t('home.explore_full_program') }}
+              </UButton>
             </div>
           </div>
         </div>
@@ -111,138 +132,3 @@ const currentModules = computed(() => {
     </div>
   </section>
 </template>
-
-<style scoped>
-/* ══ CURRICULUM ══ */
-.curriculum-section { background: #fff; }
-.sem-tabs-container {
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-}
-.sem-tabs-container::-webkit-scrollbar {
-  display: none; /* WebKit */
-}
-.sem-tabs {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 1rem;
-  margin-bottom: 0;
-  justify-content: flex-start;
-  padding: 0 1rem;
-  width: max-content;
-  min-width: 100%;
-}
-.sem-tab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid var(--color-gray-200);
-  border-radius: var(--radius-lg);
-  background: #fff;
-  cursor: pointer;
-  transition: all 250ms var(--ease-out);
-  min-width: 140px;
-  flex-shrink: 0;
-}
-.sem-tab:hover { border-color: var(--color-primary); }
-.sem-tab--active { background: var(--color-gray-50); box-shadow: var(--shadow-md); }
-.sem-tab-num { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-.sem-tab-theme { font-size: 0.72rem; color: var(--color-gray-500); font-weight: 500; }
-
-@media (min-width: 768px) {
-  .sem-tabs-container {
-    overflow: visible;
-    padding-bottom: 0;
-    margin-bottom: 2.5rem;
-  }
-  .sem-tabs {
-    flex-wrap: wrap;
-    justify-content: center;
-    width: auto;
-    min-width: 0;
-    padding: 0;
-  }
-}
-
-.sem-panel {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-gray-200);
-  max-width: 700px;
-  margin: 0 auto;
-}
-.sem-panel-header {
-  padding: 1.5rem 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  color: #fff;
-}
-.sem-num-big {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  font-weight: 800;
-  line-height: 1;
-  opacity: 0.5;
-}
-.sem-panel-label { font-size: 0.75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
-.sem-panel-theme { font-size: 1.2rem; font-weight: 700; }
-.sem-modules-layout {
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  min-height: 280px;
-}
-.sem-modules {
-  list-style: none;
-  padding: 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-  min-height: 285px;
-  max-height: 285px;
-  overflow-y: auto;
-}
-.sem-module {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  font-size: 0.925rem;
-  color: var(--color-gray-700);
-  font-weight: 500;
-  padding-bottom: 0.875rem;
-  border-bottom: 1px solid var(--color-gray-100);
-}
-.sem-module:last-child { border-bottom: none; padding-bottom: 0; }
-.sem-module-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-
-/* Transition */
-.fade-enter-active, .fade-leave-active { transition: opacity 200ms; }
-.fade-enter-from, .fade-leave-to { opacity: 0; }
-
-.btn-curriculum {
-  border: 2px solid var(--semester-color) !important;
-  color: var(--semester-color) !important;
-  background: transparent;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-.btn-curriculum:hover {
-  background: var(--semester-color) !important;
-  color: #fff !important;
-  box-shadow: 0 10px 28px var(--semester-color);
-  transform: translateY(-3px) scale(1.02);
-}
-
-/* Utility */
-.mt-8 { margin-top: 2rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.text-center { text-align: center; }
-</style>

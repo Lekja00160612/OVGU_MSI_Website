@@ -6,7 +6,6 @@ const { activities, highlightedActivities, localePath, pageData } = inject('page
 
 const categories = ['All', 'Academic Lectures', 'Industrial Visits', 'Lab Trainings', 'Achievements & Events']
 
-
 const activeCategory = ref('All')
 const searchQuery = ref('')
 const currentPage = ref(1)
@@ -45,26 +44,17 @@ const filteredActivities = computed(() => {
     if (a.path && (a.path.endsWith('00-template') || a.path.includes('template'))) return false
 
     const cat = a.meta?.category || a.category || ''
+    let normalizedCat = cat
+    if (cat === 'Industry Adventures') normalizedCat = 'Industrial Visits'
+    if (cat === 'Lab Works') normalizedCat = 'Lab Trainings'
+    if (cat === 'Scientific Seminars') normalizedCat = 'Academic Lectures'
 
-    let matchCat = false
-    if (activeCategory.value === 'All') {
-      matchCat = true
-    } else if (activeCategory.value === 'Achievements & Events') {
-      matchCat = !['Academic Lectures', 'Scientific Seminars', 'Industrial Visits', 'Industry Adventures', 'Lab Trainings', 'Lab Works'].includes(cat) || cat === 'Achievements & Events' || cat === 'Other Activities'
-    } else if (activeCategory.value === 'Lab Trainings') {
-      matchCat = cat === 'Lab Trainings' || cat === 'Lab Works'
-    } else if (activeCategory.value === 'Academic Lectures') {
-      matchCat = cat === 'Academic Lectures' || cat === 'Scientific Seminars'
-    } else if (activeCategory.value === 'Industrial Visits') {
-      matchCat = cat === 'Industrial Visits' || cat === 'Industry Adventures'
-    } else {
-      matchCat = cat === activeCategory.value
-    }
+    const matchCat = activeCategory.value === 'All' || normalizedCat === activeCategory.value
 
     const q = searchQuery.value.toLowerCase()
     if (!q) return matchCat
     const titleMatch = (a.title || '').toLowerCase().includes(q)
-    const descMatch = (a.meta?.description || a.description || '').toLowerCase().includes(q)
+    const descMatch = (a.meta?.description || a.description || '').toLowerCase()
     return matchCat && (titleMatch || descMatch)
   })
 })
@@ -94,552 +84,126 @@ function clearFilters() {
 </script>
 
 <template>
-  <div class="activities-explorer">
+  <div class="min-h-[80vh] bg-slate-50 pb-16 font-sans">
     <!-- ── Header Banner ── -->
     <PageHeader :title="pageData?.title || t('activities.title')" :description="pageData?.description || t('activities.subtitle')" />
 
     <!-- ── Featured Highlights ── -->
-    <div v-if="showHighlights" class="container highlights-section">
-      <div class="highlights-header">
-        <h2 class="highlights-title">{{ t('activities.featured') }}</h2>
-        <div class="highlights-line" />
+    <div v-if="showHighlights" class="max-w-6xl mx-auto px-4 sm:px-6 my-10">
+      <div class="flex items-center gap-4 mb-6">
+        <h2 class="text-sm font-extrabold uppercase tracking-widest text-slate-900 whitespace-nowrap">
+          {{ t('activities.featured') }}
+        </h2>
+        <div class="flex-1 h-0.5 bg-slate-200" />
       </div>
-      <div class="highlights-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <NuxtLink
           v-for="act in highlightedActivities"
           :key="act.path"
           :to="localePath(act.path.replace('/_activities', '/academic-activities'))"
-          class="activity-card activity-card--featured"
+          class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group"
         >
-          <div class="act-img-wrap">
-            <NuxtImg :src="act.meta?.image || act.image" class="act-img" loading="lazy" />
-            <span class="act-category">{{ act.meta?.category || act.category }}</span>
+          <div class="relative h-60 overflow-hidden bg-slate-100">
+            <NuxtImg :src="act.meta?.image || act.image" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+            <UBadge color="primary" variant="subtle" size="xs" class="absolute top-4 right-4 font-semibold backdrop-blur-md bg-white/90">
+              {{ act.meta?.category || act.category }}
+            </UBadge>
           </div>
-          <div class="act-content">
-            <div class="act-date">{{ act.meta?.date || act.date }}</div>
-            <h3 class="act-title">{{ act.title }}</h3>
-            <p class="act-desc">{{ act.meta?.description || act.description }}</p>
+          <div class="p-6 flex flex-col flex-1 justify-between gap-3">
+            <div>
+              <div class="text-xs font-semibold text-slate-400 mb-1">{{ act.meta?.date || act.date }}</div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-primary-600 transition-colors line-clamp-2 mb-2">
+                {{ act.title }}
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">
+                {{ act.meta?.description || act.description }}
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-primary-600">
+              <span>Read Story</span>
+              <UIcon name="i-lucide-arrow-right" class="size-4 transition-transform group-hover:translate-x-1" />
+            </div>
           </div>
         </NuxtLink>
       </div>
     </div>
 
     <!-- ── Search + Filter Bar ── -->
-    <div ref="filterBarRef" class="container filter-bar" :class="{ 'mt-lg': showHighlights }">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input
+    <div ref="filterBarRef" class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row md:items-center justify-between gap-4 my-8">
+      <div class="w-full md:w-80">
+        <UInput
           v-model="searchQuery"
-          type="text"
+          icon="i-lucide-search"
+          size="md"
           :placeholder="t('activities.search_placeholder')"
-          class="custom-search-input"
+          class="w-full"
         />
       </div>
-      <div class="category-filters">
-        <button
+      <div class="flex flex-wrap gap-1.5">
+        <UButton
           v-for="cat in categories"
           :key="cat"
-          class="custom-cat-btn"
-          :class="{ 'custom-cat-btn--active': activeCategory === cat }"
+          :variant="activeCategory === cat ? 'solid' : 'outline'"
+          color="primary"
+          size="sm"
+          class="rounded-full font-semibold shadow-xs"
           @click="selectCategory(cat)"
         >
           {{ t('activities.cat_' + cat.toLowerCase().replace(/ /g, '_')) }}
-        </button>
+        </UButton>
       </div>
     </div>
 
     <!-- ── Activities Grid ── -->
-    <div ref="gridRef" class="container activities-grid main-grid">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <NuxtLink
         v-for="act in paginatedActivities"
         :key="act.path"
         :to="localePath(act.path.replace('/_activities', '/academic-activities'))"
-        class="activity-card"
+        class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col group"
       >
-        <div class="act-img-wrap">
-          <NuxtImg :src="act.meta?.image || act.image" class="act-img" loading="lazy" />
-          <span class="act-category">{{ act.meta?.category || act.category }}</span>
+        <div class="relative h-48 overflow-hidden bg-slate-100">
+          <NuxtImg :src="act.meta?.image || act.image" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+          <UBadge color="primary" variant="subtle" size="xs" class="absolute top-3 right-3 font-semibold backdrop-blur-md bg-white/85">
+            {{ act.meta?.category || act.category }}
+          </UBadge>
         </div>
-        <div class="act-content">
-          <div class="act-date">{{ act.meta?.date || act.date }}</div>
-          <h3 class="act-title">{{ act.title }}</h3>
-          <p class="act-desc">
-            {{ act.meta?.description || act.description }}
-          </p>
+        <div class="p-5 flex flex-col flex-1 justify-between gap-2">
+          <div>
+            <div class="text-xs font-semibold text-slate-400 mb-1">{{ act.meta?.date || act.date }}</div>
+            <h3 class="text-base font-bold text-slate-900 group-hover:text-primary-600 transition-colors line-clamp-2 mb-2">
+              {{ act.title }}
+            </h3>
+            <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+              {{ act.meta?.description || act.description }}
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-primary-600">
+            <span>Read Story</span>
+            <UIcon name="i-lucide-arrow-right" class="size-4 transition-transform group-hover:translate-x-1" />
+          </div>
         </div>
       </NuxtLink>
     </div>
 
     <!-- ── No Results ── -->
-    <div v-if="filteredActivities.length === 0" class="container no-results">
-      <p class="no-results-text">{{ t('activities.no_results') }}</p>
-      <button class="custom-clear-btn" @click="clearFilters">
+    <div v-if="filteredActivities.length === 0" class="max-w-6xl mx-auto px-4 sm:px-6 text-center py-12 bg-white rounded-2xl border border-slate-200 my-8">
+      <p class="text-slate-500 mb-4 text-sm">{{ t('activities.no_results') }}</p>
+      <UButton color="primary" variant="solid" size="sm" class="font-bold rounded-xl" @click="clearFilters">
         {{ t('activities.clear_filters') }}
-      </button>
+      </UButton>
     </div>
 
     <!-- ── Pagination Bar ── -->
-    <div v-if="totalPages > 1" class="container pagination-container">
-      <div class="pagination-bar">
-        <button
-          class="pag-btn"
-          :disabled="currentPage === 1"
-          @click="currentPage--"
-        >
-          &larr; {{ t('activities.prev') }}
-        </button>
-        
-        <div class="pag-nums-scroll">
-          <button
-            v-for="p in totalPages"
-            :key="p"
-            class="pag-num"
-            :class="{ 'pag-num--active': currentPage === p }"
-            @click="currentPage = p"
-          >
-            {{ p }}
-          </button>
-        </div>
-        
-        <button
-          class="pag-btn"
-          :disabled="currentPage === totalPages"
-          @click="currentPage++"
-        >
-          {{ t('activities.next') }} &rarr;
-        </button>
-      </div>
+    <div v-if="totalPages > 1" class="max-w-6xl mx-auto px-4 sm:px-6 flex justify-center py-8">
+      <UPagination
+        v-model:page="currentPage"
+        :total="filteredActivities.length"
+        :items-per-page="itemsPerPage"
+        color="primary"
+        variant="subtle"
+        size="md"
+      />
     </div>
   </div>
 </template>
-
-<style scoped>
-/* ── Explorer wrapper ── */
-.activities-explorer {
-  min-height: 80vh;
-  background: var(--color-gray-50, #f9fafb);
-  padding-bottom: 3rem;
-}
-
-
-/* ── Container ── */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-/* ── Highlights ── */
-.highlights-section {
-  margin-bottom: 2rem;
-}
-.highlights-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-.highlights-title {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--color-primary-dark, #0f2240);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0;
-  white-space: nowrap;
-}
-.highlights-line {
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(to right, var(--color-primary, #1e3a5f) 0%, transparent 100%);
-  opacity: 0.3;
-}
-
-/* ── Filter bar ── */
-.filter-bar {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-@media (min-width: 768px) {
-  .filter-bar {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-
-/* Custom Search Box */
-.search-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 360px;
-}
-.search-icon {
-  position: absolute;
-  left: 1rem;
-  color: var(--color-gray-400, #9ca3af);
-  font-size: 0.95rem;
-}
-.custom-search-input {
-  width: 100%;
-  padding: 0.65rem 1rem 0.65rem 2.5rem;
-  font-size: 0.9rem;
-  font-family: inherit;
-  color: var(--color-gray-800, #1f2937);
-  background-color: #fff;
-  border: 1px solid var(--color-gray-300, #d1d5db);
-  border-radius: var(--radius-full, 9999px);
-  outline: none;
-  transition: border-color 250ms, box-shadow 250ms;
-}
-.custom-search-input:focus {
-  border-color: var(--color-primary, #1e3a5f);
-  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
-}
-
-/* Custom Category Buttons */
-.category-filters {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 0.5rem;
-  padding-bottom: 0.5rem;
-  margin-bottom: -0.5rem;
-  scrollbar-width: none; /* Firefox */
-}
-.category-filters::-webkit-scrollbar {
-  display: none; /* Safari + Chrome */
-}
-@media (min-width: 768px) {
-  .category-filters {
-    flex-wrap: wrap;
-    overflow-x: visible;
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
-}
-.custom-cat-btn {
-  white-space: nowrap;
-  padding: 0.5rem 1.15rem;
-  font-size: 0.825rem;
-  font-weight: 600;
-  font-family: inherit;
-  color: var(--color-gray-700, #4b5563);
-  background-color: #fff;
-  border: 1px solid var(--color-gray-300, #d1d5db);
-  border-radius: var(--radius-full, 9999px);
-  cursor: pointer;
-  transition: all 200ms;
-}
-.custom-cat-btn:hover {
-  color: var(--color-primary, #1e3a5f);
-  border-color: var(--color-primary, #1e3a5f);
-  background-color: rgba(30, 58, 95, 0.03);
-}
-.custom-cat-btn--active {
-  color: #fff !important;
-  background-color: var(--color-primary, #1e3a5f) !important;
-  border-color: var(--color-primary, #1e3a5f) !important;
-  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
-}
-.mt-lg {
-  margin-top: 2rem;
-}
-
-/* ── Highlights Horizontal Scroll ── */
-.highlights-grid {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 1.5rem;
-  padding-bottom: 1rem;
-  margin-bottom: -0.5rem;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-gray-300, #d1d5db) transparent;
-}
-.highlights-grid .activity-card--featured {
-  flex: 0 0 280px;
-  scroll-snap-align: start;
-}
-@media (min-width: 768px) {
-  .highlights-grid .activity-card--featured {
-    flex: 0 0 340px;
-  }
-}
-@media (min-width: 1024px) {
-  .highlights-grid .activity-card--featured {
-    flex: 0 0 360px;
-  }
-}
-.highlights-grid::-webkit-scrollbar {
-  height: 6px;
-}
-.highlights-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-.highlights-grid::-webkit-scrollbar-thumb {
-  background-color: var(--color-gray-300, #d1d5db);
-  border-radius: var(--radius-full, 9999px);
-}
-.highlights-grid::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-gray-400, #9ca3af);
-}
-
-/* ── Activities Grid ── */
-.activities-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-@media (min-width: 640px) {
-  .activities-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1024px) {
-  .activities-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.main-grid {
-  margin-bottom: 2.5rem;
-}
-
-/* ── Activity Card ── */
-.activity-card {
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  border-radius: var(--radius-xl, 16px);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.06));
-  border: 1px solid var(--color-gray-100, #f3f4f6);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms;
-  text-decoration: none;
-  color: inherit;
-}
-.activity-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md, 0 6px 16px rgba(0,0,0,0.08));
-  border-color: var(--color-gray-200, #e5e7eb);
-}
-.activity-card--featured {
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-  box-shadow: var(--shadow-sm);
-}
-
-/* ── Card image ── */
-.act-img-wrap {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-  background-color: var(--color-gray-100, #f3f4f6);
-}
-.act-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 400ms ease;
-}
-.activity-card:hover .act-img {
-  transform: scale(1.04);
-}
-.act-category {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background: var(--color-accent, #e87722);
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 0.3rem 0.75rem;
-  border-radius: var(--radius-sm, 4px);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-  z-index: 2;
-}
-
-/* ── Card content ── */
-.act-content {
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.act-date {
-  font-size: 0.78rem;
-  color: var(--color-gray-500, #6b7280);
-  font-weight: 600;
-  margin-bottom: 0.4rem;
-}
-.act-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-primary-dark, #0f2240);
-  margin-bottom: 0.5rem;
-  line-height: 1.35;
-  transition: color 200ms;
-}
-.activity-card:hover .act-title {
-  color: var(--color-accent, #e87722);
-}
-.act-desc {
-  font-size: 0.85rem;
-  color: var(--color-gray-600, #4b5563);
-  line-height: 1.55;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
-}
-
-/* ── No results ── */
-.no-results {
-  padding: 3rem 1.5rem;
-  text-align: center;
-}
-.no-results-text {
-  font-size: 1rem;
-  color: var(--color-gray-600, #4b5563);
-  margin-bottom: 1.25rem;
-}
-.custom-clear-btn {
-  padding: 0.55rem 1.5rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  font-family: inherit;
-  color: var(--color-primary, #1e3a5f);
-  background-color: transparent;
-  border: 2px solid var(--color-primary, #1e3a5f);
-  border-radius: var(--radius-full, 9999px);
-  cursor: pointer;
-  transition: all 250ms;
-}
-.custom-clear-btn:hover {
-  color: #fff;
-  background-color: var(--color-primary, #1e3a5f);
-}
-
-/* ── Pagination Bar ── */
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-.pagination-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centers items inside the capsule perfectly */
-  gap: 0.35rem;
-  background-color: #fff;
-  padding: 0.4rem 0.6rem;
-  border-radius: var(--radius-full, 9999px);
-  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.05));
-  border: 1px solid var(--color-gray-200, #e5e7eb);
-}
-.pag-nums-scroll {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.35rem;
-  overflow-x: auto;
-  scrollbar-width: none; /* Hide scrollbar Firefox */
-  -webkit-overflow-scrolling: touch;
-}
-.pag-nums-scroll::-webkit-scrollbar {
-  display: none; /* Hide scrollbar Chrome/Safari by default */
-}
-.pag-btn {
-  background: transparent;
-  border: none;
-  color: var(--color-gray-600, #4b5563);
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.4rem 0.8rem;
-  cursor: pointer;
-  border-radius: var(--radius-full, 9999px);
-  transition: all 200ms;
-  flex-shrink: 0;
-}
-.pag-btn:hover:not(:disabled) {
-  color: var(--color-primary, #1e3a5f);
-  background-color: var(--color-gray-100, #f3f4f6);
-}
-.pag-btn:disabled {
-  color: var(--color-gray-300, #d1d5db) !important;
-  opacity: 1 !important;
-  cursor: not-allowed;
-}
-.pag-num {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-gray-700, #374151);
-  background: transparent;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 200ms;
-  flex-shrink: 0;
-}
-.pag-num:hover:not(.pag-num--active) {
-  background-color: var(--color-gray-100, #f3f4f6);
-  color: var(--color-primary, #1e3a5f);
-}
-.pag-num--active {
-  background-color: var(--color-accent, #e87722) !important;
-  color: #fff !important;
-  box-shadow: 0 2px 6px rgba(232, 119, 34, 0.3);
-}
-
-@media (max-width: 639px) {
-  .pagination-bar {
-    width: 100%;
-    max-width: 340px;
-    box-sizing: border-box;
-    padding: 0.35rem 0.5rem;
-    justify-content: center; /* Center items on mobile too */
-  }
-  .pag-nums-scroll {
-    max-width: 130px; /* Limits width of numbers zone so it scrolls */
-    overflow-x: auto;
-    
-    /* Styled micro-scrollbar to clearly indicate scrollability on mobile */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(232, 119, 34, 0.45) transparent;
-    padding-bottom: 3px; /* make space for micro scrollbar */
-  }
-  .pag-nums-scroll::-webkit-scrollbar {
-    display: block !important;
-    height: 3px;
-  }
-  .pag-nums-scroll::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .pag-nums-scroll::-webkit-scrollbar-thumb {
-    background: rgba(232, 119, 34, 0.45);
-    border-radius: 99px;
-  }
-  .pag-btn {
-    padding: 0.35rem 0.5rem;
-    font-size: 0.75rem;
-  }
-  .pag-num {
-    width: 28px;
-    height: 28px;
-    font-size: 0.75rem;
-  }
-}
-</style>

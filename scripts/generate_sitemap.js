@@ -24,16 +24,24 @@ function getFileMtime(filePath) {
 async function generateSitemap() {
   const urls = [];
 
-  // 1. Root-level pages in content/
-  const files = fs.readdirSync(CONTENT_DIR);
-  const staticPages = [];
-  
-  for (const file of files) {
-    if (file.endsWith('.md')) {
-      const slug = file.replace('.md', '');
-      staticPages.push(slug);
+  // 1. Static and nested pages in content/
+  function findMarkdownPages(dir, baseDir = dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    let pages = [];
+    for (const entry of entries) {
+      if (entry.name.startsWith('_') || entry.name === 'vi') continue;
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        pages = pages.concat(findMarkdownPages(fullPath, baseDir));
+      } else if (entry.isFile() && entry.name.endsWith('.md')) {
+        const relative = path.relative(baseDir, fullPath).replace(/\\/g, '/').replace('.md', '');
+        pages.push(relative);
+      }
     }
+    return pages;
   }
+
+  const staticPages = findMarkdownPages(CONTENT_DIR);
 
   for (const page of staticPages) {
     const isHome = page === 'index';

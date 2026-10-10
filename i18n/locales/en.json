@@ -5,6 +5,8 @@
     "program_structure": "Program Structure",
     "academic_activities": "Academic Activities",
     "partners_lecturers": "Partners & Lecturers",
+    "academic_partners": "Academic Partners",
+    "industrial_partners": "Industrial Partners",
     "tuition_scholarships": "Tuition & Scholarships",
     "laboratories_research": "Laboratories & Research",
     "student_life": "Student Life",
@@ -39,7 +41,16 @@
     "next": "Next",
     "semester_long": "Semester",
     "more_detail": "More details",
-    "links_label": "Related Links"
+    "links_label": "Related Links",
+    "tab_curriculum": "Core Modules",
+    "tab_timetable": "Semester Timetable",
+    "tab_electives": "Elective Courses",
+    "tab_thesis": "Master Thesis Topics",
+    "nav_blueprint": "Degree Blueprint",
+    "nav_handbook": "Course Handbook",
+    "nav_timetable": "Semester Timetable",
+    "nav_thesis": "Master Thesis",
+    "nav_germany": "Germany Relocation"
   },
   "footer": {
     "subtitle": "A joint program between Vietnamese-German University (VGU) and Otto von Guericke University Magdeburg (OVGU).",
