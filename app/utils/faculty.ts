@@ -18,3 +18,26 @@ export function getFacultyAnchor(name: string): string {
     .replace(/^-+|-+$/g, '')
   return `faculty-${cleaned}`
 }
+
+/**
+ * Normalizes a module object or module title to a clean URL anchor slug.
+ * Example:
+ *   "Glass"                                            -> "glass"
+ *   "Engineering Ceramics"                            -> "engineering-ceramics"
+ *   "Inorganic, Non-metallic Binders"                  -> "inorganic-non-metallic-binders"
+ *   "Research Lab - Properties, testing and analytics" -> "research-lab-properties-testing-and-analytics"
+ */
+export function getModuleSlug(modOrTitle: any): string {
+  if (!modOrTitle) return ''
+  if (typeof modOrTitle === 'object' && modOrTitle.path) {
+    const fromPath = modOrTitle.path.replace(/^\/_modules\//, '').replace(/\.md$/, '')
+    if (fromPath) return fromPath
+  }
+  const title = typeof modOrTitle === 'object' ? (modOrTitle.title || '') : String(modOrTitle)
+  return title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import { thesisTopics, type ThesisTopic } from '~/data/thesisTopics'
+import { getModuleSlug } from '~/utils/faculty'
 
 const route = useRoute()
 const localePath = useLocalePath()
@@ -20,23 +21,39 @@ const filteredTopics = computed(() => {
   )
 })
 
-function syncFromQuery() {
-  const q = (route.query.module as string) || (route.query.search as string)
-  if (q) {
-    searchQuery.value = q
-    // Automatically open matching topics
+function syncFromRoute() {
+  let target = ''
+
+  // 1. Check URL hash (e.g. #glass)
+  if (route.hash) {
+    const raw = route.hash.replace(/^#/, '').trim().toLowerCase()
+    const matched = thesisTopics.find(t => getModuleSlug(t.module) === raw)
+    if (matched) {
+      target = matched.module
+    } else if (raw) {
+      target = raw
+    }
+  }
+
+  // 2. Fallback to query param
+  if (!target && (route.query.module || route.query.search)) {
+    target = ((route.query.module as string) || (route.query.search as string)).trim()
+  }
+
+  if (target) {
+    searchQuery.value = target
     openTopicIds.value = thesisTopics
-      .filter(t => t.module.toLowerCase().includes(q.toLowerCase()) || t.title.toLowerCase().includes(q.toLowerCase()))
+      .filter(t => t.module.toLowerCase().includes(target.toLowerCase()) || t.title.toLowerCase().includes(target.toLowerCase()))
       .map(t => t.id)
   }
 }
 
 onMounted(() => {
-  syncFromQuery()
+  syncFromRoute()
 })
 
-watch(() => route.query, () => {
-  syncFromQuery()
+watch(() => [route.hash, route.query], () => {
+  syncFromRoute()
 })
 
 function toggleTopic(id: number) {
@@ -103,7 +120,7 @@ function isOpen(id: number) {
 
     <!-- Accordion List Container -->
     <div class="flex flex-col gap-3">
-      <div v-if="filteredTopics.length === 0" class="text-center py-12 text-slate-500 bg-slate-50 rounded-2xl border border-slate-200 text-sm">
+      <div v-if="filteredTopics.length === 0" class="text-center py-12 text-slate-500 bg-white rounded-3xl border border-slate-200 text-sm shadow-xs">
         <p>{{ locale === 'vi' ? `Không tìm thấy đề tài phù hợp với "${searchQuery}".` : `No thesis topics found matching "${searchQuery}".` }}</p>
         <UButton
           color="primary"
@@ -119,13 +136,13 @@ function isOpen(id: number) {
       <div
         v-for="(topic, idx) in filteredTopics"
         :key="topic.id"
-        class="bg-white border rounded-2xl transition-all duration-200 overflow-hidden shadow-xs"
-        :class="isOpen(topic.id) ? 'border-primary-400 ring-1 ring-primary-400/20' : 'border-slate-200 hover:border-slate-300'"
+        class="bg-white border rounded-3xl transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md"
+        :class="isOpen(topic.id) ? 'border-primary-400 ring-1 ring-primary-400/20 shadow-md' : 'border-slate-200/90 hover:border-slate-300'"
       >
         <!-- Item Header -->
         <button
           type="button"
-          class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-bold text-slate-900 hover:bg-slate-50/60 transition-colors cursor-pointer gap-4"
+          class="w-full flex items-center justify-between p-4 sm:p-5 text-left font-bold text-slate-900 hover:bg-slate-50/50 transition-colors cursor-pointer gap-4"
           @click="toggleTopic(topic.id)"
           :aria-expanded="isOpen(topic.id)"
         >
@@ -142,26 +159,24 @@ function isOpen(id: number) {
         <!-- Item Expandable Content -->
         <div v-if="isOpen(topic.id)" class="px-5 pb-5 pt-2 border-t border-slate-100 flex flex-col gap-4 text-sm text-slate-700">
           <div>
+            <!-- Normalized clickable module chip linking with clean hash (#slug) -->
             <NuxtLink
-              :to="{ path: localePath('/program-structure/modules'), query: { module: topic.module } }"
-              class="inline-block group"
+              :to="`${localePath('/program-structure/modules')}#${getModuleSlug(topic.module)}`"
+              class="inline-block group/badge"
               :title="`View ${topic.module} module syllabus in handbook`"
             >
-              <UBadge
-                color="secondary"
-                variant="subtle"
-                size="sm"
-                class="font-semibold group-hover:bg-orange-500 group-hover:text-white transition-all cursor-pointer inline-flex items-center gap-1.5"
+              <span
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 hover:bg-orange-500 hover:text-white border border-slate-200/90 hover:border-orange-500 transition-all duration-200 shadow-2xs hover:shadow-xs cursor-pointer"
               >
                 <span>{{ topic.module }}</span>
-                <UIcon name="i-lucide-arrow-up-right" class="size-3 opacity-60 group-hover:opacity-100" />
-              </UBadge>
+                <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400 group-hover/badge:text-white transition-colors" />
+              </span>
             </NuxtLink>
           </div>
           
           <p class="text-slate-600 leading-relaxed">{{ topic.description }}</p>
 
-          <div v-if="topic.tasks && topic.tasks.length > 0" class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+          <div v-if="topic.tasks && topic.tasks.length > 0" class="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/80">
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
               {{ locale === 'vi' ? 'Nội dung thực hiện & Mục tiêu trọng tâm:' : 'Candidate Tasks & Key Objectives:' }}
             </h4>
@@ -172,7 +187,7 @@ function isOpen(id: number) {
             </ul>
           </div>
 
-          <div class="p-3.5 rounded-xl bg-orange-50/70 border border-orange-200/60 text-xs text-orange-950 font-medium">
+          <div class="p-4 rounded-2xl bg-orange-50/70 border border-orange-200/70 text-xs text-orange-950 font-medium">
             <UIcon name='i-lucide-info' class='size-4 text-primary-500 inline mr-1' />
             <em>{{ locale === 'vi'
               ? 'Quan tâm đến đề tài nghiên cứu này hoặc muốn đề xuất hướng nghiên cứu mới? Vui lòng liên hệ trực tiếp với giảng viên phụ trách môn học hoặc trưởng bộ môn.'
