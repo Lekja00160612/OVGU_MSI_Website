@@ -36,13 +36,13 @@ provide('pageData', {
 </script>
 
 <template>
-  <div class="min-h-[80vh] bg-slate-50 pb-20 font-sans">
+  <div class="min-h-[80vh] bg-slate-100/75 pb-20 font-sans">
     <!-- Header -->
     <PageHeader :title="pageData?.title || (locale === 'vi' ? 'Đội Ngũ Giảng Viên & Bộ Môn Học Thuật' : 'Academic Faculty & Research Chairs')" :description="pageData?.meta?.description" />
 
     <!-- Intro Markdown -->
-    <div v-if="pageData" class="max-w-4xl mx-auto px-4 sm:px-6 my-10">
-      <div class="prose max-w-none text-slate-700 bg-white p-6 sm:p-10 rounded-3xl border border-slate-200 shadow-xs">
+    <div v-if="pageData" class="max-w-6xl mx-auto px-4 sm:px-6 my-10">
+      <div class="prose max-w-none text-slate-700 bg-white p-6 sm:p-10 rounded-3xl border border-slate-200/90 shadow-md">
         <ContentRenderer :value="pageData" />
       </div>
     </div>

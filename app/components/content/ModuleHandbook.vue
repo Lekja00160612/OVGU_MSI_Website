@@ -130,6 +130,12 @@ const getRelatedThesisCount = (moduleTitle?: string): number => {
   return thesisTopics.filter(t => t.module.toLowerCase().trim() === norm).length
 }
 
+// Master thesis identifier helper
+const isMasterThesis = (mod: any): boolean => {
+  if (!mod?.title) return false
+  return /thesis/i.test(mod.title)
+}
+
 // Faculty connection helper: canonical anchor link
 const getLecturerPartnerLink = (lecturer: string): string => {
   const anchor = getFacultyAnchor(lecturer)
@@ -362,7 +368,7 @@ watch(() => [route.hash, route.query], () => {
           type="button"
           class="relative p-5 sm:p-6 rounded-3xl text-left transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[185px] border group scroll-mt-28"
           :class="[
-            mod.title === 'Master Thesis'
+            isMasterThesis(mod)
               ? (selectedModule?.path === mod.path
                   ? 'bg-gradient-to-br from-[#1E3A5F] via-[#244670] to-[#1E3A5F] text-white ring-2 ring-orange-500 shadow-xl -translate-y-1 scale-[1.01]'
                   : 'bg-gradient-to-br from-[#1E3A5F] to-[#2E5280] text-white shadow-sm hover:shadow-lg hover:-translate-y-1 border-slate-800')
@@ -372,49 +378,40 @@ watch(() => [route.hash, route.query], () => {
           ]"
           :style="{
             borderLeftWidth: selectedModule?.path === mod.path ? '8px' : '6px',
-            borderLeftColor: mod.title === 'Master Thesis' ? '#E87722' : getSemesterColor(getSemester(mod))
+            borderLeftColor: isMasterThesis(mod) ? '#E87722' : getSemesterColor(getSemester(mod))
           }"
           @click="selectModuleAndSyncHash(mod)"
         >
-          <!-- Top Badges Row -->
-          <div class="flex items-center justify-between gap-1.5 w-full mb-3 flex-wrap">
-            <div class="flex items-center gap-1.5 flex-wrap">
+          <!-- Top Clean Single-Line Header (No Clutter, Single Row) -->
+          <div class="flex items-center justify-between w-full mb-3 text-[11px] font-bold">
+            <div class="flex items-center gap-1.5">
               <span
-                class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-lg tracking-wider"
-                :class="isElective(mod) ? 'bg-orange-100 text-orange-700' : 'bg-slate-100 text-slate-700'"
+                class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md tracking-wider"
+                :class="isElective(mod) ? 'bg-orange-100 text-orange-700' : (isMasterThesis(mod) ? 'bg-orange-500 text-white' : 'bg-slate-100 text-slate-700')"
               >
-                {{ isElective(mod) ? 'Elective Pool' : `Semester ${getSemester(mod)}` }}
+                {{ isElective(mod) ? 'Elective' : (isMasterThesis(mod) ? 'Capstone' : `Sem ${getSemester(mod)}`) }}
               </span>
               <span
                 v-if="hasGermanLecturer(mod)"
-                class="text-[10px] font-black uppercase px-2 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 tracking-wider flex items-center gap-1"
-                title="Taught by Visiting German Professor from OVGU Magdeburg"
+                class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 tracking-wider"
+                title="Visiting German Professor from OVGU Magdeburg"
               >
-                <span>🇩🇪</span>
-                <span>OVGU</span>
+                OVGU
               </span>
             </div>
 
-            <!-- Thesis Badge if open topics exist -->
             <span
-              v-if="getRelatedThesisCount(mod.title) > 0"
-              class="text-[10px] font-extrabold px-2 py-0.5 rounded-lg bg-orange-50 text-orange-700 border border-orange-200 tracking-tight flex items-center gap-1"
+              class="text-[10px] font-bold uppercase tracking-wider"
+              :class="isMasterThesis(mod) ? 'text-slate-200' : 'text-slate-400'"
             >
-              <UIcon name="i-lucide-graduation-cap" class="size-3 text-orange-500" />
-              <span>{{ getRelatedThesisCount(mod.title) }} Topics</span>
-            </span>
-            <span
-              v-else-if="mod.title === 'Master Thesis'"
-              class="text-[10px] font-black uppercase px-2 py-0.5 rounded-lg bg-orange-500 text-white tracking-wider"
-            >
-              30 CP · Capstone
+              {{ isMasterThesis(mod) ? '30 ECTS Capstone' : '5 ECTS' }}
             </span>
           </div>
 
           <!-- Course Name -->
           <h4
             class="text-sm sm:text-base font-extrabold uppercase tracking-wide leading-snug line-clamp-2"
-            :class="mod.title === 'Master Thesis' ? 'text-white' : 'text-slate-900 group-hover:text-orange-600 transition-colors'"
+            :class="isMasterThesis(mod) ? 'text-white' : 'text-slate-900 group-hover:text-orange-600 transition-colors'"
           >
             {{ mod.title }}
           </h4>
@@ -423,7 +420,7 @@ watch(() => [route.hash, route.query], () => {
           <div
             v-if="formatDotLines(mod.description || mod.meta?.description).length > 0"
             class="mt-3 pt-3 border-t flex flex-col gap-1.5 text-xs"
-            :class="mod.title === 'Master Thesis' ? 'border-white/20 text-slate-200' : 'border-slate-100 text-slate-600'"
+            :class="isMasterThesis(mod) ? 'border-white/20 text-slate-200' : 'border-slate-100 text-slate-600'"
           >
             <div
               v-for="(point, pIdx) in formatDotLines(mod.description || mod.meta?.description).slice(0, 3)"
@@ -435,15 +432,20 @@ watch(() => [route.hash, route.query], () => {
             </div>
           </div>
 
-          <!-- Bottom Credits Tag & Instructor -->
+          <!-- Bottom Faculty Instructor -->
           <div
-            class="mt-3 pt-2.5 flex items-center justify-between text-[11px] font-bold"
-            :class="mod.title === 'Master Thesis' ? 'text-slate-200' : 'text-slate-500'"
+            v-if="getLecturers(mod).length > 0"
+            class="mt-3 pt-2.5 border-t flex items-center justify-between text-[11px] font-medium"
+            :class="isMasterThesis(mod) ? 'border-white/10 text-slate-200' : 'border-slate-100 text-slate-500'"
           >
-            <span>{{ mod.title === 'Master Thesis' ? '30 ECTS Capstone' : '5 ECTS Credits' }}</span>
-            <span v-if="getLecturers(mod).length > 0" class="truncate max-w-[150px] flex items-center gap-1 text-slate-700">
+            <span class="flex items-center gap-1.5 truncate max-w-[200px]">
               <UIcon name="i-lucide-user" class="size-3 text-orange-500 shrink-0" />
-              <span>{{ getLecturers(mod)[0] }}</span>
+              <span class="truncate font-semibold" :class="isMasterThesis(mod) ? 'text-white' : 'text-slate-700'">
+                {{ getLecturers(mod)[0] }}
+              </span>
+            </span>
+            <span v-if="getLecturers(mod).length > 1" class="text-[10px] font-bold text-slate-400 shrink-0">
+              +{{ getLecturers(mod).length - 1 }}
             </span>
           </div>
         </button>
@@ -464,7 +466,7 @@ watch(() => [route.hash, route.query], () => {
                 {{ isElective(selectedModule) ? 'Elective Module' : `Core Module · Semester ${getSemester(selectedModule)}` }}
               </UBadge>
               <UBadge color="neutral" variant="outline" size="xs" class="font-bold">
-                {{ selectedModule.title === 'Master Thesis' ? '30 ECTS Credits' : '5 ECTS Credits' }}
+                {{ isMasterThesis(selectedModule) ? '30 ECTS Credits' : '5 ECTS Credits' }}
               </UBadge>
               <UBadge
                 v-if="hasGermanLecturer(selectedModule)"
@@ -585,7 +587,7 @@ watch(() => [route.hash, route.query], () => {
         class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden"
         :style="{
           borderLeftWidth: '6px',
-          borderLeftColor: mod.title === 'Master Thesis' ? '#E87722' : getSemesterColor(getSemester(mod))
+          borderLeftColor: isMasterThesis(mod) ? '#E87722' : getSemesterColor(getSemester(mod))
         }"
       >
         <!-- Mobile Header (Tap to expand/collapse) -->
@@ -595,28 +597,23 @@ watch(() => [route.hash, route.query], () => {
           @click="selectModule(mod)"
         >
           <div class="flex flex-col min-w-0">
-            <div class="flex items-center gap-1.5 mb-1.5 flex-wrap">
-              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-slate-100 text-slate-700">
-                {{ isElective(mod) ? 'Elective Pool' : `Semester ${getSemester(mod)}` }}
-              </span>
-              <span
-                v-if="mod.title === 'Master Thesis'"
-                class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-orange-500 text-white"
-              >
-                30 CP
-              </span>
-              <span
-                v-else-if="hasGermanLecturer(mod)"
-                class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-0.5"
-              >
-                <span>🇩🇪</span>
-                <span>OVGU</span>
-              </span>
-              <span
-                v-if="getRelatedThesisCount(mod.title) > 0"
-                class="text-[9px] font-extrabold px-2 py-0.5 rounded bg-orange-50 text-orange-700 border border-orange-200"
-              >
-                {{ getRelatedThesisCount(mod.title) }} Topics
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <div class="flex items-center gap-1.5">
+                <span
+                  class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md"
+                  :class="isElective(mod) ? 'bg-orange-100 text-orange-700' : (isMasterThesis(mod) ? 'bg-orange-500 text-white' : 'bg-slate-100 text-slate-700')"
+                >
+                  {{ isElective(mod) ? 'Elective' : (isMasterThesis(mod) ? 'Capstone' : `Sem ${getSemester(mod)}`) }}
+                </span>
+                <span
+                  v-if="hasGermanLecturer(mod)"
+                  class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200"
+                >
+                  OVGU
+                </span>
+              </div>
+              <span class="text-[10px] font-bold uppercase text-slate-400">
+                {{ isMasterThesis(mod) ? '30 ECTS Capstone' : '5 ECTS' }}
               </span>
             </div>
             <span class="text-sm font-extrabold text-slate-900 leading-snug line-clamp-2">
