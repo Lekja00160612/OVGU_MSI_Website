@@ -20,7 +20,7 @@ Operating VGU's high-vacuum electron microscopy and X-ray diffraction suites, st
 
 ---
 
-## 🔬 Deep Dive: Scanning Electron Microscopy & X-Ray Diffraction
+## Deep Dive: Scanning Electron Microscopy & X-Ray Diffraction
 
 During the tour, students explored the physical principles and operational guidelines of our core characterization tools:
 
@@ -35,7 +35,7 @@ During the tour, students explored the physical principles and operational guide
 
 ---
 
-## 🚀 Connecting Theory to Industrial Practice
+## Connecting Theory to Industrial Practice
 
 This laboratory tour reinforced key concepts from the **Materials Characterization** module, demonstrating how high-end microscopy and diffraction are used to troubleshoot failures, optimize alloys, and engineer new structural components.
 

@@ -302,7 +302,7 @@ const arrowMarkerId = computed(() => {
       </div>
 
       <!-- Desktop: Detail panel (right) -->
-      <div class="hidden lg:block lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 shadow-xs sticky top-24">
+      <div class="hidden lg:block lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 shadow-xs sticky top-24 min-h-[420px]">
         <div v-if="activeStep" class="flex flex-col gap-4" :key="activeStep.id">
           <span class="text-xs font-bold uppercase tracking-wider text-primary-600">Detailed Instructions</span>
           <h3 class="text-lg font-extrabold text-slate-900 leading-tight">{{ activeStep.title }}</h3>

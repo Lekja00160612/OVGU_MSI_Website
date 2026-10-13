@@ -20,7 +20,7 @@ The publication, titled **"Biocalorimetry for the biotechnological use of natura
 
 ---
 
-## 🌟 The Core Innovation: What is Biocalorimetry?
+## The Core Innovation: What is Biocalorimetry?
 
 Biocalorimetry is the real-time measurement of the microscopic amounts of heat released by living microbes as they consume and break down materials. Because all living processes generate heat, this acts as a universal, non-invasive sensor of microbial activity. 
 
@@ -28,7 +28,7 @@ This research highlights how biocalorimetry serves as a game-changing tool for s
 
 ---
 
-## 🚀 Key Research Pillars & Student Takeaways
+## Key Research Pillars & Student Takeaways
 
 For students in our Materials Science program, this publication represents exactly the kind of interdisciplinary, real-world science they engage in at VGU. The review outlines three major breakthroughs:
 
@@ -49,7 +49,7 @@ The authors present a visionary perspective: by combining biocalorimetric metabo
 
 ---
 
-## 🔬 Institutional Support & Collaboration
+## Institutional Support & Collaboration
 
 This international breakthrough was made possible through extensive collaborative funding and networks:
 - **Helmholtz Association** (Integration Platform at UFZ)
@@ -61,6 +61,6 @@ This joint effort highlights the strong, direct ties between VGU and leading Ger
 
 ---
 
-### 📖 Access the Full Research
+### Access the Full Research
 Explore the full details of this pioneering work:
 🔗 **Full Article (Open Access):** [https://doi.org/10.1007/s00253-026-13871-5](https://doi.org/10.1007/s00253-026-13871-5)

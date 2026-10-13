@@ -21,7 +21,7 @@ const displayScholarshipsUrl = computed(() => props.scholarshipsUrl ?? '/tuition
 
 <template>
   <section class="relative min-h-[60vh] md:min-h-[85vh] flex items-center justify-center bg-cover bg-no-repeat bg-[center_30%]" :style="{ backgroundImage: `url(${displayBackgroundImage})` }">
-    <div class="absolute inset-0 bg-gradient-to-b from-[#0A162D]/80 via-[#0A162D]/60 to-[#0A162D]/90" />
+    <div class="absolute inset-0 bg-gradient-to-b from-msi-dark/90 via-msi-dark/70 to-msi-dark/95" />
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-20 flex flex-col items-center text-center">
       <UBadge
         v-if="displayBadge"

@@ -28,7 +28,6 @@ const gatewayCards = computed(() => [
       : 'Compare milestones for Direct Entry candidates and Non-traditional / Bridging applicants.',
     to: localePath('/future-students/pathways'),
     icon: 'i-lucide-git-branch',
-    color: 'hover:border-orange-500'
   },
   {
     title: locale.value === 'vi' ? 'Chia Sẻ Cựu Sinh Viên & Việc Làm' : 'Alumni Stories & Career Prospects',
@@ -38,7 +37,6 @@ const gatewayCards = computed(() => [
       : 'Read insights from graduates and discover career paths in semiconductor, automotive, and energy R&D.',
     to: localePath('/future-students/alumni'),
     icon: 'i-lucide-users',
-    color: 'hover:border-sky-500'
   },
   {
     title: locale.value === 'vi' ? 'Học Phí & Học Bổng Toàn Phần DAAD' : 'Tuition & DAAD Scholarships',
@@ -48,7 +46,6 @@ const gatewayCards = computed(() => [
       : 'Fixed transparent tuition fees and prestigious DAAD Sur-Place scholarships with monthly living stipends.',
     to: localePath('/tuition-scholarships'),
     icon: 'i-lucide-award',
-    color: 'hover:border-amber-500'
   },
   {
     title: locale.value === 'vi' ? 'Sổ Tay Môn Học & Đề Cương (25+ Môn)' : 'Course Handbook & Syllabi',
@@ -58,7 +55,6 @@ const gatewayCards = computed(() => [
       : 'Browse 15 compulsory core modules and 10+ electives taught in English by visiting German professors.',
     to: localePath('/program-structure/modules'),
     icon: 'i-lucide-book-open',
-    color: 'hover:border-orange-500'
   }
 ])
 </script>
@@ -93,8 +89,7 @@ const gatewayCards = computed(() => [
               v-for="gate in gatewayCards"
               :key="gate.to"
               :to="gate.to"
-              class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between gap-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group"
-              :class="gate.color"
+              class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-500 hover:shadow-primary-500/5 group"
             >
               <div>
                 <div class="flex items-center justify-between gap-2 mb-3">

@@ -29,7 +29,7 @@ const displaySecondaryLink = computed(() => props.secondaryLink ?? page.value.ct
     class="relative bg-cover bg-center bg-no-repeat overflow-hidden"
     :style="{ backgroundImage: `url(${displayBackgroundImage})` }"
   >
-    <div class="absolute inset-0 bg-gradient-to-br from-[#0A162D]/90 to-[#1E3A5F]/85" />
+    <div class="absolute inset-0 bg-gradient-to-br from-msi-dark/95 via-msi-dark/90 to-msi-navy/90" />
     <div class="relative z-10 text-center py-20 px-4 sm:px-6 max-w-4xl mx-auto flex flex-col items-center gap-6">
       <UBadge
         v-if="displayBadge"

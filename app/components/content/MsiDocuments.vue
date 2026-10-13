@@ -27,8 +27,8 @@ const documents: MsiDocumentItem[] = [
   {
     id: 'booklet',
     icon: 'i-lucide-book-open',
-    iconBg: 'bg-orange-50',
-    iconColor: 'text-orange-600 ring-orange-200/60',
+    iconBg: 'bg-slate-100',
+    iconColor: 'text-slate-700 ring-slate-200/80',
     labelEn: 'PDF',
     labelVi: 'PDF',
     titleEn: 'MSI Program Booklet',
@@ -43,8 +43,8 @@ const documents: MsiDocumentItem[] = [
   {
     id: 'leaflet',
     icon: 'i-lucide-file-text',
-    iconBg: 'bg-sky-50',
-    iconColor: 'text-sky-600 ring-sky-200/60',
+    iconBg: 'bg-slate-100',
+    iconColor: 'text-slate-700 ring-slate-200/80',
     labelEn: 'PDF',
     labelVi: 'PDF',
     titleEn: 'MSI Quick-Guide Leaflet',
@@ -59,8 +59,8 @@ const documents: MsiDocumentItem[] = [
   {
     id: 'scholarships',
     icon: 'i-lucide-graduation-cap',
-    iconBg: 'bg-amber-50',
-    iconColor: 'text-amber-600 ring-amber-200/60',
+    iconBg: 'bg-slate-100',
+    iconColor: 'text-slate-700 ring-slate-200/80',
     labelEn: 'PDF',
     labelVi: 'PDF',
     titleEn: 'MSI Scholarships',

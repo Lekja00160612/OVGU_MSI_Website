@@ -143,12 +143,12 @@ const showAcademicActivitiesToast = () => {
         duration: config.public.eventToastDurationMs || 6000,
         close: true,
         ui: {
-          root: 'relative group overflow-hidden bg-[#0f2240] shadow-[0_12px_40px_rgba(0,0,0,.55),0_2px_10px_rgba(232,119,34,.12)] rounded-xl ring-1 ring-[rgba(232,119,34,.3)] p-5 pb-7 flex gap-3.5 focus:outline-none border-l-[4px] border-l-[#e87722] items-start',
+          root: 'relative group overflow-hidden bg-msi-dark shadow-[0_12px_40px_rgba(0,0,0,.55),0_2px_10px_rgba(232,119,34,.12)] rounded-xl ring-1 ring-[rgba(232,119,34,.3)] p-5 pb-7 flex gap-3.5 focus:outline-none border-l-[4px] border-l-primary-500 items-start',
           wrapper: 'w-0 flex-1 flex flex-col',
           title: 'text-sm font-bold text-white tracking-tight pr-8',
           description: 'text-xs text-slate-300 leading-relaxed mt-1.5',
-          icon: 'shrink-0 size-5 text-[#e87722] mt-0.5',
-          close: 'p-0.5 text-slate-400 hover:text-[#e87722] transition-colors duration-150 absolute top-4 right-4',
+          icon: 'shrink-0 size-5 text-primary-500 mt-0.5',
+          close: 'p-0.5 text-slate-400 hover:text-primary-500 transition-colors duration-150 absolute top-4 right-4',
           actions: 'flex gap-1.5 shrink-0 items-start mt-4'
         },
         actions: [
@@ -663,7 +663,7 @@ const scrollToFooter = () => {
     </main>
 
     <!-- === SECTION: Global Footer === -->
-    <footer id="site-footer" class="bg-[#0f2240] text-slate-300 relative overflow-hidden border-t-4 border-t-orange-500 pt-16 pb-12 sm:pt-20 sm:pb-16 font-sans">
+    <footer id="site-footer" class="bg-msi-dark text-slate-300 relative overflow-hidden border-t-4 border-t-primary-500 pt-16 pb-12 sm:pt-20 sm:pb-16 font-sans">
       <!-- Decorative Backdrop Glow -->
       <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
       <div class="absolute -left-20 -top-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />

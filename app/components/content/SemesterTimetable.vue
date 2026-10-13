@@ -331,7 +331,7 @@ const weekDayLabels = [
 
     <!-- === SECTION 1: Title & Overview === -->
     <div class="text-center max-w-2xl mx-auto mb-7">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1e3a5f] tracking-tight mb-2">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-msi-navy tracking-tight mb-2">
         {{ isVi ? 'Kế Hoạch & Lịch Học Dự Kiến' : 'Prospective Semester Schedule' }}
       </h2>
       <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -343,9 +343,9 @@ const weekDayLabels = [
     </div>
 
     <!-- === SECTION 2: Open Lectures Policy Notice === -->
-    <div class="bg-[#eef3fb] border border-[#cddaee] border-l-4 border-l-orange-500 rounded-xl p-4 sm:p-5 mb-6 shadow-xs">
+    <div class="bg-msi-blue-50 border border-msi-blue-100 border-l-4 border-l-primary-500 rounded-xl p-4 sm:p-5 mb-6 shadow-xs">
       <div class="mb-1">
-        <strong class="text-sm font-bold text-[#1e3a5f]">
+        <strong class="text-sm font-bold text-msi-navy">
           {{ isVi ? 'Thông báo về dự thính bài giảng mở:' : 'Open Lectures Policy:' }}
         </strong>
       </div>
@@ -419,7 +419,7 @@ const weekDayLabels = [
     <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden mb-8">
       <!-- Calendar Nav Header -->
       <div class="bg-slate-50/80 px-4 sm:px-6 py-3.5 border-b border-slate-200 flex items-center justify-between gap-4">
-        <h3 class="text-base sm:text-lg font-bold text-[#1e3a5f] tracking-tight">
+        <h3 class="text-base sm:text-lg font-bold text-msi-navy tracking-tight">
           {{ currentMonthLabel }}
         </h3>
         <div class="flex items-center gap-1.5">
@@ -504,7 +504,7 @@ const weekDayLabels = [
     <!-- === SECTION 5: Course Modules & Scheduled Dates Table === -->
     <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden mb-8">
       <div class="px-5 py-4 border-b border-slate-200 bg-slate-50/80 flex items-center justify-between gap-4">
-        <h3 class="text-base sm:text-lg font-bold text-[#1e3a5f]">
+        <h3 class="text-base sm:text-lg font-bold text-msi-navy">
           {{ isVi ? 'Danh Sách Các Khối Môn Học & Thời Gian Dự Kiến' : 'Prospective Course Modules & Scheduled Dates' }}
         </h3>
         <UBadge color="primary" variant="subtle" size="sm" class="font-bold">

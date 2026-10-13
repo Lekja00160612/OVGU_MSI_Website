@@ -24,18 +24,18 @@ Our scholars are:
 
 ---
 
-## 🎙️ Student Reflections: Insights from our Scholars
+## Student Reflections: Insights from our Scholars
 
 Hear directly from our DAAD scholars about their experiences in the VGU MSI program and their anticipation of studying in Germany:
 
-### 🔬 Nguyễn Sơn Tùng: A Strong Scientific Foundation
+### Nguyễn Sơn Tùng: A Strong Scientific Foundation
 > "Receiving the DAAD Scholarship is a great honor and motivation for me. The MSI program at VGU has provided a strong academic foundation in materials science, and I am excited to continue my research journey in Germany. I hope to gain deeper knowledge and contribute to advanced materials research in the future."
 
 ![Nguyễn Sơn Tùng - DAAD Scholar 2024](/images/academic_activities/daad-scholarships-img-1.png)
 
 ---
 
-### ⚛️ Nguyễn Ngọc Thuỵ Khanh: Access to Global Research Networks
+### Nguyễn Ngọc Thuỵ Khanh: Access to Global Research Networks
 > "This scholarship opens an incredible opportunity to experience Germany's research environment and collaborate with international scientists. I am very thankful to the MSI program and our professors for their guidance and support throughout my studies."
 
 ![Nguyễn Ngọc Thuỵ Khanh - DAAD Scholar 2024](/images/academic_activities/daad-scholarships-img-2.png)

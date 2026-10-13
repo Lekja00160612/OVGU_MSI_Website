@@ -26,8 +26,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Nền tảng khoa học vật liệu cơ bản: Vật lý chất rắn, Cơ học môi trường liên tục, Đặc tính vật liệu, Gốm sứ, Kim loại, Polyme.'
       : 'Core scientific foundation: Solid state physics, continuum mechanics, characterization, ceramics, metals, polymers.',
-    color: '#1E3A5F',
-    bg: 'bg-slate-900',
+    bg: 'bg-msi-navy',
     icon: 'i-lucide-book-open'
   },
   {
@@ -36,8 +35,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Chuyên sâu theo định hướng: Cơ học tính toán, Vật liệu nano, Vật liệu y sinh, Cảm biến bán dẫn hoặc Quản trị.'
       : 'Specialization tracks: Computational mechanics, nano-materials, biomaterials, smart sensorics, or management.',
-    color: '#009FDF',
-    bg: 'bg-sky-600',
+    bg: 'bg-secondary-500',
     icon: 'i-lucide-flask-conical'
   },
   {
@@ -46,8 +44,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Thao tác trực tiếp trên 22+ thiết bị phân tích hiện đại tại VGU (SEM, XRD, TGA) và nghiên cứu tài liệu khoa học theo nhóm.'
       : 'Direct hands-on training on 22+ characterization instruments (SEM, XRD, TGA) and collaborative literature research.',
-    color: '#E87722',
-    bg: 'bg-orange-500',
+    bg: 'bg-primary-500',
     icon: 'i-lucide-microscope'
   },
   {
@@ -56,8 +53,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Đề tài nghiên cứu độc lập 6 tháng dưới sự hướng dẫn song phương của giáo sư OVGU Magdeburg và VGU.'
       : '6-month independent capstone research project supervised jointly by OVGU Magdeburg and VGU faculty.',
-    color: '#C2410C',
-    bg: 'bg-amber-600',
+    bg: 'bg-primary-700',
     icon: 'i-lucide-graduation-cap'
   }
 ])
@@ -126,7 +122,6 @@ const gatewayCards = computed(() => [
     to: localePath('/program-structure/modules'),
     badge: 'Core + Electives',
     icon: 'i-lucide-book-open',
-    color: 'hover:border-orange-500 hover:shadow-orange-500/10'
   },
   {
     title: locale.value === 'vi' ? 'Thời Khóa Biểu & Lịch Học' : 'Semester Timetable Matrix',
@@ -136,7 +131,6 @@ const gatewayCards = computed(() => [
     to: localePath('/program-structure/timetable'),
     badge: 'WS 26/27 Live',
     icon: 'i-lucide-calendar',
-    color: 'hover:border-sky-500 hover:shadow-sky-500/10'
   },
   {
     title: locale.value === 'vi' ? 'Đề Tài Luận Văn Thạc Sĩ' : 'Master Thesis Topics Portal',
@@ -146,7 +140,6 @@ const gatewayCards = computed(() => [
     to: localePath('/program-structure/thesis'),
     badge: '30 ECTS Capstone',
     icon: 'i-lucide-graduation-cap',
-    color: 'hover:border-indigo-500 hover:shadow-indigo-500/10'
   },
   {
     title: locale.value === 'vi' ? 'Hành Trình Sang Đức (OVGU)' : 'Path to Germany Relocation',
@@ -156,7 +149,6 @@ const gatewayCards = computed(() => [
     to: localePath('/student-life/germany-relocation'),
     badge: 'OVGU Magdeburg',
     icon: 'i-lucide-plane-takeoff',
-    color: 'hover:border-emerald-500 hover:shadow-emerald-500/10'
   }
 ])
 </script>
@@ -305,8 +297,7 @@ const gatewayCards = computed(() => [
         v-for="gate in gatewayCards"
         :key="gate.to"
         :to="gate.to"
-        class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between gap-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group"
-        :class="gate.color"
+        class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-500 hover:shadow-primary-500/5 group"
       >
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">

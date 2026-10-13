@@ -20,7 +20,7 @@ Supervised by **Prof. Dr.-Ing. Thomas Bier**, our flying faculty from Germany, t
 
 ---
 
-## 🔬 Practicing Modern Binder Engineering
+## Practicing Modern Binder Engineering
 
 Operating in VGU's advanced concrete technology laboratory, student groups conducted key industrial characterization and mixing steps:
 
@@ -37,7 +37,7 @@ Operating in VGU's advanced concrete technology laboratory, student groups condu
 
 ---
 
-## 🚀 Building Real-World Competency
+## Building Real-World Competency
 
 Through these practical, collaborative exercises, VGU students gain deep, quantitative insights into concrete mix design, microstructural development, and durability control. 
 

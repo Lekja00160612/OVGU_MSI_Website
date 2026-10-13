@@ -21,16 +21,16 @@ Their arrival represents the robust, structural partnership between VGU, **Otto 
 
 ---
 
-## ✈️ Meet Our German Flying Faculty & Core Courses
+## Meet Our German Flying Faculty & Core Courses
 
 During this intensive block semester, students from the MSI Intake 2024 and Intake 2025 cohorts engaged with leading experts across metallic and polymer material classes:
 
-### ⚙️ Metals & Structural Mechanics
+### Metals & Structural Mechanics
 - **Dr. Sebastian Hütter** (Research Associate, OVGU Magdeburg)
 - **Dr. Georg Hasemann** (Chair of Metallic Materials, OVGU Magdeburg)
 - **Core Topics:** High-temperature superalloys, advanced dislocation dynamics, crystal lattice defects, and deformation mechanisms.
 
-### 🧪 Advanced Polymer Materials
+### Advanced Polymer Materials
 - **Prof. Dr. rer. nat. Sven Henning** (Fraunhofer Institute for Microstructure of Materials and Systems IMWS)
 - **Core Topics:** Polymer physics, molecular structure-property relationships, polymer matrix composites, and microstructural failure analysis.
 
@@ -42,7 +42,7 @@ During this intensive block semester, students from the MSI Intake 2024 and Inta
 
 ---
 
-## 🤝 Building a Global Scientific Network
+## Building a Global Scientific Network
 
 This morning, our faculty members joined the MSI 2024 and MSI 2025 students for a memorable campus photo session, capturing the vibrant spirit of international partnership, scientific curiosity, and academic excellence that defines VGU.
 

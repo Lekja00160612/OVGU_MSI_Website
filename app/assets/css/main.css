@@ -52,9 +52,14 @@
   --color-neutral-900: #0F172A;
   --color-neutral-950: #0A0F1D;
 
-  /* Institutional Aliases */
+  /* Institutional Palette Utilities */
   --color-msi-navy: #1E3A5F;
+  --color-msi-navy-light: #2E5280;
   --color-msi-dark: #0F2240;
+  --color-msi-blue-50: #EEF3FB;
+  --color-msi-blue-100: #CDDAEE;
+  --color-vgu-orange: #E87722;
+  --color-ovgu-cyan: #009FDF;
 }
 
 /* ── Core Design Tokens (CSS Variables for dynamic styles & posters) ── */
@@ -132,6 +137,17 @@
   .prose a[data-slot="base"],
   [data-slot="base"] {
     text-decoration: none !important;
+  }
+
+  .prose a[data-slot="base"] {
+    color: inherit;
+  }
+
+  .prose a[data-slot="base"].bg-primary,
+  .prose a[data-slot="base"][class*="bg-primary"],
+  .prose a[data-slot="base"].text-white,
+  .prose a[data-slot="base"][class*="text-white"] {
+    color: #ffffff !important;
   }
 
 
@@ -225,13 +241,13 @@
   font-weight: 700;
 }
 
-.prose a {
+.prose a:not([data-slot="base"]):not([role="button"]) {
   color: var(--color-accent);
   text-decoration: underline;
   transition: color 150ms ease;
 }
 
-.prose a:hover {
+.prose a:not([data-slot="base"]):not([role="button"]):hover {
   color: var(--color-accent-dark);
 }
 

@@ -20,7 +20,7 @@ As a key part of our *Master of Science in Materials Science (MSI)* curriculum, 
 
 ---
 
-## 🏛️ From Chemistry to Construction: Technical Focus
+## From Chemistry to Construction: Technical Focus
 
 Knauf engineers guided the students through the entire automated manufacturing process, showing the physical chemistry behind modern building elements:
 
@@ -36,7 +36,7 @@ Knauf engineers guided the students through the entire automated manufacturing p
 
 ---
 
-## 🏗️ Hands-On Autoclaved Construction Practice
+## Hands-On Autoclaved Construction Practice
 
 Following the plant tour, VGU MSI students engaged in an interactive **hands-on workshop** led by Knauf technical instructors:
 

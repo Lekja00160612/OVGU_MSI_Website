@@ -20,7 +20,7 @@ This interactive format allowed students to demonstrate their deep understanding
 
 ---
 
-## 🛠️ The Scientific Core: What Our Students Mastered
+## The Scientific Core: What Our Students Mastered
 
 Throughout the module, students explored the mathematical and physical principles governing how solid materials deform and fail under complex stress states:
 
@@ -38,7 +38,7 @@ Throughout the module, students explored the mathematical and physical principle
 
 ---
 
-## 🚀 Building Key Professional Competencies
+## Building Key Professional Competencies
 
 By shifting the final evaluation from a standard exam to a **presentation-based symposium**, the MSI program reinforces essential professional skills:
 - **Scientific Communication:** Translating complex tensor calculus and finite element results into clean, comprehensible slides.

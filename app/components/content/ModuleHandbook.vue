@@ -272,10 +272,10 @@ onMounted(() => {
             </span>
             <span
               v-else-if="hasGermanLecturer(mod)"
-              class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 tracking-wider flex items-center gap-1"
+              class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-300 tracking-wider flex items-center gap-1"
               title="Taught by Visiting German Professor from OVGU Magdeburg"
             >
-              <span>🇩🇪</span>
+              <UIcon name="i-lucide-plane" class="size-3 text-slate-700" />
               <span>OVGU</span>
             </span>
           </div>

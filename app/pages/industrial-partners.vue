@@ -154,7 +154,7 @@ const industrialConnections = computed(() => [
       </div>
 
       <!-- Open Call for Collaboration & Applied Research -->
-      <div class="bg-gradient-to-br from-[#0F2240] to-[#1E3A5F] text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-700/50 relative overflow-hidden">
+      <div class="bg-gradient-to-br from-msi-dark to-msi-navy text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-700/50 relative overflow-hidden">
         <div class="absolute -right-20 -top-20 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div class="relative z-10 flex flex-col gap-8">

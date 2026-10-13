@@ -222,10 +222,10 @@ const layoutArrows = computed(() => {
     <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs text-center max-w-xl mx-auto w-full flex flex-col items-center gap-1">
       <h3 class="text-lg font-extrabold text-slate-900 m-0">
         <template v-if="locale === 'vi'">
-          <span class="text-primary-600 font-extrabold">{{ currentNodes.length }} bước</span> trên hành trình của bạn
+          <span class="text-orange-600 font-extrabold">{{ currentNodes.length }} bước</span> trên hành trình của bạn
         </template>
         <template v-else>
-          <span class="text-primary-600 font-extrabold">{{ currentNodes.length }} steps</span> on your journey
+          <span class="text-orange-600 font-extrabold">{{ currentNodes.length }} steps</span> on your journey
         </template>
       </h3>
       <p class="text-sm text-slate-600 font-medium leading-relaxed m-0">
@@ -233,26 +233,27 @@ const layoutArrows = computed(() => {
       </p>
     </div>
 
-    <!-- Custom Tab Switcher Grid -->
-    <div class="flex flex-wrap justify-center gap-2 mb-2">
-      <UButton
+    <!-- Custom Tab Switcher Grid (Navy Active & Slate Inactive for high contrast) -->
+    <div class="flex flex-wrap justify-center gap-2.5 mb-2">
+      <button
         v-for="tab in computedTabs"
         :key="tab.id"
-        :variant="activeTabId === tab.id ? 'solid' : 'outline'"
-        color="primary"
-        size="sm"
-        class="rounded-full font-semibold shadow-xs"
-        icon="i-lucide-clipboard-list"
+        type="button"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer shadow-2xs"
+        :class="activeTabId === tab.id
+          ? 'bg-[#1E3A5F] text-white shadow-sm ring-1 ring-[#1E3A5F]'
+          : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200/90'"
         @click="activeTabId = tab.id"
       >
-        {{ tab.label }}
-      </UButton>
+        <UIcon name="i-lucide-route" class="size-4" :class="activeTabId === tab.id ? 'text-orange-400' : 'text-slate-500'" />
+        <span>{{ tab.label }}</span>
+      </button>
     </div>
 
     <!-- Main Workspace Layout -->
     <div class="w-full flex flex-col gap-6">
       <!-- 1. Visual SVG Pathway (Horizontal & Scrollable) -->
-      <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-inner overflow-x-auto">
+      <div class="w-full bg-slate-50 border border-slate-200 rounded-3xl p-4 sm:p-6 shadow-inner overflow-x-auto">
         <div class="flex justify-center min-w-fit mx-auto">
           <svg :viewBox="`0 0 ${svgWidth} ${svgHeight}`" :style="{ width: svgWidth + 'px', height: svgHeight + 'px' }">
             <defs>
@@ -265,11 +266,6 @@ const layoutArrows = computed(() => {
               >
                 <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1E3A5F" />
               </marker>
-              <!-- Rough hand-drawn effect overlay filter -->
-              <filter :id="componentId" x="-10%" y="-10%" width="120%" height="120%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise" />
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
-              </filter>
             </defs>
 
             <!-- Draw Connection Arrows -->
@@ -282,7 +278,6 @@ const layoutArrows = computed(() => {
               stroke-width="3"
               :stroke-dasharray="arrow.type === 'dashed' ? '6,5' : 'none'"
               marker-end="url(#marker-arrow)"
-              :filter="componentId ? `url(#${componentId})` : 'none'"
             />
 
             <!-- Draw Step Nodes -->
@@ -298,7 +293,6 @@ const layoutArrows = computed(() => {
                 :fill="selectedNodeIndex === node.index ? '#E87722' : (node.color || '#1E3A5F')"
                 :stroke="selectedNodeIndex === node.index ? '#C95E0A' : 'transparent'"
                 stroke-width="3.5"
-                :filter="componentId ? `url(#${componentId})` : 'none'"
               />
               
               <!-- Number Index -->
@@ -313,7 +307,7 @@ const layoutArrows = computed(() => {
               <!-- Node Labels (centered on top of the circle) -->
               <text
                 :x="node.cx" :y="node.cy - node.r - 20"
-                :fill="selectedNodeIndex === node.index ? '#C95E0A' : '#0F2240'"
+                :fill="selectedNodeIndex === node.index ? '#E87722' : '#0F2240'"
                 font-size="12.5"
                 font-weight="800"
                 text-anchor="middle"
@@ -332,30 +326,38 @@ const layoutArrows = computed(() => {
         </div>
       </div>
 
-      <!-- 2. Detail View Panel (Fixed Height & Scrollable Vertically) -->
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col max-w-2xl mx-auto w-full" v-if="activeNode">
-        <div class="flex flex-col gap-3" :key="activeNode.id">
+      <!-- 2. Detail View Panel (Stabilized Height to Prevent CLS) -->
+      <div
+        v-if="activeNode"
+        class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs flex flex-col justify-between max-w-2xl mx-auto w-full min-h-[380px] sm:min-h-[340px] transition-all duration-200"
+      >
+        <div class="flex flex-col gap-3">
           <div>
-            <UBadge color="primary" variant="subtle" size="sm" class="mb-2">
+            <UBadge color="neutral" variant="subtle" size="sm" class="mb-2 font-bold text-slate-700">
               {{ locale === 'vi' ? `Bước ${selectedNodeIndex + 1} của ${currentNodes.length}` : `Step ${selectedNodeIndex + 1} of ${currentNodes.length}` }}
             </UBadge>
-            <h3 class="text-xl font-extrabold text-slate-900 mb-1">{{ activeNode.label }}</h3>
-            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider" v-if="activeNode.sub">{{ activeNode.sub }}</span>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-1 leading-snug">{{ activeNode.label }}</h3>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block" v-if="activeNode.sub">{{ activeNode.sub }}</span>
           </div>
 
           <div class="flex flex-col gap-4 text-sm text-slate-700 leading-relaxed">
             <!-- Dynamic Parsed Markdown Content -->
-            <div class="prose max-w-none text-slate-700 text-sm" v-html="parseMarkdown(activeNode.desc)"></div>
+            <div class="prose max-w-none text-slate-700 text-sm leading-relaxed" v-html="parseMarkdown(activeNode.desc)"></div>
 
-            <!-- Static Guidance Box -->
-            <div class="p-4 rounded-xl bg-orange-50/70 border border-orange-200/60">
-              <h4 class="text-xs font-bold text-orange-900 uppercase tracking-wider mb-1">
-                {{ locale === 'vi' ? 'Hướng dẫn / Chuẩn bị:' : 'Guidance / Preparation:' }}
-              </h4>
-              <p class="text-sm font-medium text-orange-950 m-0">{{ activeNode.todoText }}</p>
+            <!-- Static Guidance Box: Reassuring Slate Neutral Card -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 flex items-start gap-3.5 my-1">
+              <div class="size-8 rounded-xl bg-slate-200/80 text-slate-700 flex items-center justify-center shrink-0 mt-0.5 ring-1 ring-slate-300/50">
+                <UIcon name="i-lucide-clipboard-check" class="size-4.5" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1">
+                  {{ locale === 'vi' ? 'Hướng dẫn / Chuẩn bị:' : 'Guidance / Preparation:' }}
+                </h4>
+                <p class="text-xs sm:text-sm font-medium text-slate-700 m-0 leading-relaxed">{{ activeNode.todoText }}</p>
+              </div>
             </div>
 
-            <!-- Official Website Button Link -->
+            <!-- Official Website Button Link: Vibrant VGU Orange CTA -->
             <div v-if="activeNode.link && activeNode.link !== '#'" class="mt-2">
               <UButton
                 :to="activeNode.link"
@@ -366,39 +368,39 @@ const layoutArrows = computed(() => {
                 size="md"
                 block
                 trailing-icon="i-lucide-external-link"
-                class="font-bold rounded-xl justify-center shadow-xs"
+                class="font-bold rounded-xl justify-center shadow-xs !text-white text-white"
               >
                 {{ locale === 'vi' ? 'Đi đến Cổng Thông Tin Chính Thức' : 'Visit Official Portal / Resource' }}
               </UButton>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- 3. Navigation Buttons for easy progression -->
-      <div class="flex justify-between items-center gap-3 max-w-2xl mx-auto w-full">
-        <UButton
-          color="neutral"
-          variant="outline"
-          size="sm"
-          icon="i-lucide-chevron-left"
-          class="font-semibold rounded-xl"
-          :disabled="selectedNodeIndex === 0"
-          @click="prevNode"
-        >
-          {{ locale === 'vi' ? 'Trước' : 'Prev' }}
-        </UButton>
-        <UButton
-          color="primary"
-          variant="solid"
-          size="sm"
-          trailing-icon="i-lucide-chevron-right"
-          class="font-semibold rounded-xl shadow-xs"
-          :disabled="selectedNodeIndex === currentNodes.length - 1"
-          @click="nextNode"
-        >
-          {{ locale === 'vi' ? 'Tiếp theo' : 'Next' }}
-        </UButton>
+        <!-- 3. Navigation Buttons for easy progression (Locked at bottom of card) -->
+        <div class="flex justify-between items-center gap-3 pt-6 mt-4 border-t border-slate-100">
+          <UButton
+            color="neutral"
+            variant="outline"
+            size="sm"
+            icon="i-lucide-chevron-left"
+            class="font-semibold rounded-xl cursor-pointer"
+            :disabled="selectedNodeIndex === 0"
+            @click="prevNode"
+          >
+            {{ locale === 'vi' ? 'Trước' : 'Prev' }}
+          </UButton>
+          <UButton
+            color="primary"
+            variant="solid"
+            size="sm"
+            trailing-icon="i-lucide-chevron-right"
+            class="font-semibold rounded-xl shadow-xs text-white cursor-pointer"
+            :disabled="selectedNodeIndex === currentNodes.length - 1"
+            @click="nextNode"
+          >
+            {{ locale === 'vi' ? 'Tiếp theo' : 'Next' }}
+          </UButton>
+        </div>
       </div>
     </div>
   </div>

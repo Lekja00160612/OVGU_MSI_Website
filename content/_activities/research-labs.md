@@ -20,17 +20,17 @@ Held in our state-of-the-art laboratory facility, this hands-on course allowed s
 
 ---
 
-## 🔬 Experiential Learning: Key Lab Disciplines
+## Experiential Learning: Key Lab Disciplines
 
 Students rotated through three research-grade laboratory suites, gaining practical competencies required for modern materials engineering:
 
-### ⚙️ 1. Powder Metallurgy & Mechanical Alloying
+### 1. Powder Metallurgy & Mechanical Alloying
 - **The Work:** Mastering synthesis routes for high-melting-point refractory alloys. Students controlled high-energy ball milling parameters to refine particles and induce mechanical alloying at solid state.
 
-### ⛓️ 2. Heat Treatment & Metallography
+### 2. Heat Treatment & Metallography
 - **The Work:** Quenching, tempering, and sintering alloys to systematically alter mechanical properties. Students prepared metallographic specimens through grinding and polishing, using chemical etchants to resolve grain structures.
 
-### 🔬 3. High-End Material Characterization & Analytics
+### 3. High-End Material Characterization & Analytics
 - **The Work:** Operating advanced scientific characterization equipment to inspect milled powders and structural alloys.
 - **Tools Used:** X-Ray Diffraction (XRD) for phase identification, Scanning Electron Microscopy (SEM) for morphology, and laser diffraction for particle size analysis.
 
@@ -43,7 +43,7 @@ Students rotated through three research-grade laboratory suites, gaining practic
 
 ---
 
-## 🚀 Preparing Globally Competitive Materials Experts
+## Preparing Globally Competitive Materials Experts
 
 The hands-on competencies developed in these research labs prepare our students for professional success. 
 

@@ -175,6 +175,6 @@ To prepare a smooth application, ensure you have the following documents ready i
 
 ## Next Steps
 
-- 🌟 Read inspiring stories from graduates in our **[Alumni Testimonials & Career Outcomes Guide →](/future-students/alumni)**
-- 💰 Check scholarship deadlines and tuition details on the **[Tuition & Scholarships Page →](/tuition-scholarships)**
-- 🏛️ Explore our curriculum structure on the **[Degree Blueprint (120 ECTS) Page →](/program-structure)**
+- Read inspiring stories from graduates in our **[Alumni Testimonials & Career Outcomes Guide →](/future-students/alumni)**
+- Check scholarship deadlines and tuition details on the **[Tuition & Scholarships Page →](/tuition-scholarships)**
+- Explore our curriculum structure on the **[Degree Blueprint (120 ECTS) Page →](/program-structure)**

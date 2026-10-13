@@ -176,7 +176,7 @@ onUnmounted(() => {
         rel="noopener noreferrer"
         icon="i-lucide-file-text"
         size="md"
-        class="flex-1 justify-center font-bold rounded-xl shadow-sm bg-[#1E3A5F] hover:bg-[#0F2240] text-white cursor-pointer py-2.5 transition-all text-xs sm:text-sm"
+        class="flex-1 justify-center font-bold rounded-xl shadow-sm bg-msi-navy hover:bg-msi-dark text-white cursor-pointer py-2.5 transition-all text-xs sm:text-sm"
       >
         {{ applicationLabel || 'Official Application 2026 (PDF)' }}
       </UButton>

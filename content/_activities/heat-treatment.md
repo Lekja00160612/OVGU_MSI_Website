@@ -20,25 +20,25 @@ These experiments are designed to directly bridge theoretical phase transformati
 
 ---
 
-## 🔬 Core Metallurgical Lab Exercises
+## Core Metallurgical Lab Exercises
 
 Students rotated through four distinct experimental modules, utilizing professional furnace systems, polishing stations, and hardness testers:
 
-### ⚙️ Exercise 1: Hardening & Tempering of C45 Carbon Steel
+### Exercise 1: Hardening & Tempering of C45 Carbon Steel
 - **Core Activity:** Heating C45 specimens into the single-phase austenite region, quenching to lock in a fully martensitic structure, followed by tempering runs at varied temperatures.
 - **Goal:** Analyzing the structural transition from **soft annealed ferrite-pearlite** to **hard brittle martensite**, and finally to **ductile tempered martensite**.
 - **Assessment:** Quantitative evaluation of how tempering temperature systematically lowers hardness while restoring toughness.
 
-### 🌊 Exercise 2: Influence of Quenching Media on Critical Cooling Rates
+### Exercise 2: Influence of Quenching Media on Critical Cooling Rates
 - **Quenching Media Tested:** *Air, Oil, and Water*.
 - **Goal:** Exploring the thermodynamic concept of the **critical cooling rate** required to bypass the pearlite/bainite noses on Time-Temperature-Transformation (TTT) diagrams.
 - **Assessment:** Correlating cooling speeds directly to microstructure and hardness, while analyzing structural risks such as **residual stresses** and **quenching cracks**.
 
-### ⛓️ Exercise 3: Hardenability of Alloyed Steels (C45 vs. 42CrMo4)
+### Exercise 3: Hardenability of Alloyed Steels (C45 vs. 42CrMo4)
 - **Goal:** Subjecting plain carbon C45 and low-alloy 42CrMo4 structural steel to identical quenching runs.
 - **Assessment:** Evaluating how chromium ($Cr$) and molybdenum ($Mo$) retard diffusion, shifting TTT curves and allowing thick parts to harden completely through. Students gain critical insights into material selection and engineering trade-offs.
 
-### 🧪 Exercise 4: Precipitation Hardening of Lightweight Aluminum Alloys
+### Exercise 4: Precipitation Hardening of Lightweight Aluminum Alloys
 - **Goal:** Performing solution annealing followed by rapid quenching and artificial/natural aging of high-strength aluminum specimens.
 - **Assessment:** Plotting age-hardening curves to monitor how coherent nanometer-sized precipitates pin dislocations, dramatically increasing the yield strength of lightweight structures.
 

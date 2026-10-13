@@ -54,40 +54,17 @@ provide('pageData', {
 
     <!-- Link Banner to Industry Connections Page -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
-      <div class="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        <div class="flex items-start gap-4">
-          <div class="size-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 ring-1 ring-orange-200/60 mt-1 sm:mt-0">
-            <UIcon name="i-lucide-building-2" class="size-6" />
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-slate-900">
-              {{ locale === 'vi' ? 'Khám Phá Kết Nối Doanh Nghiệp & Điểm Đến Kiến Tập' : 'Explore Industry Connections & Plant Visits' }}
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
-              {{ locale === 'vi'
-                ? 'Tìm hiểu các doanh nghiệp sản xuất và cơ sở công nghệ mà học viên MSI đã đến tham quan, kiến tập dây chuyền sản xuất thực tế trong chương trình.'
-                : 'Learn about the manufacturing plants, industrial facilities, and technology sites explored by MSI Master students during educational excursions.'
-              }}
-            </p>
-          </div>
-        </div>
-
-        <NuxtLink
-          :to="localePath('/industrial-partners')"
-          class="shrink-0"
-        >
-          <UButton
-            color="primary"
-            variant="solid"
-            size="md"
-            icon="i-lucide-arrow-right"
-            trailing
-            class="font-bold rounded-xl px-5 py-2.5 shadow-xs cursor-pointer"
-          >
-            {{ locale === 'vi' ? 'Xem Kết Nối Doanh Nghiệp' : 'View Industry Connections' }}
-          </UButton>
-        </NuxtLink>
-      </div>
+      <CalloutBanner
+        variant="white"
+        icon="i-lucide-building-2"
+        :title="locale === 'vi' ? 'Khám Phá Kết Nối Doanh Nghiệp & Điểm Đến Kiến Tập' : 'Explore Industry Connections & Plant Visits'"
+        :description="locale === 'vi'
+          ? 'Tìm hiểu các doanh nghiệp sản xuất và cơ sở công nghệ mà học viên MSI đã đến tham quan, kiến tập dây chuyền sản xuất thực tế trong chương trình.'
+          : 'Learn about the manufacturing plants, industrial facilities, and technology sites explored by MSI Master students during educational excursions.'"
+        :to="localePath('/industrial-partners')"
+        :button-text="locale === 'vi' ? 'Xem Kết Nối Doanh Nghiệp' : 'View Industry Connections'"
+        button-icon="i-lucide-arrow-right"
+      />
     </div>
   </div>
 </template>

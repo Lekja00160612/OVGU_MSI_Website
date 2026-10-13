@@ -172,6 +172,6 @@ nodes:
 
 ## Các Bước Tiếp Theo
 
-- 🌟 Đọc câu chuyện thực tế từ cựu sinh viên tại **[Trang Chia Sẻ Cựu Sinh Viên & Sự Nghiệp →](/vi/future-students/alumni)**
-- 💰 Xem chi tiết các suất học bổng toàn phần tại **[Trang Học Phí & Học Bổng →](/vi/tuition-scholarships)**
-- 🏛️ Tìm hiểu khung đào tạo 120 ECTS tại **[Trang Khung Đào Tạo Chuẩn Đức →](/vi/program-structure)**
+- Đọc câu chuyện thực tế từ cựu sinh viên tại **[Trang Chia Sẻ Cựu Sinh Viên & Sự Nghiệp →](/vi/future-students/alumni)**
+- Xem chi tiết các suất học bổng toàn phần tại **[Trang Học Phí & Học Bổng →](/vi/tuition-scholarships)**
+- Tìm hiểu khung đào tạo 120 ECTS tại **[Trang Khung Đào Tạo Chuẩn Đức →](/vi/program-structure)**

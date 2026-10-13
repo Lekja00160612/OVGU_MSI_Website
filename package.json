@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@nuxt/content": "^3.13.0",
+    "@nuxt/fonts": "^1.0.1",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.7.1",
     "@nuxtjs/i18n": "^10.3.0",

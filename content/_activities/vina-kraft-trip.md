@@ -20,7 +20,7 @@ As the leading packaging paper manufacturer in the region, Vina Kraft Paper prov
 
 ---
 
-## 🏛️ Cellulosic Materials Science: Technical Focus
+## Cellulosic Materials Science: Technical Focus
 
 Vina Kraft engineers guided the cohort through the entire paper-making pipeline, exploring key concepts in natural polymer processing:
 
@@ -37,7 +37,7 @@ Vina Kraft engineers guided the cohort through the entire paper-making pipeline,
 
 ---
 
-## 🚀 Bridging Science and Application
+## Bridging Science and Application
 
 This excursion highlighted how materials science and chemical engineering principles are implemented on high-throughput industrial lines. By exploring large-scale manufacturing and automated quality control, VGU students gain invaluable insights into product development, process optimization, and industrial sustainability.
 

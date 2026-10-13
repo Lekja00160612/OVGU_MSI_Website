@@ -13,10 +13,6 @@ export default defineNuxtConfig({
           rel: 'icon',
           type: 'image/png',
           href: '/favicon.ico'
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap'
         }
       ]
     }
@@ -47,7 +43,13 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxt/ui', '@nuxt/image', '@nuxtjs/i18n', 'nuxt-studio'],
+  modules: ['@nuxt/content', '@nuxt/ui', '@nuxt/image', '@nuxt/fonts', '@nuxtjs/i18n', 'nuxt-studio'],
+  fonts: {
+    defaults: {
+      weights: [300, 400, 500, 600, 700, 800],
+      styles: ['normal', 'italic']
+    }
+  },
   css: ['~/assets/css/main.css'],
   colorMode: { preference: 'light' },
   ui: {

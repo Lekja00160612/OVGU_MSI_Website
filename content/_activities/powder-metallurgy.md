@@ -21,7 +21,7 @@ The lab series tasked students with synthesizing and analyzing refractory **Moly
 
 ---
 
-## 🔬 Sintering & Mechanical Alloying Process
+## Sintering & Mechanical Alloying Process
 
 Operating research-grade mechanical alloying equipment, students executed key steps in the powder metallurgy pipeline:
 
@@ -38,7 +38,7 @@ Operating research-grade mechanical alloying equipment, students executed key st
 
 ---
 
-## 🚀 Equipping Future Advanced Metallurgy Experts
+## Equipping Future Advanced Metallurgy Experts
 
 By analyzing their own XRD and SEM data, VGU students master advanced materials characterization and processing. 
 

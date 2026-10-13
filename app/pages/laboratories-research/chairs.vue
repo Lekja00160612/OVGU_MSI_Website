@@ -43,28 +43,17 @@ useSeoMeta({
       </div>
 
       <!-- Master Thesis Gateway Banner -->
-      <div class="bg-gradient-to-br from-[#1E3A5F] to-[#2E5280] text-white p-6 sm:p-8 rounded-3xl shadow-md border-l-8 border-l-[#E87722] flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex flex-col gap-2 text-center md:text-left">
-          <span class="text-xs font-bold uppercase tracking-wider text-orange-400">
-            {{ locale === 'vi' ? '30 ECTS Capstone Research' : '30 ECTS Capstone Research' }}
-          </span>
-          <h3 class="text-xl sm:text-2xl font-black text-white">
-            {{ locale === 'vi' ? 'Cổng Đề Tài Luận Văn Thạc Sĩ' : 'Master Thesis Topics & Supervision Portal' }}
-          </h3>
-          <p class="text-xs sm:text-sm text-slate-200 max-w-xl">
-            {{ locale === 'vi'
-              ? 'Khám phá các đề tài nghiên cứu mở dưới sự đồng hướng dẫn của giáo sư VGU và trưởng bộ môn OVGU Magdeburg.'
-              : 'Explore open master thesis projects co-supervised by VGU researchers and chair directors at OVGU Magdeburg.'
-            }}
-          </p>
-        </div>
-        <NuxtLink
-          :to="localePath('/program-structure/thesis')"
-          class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs sm:text-sm transition-all shadow-md shrink-0 whitespace-nowrap cursor-pointer"
-        >
-          <span>{{ locale === 'vi' ? 'Xem các đề tài luận văn →' : 'View Open Thesis Topics →' }}</span>
-        </NuxtLink>
-      </div>
+      <CalloutBanner
+        :badge="locale === 'vi' ? '30 ECTS Capstone Research' : '30 ECTS Capstone Research'"
+        :title="locale === 'vi' ? 'Cổng Đề Tài Luận Văn Thạc Sĩ' : 'Master Thesis Topics & Supervision Portal'"
+        :description="locale === 'vi'
+          ? 'Khám phá các đề tài nghiên cứu mở dưới sự đồng hướng dẫn của giáo sư VGU và trưởng bộ môn OVGU Magdeburg.'
+          : 'Explore open master thesis projects co-supervised by VGU researchers and chair directors at OVGU Magdeburg.'"
+        :to="localePath('/program-structure/thesis')"
+        :button-text="locale === 'vi' ? 'Xem các đề tài luận văn' : 'View Open Thesis Topics'"
+        button-icon="i-lucide-arrow-right"
+        variant="navy"
+      />
 
       <!-- Navigation Footer links -->
       <div class="flex justify-between items-center bg-white p-4 sm:p-6 rounded-2xl border border-slate-200">

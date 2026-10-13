@@ -97,7 +97,7 @@ const isBleed = computed(() => {
     ]"
     :style="containerStyles"
   >
-    <div class="group relative block w-full rounded-2xl overflow-hidden shadow-xs border border-slate-200 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
+    <div class="group relative block w-full rounded-2xl overflow-hidden shadow-xs border border-slate-200 bg-slate-100 min-h-[160px] hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
       <NuxtImg 
         :src="src" 
         :alt="alt" 
@@ -110,7 +110,7 @@ const isBleed = computed(() => {
       />
       <div 
         v-if="showOverlay" 
-        class="absolute inset-0 bg-gradient-to-b from-transparent to-[#1e3a5f]/10 pointer-events-none mix-blend-multiply opacity-0 group-hover:opacity-50 transition-opacity duration-300" 
+        class="absolute inset-0 bg-gradient-to-b from-transparent to-msi-navy/10 pointer-events-none mix-blend-multiply opacity-0 group-hover:opacity-50 transition-opacity duration-300" 
         aria-hidden="true" 
       />
     </div>

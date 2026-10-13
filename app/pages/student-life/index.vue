@@ -31,28 +31,17 @@ useSeoMeta({
         </div>
 
         <!-- Gateway Card to Germany Relocation Guide -->
-        <div class="bg-gradient-to-br from-[#1E3A5F] to-[#2E5280] text-white p-6 sm:p-8 rounded-3xl shadow-md border-l-8 border-l-[#E87722] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div class="flex flex-col gap-2 text-center md:text-left">
-            <span class="text-xs font-bold uppercase tracking-wider text-orange-400">
-              {{ locale === 'vi' ? 'Học Bổng Trao Đổi DAAD' : 'DAAD Mobility Opportunity' }}
-            </span>
-            <h3 class="text-xl sm:text-2xl font-black text-white">
-              {{ locale === 'vi' ? 'Cẩm Nang Hướng Dẫn Sang Đức (OVGU)' : 'Path to Germany & OVGU Relocation Guide' }}
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-200 max-w-xl">
-              {{ locale === 'vi'
-                ? 'Tìm hiểu chi tiết quy trình xin visa VFS, mở tài khoản phong tỏa Sperrkonto, bảo hiểm y tế và kinh nghiệm lưu trú tại Magdeburg.'
-                : 'Step-by-step roadmap for study and Master Thesis research at OVGU: visa processing, blocked accounts, flights, and living in Magdeburg.'
-              }}
-            </p>
-          </div>
-          <NuxtLink
-            :to="localePath('/student-life/germany-relocation')"
-            class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs sm:text-sm transition-all shadow-md shrink-0 whitespace-nowrap cursor-pointer"
-          >
-            <span>{{ locale === 'vi' ? 'Khám phá cẩm nang →' : 'Explore Guide →' }}</span>
-          </NuxtLink>
-        </div>
+        <CalloutBanner
+          :badge="locale === 'vi' ? 'Học Bổng Trao Đổi DAAD' : 'DAAD Mobility Opportunity'"
+          :title="locale === 'vi' ? 'Cẩm Nang Hướng Dẫn Sang Đức (OVGU)' : 'Path to Germany & OVGU Relocation Guide'"
+          :description="locale === 'vi'
+            ? 'Tìm hiểu chi tiết quy trình xin visa VFS, mở tài khoản phong tỏa Sperrkonto, bảo hiểm y tế và kinh nghiệm lưu trú tại Magdeburg.'
+            : 'Step-by-step roadmap for study and Master Thesis research at OVGU: visa processing, blocked accounts, flights, and living in Magdeburg.'"
+          :to="localePath('/student-life/germany-relocation')"
+          :button-text="locale === 'vi' ? 'Khám phá cẩm nang' : 'Explore Guide'"
+          button-icon="i-lucide-arrow-right"
+          variant="navy"
+        />
       </div>
     </template>
     <template v-else>

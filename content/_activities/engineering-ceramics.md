@@ -20,7 +20,7 @@ As one of the most critical classes of structural and functional materials in mo
 
 ---
 
-## 🔬 Core Learning Pillars: Inside the Ceramics Module
+## Core Learning Pillars: Inside the Ceramics Module
 
 Under the direct supervision of Prof. Scheffler, MSI students dive deep into the microstructural engineering of these robust non-metallic systems:
 
@@ -38,7 +38,7 @@ Under the direct supervision of Prof. Scheffler, MSI students dive deep into the
 
 ---
 
-## 🚀 Bridging Fundamental Science and High-Tech Industry
+## Bridging Fundamental Science and High-Tech Industry
 
 By combining rigorous solid-state chemistry and thermodynamics with practical engineering perspectives, the course empowers our students to design, characterize, and optimize structural materials for the most demanding environments on Earth and beyond.
 

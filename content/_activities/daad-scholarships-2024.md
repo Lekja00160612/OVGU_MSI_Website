@@ -36,7 +36,7 @@ For Sơn Tùng and Thuỵ Khanh, this competitive scholarship fully funds a one-
 
 ---
 
-## 🌟 Nurturing Globally Competitive Scientists
+## Nurturing Globally Competitive Scientists
 
 At VGU, our mission is to act as a direct academic bridge between Vietnam and Germany. By working with international flying faculty and utilizing research-grade equipment, our students are uniquely prepared to succeed on the global stage. 
 

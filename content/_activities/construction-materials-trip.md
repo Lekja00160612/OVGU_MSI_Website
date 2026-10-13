@@ -20,7 +20,7 @@ Accompanied by **Prof. Dr.-Ing. Thomas Bier** and **Dr. Duong Hieu Linh**, the f
 
 ---
 
-## 🏛️ Morning Session: The Science of Lightweight Porous Concrete (AAC Plant)
+## Morning Session: The Science of Lightweight Porous Concrete (AAC Plant)
 
 The morning session was dedicated to exploring **Autoclaved Aerated Concrete (AAC)** and reinforced elements—technologies that are revolutionizing civil and residential building designs due to their high energy efficiency.
 
@@ -36,7 +36,7 @@ Students toured the highly automated production facilities and learned about:
 
 ---
 
-## 🏗️ Afternoon Session: Heavy-Duty Structural Concrete (Mekong Concrete Plant)
+## Afternoon Session: Heavy-Duty Structural Concrete (Mekong Concrete Plant)
 
 In the afternoon, the excursion transitioned from lightweight materials to massive, heavy-duty structural concrete at the **Mekong Concrete Plant** in Long An. This plant manufactures precast and ready-mixed concrete designed to withstand extreme loads in major civil infrastructure projects.
 
@@ -47,7 +47,7 @@ Students observed:
 
 ---
 
-## 🔬 Broadening Horizons in Materials Engineering
+## Broadening Horizons in Materials Engineering
 
 This double-session field trip gave VGU MSI students a balanced, real-world understanding of the construction materials sector. Seeing the direct translation of **binder technology** and **material characterization** from the classroom to automated, high-precision factory floors prepares our graduates to step straight into high-value engineering roles.
 

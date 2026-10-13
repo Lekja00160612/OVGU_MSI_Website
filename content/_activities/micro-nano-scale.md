@@ -20,7 +20,7 @@ The course was taught by **Prof. Dr. Franziska Scheffler**, Head of the Chair of
 
 ---
 
-## 🔬 Core Characterization Techniques Mastered
+## Core Characterization Techniques Mastered
 
 Under the expert guidance of Prof. Scheffler, students explored the fundamental principles, quantum mechanics, and instrumentation behind the most powerful analytical tools in modern materials science:
 
@@ -37,7 +37,7 @@ Under the expert guidance of Prof. Scheffler, students explored the fundamental 
 
 ---
 
-## 🌎 A Research-Driven, Global Degree
+## A Research-Driven, Global Degree
 
 At VGU, we believe that world-class engineering requires global collaboration. By learning directly from flying faculty like Prof. Franziska Scheffler, our students establish direct networks with German universities, opening pathways for fully-funded master thesis research, doctoral scholarships, and European careers.
 
