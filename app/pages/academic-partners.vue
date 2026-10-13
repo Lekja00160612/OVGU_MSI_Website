@@ -36,7 +36,7 @@ provide('pageData', {
 </script>
 
 <template>
-  <div class="min-h-[80vh] bg-slate-100/75 pb-20 font-sans">
+  <div class="min-h-[80vh] bg-slate-50 pb-20 font-sans">
     <!-- Header -->
     <PageHeader :title="pageData?.title || (locale === 'vi' ? 'Đội Ngũ Giảng Viên & Bộ Môn Học Thuật' : 'Academic Faculty & Research Chairs')" :description="pageData?.meta?.description" />
 
