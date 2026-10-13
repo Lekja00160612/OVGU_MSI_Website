@@ -142,13 +142,24 @@ const getLecturerPartnerLink = (lecturer: string): string => {
   return `${localePath('/academic-partners')}#${anchor}`
 }
 
-// Helper: Split sentences by dot/period into clean, structured lines
-const formatDotLines = (text?: string): string[] => {
+// Helper: Clean, structured curriculum topics
+const getCleanTopics = (text?: string): string[] => {
   if (!text) return []
   return text
-    .split(/(?<=[.!?])\s+|\s*[;•·]\s*|\n+/)
-    .map(line => line.trim())
+    .split('\n')
+    .map(line => line.replace(/^[•·\-\*▸]\s*/, '').trim())
     .filter(line => line.length > 2)
+}
+
+// Helper: Concise 1-2 sentence preview for cards
+const getModuleSummary = (mod: any): string => {
+  const desc = mod?.description || mod?.meta?.description || ''
+  if (!desc) return ''
+  const firstLine = desc
+    .split('\n')
+    .map((l: string) => l.replace(/^[•·\-\*▸]\s*/, '').trim())
+    .find((l: string) => l.length > 5)
+  return firstLine || ''
 }
 
 // Filtered modules
@@ -416,21 +427,14 @@ watch(() => [route.hash, route.query], () => {
             {{ mod.title }}
           </h4>
 
-          <!-- Multi-line Content: Key structured outcomes -->
-          <div
-            v-if="formatDotLines(mod.description || mod.meta?.description).length > 0"
-            class="mt-3 pt-3 border-t flex flex-col gap-1.5 text-xs"
-            :class="isMasterThesis(mod) ? 'border-white/20 text-slate-200' : 'border-slate-100 text-slate-600'"
+          <!-- Clean Short Preview Description -->
+          <p
+            v-if="getModuleSummary(mod)"
+            class="mt-2 text-xs leading-relaxed line-clamp-2"
+            :class="isMasterThesis(mod) ? 'text-slate-200' : 'text-slate-500'"
           >
-            <div
-              v-for="(point, pIdx) in formatDotLines(mod.description || mod.meta?.description).slice(0, 3)"
-              :key="pIdx"
-              class="flex items-start gap-1.5 leading-relaxed"
-            >
-              <span class="text-orange-500 font-bold shrink-0 mt-0.5">▸</span>
-              <span class="line-clamp-2">{{ point.replace(/\.$/, '') }}</span>
-            </div>
-          </div>
+            {{ getModuleSummary(mod) }}
+          </p>
 
           <!-- Bottom Faculty Instructor -->
           <div
@@ -485,17 +489,22 @@ watch(() => [route.hash, route.query], () => {
             </h3>
           </div>
 
-          <!-- Description & Learning Outcomes broken into structured lines -->
+          <!-- Clean Curriculum & Topics Overview -->
           <div class="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-none">
-            <div v-if="formatDotLines(selectedModule.description || selectedModule.meta?.description).length > 0" class="space-y-2">
-              <div
-                v-for="(line, lIdx) in formatDotLines(selectedModule.description || selectedModule.meta?.description)"
-                :key="lIdx"
-                class="flex items-start gap-2.5 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:border-slate-300 transition-colors"
-              >
-                <span class="text-orange-500 font-extrabold text-sm shrink-0 mt-0.5">▸</span>
-                <span class="text-slate-700 leading-relaxed font-medium">{{ line.replace(/\.$/, '') }}</span>
-              </div>
+            <div v-if="getCleanTopics(selectedModule.description || selectedModule.meta?.description).length > 0">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                {{ locale === 'vi' ? 'Nội dung học phần:' : 'Curriculum & Topics:' }}
+              </h4>
+              <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
+                <li
+                  v-for="(topic, tIdx) in getCleanTopics(selectedModule.description || selectedModule.meta?.description)"
+                  :key="tIdx"
+                  class="flex items-start gap-2.5 leading-relaxed"
+                >
+                  <span class="size-1.5 rounded-full bg-orange-500 mt-2 shrink-0" />
+                  <span>{{ topic }}</span>
+                </li>
+              </ul>
             </div>
             <p v-else class="italic text-slate-400">
               Detailed module descriptors covering foundational scientific principles, laboratory experiments, and German-standard engineering qualifications.
@@ -633,15 +642,20 @@ watch(() => [route.hash, route.query], () => {
           v-if="activeMobilePath === mod.path"
           class="p-4 pt-2 border-t border-slate-100 bg-white flex flex-col gap-3 text-xs text-slate-600"
         >
-          <div v-if="formatDotLines(mod.description || mod.meta?.description).length > 0" class="space-y-1.5 my-1">
-            <div
-              v-for="(point, pIdx) in formatDotLines(mod.description || mod.meta?.description)"
-              :key="pIdx"
-              class="flex items-start gap-1.5 leading-relaxed"
-            >
-              <span class="text-orange-500 font-bold shrink-0 mt-0.5">▸</span>
-              <span>{{ point.replace(/\.$/, '') }}</span>
-            </div>
+          <div v-if="getCleanTopics(mod.description || mod.meta?.description).length > 0" class="my-2">
+            <span class="text-[10px] font-bold uppercase text-slate-400 block mb-1.5">
+              {{ locale === 'vi' ? 'Nội dung học phần:' : 'Curriculum & Topics:' }}
+            </span>
+            <ul class="space-y-1.5 text-xs text-slate-700">
+              <li
+                v-for="(point, pIdx) in getCleanTopics(mod.description || mod.meta?.description)"
+                :key="pIdx"
+                class="flex items-start gap-2 leading-relaxed"
+              >
+                <span class="size-1.5 rounded-full bg-orange-500 mt-1.5 shrink-0" />
+                <span>{{ point }}</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Mobile Teaching Faculty with links -->
@@ -711,7 +725,7 @@ watch(() => [route.hash, route.query], () => {
                   {{ selectedModule.title === 'Master Thesis' ? '30 ECTS' : '5 ECTS' }}
                 </UBadge>
                 <UBadge v-if="hasGermanLecturer(selectedModule)" color="success" variant="subtle" size="xs" class="font-bold">
-                  🇩🇪 Visiting German Professor
+                  {{ locale === 'vi' ? 'Giảng viên từ Đức (OVGU)' : 'Visiting German Professor' }}
                 </UBadge>
               </div>
               <h3 class="text-lg sm:text-xl font-black text-slate-900">
@@ -732,17 +746,19 @@ watch(() => [route.hash, route.query], () => {
           <div class="p-6 overflow-y-auto space-y-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
             <!-- Overview -->
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Module Overview</h4>
-              <div v-if="formatDotLines(selectedModule.description || selectedModule.meta?.description).length > 0" class="space-y-2">
-                <div
-                  v-for="(point, pIdx) in formatDotLines(selectedModule.description || selectedModule.meta?.description)"
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                {{ locale === 'vi' ? 'Nội dung học phần:' : 'Module Overview & Topics:' }}
+              </h4>
+              <ul v-if="getCleanTopics(selectedModule.description || selectedModule.meta?.description).length > 0" class="space-y-2">
+                <li
+                  v-for="(point, pIdx) in getCleanTopics(selectedModule.description || selectedModule.meta?.description)"
                   :key="pIdx"
-                  class="flex items-start gap-2"
+                  class="flex items-start gap-2.5 leading-relaxed text-slate-700"
                 >
-                  <span class="text-orange-500 font-bold shrink-0 mt-0.5">▸</span>
-                  <span>{{ point.replace(/\.$/, '') }}</span>
-                </div>
-              </div>
+                  <span class="size-1.5 rounded-full bg-orange-500 mt-2 shrink-0" />
+                  <span>{{ point }}</span>
+                </li>
+              </ul>
               <p v-else>{{ selectedModule.description || selectedModule.meta?.description || 'Course description not provided.' }}</p>
             </div>
 

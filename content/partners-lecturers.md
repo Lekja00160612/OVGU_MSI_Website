@@ -26,13 +26,13 @@ groups:
         link: https://www.nm.ovgu.de/nm/en/
         members:
           - name: Prof. Dr.-Ing. Daniel Juhre
-            roles: Vice Dean of the Faculty of Mechanical Engineering (OVGU); Head of the Chair of Computational Mechanics
+            roles: Vice Dean of the Faculty of Mechanical Engineering (OVGU)
             image: /Lecturer_Avatar/Daniel Juhre.jpg
             email: daniel.juhre@ovgu.de
             is_management: true
             management_role: Program Director
           - name: M.Sc. Marc Ulrich
-            roles: Research Assistant (Chair of Computational Mechanics)
+            roles: Research Assistant
             image: /Lecturer_Avatar/Marc Ulrich.png
             email: marc.ulrich@ovgu.de
             is_management: true
@@ -41,7 +41,7 @@ groups:
         link: https://www.physik.ovgu.de/Abteilungen+des+IfP/Festkörperphysik_+spez_+Halbleiterphysik-p-8.html
         members:
           - name: Prof. Dr. rer. nat. Jürgen Christen
-            roles: Head of Chair of Solid State Physics
+            roles: Head of Chair
             image: /Lecturer_Avatar/Jurgen Christen.jpg
           - name: apl. Prof. Dr. rer. nat. habil. Frank Bertram
             roles: ""
@@ -50,7 +50,7 @@ groups:
         link: https://www.ht-materials.ovgu.de/
         members:
           - name: Prof. Dr.-Ing. Manja Krüger
-            roles: Head of Chair of High Temperature Materials
+            roles: Head of Chair
             image: /Lecturer_Avatar/Manja Kruger.jpg
           - name: Dr.-Ing. Georg Hasemann
             roles: ""
@@ -59,7 +59,7 @@ groups:
         link: https://www.metalle.ovgu.de/
         members:
           - name: Prof. Dr.-Ing. Thorsten Halle
-            roles: Head of Chair of Metallic Materials
+            roles: Head of Chair
             image: /Lecturer_Avatar/Thorsten Halle.jpg
           - name: Dr.-Ing. Sebastian Hütter
             roles: ""
@@ -68,7 +68,7 @@ groups:
         link: https://www.ceramics.ovgu.de/
         members:
           - name: Prof. Dr. rer. nat. Michael Scheffler
-            roles: Head of Chair of Non-Metallic Materials
+            roles: Head of Chair
             image: /Lecturer_Avatar/Michael Scheffler.jpg
           - name: Dr. rer. nat. Ulf Betke
             roles: ""
@@ -77,7 +77,7 @@ groups:
         link: https://www.tm.ovgu.de/tm/en/
         members:
           - name: Prof. Dr.-Ing. habil. Dr. h. c. mult. Holm Altenbach
-            roles: Former Head of Chair of Engineering Mechanics
+            roles: Former Head of Chair
             image: /Lecturer_Avatar/Holm Altenbach.jpg
       - title: Institute of Chemistry
         link: https://www.ich.ovgu.de/Institut.html

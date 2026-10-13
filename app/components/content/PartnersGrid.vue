@@ -46,29 +46,6 @@ const avatarColor = (name: string): string => {
   return PALETTE[Math.abs(hash) % PALETTE.length]
 }
 
-// ── Helper: infer affiliation badge details ──────────────────────────────────
-const getAffiliation = (member: any, group?: any, subgroup?: any): { label: string, icon: string, iconColor: string, code: string } => {
-  if (member.institution) {
-    const inst = member.institution
-    if (/vgu/i.test(inst)) return { label: 'Vietnamese-German University', icon: 'i-lucide-school', iconColor: 'text-orange-500', code: 'VGU' }
-    if (/fraunhofer/i.test(inst)) return { label: 'Fraunhofer IMWS Halle', icon: 'i-lucide-building-2', iconColor: 'text-emerald-600', code: 'Fraunhofer' }
-    if (/freiberg/i.test(inst)) return { label: 'TU Bergakademie Freiberg', icon: 'i-lucide-building-2', iconColor: 'text-emerald-600', code: 'TU Freiberg' }
-    const firstPart = inst.split(',')[0].split('(')[0].trim()
-    return { label: firstPart || inst, icon: 'i-lucide-building', iconColor: 'text-[#1E3A5F]', code: 'Partner' }
-  }
-  if (group?.id === 'vgu-core' || group?.id === 'support') {
-    return { label: 'Vietnamese-German University', icon: 'i-lucide-school', iconColor: 'text-orange-500', code: 'VGU' }
-  }
-  if (subgroup?.title) {
-    return { label: subgroup.title, icon: 'i-lucide-landmark', iconColor: 'text-[#009FDF]', code: 'OVGU' }
-  }
-  return { label: 'Otto von Guericke University', icon: 'i-lucide-landmark', iconColor: 'text-[#009FDF]', code: 'OVGU' }
-}
-
-const isProfessor = (name: string): boolean => {
-  return /prof\./i.test(name)
-}
-
 // Smooth scroll to targeted faculty member card if hash present
 const scrollToTargetFaculty = () => {
   if (route.hash) {
@@ -115,7 +92,7 @@ watch(() => route.hash, () => {
         </p>
       </div>
 
-      <!-- Direct Members Grid (High-contrast, elevated pure white cards) -->
+      <!-- Direct Members Grid (High-contrast, clean, professional white cards) -->
       <div
         v-if="group.members && group.members.length > 0"
         class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
@@ -124,140 +101,98 @@ watch(() => route.hash, () => {
           v-for="member in group.members"
           :id="getFacultyAnchor(member.name)"
           :key="member.name"
-          class="relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(30,58,95,0.08),0_2px_6px_-1px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_35px_-8px_rgba(30,58,95,0.16)] hover:border-orange-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden group scroll-mt-28 target:ring-4 target:ring-orange-500/80 target:shadow-2xl target:border-orange-400 target:-translate-y-2"
+          class="relative rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-lg hover:border-orange-300 hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left p-5 sm:p-6 gap-5 group scroll-mt-28 target:ring-4 target:ring-orange-500/80 target:shadow-2xl target:border-orange-400 target:-translate-y-1"
         >
-          <!-- Distinct Top Accent Line -->
-          <div
-            class="h-1.5 w-full shrink-0"
-            :class="member.is_management
-              ? 'bg-gradient-to-r from-orange-500 via-amber-400 to-orange-600'
-              : (getAffiliation(member, group).code === 'VGU'
-                  ? 'bg-gradient-to-r from-orange-500 via-amber-500 to-[#1E3A5F]'
-                  : 'bg-gradient-to-r from-[#1E3A5F] via-[#009FDF] to-orange-500')"
-          />
-
-          <!-- Top Institutional Header Bar -->
-          <div class="px-5 sm:px-6 py-3 bg-gradient-to-r from-slate-50 to-slate-100/80 border-b border-slate-200/70 flex items-center justify-between gap-2.5 flex-wrap">
-            <div class="flex items-center gap-2 min-w-0">
-              <UIcon :name="getAffiliation(member, group).icon" class="size-4 shrink-0" :class="getAffiliation(member, group).iconColor" />
-              <span class="text-xs font-bold text-[#1E3A5F] truncate max-w-[200px] sm:max-w-[280px]" :title="getAffiliation(member, group).label">
-                {{ getAffiliation(member, group).label }}
-              </span>
-            </div>
-
-            <!-- Role / Management Badge -->
-            <div class="flex items-center gap-1.5 shrink-0">
-              <UBadge
-                v-if="member.is_management"
-                :color="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc') ? 'primary' : 'secondary'"
-                variant="solid"
-                size="xs"
-                class="font-black text-[11px] px-2.5 py-0.5 rounded-lg shadow-2xs flex items-center gap-1"
-              >
-                <UIcon name="i-lucide-shield-check" class="size-3" />
-                <span>{{ member.management_role }}</span>
-              </UBadge>
-              <UBadge
-                v-else
-                color="neutral"
-                variant="subtle"
-                size="xs"
-                class="font-bold text-[10px] uppercase tracking-wider text-slate-600 px-2 py-0.5 rounded-md"
-              >
-                {{ isProfessor(member.name) ? 'Professor' : (group.id === 'support' ? 'Laboratory Engineer' : 'Faculty Member') }}
-              </UBadge>
+          <!-- Portrait with Clean Subtle Ring -->
+          <div class="relative shrink-0">
+            <NuxtImg
+              v-if="member.image"
+              :src="member.image"
+              :alt="member.name"
+              class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover ring-1 ring-slate-200 group-hover:ring-orange-300 shadow-xs group-hover:scale-105 transition-all duration-300"
+            />
+            <div
+              v-else
+              class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl flex items-center justify-center text-2xl font-black text-white shadow-inner"
+              :style="{ background: avatarColor(member.name) }"
+            >
+              {{ getInitials(member.name) }}
             </div>
           </div>
 
-          <!-- Main Card Body -->
-          <div class="p-5 sm:p-6 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5 flex-1">
-            <!-- Framed Portrait with Ring -->
-            <div class="relative shrink-0">
-              <div class="relative rounded-2xl p-1 bg-gradient-to-tr from-slate-200 via-white to-slate-200 shadow-md group-hover:shadow-lg ring-2 ring-slate-100 group-hover:ring-orange-300 transition-all">
-                <NuxtImg
-                  v-if="member.image"
-                  :src="member.image"
-                  :alt="member.name"
-                  class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div
-                  v-else
-                  class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl flex items-center justify-center text-2xl font-black text-white shadow-inner"
-                  :style="{ background: avatarColor(member.name) }"
-                >
-                  {{ getInitials(member.name) }}
-                </div>
-              </div>
+          <!-- Info Details -->
+          <div class="flex flex-col gap-1.5 min-w-0 flex-1 w-full">
+            <!-- Leadership Role Badge (Only for Program Director / Coordinator) -->
+            <div v-if="member.is_management" class="flex justify-center sm:justify-start">
+              <span
+                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-bold tracking-wide"
+                :class="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc')
+                  ? 'bg-orange-100 text-orange-800 border border-orange-200/80'
+                  : 'bg-slate-100 text-[#1E3A5F] border border-slate-200/80'"
+              >
+                <UIcon name="i-lucide-shield-check" class="size-3 text-orange-500" />
+                <span>{{ member.management_role }}</span>
+              </span>
             </div>
 
-            <!-- Info Column -->
-            <div class="flex flex-col gap-2 min-w-0 flex-1 w-full">
-              <!-- Full Name -->
-              <h3 class="text-lg sm:text-xl font-black text-[#1E3A5F] group-hover:text-orange-600 transition-colors leading-snug tracking-tight">
-                {{ member.name }}
-              </h3>
+            <!-- Full Name -->
+            <h3 class="text-lg sm:text-xl font-bold text-[#1E3A5F] group-hover:text-orange-600 transition-colors leading-snug tracking-tight">
+              {{ member.name }}
+            </h3>
 
-              <!-- Academic Roles & Chairs -->
-              <p v-if="member.roles" class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                {{ member.roles }}
-              </p>
+            <!-- Position / Academic Role -->
+            <p v-if="member.roles" class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+              {{ member.roles }}
+            </p>
 
-              <!-- External Institution Link (if any) -->
-              <div v-if="member.institution" class="flex justify-center sm:justify-start">
-                <a
-                  v-if="member.institution_link"
-                  :href="member.institution_link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-orange-600 hover:underline"
-                >
-                  <UIcon name="i-lucide-building-2" class="size-3.5 text-slate-400" />
-                  <span>{{ member.institution }}</span>
-                  <UIcon name="i-lucide-external-link" class="size-3 text-slate-400" />
-                </a>
-                <span v-else class="inline-flex items-center gap-1 text-xs font-semibold text-slate-500">
-                  <UIcon name="i-lucide-building-2" class="size-3.5 text-slate-400" />
-                  <span>{{ member.institution }}</span>
-                </span>
-              </div>
-
-              <!-- Email Chip -->
-              <div v-if="member.email" class="pt-0.5 flex justify-center sm:justify-start">
-                <a
-                  :href="`mailto:${member.email}`"
-                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold text-[#1E3A5F] bg-slate-100 hover:bg-orange-500 hover:text-white border border-slate-200/80 hover:border-orange-500 transition-all duration-200 shadow-2xs group/mail"
-                >
-                  <UIcon name="i-lucide-mail" class="size-3.5 text-orange-500 group-hover/mail:text-white transition-colors" />
-                  <span>{{ member.email }}</span>
-                </a>
-              </div>
-
-              <!-- Module Chips Deep-Linked to Handbook (#slug) -->
-              <div
-                v-if="getLecturerModules(member.name).length > 0"
-                class="pt-3 flex flex-col gap-1.5 border-t border-slate-100 mt-1"
+            <!-- External Partner Institution (Clean link) -->
+            <div v-if="member.institution" class="flex justify-center sm:justify-start">
+              <a
+                v-if="member.institution_link"
+                :href="member.institution_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition-colors"
               >
-                <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 flex items-center gap-1 justify-center sm:justify-start">
-                  <UIcon name="i-lucide-book-open" class="size-3 text-orange-500" />
-                  <span>{{ locale === 'vi' ? 'Môn học phụ trách:' : 'Courses Taught in MSI:' }}</span>
-                </span>
-                <div class="flex flex-wrap gap-1.5 justify-center sm:justify-start">
-                  <NuxtLink
-                    v-for="mod in getLecturerModules(member.name)"
-                    :key="mod.path || mod.id"
-                    :to="`${localePath ? localePath('/program-structure/modules') : '/program-structure/modules'}#${getModuleSlug(mod)}`"
-                    :title="`View ${mod.title} syllabus in Handbook`"
-                    class="group/modlink"
-                  >
-                    <span
-                      class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 hover:bg-[#1E3A5F] hover:text-white border border-slate-200 hover:border-[#1E3A5F] transition-all duration-200 shadow-2xs hover:shadow-xs cursor-pointer"
-                    >
-                      <span>{{ mod.title }}</span>
-                      <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400 group-hover/modlink:text-orange-400 transition-colors" />
-                    </span>
-                  </NuxtLink>
-                </div>
-              </div>
+                <UIcon name="i-lucide-building-2" class="size-3.5 text-slate-400" />
+                <span>{{ member.institution }}</span>
+                <UIcon name="i-lucide-external-link" class="size-3 text-slate-400" />
+              </a>
+              <span v-else class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500">
+                <UIcon name="i-lucide-building-2" class="size-3.5 text-slate-400" />
+                <span>{{ member.institution }}</span>
+              </span>
+            </div>
+
+            <!-- Email Chip -->
+            <div v-if="member.email" class="pt-0.5 flex justify-center sm:justify-start">
+              <a
+                :href="`mailto:${member.email}`"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition-colors"
+              >
+                <UIcon name="i-lucide-mail" class="size-3.5 text-orange-500" />
+                <span>{{ member.email }}</span>
+              </a>
+            </div>
+
+            <!-- Courses Taught in MSI -->
+            <div
+              v-if="getLecturerModules(member.name).length > 0"
+              class="pt-2 flex flex-wrap items-center gap-1.5 justify-center sm:justify-start"
+            >
+              <span class="text-[11px] font-semibold text-slate-400 mr-1">
+                {{ locale === 'vi' ? 'Môn phụ trách:' : 'Courses:' }}
+              </span>
+              <NuxtLink
+                v-for="mod in getLecturerModules(member.name)"
+                :key="mod.path || mod.id"
+                :to="`${localePath ? localePath('/program-structure/modules') : '/program-structure/modules'}#${getModuleSlug(mod)}`"
+                :title="`View ${mod.title} syllabus in Handbook`"
+                class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-orange-50 hover:text-orange-600 border border-slate-200/60 hover:border-orange-300 transition-colors cursor-pointer"
+              >
+                <span>{{ mod.title }}</span>
+                <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400" />
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -302,119 +237,98 @@ watch(() => route.hash, () => {
               v-for="member in subgroup.members"
               :id="getFacultyAnchor(member.name)"
               :key="member.name"
-              class="relative rounded-3xl bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(30,58,95,0.08),0_2px_6px_-1px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_35px_-8px_rgba(30,58,95,0.16)] hover:border-orange-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden group scroll-mt-28 target:ring-4 target:ring-orange-500/80 target:shadow-2xl target:border-orange-400 target:-translate-y-2"
+              class="relative rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-lg hover:border-orange-300 hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left p-5 sm:p-6 gap-5 group scroll-mt-28 target:ring-4 target:ring-orange-500/80 target:shadow-2xl target:border-orange-400 target:-translate-y-1"
             >
-              <!-- Distinct Top Accent Line -->
-              <div
-                class="h-1.5 w-full shrink-0"
-                :class="member.is_management
-                  ? 'bg-gradient-to-r from-orange-500 via-amber-400 to-orange-600'
-                  : 'bg-gradient-to-r from-[#1E3A5F] via-[#009FDF] to-orange-500'"
-              />
-
-              <!-- Top Institutional Header Bar -->
-              <div class="px-5 sm:px-6 py-3 bg-gradient-to-r from-slate-50 to-slate-100/80 border-b border-slate-200/70 flex items-center justify-between gap-2.5 flex-wrap">
-                <div class="flex items-center gap-2 min-w-0">
-                  <UIcon :name="getAffiliation(member, group, subgroup).icon" class="size-4 shrink-0" :class="getAffiliation(member, group, subgroup).iconColor" />
-                  <span class="text-xs font-bold text-[#1E3A5F] truncate max-w-[200px] sm:max-w-[280px]" :title="getAffiliation(member, group, subgroup).label">
-                    {{ getAffiliation(member, group, subgroup).label }}
-                  </span>
-                </div>
-
-                <!-- Role / Management Badge -->
-                <div class="flex items-center gap-1.5 shrink-0">
-                  <UBadge
-                    v-if="member.is_management"
-                    :color="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc') ? 'primary' : 'secondary'"
-                    variant="solid"
-                    size="xs"
-                    class="font-black text-[11px] px-2.5 py-0.5 rounded-lg shadow-2xs flex items-center gap-1"
-                  >
-                    <UIcon name="i-lucide-shield-check" class="size-3" />
-                    <span>{{ member.management_role }}</span>
-                  </UBadge>
-                  <UBadge
-                    v-else
-                    color="neutral"
-                    variant="subtle"
-                    size="xs"
-                    class="font-bold text-[10px] uppercase tracking-wider text-slate-600 px-2 py-0.5 rounded-md"
-                  >
-                    {{ isProfessor(member.name) ? 'Professor' : 'Faculty Member' }}
-                  </UBadge>
+              <!-- Portrait with Clean Subtle Ring -->
+              <div class="relative shrink-0">
+                <NuxtImg
+                  v-if="member.image"
+                  :src="member.image"
+                  :alt="member.name"
+                  class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover ring-1 ring-slate-200 group-hover:ring-orange-300 shadow-xs group-hover:scale-105 transition-all duration-300"
+                />
+                <div
+                  v-else
+                  class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl flex items-center justify-center text-2xl font-black text-white shadow-inner"
+                  :style="{ background: avatarColor(member.name) }"
+                >
+                  {{ getInitials(member.name) }}
                 </div>
               </div>
 
-              <!-- Main Card Body -->
-              <div class="p-5 sm:p-6 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-5 flex-1">
-                <!-- Framed Portrait with Ring -->
-                <div class="relative shrink-0">
-                  <div class="relative rounded-2xl p-1 bg-gradient-to-tr from-slate-200 via-white to-slate-200 shadow-md group-hover:shadow-lg ring-2 ring-slate-100 group-hover:ring-orange-300 transition-all">
-                    <NuxtImg
-                      v-if="member.image"
-                      :src="member.image"
-                      :alt="member.name"
-                      class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div
-                      v-else
-                      class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl flex items-center justify-center text-2xl font-black text-white shadow-inner"
-                      :style="{ background: avatarColor(member.name) }"
-                    >
-                      {{ getInitials(member.name) }}
-                    </div>
-                  </div>
+              <!-- Info Details -->
+              <div class="flex flex-col gap-1.5 min-w-0 flex-1 w-full">
+                <!-- Leadership Role Badge (Only for Program Director / Coordinator) -->
+                <div v-if="member.is_management" class="flex justify-center sm:justify-start">
+                  <span
+                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-bold tracking-wide"
+                    :class="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc')
+                      ? 'bg-orange-100 text-orange-800 border border-orange-200/80'
+                      : 'bg-slate-100 text-[#1E3A5F] border border-slate-200/80'"
+                  >
+                    <UIcon name="i-lucide-shield-check" class="size-3 text-orange-500" />
+                    <span>{{ member.management_role }}</span>
+                  </span>
                 </div>
 
-                <!-- Info Column -->
-                <div class="flex flex-col gap-2 min-w-0 flex-1 w-full">
-                  <!-- Full Name -->
-                  <h4 class="text-lg sm:text-xl font-black text-[#1E3A5F] group-hover:text-orange-600 transition-colors leading-snug tracking-tight">
-                    {{ member.name }}
-                  </h4>
+                <!-- Full Name -->
+                <h3 class="text-lg sm:text-xl font-bold text-[#1E3A5F] group-hover:text-orange-600 transition-colors leading-snug tracking-tight">
+                  {{ member.name }}
+                </h3>
 
-                  <!-- Academic Roles & Chairs -->
-                  <p v-if="member.roles" class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                    {{ member.roles }}
-                  </p>
+                <!-- Position / Academic Role -->
+                <p v-if="member.roles" class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                  {{ member.roles }}
+                </p>
 
-                  <!-- Email Chip -->
-                  <div v-if="member.email" class="pt-0.5 flex justify-center sm:justify-start">
-                    <a
-                      :href="`mailto:${member.email}`"
-                      class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold text-[#1E3A5F] bg-slate-100 hover:bg-orange-500 hover:text-white border border-slate-200/80 hover:border-orange-500 transition-all duration-200 shadow-2xs group/mail"
-                    >
-                      <UIcon name="i-lucide-mail" class="size-3.5 text-orange-500 group-hover/mail:text-white transition-colors" />
-                      <span>{{ member.email }}</span>
-                    </a>
-                  </div>
-
-                  <!-- Module Chips Deep-Linked to Handbook (#slug) -->
-                  <div
-                    v-if="getLecturerModules(member.name).length > 0"
-                    class="pt-3 flex flex-col gap-1.5 border-t border-slate-100 mt-1"
+                <!-- External Partner Institution (Clean link) -->
+                <div v-if="member.institution" class="flex justify-center sm:justify-start">
+                  <a
+                    v-if="member.institution_link"
+                    :href="member.institution_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition-colors"
                   >
-                    <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 flex items-center gap-1 justify-center sm:justify-start">
-                      <UIcon name="i-lucide-book-open" class="size-3 text-orange-500" />
-                      <span>{{ locale === 'vi' ? 'Môn học phụ trách:' : 'Courses Taught in MSI:' }}</span>
-                    </span>
-                    <div class="flex flex-wrap gap-1.5 justify-center sm:justify-start">
-                      <NuxtLink
-                        v-for="mod in getLecturerModules(member.name)"
-                        :key="mod.path || mod.id"
-                        :to="`${localePath ? localePath('/program-structure/modules') : '/program-structure/modules'}#${getModuleSlug(mod)}`"
-                        :title="`View ${mod.title} syllabus in Handbook`"
-                        class="group/modlink"
-                      >
-                        <span
-                          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 hover:bg-[#1E3A5F] hover:text-white border border-slate-200 hover:border-[#1E3A5F] transition-all duration-200 shadow-2xs hover:shadow-xs cursor-pointer"
-                        >
-                          <span>{{ mod.title }}</span>
-                          <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400 group-hover/modlink:text-orange-400 transition-colors" />
-                        </span>
-                      </NuxtLink>
-                    </div>
-                  </div>
+                    <UIcon name="i-lucide-building-2" class="size-3.5 text-slate-400" />
+                    <span>{{ member.institution }}</span>
+                    <UIcon name="i-lucide-external-link" class="size-3 text-slate-400" />
+                  </a>
+                  <span v-else class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500">
+                    <UIcon name="i-lucide-building-2" class="size-3.5 text-slate-400" />
+                    <span>{{ member.institution }}</span>
+                  </span>
+                </div>
+
+                <!-- Email Chip -->
+                <div v-if="member.email" class="pt-0.5 flex justify-center sm:justify-start">
+                  <a
+                    :href="`mailto:${member.email}`"
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition-colors"
+                  >
+                    <UIcon name="i-lucide-mail" class="size-3.5 text-orange-500" />
+                    <span>{{ member.email }}</span>
+                  </a>
+                </div>
+
+                <!-- Courses Taught in MSI -->
+                <div
+                  v-if="getLecturerModules(member.name).length > 0"
+                  class="pt-2 flex flex-wrap items-center gap-1.5 justify-center sm:justify-start"
+                >
+                  <span class="text-[11px] font-semibold text-slate-400 mr-1">
+                    {{ locale === 'vi' ? 'Môn phụ trách:' : 'Courses:' }}
+                  </span>
+                  <NuxtLink
+                    v-for="mod in getLecturerModules(member.name)"
+                    :key="mod.path || mod.id"
+                    :to="`${localePath ? localePath('/program-structure/modules') : '/program-structure/modules'}#${getModuleSlug(mod)}`"
+                    :title="`View ${mod.title} syllabus in Handbook`"
+                    class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-orange-50 hover:text-orange-600 border border-slate-200/60 hover:border-orange-300 transition-colors cursor-pointer"
+                  >
+                    <span>{{ mod.title }}</span>
+                    <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400" />
+                  </NuxtLink>
                 </div>
               </div>
             </div>

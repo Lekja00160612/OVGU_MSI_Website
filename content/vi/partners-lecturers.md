@@ -26,13 +26,13 @@ groups:
         link: https://www.nm.ovgu.de/nm/en/
         members:
           - name: Prof. Dr.-Ing. Daniel Juhre
-            roles: Phó Trưởng khoa Cơ khí (OVGU); Trưởng Bộ môn Cơ học Tính toán
+            roles: Phó Trưởng khoa Cơ khí (OVGU)
             image: /Lecturer_Avatar/Daniel Juhre.jpg
             email: daniel.juhre@ovgu.de
             is_management: true
             management_role: Giám đốc Chương trình
           - name: M.Sc. Marc Ulrich
-            roles: Trợ lý Nghiên cứu (Bộ môn Cơ học Tính toán)
+            roles: Trợ lý Nghiên cứu
             image: /Lecturer_Avatar/Marc Ulrich.png
             email: marc.ulrich@ovgu.de
             is_management: true
@@ -41,49 +41,49 @@ groups:
         link: https://www.physik.ovgu.de/Abteilungen+des+IfP/Festkörperphysik_+spez_+Halbleiterphysik-p-8.html
         members:
           - name: Prof. Dr. rer. nat. Jürgen Christen
-            roles: Trưởng Bộ môn Vật lý Chất rắn
+            roles: Trưởng Bộ môn
             image: /Lecturer_Avatar/Jurgen Christen.jpg
           - name: apl. Prof. Dr. rer. nat. habil. Frank Bertram
-            roles: Giáo sư chuyên ngành
+            roles: ""
             image: /Lecturer_Avatar/Frank Bertram.jpeg
       - title: Bộ môn Vật liệu Chịu nhiệt độ cao
         link: https://www.ht-materials.ovgu.de/
         members:
           - name: Prof. Dr.-Ing. Manja Krüger
-            roles: Trưởng Bộ môn Vật liệu Chịu nhiệt độ cao
+            roles: Trưởng Bộ môn
             image: /Lecturer_Avatar/Manja Kruger.jpg
           - name: Dr.-Ing. Georg Hasemann
-            roles: Giảng viên chuyên ngành
+            roles: ""
             image: /Lecturer_Avatar/Georg Hasemann.jpg
       - title: Bộ môn Vật liệu Kim loại
         link: https://www.metalle.ovgu.de/
         members:
           - name: Prof. Dr.-Ing. Thorsten Halle
-            roles: Trưởng Bộ môn Vật liệu Kim loại
+            roles: Trưởng Bộ môn
             image: /Lecturer_Avatar/Thorsten Halle.jpg
           - name: Dr.-Ing. Sebastian Hütter
-            roles: Giảng viên chuyên ngành
+            roles: ""
             image: /Lecturer_Avatar/Sebastian Huetter.jpg
       - title: Bộ môn Vật liệu Phi kim loại (Gốm sứ)
         link: https://www.ceramics.ovgu.de/
         members:
           - name: Prof. Dr. rer. nat. Michael Scheffler
-            roles: Trưởng Bộ môn Vật liệu Phi kim loại
+            roles: Trưởng Bộ môn
             image: /Lecturer_Avatar/Michael Scheffler.jpg
           - name: Dr. rer. nat. Ulf Betke
-            roles: Giảng viên chuyên ngành
+            roles: ""
             image: /Lecturer_Avatar/Ulf Betke.JPG
       - title: Bộ môn Cơ học Kỹ thuật
         link: https://www.tm.ovgu.de/tm/en/
         members:
           - name: Prof. Dr.-Ing. habil. Dr. h. c. mult. Holm Altenbach
-            roles: Nguyên Trưởng Bộ môn Cơ học Kỹ thuật
+            roles: Nguyên Trưởng Bộ môn
             image: /Lecturer_Avatar/Holm Altenbach.jpg
       - title: Viện Hóa học
         link: https://www.ich.ovgu.de/Institut.html
         members:
           - name: Prof. Dr. Franziska Scheffler
-            roles: Giáo sư chuyên ngành
+            roles: ""
             image: /Lecturer_Avatar/Franziska Scheffler.jpg
   - id: invited
     title: Giảng viên Khách mời & Viện Đối tác
