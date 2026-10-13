@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/_nuxt/*",
+    "/_studio-app/*",
+    "/Documents/*",
+    "/images/*",
+    "/Logo/*",
+    "/Thumbnail/*",
+    "/Lecturer_Avatar/*",
+    "/posters/*",
+    "/favicon.ico",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/_payload.json"
+  ]
+}

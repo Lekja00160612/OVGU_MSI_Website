@@ -59,6 +59,11 @@ export default defineNuxtConfig({
       colors: ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'neutral']
     }
   },
+  icon: {
+    serverBundle: {
+      collections: ['lucide']
+    }
+  },
   i18n: {
     baseUrl: 'https://msi.vgu.edu.vn',
     langDir: 'locales',
@@ -118,5 +123,27 @@ export default defineNuxtConfig({
       routes: ['/', '/vi'],
       autoSubfolderIndex: false,
     },
+    cloudflare: {
+      pages: {
+        defaultRoutes: false,
+        routes: {
+          include: ['/*'],
+          exclude: [
+            '/_nuxt/*',
+            '/_studio-app/*',
+            '/Documents/*',
+            '/images/*',
+            '/Logo/*',
+            '/Thumbnail/*',
+            '/Lecturer_Avatar/*',
+            '/posters/*',
+            '/favicon.ico',
+            '/robots.txt',
+            '/sitemap.xml',
+            '/_payload.json'
+          ]
+        }
+      }
+    }
   }
 })
