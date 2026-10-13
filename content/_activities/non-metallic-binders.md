@@ -1,6 +1,6 @@
 ---
 title: "Lab Training: Cement & Concrete Mix Design and Early-Stage Hydration with Prof. Thomas Bier"
-category: "Lab Works"
+category: "Lab Trainings"
 date: "2026-02-04"
 image: "/images/academic_activities/non-metallic-binders-cover.jpg"
 description: "VGU MSI Master students practice cement mixing, casting, and workability testing during hands-on Inorganic Binders lab training under Prof. Thomas Bier."

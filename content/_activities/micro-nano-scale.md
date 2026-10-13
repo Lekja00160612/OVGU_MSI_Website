@@ -1,6 +1,6 @@
 ---
 title: "Materials Characterization: High-Resolution Imaging from Micro to Nano Scale"
-category: "Lab Works"
+category: "Lab Trainings"
 date: "2026-03-11"
 image: "/images/academic_activities/micro-nano-scale-cover.jpg"
 description: "VGU MSI students explore SEM, XRD, and spectroscopic characterization with flying faculty Prof. Franziska Scheffler from OVGU Magdeburg."

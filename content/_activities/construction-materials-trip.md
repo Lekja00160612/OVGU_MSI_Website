@@ -1,6 +1,6 @@
 ---
 title: "Excursion: Exploring Cement & Concrete Tech at Mekong Concrete and AAC Plants"
-category: "Industry Adventures"
+category: "Industrial Visits"
 date: "2026-02-11"
 image: "/images/academic_activities/construction-materials-cover.jpg"
 description: "MSI Master students visit automated AAC and Mekong Concrete plants in Long An with Prof. Thomas Bier, exploring modern cement chemistry and concrete engineering."

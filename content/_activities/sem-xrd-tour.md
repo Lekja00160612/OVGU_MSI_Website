@@ -1,6 +1,6 @@
 ---
 title: "Lab Training: Scanning Electron Microscopy (SEM) & XRD Research Lab Tour"
-category: "Lab Works"
+category: "Lab Trainings"
 date: "2026-03-30"
 image: "/images/academic_activities/sem-xrd-tour-cover.jpg"
 description: "VGU MSI Master students join Dr. Ulf Betke for a research lab tour, exploring advanced micro-nano characterization with SEM and XRD."

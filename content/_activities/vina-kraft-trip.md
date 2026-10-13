@@ -1,6 +1,6 @@
 ---
 title: "Excursion: Vina Kraft Paper - Industrial Pulp Processing & Packaging Engineering"
-category: "Industry Adventures"
+category: "Industrial Visits"
 date: "2026-05-08"
 image: "/images/academic_activities/vina-kraft-trip-cover.jpg"
 description: "VGU Materials Science Master students visit Vina Kraft Paper in Binh Duong, exploring industrial pulp processing, cellulose chemistry, and packaging engineering."

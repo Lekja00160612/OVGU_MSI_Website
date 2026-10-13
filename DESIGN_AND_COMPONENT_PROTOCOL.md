@@ -9,8 +9,8 @@ When you are asked to build, modify, or extend any feature, page, or layout on t
 
 ## 1. Golden Rules of Governance
 
-1. **Standard Component Stack: Nuxt UI + Tailwind CSS v4**:
-   - The canonical UI stack is **Nuxt 4**, **Nuxt UI (v3)**, and **Tailwind CSS (v4)**.
+1. **Standard Component Stack: Nuxt UI v4 + Tailwind CSS v4**:
+   - The canonical UI stack is **Nuxt 4**, **Nuxt UI v4** (`@nuxt/ui` v4), and **Tailwind CSS v4**.
    - All interactive controls (buttons, badges, inputs, modals, tabs, slide-overs) must use **Nuxt UI primitives** (`<UButton>`, `<UBadge>`, `<UCard>`, `<UModal>`, `<USlideover>`, `<UTabs>`, `<UInput>`).
    - Layout, grid structures, spacing, and typography derive strictly from standard **Tailwind CSS v4 utility classes**.
    - **Zero Custom Scoped CSS Rule**: Do NOT create ad-hoc `<style scoped>` blocks with custom classes (`.custom-btn`, `.my-card`, etc.). All styling must be expressed through component props or Tailwind utility classes.

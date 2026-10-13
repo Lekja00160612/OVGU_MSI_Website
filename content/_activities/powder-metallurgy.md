@@ -1,6 +1,6 @@
 ---
 title: "Lab Highlight: Powder Metallurgy, Sintering, & Characterization of High-Temp Mo-Si-B Alloys"
-category: "Lab Works"
+category: "Lab Trainings"
 date: "2025-06-25"
 image: "/images/academic_activities/powder-metallurgy-cover.jpg"
 description: "MSI Master students synthesize high-temperature Mo-V-Si-B alloys, practicing ball milling, particle sizing, XRD lattice scans, and SEM morphology."

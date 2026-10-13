@@ -1,6 +1,6 @@
 ---
 title: "Lab Training: Research Lab Module - Advanced Properties, Testing, & Analytics"
-category: "Lab Works"
+category: "Lab Trainings"
 date: "2025-06-10"
 image: "/images/academic_activities/research-labs-cover.jpg"
 description: "VGU MSI Master students complete their Properties, Testing, and Analytics research lab, practicing powder metallurgy, metallography, SEM, and XRD."

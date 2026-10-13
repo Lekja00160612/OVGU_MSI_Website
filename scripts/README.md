@@ -8,6 +8,7 @@ This directory contains production utilities for maintaining content, updating a
 
 | Command | Script File | Purpose |
 | :--- | :--- | :--- |
+| `npm run check` | `verify_links.js` + `master_classify_activities.py` + `generate_sitemap.js` | Comprehensive quality gate (links + categories + sitemap) |
 | `npm run prebuild` | `scripts/generate_sitemap.js` | Fast, deterministic, offline-safe sitemap generation |
 | `npm run verify:links` | `scripts/verify_links.js` | Scans all code & markdown to guarantee zero broken links |
 | `npm run crawl` | `scripts/crawl_activities.js` | On-demand scraper to pull new news from VGU portal |

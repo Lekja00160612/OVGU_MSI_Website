@@ -1,6 +1,6 @@
 ---
 title: "Lab Training: Quenching, Tempering, and Aluminum Precipitation Hardening"
-category: "Lab Works"
+category: "Lab Trainings"
 date: "2025-12-12"
 image: "/images/academic_activities/heat-treatment-cover.jpg"
 description: "VGU MSI Master students conduct hands-on heat treatment lab training, practicing C45 steel hardening, tempering, quenching, and aluminum precipitation hardening."

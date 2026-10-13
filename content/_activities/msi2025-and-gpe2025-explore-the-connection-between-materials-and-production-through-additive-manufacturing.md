@@ -1,6 +1,6 @@
 ---
 title: "MSI2025 and GPE2025 Explore the Connection Between Materials and Production Through Additive Manufacturing"
-category: "Lab Works"
+category: "Lab Trainings"
 date: "2026-08-11"
 image: "/images/academic_activities/msi2025-and-gpe2025-explore-the-connecti-cover.jpg"
 description: "Students from the GPE2025 and MSI2025 intakes have recently completed the Additive Manufacturing course at Vietnamese German University VGU . Offered ..."

@@ -1,6 +1,6 @@
 ---
 title: "Workshop within the framework of a ministry-level scientific and technological research project, in conjunction with the Material Science Master Program seminar"
-category: "Achievements & Events"
+category: "Academic Lectures"
 date: "2026-06-29"
 eventDate: "Thursday, 23 July 2026"
 eventTime: "09:00 AM – 04:00 PM"

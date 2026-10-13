@@ -1,6 +1,6 @@
 ---
 title: "Lab Training: Polymer Tensile Testing, Rheometry, & SEM Microstructure"
-category: "Lab Works"
+category: "Lab Trainings"
 date: "2025-12-12"
 image: "/images/academic_activities/polymer-labs-cover.jpg"
 description: "VGU MSI students perform advanced polymer characterization using tensile testing, rheometry flow analysis, and SEM imaging under Prof. Sven Henning."

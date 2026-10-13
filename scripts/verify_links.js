@@ -57,3 +57,7 @@ for (const item of foundLinks) {
 }
 
 console.log(`\nVerification finished: ${missing.length} missing files out of ${foundLinks.size} tested.`);
+
+if (missing.length > 0) {
+  process.exit(1);
+}

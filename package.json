@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "prebuild": "node scripts/generate_sitemap.js",
+    "pregenerate": "node scripts/generate_sitemap.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -13,7 +14,8 @@
     "classify": "py scripts/master_classify_activities.py --apply",
     "classify:check": "py scripts/master_classify_activities.py --check",
     "verify:links": "node scripts/verify_links.js",
-    "sitemap": "node scripts/generate_sitemap.js"
+    "sitemap": "node scripts/generate_sitemap.js",
+    "check": "node scripts/verify_links.js && py scripts/master_classify_activities.py --check && node scripts/generate_sitemap.js"
   },
   "dependencies": {
     "better-sqlite3": "^12.11.1",

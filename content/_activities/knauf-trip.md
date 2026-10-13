@@ -1,6 +1,6 @@
 ---
 title: "Excursion to Knauf Vietnam: Automated Gypsum Manufacturing & Acoustic Engineering"
-category: "Industry Adventures"
+category: "Industrial Visits"
 date: "2025-12-11"
 image: "/images/academic_activities/knauf-trip-cover.jpg"
 description: "Discover how VGU Materials Science Master students explore automated lightweight gypsum manufacturing on a field trip to Knauf Vietnam in Nha Be."
