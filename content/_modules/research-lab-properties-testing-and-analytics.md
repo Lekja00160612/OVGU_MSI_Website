@@ -14,7 +14,7 @@ description: |
   • Laboratory for corrosion testing
 lecturers:
   - "Prof. Dr.-Ing. Thorsten Halle"
-  - "Prof. Dr.-Ing. Mania Krüger"
+  - "Prof. Dr.-Ing. Manja Krüger"
   - "Prof. Dr. rer. nat. Michael Scheffler"
   - "Dr.-Ing. Tong Duy Hien"
 images: []

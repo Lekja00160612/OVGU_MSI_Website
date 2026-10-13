@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { thesisTopics, type ThesisTopic } from '~/data/thesisTopics'
+
+const route = useRoute()
+const localePath = useLocalePath()
+const { locale } = useI18n()
 
 const searchQuery = ref('')
 const openTopicIds = ref<number[]>([])
@@ -14,6 +18,25 @@ const filteredTopics = computed(() => {
     topic.description.toLowerCase().includes(query) ||
     topic.tasks.some(task => task.toLowerCase().includes(query))
   )
+})
+
+function syncFromQuery() {
+  const q = (route.query.module as string) || (route.query.search as string)
+  if (q) {
+    searchQuery.value = q
+    // Automatically open matching topics
+    openTopicIds.value = thesisTopics
+      .filter(t => t.module.toLowerCase().includes(q.toLowerCase()) || t.title.toLowerCase().includes(q.toLowerCase()))
+      .map(t => t.id)
+  }
+}
+
+onMounted(() => {
+  syncFromQuery()
+})
+
+watch(() => route.query, () => {
+  syncFromQuery()
 })
 
 function toggleTopic(id: number) {
@@ -35,33 +58,62 @@ function isOpen(id: number) {
     <div class="mb-6">
       <div class="flex items-center justify-between gap-4 flex-wrap mb-3">
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          Master’s Thesis Topics & Research Opportunities
+          {{ locale === 'vi' ? 'Đề Tài Luận Văn Thạc Sĩ & Cơ Hội Nghiên Cứu' : 'Master’s Thesis Topics & Research Opportunities' }}
         </h2>
         <UBadge color="primary" variant="subtle" size="md" class="font-bold rounded-full">
-          {{ filteredTopics.length }} Topics Offered
+          {{ filteredTopics.length }} {{ locale === 'vi' ? 'Đề Tài' : 'Topics Offered' }}
         </UBadge>
       </div>
       <p class="text-slate-600 text-sm leading-relaxed max-w-4xl">
-        Master’s Thesis projects are conducted under the academic supervision of participating chairs and research groups at OVGU and VGU. Students are encouraged to contact individual module lecturers or department professors directly to discuss topic availability or propose research directions — the list below outlines representative thesis offers across our core specialization modules.
+        {{ locale === 'vi'
+          ? 'Các dự án luận văn thạc sĩ được thực hiện dưới sự hướng dẫn học thuật từ các bộ môn và nhóm nghiên cứu tại OVGU Magdeburg và VGU. Học viên có thể liên hệ trực tiếp với giảng viên phụ trách môn học để trao đổi về đề tài hoặc đề xuất hướng nghiên cứu mong muốn.'
+          : 'Master’s Thesis projects are conducted under the academic supervision of participating chairs and research groups at OVGU and VGU. Students are encouraged to contact individual module lecturers or department professors directly to discuss topic availability or propose research directions — the list below outlines representative thesis offers across our core specialization modules.'
+        }}
       </p>
     </div>
 
     <!-- Search Input Bar with Nuxt UI UInput -->
-    <div class="mb-6">
-      <UInput
-        v-model="searchQuery"
-        icon="i-lucide-search"
-        size="lg"
-        placeholder="Search thesis topics by keyword, module, or supervisor..."
-        class="w-full"
-        :ui="{ root: 'w-full' }"
-      />
+    <div class="mb-6 flex flex-col gap-2">
+      <div class="flex items-center gap-3">
+        <UInput
+          v-model="searchQuery"
+          icon="i-lucide-search"
+          size="lg"
+          :placeholder="locale === 'vi' ? 'Tìm kiếm đề tài theo từ khóa, môn học, giáo sư hướng dẫn...' : 'Search thesis topics by keyword, module, or supervisor...'"
+          class="w-full"
+          :ui="{ root: 'w-full' }"
+        />
+        <UButton
+          v-if="searchQuery"
+          color="neutral"
+          variant="subtle"
+          size="lg"
+          icon="i-lucide-x"
+          class="shrink-0 font-bold"
+          @click="searchQuery = ''"
+        >
+          {{ locale === 'vi' ? 'Xem tất cả' : 'Show All' }}
+        </UButton>
+      </div>
+
+      <div v-if="searchQuery" class="flex items-center gap-2 px-1 text-xs text-slate-500">
+        <span>{{ locale === 'vi' ? 'Đang lọc theo:' : 'Filtered by:' }} <strong class="text-orange-600 font-bold">{{ searchQuery }}</strong></span>
+      </div>
     </div>
 
     <!-- Accordion List Container -->
     <div class="flex flex-col gap-3">
       <div v-if="filteredTopics.length === 0" class="text-center py-12 text-slate-500 bg-slate-50 rounded-2xl border border-slate-200 text-sm">
-        No thesis topics found matching "{{ searchQuery }}".
+        <p>{{ locale === 'vi' ? `Không tìm thấy đề tài phù hợp với "${searchQuery}".` : `No thesis topics found matching "${searchQuery}".` }}</p>
+        <UButton
+          color="primary"
+          variant="soft"
+          size="sm"
+          class="mt-3 font-bold"
+          @click="searchQuery = ''"
+        >
+          {{ locale === 'vi' ? 'Xem tất cả đề tài' : 'View all topics' }}
+        </UButton>
       </div>
 
       <div
@@ -90,16 +142,28 @@ function isOpen(id: number) {
         <!-- Item Expandable Content -->
         <div v-if="isOpen(topic.id)" class="px-5 pb-5 pt-2 border-t border-slate-100 flex flex-col gap-4 text-sm text-slate-700">
           <div>
-            <UBadge color="secondary" variant="subtle" size="sm" class="font-semibold">
-              {{ topic.module }}
-            </UBadge>
+            <NuxtLink
+              :to="{ path: localePath('/program-structure/modules'), query: { module: topic.module } }"
+              class="inline-block group"
+              :title="`View ${topic.module} module syllabus in handbook`"
+            >
+              <UBadge
+                color="secondary"
+                variant="subtle"
+                size="sm"
+                class="font-semibold group-hover:bg-orange-500 group-hover:text-white transition-all cursor-pointer inline-flex items-center gap-1.5"
+              >
+                <span>{{ topic.module }}</span>
+                <UIcon name="i-lucide-arrow-up-right" class="size-3 opacity-60 group-hover:opacity-100" />
+              </UBadge>
+            </NuxtLink>
           </div>
           
           <p class="text-slate-600 leading-relaxed">{{ topic.description }}</p>
 
           <div v-if="topic.tasks && topic.tasks.length > 0" class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-              Candidate Tasks & Key Objectives:
+              {{ locale === 'vi' ? 'Nội dung thực hiện & Mục tiêu trọng tâm:' : 'Candidate Tasks & Key Objectives:' }}
             </h4>
             <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-600">
               <li v-for="(task, tIdx) in topic.tasks" :key="tIdx">
@@ -109,7 +173,11 @@ function isOpen(id: number) {
           </div>
 
           <div class="p-3.5 rounded-xl bg-orange-50/70 border border-orange-200/60 text-xs text-orange-950 font-medium">
-            <UIcon name='i-lucide-info' class='size-4 text-primary-500 inline mr-1' /><em>Interested in this research project or wishing to propose a related topic? Please reach out directly to the responsible module lecturer or department chair.</em>
+            <UIcon name='i-lucide-info' class='size-4 text-primary-500 inline mr-1' />
+            <em>{{ locale === 'vi'
+              ? 'Quan tâm đến đề tài nghiên cứu này hoặc muốn đề xuất hướng nghiên cứu mới? Vui lòng liên hệ trực tiếp với giảng viên phụ trách môn học hoặc trưởng bộ môn.'
+              : 'Interested in this research project or wishing to propose a related topic? Please reach out directly to the responsible module lecturer or department chair.'
+            }}</em>
           </div>
         </div>
       </div>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { thesisTopics } from '~/data/thesisTopics'
+import { getFacultyAnchor } from '~/utils/faculty'
 
+const route = useRoute()
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
 
@@ -59,6 +62,62 @@ const getLinks = (mod: any) => mod?.links || mod?.meta?.links || []
 const getImages = (mod: any) => mod?.images || mod?.meta?.images || []
 const getLecturers = (mod: any): string[] => mod?.lecturers || mod?.meta?.lecturers || []
 
+// Media safe extraction helpers
+const getPdfUrl = (item: any): string => {
+  if (!item) return ''
+  if (typeof item === 'string') return item
+  return item.url || ''
+}
+
+const getPdfTitle = (item: any): string => {
+  if (!item) return 'Document (PDF)'
+  if (typeof item === 'string') {
+    const filename = item.split('/').pop() || item
+    try {
+      return decodeURIComponent(filename)
+    } catch {
+      return filename
+    }
+  }
+  return item.title || item.url?.split('/').pop() || 'Document (PDF)'
+}
+
+const getLinkUrl = (item: any): string => {
+  if (!item) return ''
+  if (typeof item === 'string') return item
+  return item.url || ''
+}
+
+const getLinkTitle = (item: any): string => {
+  if (!item) return 'External Link'
+  if (typeof item === 'string') return item
+  return item.title || item.url || 'External Link'
+}
+
+const getImageUrl = (item: any): string => {
+  if (!item) return ''
+  if (typeof item === 'string') return item
+  return item.url || item.src || ''
+}
+
+const getImageCaption = (item: any): string => {
+  if (!item || typeof item === 'string') return ''
+  return item.title || item.caption || item.alt || ''
+}
+
+// Thesis connection helper
+const getRelatedThesisCount = (moduleTitle?: string): number => {
+  if (!moduleTitle) return 0
+  const norm = moduleTitle.toLowerCase().trim()
+  return thesisTopics.filter(t => t.module.toLowerCase().trim() === norm).length
+}
+
+// Faculty connection helper
+const getLecturerPartnerLink = (lecturer: string): string => {
+  const anchor = getFacultyAnchor(lecturer)
+  return `${localePath('/academic-partners')}#${anchor}`
+}
+
 // Helper: Split sentences by dot/period into clean, long structured bullet lines
 const formatDotLines = (text?: string): string[] => {
   if (!text) return []
@@ -110,10 +169,36 @@ function resetFilters() {
   searchQuery.value = ''
 }
 
+// Sync route parameters (when navigated from academic-partners or thesis)
+function syncModuleFromRoute() {
+  const queryParam = (route.query.module as string) || (route.query.search as string)
+  if (!queryParam || !allModules.value) return
+
+  // Switch to 'all' so neither core nor elective is hidden
+  activeType.value = 'all'
+  activeSemester.value = 'all'
+  onlyGermanLecturer.value = false
+  searchQuery.value = queryParam
+
+  const target = allModules.value.find(
+    (m: any) => m.title?.toLowerCase() === queryParam.toLowerCase() ||
+                m.path?.toLowerCase().endsWith(`/${queryParam.toLowerCase().replace(/\s+/g, '-')}`)
+  )
+  if (target) {
+    selectedModule.value = target
+    activeMobilePath.value = target.path
+  }
+}
+
 onMounted(() => {
+  syncModuleFromRoute()
   if (filteredModules.value.length > 0 && !selectedModule.value) {
     selectedModule.value = filteredModules.value[0]
   }
+})
+
+watch(() => route.query, () => {
+  syncModuleFromRoute()
 })
 </script>
 
@@ -125,39 +210,38 @@ onMounted(() => {
       <!-- Row 1: Course Type Tabs & Official PDF Button -->
       <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
         <!-- Type Tabs (All / Core / Elective) -->
-          <!-- Type Tabs: 15 Core Modules first, then Electives, then All Courses -->
-          <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-2xl shrink-0 overflow-x-auto no-scrollbar">
-            <button
-              type="button"
-              class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer select-none whitespace-nowrap"
-              :class="activeType === 'core'
-                ? 'bg-orange-500 text-white shadow-2xs'
-                : 'text-slate-600 hover:text-slate-900'"
-              @click="activeType = 'core'"
-            >
-              {{ locale === 'vi' ? '15 Môn Cốt Lõi' : '15 Core Modules' }} ({{ coreCount }})
-            </button>
-            <button
-              type="button"
-              class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer select-none whitespace-nowrap"
-              :class="activeType === 'elective'
-                ? 'bg-orange-500 text-white shadow-2xs'
-                : 'text-slate-600 hover:text-slate-900'"
-              @click="activeType = 'elective'"
-            >
-              {{ locale === 'vi' ? 'Môn Tự Chọn' : 'Electives Pool' }} ({{ electiveCount }})
-            </button>
-            <button
-              type="button"
-              class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer select-none whitespace-nowrap"
-              :class="activeType === 'all'
-                ? 'bg-orange-500 text-white shadow-2xs'
-                : 'text-slate-600 hover:text-slate-900'"
-              @click="activeType = 'all'"
-            >
-              {{ locale === 'vi' ? 'Tất cả môn' : 'All Courses' }} ({{ allModules?.length || 0 }})
-            </button>
-          </div>
+        <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-2xl shrink-0 overflow-x-auto no-scrollbar">
+          <button
+            type="button"
+            class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer select-none whitespace-nowrap"
+            :class="activeType === 'core'
+              ? 'bg-orange-500 text-white shadow-2xs'
+              : 'text-slate-600 hover:text-slate-900'"
+            @click="activeType = 'core'"
+          >
+            {{ locale === 'vi' ? '15 Môn Cốt Lõi' : '15 Core Modules' }} ({{ coreCount }})
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer select-none whitespace-nowrap"
+            :class="activeType === 'elective'
+              ? 'bg-orange-500 text-white shadow-2xs'
+              : 'text-slate-600 hover:text-slate-900'"
+            @click="activeType = 'elective'"
+          >
+            {{ locale === 'vi' ? 'Môn Tự Chọn' : 'Electives Pool' }} ({{ electiveCount }})
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer select-none whitespace-nowrap"
+            :class="activeType === 'all'
+              ? 'bg-orange-500 text-white shadow-2xs'
+              : 'text-slate-600 hover:text-slate-900'"
+            @click="activeType = 'all'"
+          >
+            {{ locale === 'vi' ? 'Tất cả môn' : 'All Courses' }} ({{ allModules?.length || 0 }})
+          </button>
+        </div>
 
         <!-- Official Handbook PDF CTA Button -->
         <div class="flex items-center gap-2.5">
@@ -231,7 +315,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- === SECTION 2: Desktop 2-Column Split Layout (STRICTLY MAXIMUM 2 COLUMNS ON LEFT, TALLER & BIGGER CARDS) === -->
+    <!-- === SECTION 2: Desktop 2-Column Split Layout (STRICTLY MAXIMUM 2 COLUMNS ON LEFT) === -->
     <div class="hidden lg:flex gap-8 items-start">
 
       <!-- Left Column: Module Cards Grid (Strictly max 2 columns) -->
@@ -317,7 +401,7 @@ onMounted(() => {
         </button>
       </div>
 
-      <!-- Right Column: Sticky Detail Panel (Old Components Styling) -->
+      <!-- Right Column: Sticky Detail Panel -->
       <div class="flex-1 sticky top-28 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-md min-h-[500px] max-h-[82vh] overflow-y-auto flex flex-col justify-between">
         <div v-if="selectedModule" class="flex flex-col gap-4">
           <!-- Header -->
@@ -341,7 +425,8 @@ onMounted(() => {
                 size="xs"
                 class="font-bold"
               >
-                <UIcon name='i-lucide-plane' class='size-3.5 text-emerald-600 inline mr-1' />{{ locale === 'vi' ? 'Giảng viên từ Đức (OVGU)' : 'Taught by Visiting German Professor' }}
+                <UIcon name='i-lucide-plane' class='size-3.5 text-emerald-600 inline mr-1' />
+                {{ locale === 'vi' ? 'Giảng viên từ Đức (OVGU)' : 'Taught by Visiting German Professor' }}
               </UBadge>
             </div>
 
@@ -366,15 +451,22 @@ onMounted(() => {
               Detailed module descriptors covering foundational scientific principles, laboratory experiments, and German-standard engineering qualifications.
             </p>
 
-            <!-- Lecturers List -->
+            <!-- Lecturers List with Links to Academic Partners -->
             <div v-if="getLecturers(selectedModule).length > 0" class="mt-4 pt-4 border-t border-slate-100">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
                 {{ locale === 'vi' ? 'Giảng viên phụ trách:' : 'Teaching Faculty:' }}
               </span>
-              <ul class="space-y-1 text-xs text-slate-700 font-semibold">
+              <ul class="space-y-1.5 text-xs text-slate-700 font-semibold">
                 <li v-for="lecturer in getLecturers(selectedModule)" :key="lecturer" class="flex items-center gap-1.5">
                   <UIcon name="i-lucide-user" class="size-3.5 text-orange-500 shrink-0" />
-                  <span>{{ lecturer }}</span>
+                  <NuxtLink
+                    :to="getLecturerPartnerLink(lecturer)"
+                    class="hover:text-orange-600 hover:underline inline-flex items-center gap-1 group font-bold text-slate-800 transition-colors"
+                    :title="`Meet ${lecturer} on Academic Faculty page`"
+                  >
+                    <span>{{ lecturer }}</span>
+                    <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400 group-hover:text-orange-600 opacity-70 group-hover:opacity-100 transition-opacity" />
+                  </NuxtLink>
                 </li>
               </ul>
             </div>
@@ -392,6 +484,7 @@ onMounted(() => {
               <span>{{ locale === 'vi' ? 'Xem trong Cẩm nang' : 'View in Handbook' }}</span>
             </a>
 
+            <!-- More Detail & Media Modal Trigger -->
             <button
               v-if="getPdfs(selectedModule).length || getImages(selectedModule).length || getLinks(selectedModule).length"
               type="button"
@@ -401,6 +494,25 @@ onMounted(() => {
               <UIcon name="i-lucide-layers" class="size-3.5 text-orange-500" />
               <span>{{ locale === 'vi' ? 'Tài liệu chi tiết' : 'More Detail & Media' }}</span>
             </button>
+
+            <!-- Link to Master Thesis Topics -->
+            <NuxtLink
+              :to="{ path: localePath('/program-structure/thesis'), query: { module: selectedModule.title } }"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-[#1E3A5F] bg-sky-50 hover:bg-sky-100 border border-sky-200 transition-colors"
+              :title="`View thesis opportunities in ${selectedModule.title}`"
+            >
+              <UIcon name="i-lucide-graduation-cap" class="size-3.5 text-[#009FDF]" />
+              <span>{{ locale === 'vi' ? 'Đề Tài Luận Văn' : 'Thesis Topics' }}</span>
+              <UBadge
+                v-if="getRelatedThesisCount(selectedModule.title) > 0"
+                color="secondary"
+                variant="solid"
+                size="xs"
+                class="ml-1 px-1.5 py-0.2 rounded-full font-extrabold text-[10px]"
+              >
+                {{ getRelatedThesisCount(selectedModule.title) }}
+              </UBadge>
+            </NuxtLink>
           </div>
         </div>
 
@@ -479,14 +591,26 @@ onMounted(() => {
             </div>
           </div>
 
+          <!-- Mobile Teaching Faculty with links -->
           <div v-if="getLecturers(mod).length > 0" class="pt-2 border-t border-slate-200/60">
-            <span class="text-[10px] font-bold uppercase text-slate-400 block mb-1">Teaching Faculty:</span>
-            <div class="font-semibold text-slate-700">
-              {{ getLecturers(mod).join(', ') }}
+            <span class="text-[10px] font-bold uppercase text-slate-400 block mb-1">
+              {{ locale === 'vi' ? 'Giảng viên phụ trách:' : 'Teaching Faculty:' }}
+            </span>
+            <div class="font-semibold text-slate-700 flex flex-wrap gap-x-2.5 gap-y-1">
+              <NuxtLink
+                v-for="lecturer in getLecturers(mod)"
+                :key="lecturer"
+                :to="getLecturerPartnerLink(lecturer)"
+                class="hover:text-orange-600 hover:underline inline-flex items-center gap-0.5 text-orange-700 font-bold"
+              >
+                <span>{{ lecturer }}</span>
+                <UIcon name="i-lucide-arrow-up-right" class="size-3 text-orange-400" />
+              </NuxtLink>
             </div>
           </div>
 
-          <div class="pt-2 flex items-center gap-2">
+          <!-- Mobile Action Buttons -->
+          <div class="pt-2 flex items-center gap-2 flex-wrap">
             <a
               href="/Documents/MODULE CATALOGUE MSI.pdf"
               target="_blank"
@@ -495,13 +619,21 @@ onMounted(() => {
               <span>Handbook (PDF)</span>
             </a>
             <button
-              v-if="getPdfs(mod).length || getImages(mod).length"
+              v-if="getPdfs(mod).length || getImages(mod).length || getLinks(mod).length"
               type="button"
-              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 bg-white border border-slate-200"
+              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 bg-white border border-slate-200 cursor-pointer"
               @click="openModal(mod)"
             >
               <span>Details &amp; Files</span>
             </button>
+            <NuxtLink
+              :to="{ path: localePath('/program-structure/thesis'), query: { module: mod.title } }"
+              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold text-[#1E3A5F] bg-sky-50 border border-sky-200"
+            >
+              <UIcon name="i-lucide-graduation-cap" class="size-3.5 text-[#009FDF]" />
+              <span>Thesis</span>
+              <span v-if="getRelatedThesisCount(mod.title) > 0" class="text-[10px] font-bold text-orange-600">({{ getRelatedThesisCount(mod.title) }})</span>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -518,7 +650,7 @@ onMounted(() => {
           <!-- Modal Header -->
           <div class="p-6 border-b border-slate-100 flex items-start justify-between gap-4 bg-slate-50">
             <div>
-              <div class="flex items-center gap-2 mb-1.5">
+              <div class="flex items-center gap-2 mb-1.5 flex-wrap">
                 <UBadge color="primary" variant="subtle" size="xs" class="font-bold">
                   {{ isElective(selectedModule) ? 'Elective' : `Sem ${getSemester(selectedModule)}` }}
                 </UBadge>
@@ -545,6 +677,7 @@ onMounted(() => {
 
           <!-- Modal Body -->
           <div class="p-6 overflow-y-auto space-y-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <!-- Overview -->
             <div>
               <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Module Overview</h4>
               <div v-if="formatDotLines(selectedModule.description || selectedModule.meta?.description).length > 0" class="space-y-2">
@@ -560,54 +693,120 @@ onMounted(() => {
               <p v-else>{{ selectedModule.description || selectedModule.meta?.description || 'Course description not provided.' }}</p>
             </div>
 
-            <!-- Documents -->
+            <!-- Documents & Syllabi (Crash-proof helper rendering) -->
             <div v-if="getPdfs(selectedModule).length > 0">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Documents &amp; Syllabi</h4>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                {{ locale === 'vi' ? 'Tài liệu & Đề cương' : 'Documents & Syllabi' }}
+              </h4>
               <div class="flex flex-col gap-2">
                 <a
                   v-for="(pdf, idx) in getPdfs(selectedModule)"
                   :key="idx"
-                  :href="pdf"
+                  :href="getPdfUrl(pdf)"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex items-center gap-2 p-2.5 rounded-xl bg-orange-50 border border-orange-200 text-orange-700 font-bold hover:bg-orange-100 transition-colors"
+                  class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-orange-50/80 border border-orange-200 text-orange-800 font-bold hover:bg-orange-100 transition-colors group"
                 >
-                  <UIcon name="i-lucide-file-down" class="size-4 shrink-0" />
-                  <span class="truncate">{{ pdf.split('/').pop() }}</span>
+                  <div class="flex items-center gap-2 min-w-0">
+                    <UIcon name="i-lucide-file-down" class="size-4 shrink-0 text-orange-600" />
+                    <span class="truncate">{{ getPdfTitle(pdf) }}</span>
+                  </div>
+                  <UIcon name="i-lucide-download" class="size-3.5 shrink-0 text-orange-400 group-hover:text-orange-700" />
                 </a>
               </div>
             </div>
 
-            <!-- External Links -->
+            <!-- Academic Resources & Links -->
             <div v-if="getLinks(selectedModule).length > 0">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Academic Resources</h4>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                {{ locale === 'vi' ? 'Tài nguyên & Hoạt động Học thuật' : 'Academic Resources & Activities' }}
+              </h4>
               <div class="flex flex-col gap-2">
                 <a
                   v-for="(link, idx) in getLinks(selectedModule)"
                   :key="idx"
-                  :href="link"
+                  :href="getLinkUrl(link)"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-medium hover:text-orange-600 transition-colors"
+                  class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-medium hover:text-orange-600 hover:border-orange-200 transition-colors group"
                 >
-                  <UIcon name="i-lucide-external-link" class="size-4 shrink-0 text-orange-500" />
-                  <span class="truncate">{{ link }}</span>
+                  <div class="flex items-center gap-2 min-w-0">
+                    <UIcon name="i-lucide-external-link" class="size-4 shrink-0 text-orange-500" />
+                    <span class="truncate font-semibold">{{ getLinkTitle(link) }}</span>
+                  </div>
+                  <span v-if="link.description" class="text-xs text-slate-400 shrink-0 hidden sm:inline">{{ link.description }}</span>
                 </a>
               </div>
             </div>
 
             <!-- Image Gallery -->
             <div v-if="getImages(selectedModule).length > 0">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Laboratory &amp; Equipment Gallery</h4>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                {{ locale === 'vi' ? 'Hình ảnh Phòng thí nghiệm' : 'Laboratory & Equipment Gallery' }}
+              </h4>
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <NuxtImg
+                <div
                   v-for="(img, idx) in getImages(selectedModule)"
                   :key="idx"
-                  :src="img"
-                  class="rounded-xl border border-slate-200 object-cover h-28 w-full"
-                  loading="lazy"
-                />
+                  class="flex flex-col gap-1"
+                >
+                  <NuxtImg
+                    :src="getImageUrl(img)"
+                    :alt="getImageCaption(img) || selectedModule.title"
+                    class="rounded-xl border border-slate-200 object-cover h-28 w-full"
+                    loading="lazy"
+                  />
+                  <span v-if="getImageCaption(img)" class="text-[10px] text-slate-500 truncate">
+                    {{ getImageCaption(img) }}
+                  </span>
+                </div>
               </div>
+            </div>
+
+            <!-- Teaching Faculty in Modal with Links -->
+            <div v-if="getLecturers(selectedModule).length > 0" class="pt-3 border-t border-slate-100">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                {{ locale === 'vi' ? 'Giảng viên phụ trách' : 'Teaching Faculty' }}
+              </h4>
+              <div class="flex flex-wrap gap-2">
+                <NuxtLink
+                  v-for="lecturer in getLecturers(selectedModule)"
+                  :key="lecturer"
+                  :to="getLecturerPartnerLink(lecturer)"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-orange-50 text-slate-800 hover:text-orange-600 font-bold text-xs border border-slate-200 hover:border-orange-200 transition-colors group"
+                  @click="isDetailModalOpen = false"
+                >
+                  <UIcon name="i-lucide-user" class="size-3.5 text-orange-500" />
+                  <span>{{ lecturer }}</span>
+                  <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400 group-hover:text-orange-500" />
+                </NuxtLink>
+              </div>
+            </div>
+
+            <!-- Master Thesis Research Topics Section -->
+            <div class="p-4 rounded-2xl bg-orange-50/70 border border-orange-200/80 flex items-center justify-between gap-3 flex-wrap">
+              <div class="flex items-center gap-2.5">
+                <UIcon name="i-lucide-graduation-cap" class="size-5 text-orange-500 shrink-0" />
+                <div>
+                  <div class="text-xs font-bold text-slate-900">
+                    {{ locale === 'vi' ? 'Đề Tài Luận Văn Thạc Sĩ Liên Quan' : 'Related Master Thesis Research Topics' }}
+                  </div>
+                  <div class="text-[11px] text-slate-600">
+                    {{ getRelatedThesisCount(selectedModule.title) > 0
+                      ? (locale === 'vi' ? `Có ${getRelatedThesisCount(selectedModule.title)} đề tài nghiên cứu mở cho môn học này.` : `${getRelatedThesisCount(selectedModule.title)} research project offers available for this module.`)
+                      : (locale === 'vi' ? 'Khám phá các hướng nghiên cứu luận văn thạc sĩ 30 ECTS.' : 'Explore 30 ECTS research capstones supervised by OVGU and VGU faculty.')
+                    }}
+                  </div>
+                </div>
+              </div>
+              <NuxtLink
+                :to="{ path: localePath('/program-structure/thesis'), query: { module: selectedModule.title } }"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs transition-colors shadow-2xs"
+                @click="isDetailModalOpen = false"
+              >
+                <span>{{ locale === 'vi' ? 'Xem Đề Tài' : 'View Thesis Topics' }}</span>
+                <UIcon name="i-lucide-arrow-right" class="size-3.5" />
+              </NuxtLink>
             </div>
           </div>
 

@@ -12,7 +12,7 @@ groups:
         email: thanh.nx@vgu.edu.vn
         is_management: true
         management_role: Điều phối viên Học thuật
-      - name: Mr. Tong Duy Hien
+      - name: Dr.-Ing. Tong Duy Hien
         roles: Giảng viên Cơ hữu VGU
         image: /Lecturer_Avatar/Tong Duy Hien.jpg
       - name: Dr. rer. nat. Duong Hieu Linh

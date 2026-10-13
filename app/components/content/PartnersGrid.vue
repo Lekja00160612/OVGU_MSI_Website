@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { inject, computed } from 'vue'
+import { inject, computed, onMounted, nextTick, watch } from 'vue'
+import { getFacultyAnchor } from '~/utils/faculty'
 
 const { page, allModules, localePath } = inject('pageData') as any
+const route = useRoute()
 
 // Resolve the page groups from meta (mirrors the partners-lecturers.vue pattern)
 const groups = computed<any[]>(() => {
@@ -22,13 +24,13 @@ const getInitials = (name: string): string => {
   return (parts[0]?.[0] ?? 'L').toUpperCase()
 }
 
-// ── Helper: modules taught by a given lecturer ───────────────────────────────
+// ── Helper: modules taught by a given lecturer with normalized title matching ─
 const getLecturerModules = (lecturerName: string): any[] => {
   if (!allModules?.value || !lecturerName) return []
-  const needle = lecturerName.toLowerCase().trim()
+  const normLecturer = getFacultyAnchor(lecturerName)
   return allModules.value.filter((mod: any) => {
     const list: string[] = mod.lecturers ?? mod.meta?.lecturers ?? []
-    return list.some((l: string) => l.toLowerCase().trim() === needle)
+    return list.some((l: string) => getFacultyAnchor(l) === normLecturer)
   })
 }
 
@@ -42,6 +44,26 @@ const avatarColor = (name: string): string => {
   for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash)
   return PALETTE[Math.abs(hash) % PALETTE.length]
 }
+
+// Smooth scroll to targeted faculty member card if hash present
+const scrollToTargetFaculty = () => {
+  if (route.hash) {
+    nextTick(() => {
+      const el = document.querySelector(route.hash)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    })
+  }
+}
+
+onMounted(() => {
+  setTimeout(scrollToTargetFaculty, 150)
+})
+
+watch(() => route.hash, () => {
+  scrollToTargetFaculty()
+})
 </script>
 
 <template>
@@ -69,8 +91,9 @@ const avatarColor = (name: string): string => {
       >
         <div
           v-for="member in group.members"
+          :id="getFacultyAnchor(member.name)"
           :key="member.name"
-          class="p-6 rounded-3xl border transition-all duration-200 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group hover:shadow-md"
+          class="p-6 rounded-3xl border transition-all duration-300 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group hover:shadow-md scroll-mt-28 target:ring-2 target:ring-orange-500 target:bg-orange-50/80 target:shadow-lg"
           :class="member.is_management ? 'bg-orange-50/50 border-orange-200 shadow-2xs' : 'bg-slate-50/70 border-slate-200/90'"
         >
           <!-- Prominent Larger Portrait / Headshot -->
@@ -114,7 +137,7 @@ const avatarColor = (name: string): string => {
                 size="sm"
                 class="font-bold text-xs px-2.5 py-1 rounded-lg"
               >
-                <a v-if="member.institution_link" :href="member.institution_link" target="_blank" class="hover:underline">
+                <a v-if="member.institution_link" :href="member.institution_link" target="_blank" rel="noopener noreferrer" class="hover:underline">
                   {{ member.institution }}
                 </a>
                 <template v-else>{{ member.institution }}</template>
@@ -131,7 +154,7 @@ const avatarColor = (name: string): string => {
               </a>
             </div>
 
-            <!-- Module tags -->
+            <!-- Module tags with deep links to handbook -->
             <div
               v-if="getLecturerModules(member.name).length > 0"
               class="pt-3 flex flex-col gap-1.5 border-t border-slate-200/80 mt-1"
@@ -141,10 +164,21 @@ const avatarColor = (name: string): string => {
                 <NuxtLink
                   v-for="mod in getLecturerModules(member.name)"
                   :key="mod.path || mod.id"
-                  :to="localePath ? localePath('/program-structure/modules') : '/program-structure/modules'"
+                  :to="{
+                    path: localePath ? localePath('/program-structure/modules') : '/program-structure/modules',
+                    query: { module: mod.title }
+                  }"
+                  :title="`View ${mod.title} in Course Handbook & Syllabi`"
+                  class="group/modlink"
                 >
-                  <UBadge color="primary" variant="subtle" size="sm" class="font-bold text-xs px-2.5 py-1 rounded-lg">
-                    {{ mod.title }}
+                  <UBadge
+                    color="primary"
+                    variant="subtle"
+                    size="sm"
+                    class="font-bold text-xs px-2.5 py-1 rounded-lg group-hover/modlink:bg-orange-500 group-hover/modlink:text-white transition-all cursor-pointer inline-flex items-center gap-1"
+                  >
+                    <span>{{ mod.title }}</span>
+                    <UIcon name="i-lucide-arrow-up-right" class="size-3 opacity-60 group-hover/modlink:opacity-100" />
                   </UBadge>
                 </NuxtLink>
               </div>
@@ -173,8 +207,9 @@ const avatarColor = (name: string): string => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             <div
               v-for="member in subgroup.members"
+              :id="getFacultyAnchor(member.name)"
               :key="member.name"
-              class="p-6 rounded-3xl border bg-slate-50/70 border-slate-200/90 transition-all duration-200 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group hover:shadow-md"
+              class="p-6 rounded-3xl border bg-slate-50/70 border-slate-200/90 transition-all duration-300 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 group hover:shadow-md scroll-mt-28 target:ring-2 target:ring-orange-500 target:bg-orange-50/80 target:shadow-lg"
             >
               <!-- Prominent Larger Portrait / Headshot -->
               <div class="relative shrink-0">
@@ -216,7 +251,7 @@ const avatarColor = (name: string): string => {
                     size="sm"
                     class="font-bold text-xs px-2.5 py-1 rounded-lg"
                   >
-                    <a v-if="member.institution_link" :href="member.institution_link" target="_blank" class="hover:underline">
+                    <a v-if="member.institution_link" :href="member.institution_link" target="_blank" rel="noopener noreferrer" class="hover:underline">
                       {{ member.institution }}
                     </a>
                     <template v-else>{{ member.institution }}</template>
@@ -233,6 +268,7 @@ const avatarColor = (name: string): string => {
                   </a>
                 </div>
 
+                <!-- Module tags with deep links to handbook -->
                 <div
                   v-if="getLecturerModules(member.name).length > 0"
                   class="pt-3 flex flex-col gap-1.5 border-t border-slate-200/80 mt-1"
@@ -242,10 +278,21 @@ const avatarColor = (name: string): string => {
                     <NuxtLink
                       v-for="mod in getLecturerModules(member.name)"
                       :key="mod.path || mod.id"
-                      :to="localePath ? localePath('/program-structure/modules') : '/program-structure/modules'"
+                      :to="{
+                        path: localePath ? localePath('/program-structure/modules') : '/program-structure/modules',
+                        query: { module: mod.title }
+                      }"
+                      :title="`View ${mod.title} in Course Handbook & Syllabi`"
+                      class="group/modlink"
                     >
-                      <UBadge color="primary" variant="subtle" size="sm" class="font-bold text-xs px-2.5 py-1 rounded-lg">
-                        {{ mod.title }}
+                      <UBadge
+                        color="primary"
+                        variant="subtle"
+                        size="sm"
+                        class="font-bold text-xs px-2.5 py-1 rounded-lg group-hover/modlink:bg-orange-500 group-hover/modlink:text-white transition-all cursor-pointer inline-flex items-center gap-1"
+                      >
+                        <span>{{ mod.title }}</span>
+                        <UIcon name="i-lucide-arrow-up-right" class="size-3 opacity-60 group-hover/modlink:opacity-100" />
                       </UBadge>
                     </NuxtLink>
                   </div>
