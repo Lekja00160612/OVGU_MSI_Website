@@ -23,7 +23,14 @@ Học phí được tính **theo từng học kỳ** vào đầu mỗi kỳ — 
 
 ### Thành Phần 2 — Hỗ Trợ OVGU cho Luận văn Thạc sĩ tại Đức
 
-Những học viên xuất sắc có cơ hội thực hiện một phần hoặc toàn bộ **nghiên cứu Luận văn Thạc sĩ tại OVGU Magdeburg**, được hỗ trợ bởi Học bổng Trao đổi DAAD (chi tiết bên dưới). Đây không phải gánh nặng học phí bổ sung — mà là một cơ hội nghiên cứu được tài trợ tại một trường đại học Đức, hỗ trợ đầy đủ thông qua quan hệ đối tác VGU-OVGU.
+Học viên có cơ hội thực hiện một phần hoặc toàn bộ **nghiên cứu Luận văn Thạc sĩ tại OVGU Magdeburg** tại CHLB Đức. Cơ hội nghiên cứu này có thể được thực hiện thông qua hai lộ trình:
+
+- **Được tài trợ học bổng:** Học viên có thành tích xuất sắc có thể ứng tuyển **Học bổng Trao đổi DAAD** (chi tiết bên dưới), được hỗ trợ toàn diện bao gồm sinh hoạt phí hàng tháng tại Đức và chi phí vé máy bay cho kỳ nghiên cứu.
+- **Tự túc tài chính:** Học viên cũng có thể chủ động tự túc tài chính cho kỳ làm luận văn tại OVGU, với sự hướng dẫn học thuật đầy đủ từ các giáo sư bộ môn OVGU và quyền tiếp cận hệ thống phòng thí nghiệm hiện đại tại Đức.
+
+> [!NOTE]
+> **Phí Học kỳ bắt buộc tại OVGU (*Semesterbeitrag*):** Các trường đại học công lập tại Đức không thu học phí giảng dạy; tuy nhiên, đối với **cả học viên nhận học bổng và học viên tự túc tài chính**, một khoản phí học kỳ hành chính theo quy định tại OVGU (khoảng ~300 €/học kỳ) sẽ được áp dụng song song. Khoản đóng góp này bao gồm phí dịch vụ sinh viên (*Studentenwerk*), cơ sở vật chất và vé phương tiện công cộng toàn quốc **Deutschlandticket** (sử dụng không giới hạn tàu vùng, xe buýt và xe điện trên toàn nước Đức).
+
 
 ---
 

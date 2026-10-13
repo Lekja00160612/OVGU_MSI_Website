@@ -23,7 +23,14 @@ Tuition is charged **per semester** at the start of each term — no lump-sum up
 
 ### Component 2 — OVGU Grant for Master's Thesis in Germany
 
-Top-performing students have the opportunity to conduct part or all of their **Master's Thesis research at OVGU Magdeburg**, supported by a separate DAAD Mobility Scholarship (detailed below). This is not an additional tuition burden — it is a funded research opportunity at a German university, fully supported through the VGU-OVGU partnership.
+Students have the opportunity to conduct part or all of their **Master's Thesis research at OVGU Magdeburg** in Germany. This research stay can be pursued through two pathways:
+
+- **Scholarship-funded:** Top-performing students can apply for the dedicated **DAAD Mobility Scholarship** (detailed below), which provides comprehensive funding including a monthly living stipend and travel allowance covering their research stay.
+- **Self-funded:** Students may also independently fund their thesis stay at OVGU with full thesis supervision by OVGU research professors and direct access to German laboratory facilities.
+
+> [!NOTE]
+> **Mandatory OVGU Semester Fee (*Semesterbeitrag*):** In Germany, public university education is tuition-free; however, for **both scholarship-funded and self-funded students**, a mandatory administrative semester fee at OVGU (approx. ~300 € per semester) will be applied alongside. This contribution covers student services (*Studentenwerk*), campus facilities, and the nationwide **Deutschlandticket** public transit pass for unlimited regional train, tram, and bus travel across Germany.
+
 
 ---
 
