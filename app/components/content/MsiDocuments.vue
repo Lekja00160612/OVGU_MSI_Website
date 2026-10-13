@@ -1,10 +1,34 @@
+<!--
+  Component: MsiDocuments
+  Description: Regulatory and promotional document download cards for MSI Master program.
+  Nuxt UI Primitives: UCard, UBadge, UButton, UIcon.
+-->
 <script setup lang="ts">
 const { locale } = useI18n()
 
-const documents = [
+interface MsiDocumentItem {
+  id: string
+  icon: string
+  iconBg: string
+  iconColor: string
+  labelEn: string
+  labelVi: string
+  titleEn: string
+  titleVi: string
+  descEn: string
+  descVi: string
+  noteEn: string | null
+  noteVi: string | null
+  url: string
+  badge: string
+}
+
+const documents: MsiDocumentItem[] = [
   {
     id: 'booklet',
     icon: 'i-lucide-book-open',
+    iconBg: 'bg-orange-50',
+    iconColor: 'text-orange-600 ring-orange-200/60',
     labelEn: 'PDF',
     labelVi: 'PDF',
     titleEn: 'MSI Program Booklet',
@@ -15,11 +39,12 @@ const documents = [
     noteVi: 'Không bao gồm thông tin học bổng. Để xem học bổng, hãy tải tệp MSI Scholarships.',
     url: '/Documents/Booklet MSI (updated 06.2026).pdf',
     badge: 'Updated Jun 2026',
-    iconColor: 'var(--color-primary)',
   },
   {
     id: 'leaflet',
     icon: 'i-lucide-file-text',
+    iconBg: 'bg-sky-50',
+    iconColor: 'text-sky-600 ring-sky-200/60',
     labelEn: 'PDF',
     labelVi: 'PDF',
     titleEn: 'MSI Quick-Guide Leaflet',
@@ -30,11 +55,12 @@ const documents = [
     noteVi: null,
     url: '/Documents/MSI leaflet 2026.pdf',
     badge: '2026 Edition',
-    iconColor: 'var(--color-ovgu-blue)',
   },
   {
     id: 'scholarships',
     icon: 'i-lucide-graduation-cap',
+    iconBg: 'bg-amber-50',
+    iconColor: 'text-amber-600 ring-amber-200/60',
     labelEn: 'PDF',
     labelVi: 'PDF',
     titleEn: 'MSI Scholarships',
@@ -45,7 +71,6 @@ const documents = [
     noteVi: null,
     url: '/Documents/MSI_Scholarships_Brochure.pdf',
     badge: 'Scholarships',
-    iconColor: 'var(--color-accent)',
   },
 ]
 
@@ -86,7 +111,9 @@ function t(item: any, key: string) {
           <div>
             <!-- Icon + type badge -->
             <div class="flex items-center justify-between mb-4">
-              <span class="text-3xl">{{ doc.icon }}</span>
+              <span class="size-11 rounded-2xl flex items-center justify-center ring-1 shadow-2xs" :class="[doc.iconBg, doc.iconColor]">
+                <UIcon :name="doc.icon" class="size-6" />
+              </span>
               <div class="flex items-center gap-1.5">
                 <UBadge color="neutral" variant="subtle" size="xs">{{ t(doc, 'label') }}</UBadge>
                 <UBadge color="primary" variant="subtle" size="xs">{{ doc.badge }}</UBadge>
@@ -108,12 +135,12 @@ function t(item: any, key: string) {
             target="_blank"
             external
             rel="noopener noreferrer"
-            icon="i-lucide-file-text"
+            icon="i-lucide-download"
             color="primary"
             variant="solid"
             size="md"
             block
-            class="mt-4 font-bold rounded-xl justify-center shadow-xs"
+            class="mt-4 font-bold rounded-xl justify-center shadow-xs cursor-pointer"
             :id="`doc-download-${doc.id}`"
           >
             {{ locale === 'vi' ? (doc.labelVi === 'PDF' ? 'Mở PDF' : 'Tải xuống') : (doc.labelEn === 'PDF' ? 'Open PDF' : 'Download') }}
