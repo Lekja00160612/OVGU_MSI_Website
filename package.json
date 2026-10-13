@@ -16,19 +16,19 @@
     "sitemap": "node scripts/generate_sitemap.js"
   },
   "dependencies": {
-    "better-sqlite3": "^12.10.0",
-    "nuxt": "^4.4.6",
+    "better-sqlite3": "^12.11.1",
+    "nuxt": "^4.6.1",
     "nuxt-studio": "^1.7.0",
     "qrcode": "^1.5.4",
-    "vue": "^3.5.34",
-    "vue-router": "^5.0.6"
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
-    "@nuxt/content": "^3.13.0",
+    "@nuxt/content": "^3.16.2",
     "@nuxt/fonts": "^1.0.1",
-    "@nuxt/image": "^2.0.0",
-    "@nuxt/ui": "^4.7.1",
-    "@nuxtjs/i18n": "^10.3.0",
+    "@nuxt/image": "^2.1.0",
+    "@nuxt/ui": "^4.11.3",
+    "@nuxtjs/i18n": "^10.6.0",
     "@types/qrcode": "^1.5.6"
   }
 }

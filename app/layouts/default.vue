@@ -138,7 +138,7 @@ const showAcademicActivitiesToast = () => {
         id: `event-toast-${event.path.replace(/\//g, '-')}-${Date.now()}`,
         title: title,
         description: desc,
-        icon: 'i-heroicons-ticket',
+        icon: 'i-lucide-ticket',
         color: 'primary',
         duration: config.public.eventToastDurationMs || 6000,
         close: true,

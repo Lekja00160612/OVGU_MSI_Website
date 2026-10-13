@@ -71,6 +71,10 @@ export default defineNuxtConfig({
     detectBrowserLanguage: false,
     restructureDir: 'i18n'
   },
+  image: {
+    format: ['webp', 'png', 'jpg'],
+    quality: 85
+  },
   mdc: {
     headings: {
       anchorLinks: {
@@ -86,19 +90,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       eventToastIntervalMs: 86400000, // 24 hours
-      eventToastDurationMs: 6000, // 6 seconds auto turn off
-      mdc: {
-        headings: {
-          anchorLinks: {
-            h1: false,
-            h2: false,
-            h3: false,
-            h4: false,
-            h5: false,
-            h6: false
-          }
-        }
-      }
+      eventToastDurationMs: 6000 // 6 seconds auto turn off
     }
   },
   studio: {
@@ -126,45 +118,5 @@ export default defineNuxtConfig({
       routes: ['/', '/vi'],
       autoSubfolderIndex: false,
     },
-  },
-    // PLEASE CHANGE CLOUDFLARE BUILD TO: npx nuxi generate
-    // 
-    // cloudflare: {
-    //   pages: {
-    //     routes: {
-    //       exclude: [
-    //         '/Documents/*',
-    //         '/Logo/*',
-    //         '/Thumbnail/*',
-    //         '/images/*',
-    //         '/Hybrid_Learning/*',
-    //         '/OVGU_Campus/*',
-    //         '/Lecturer_Avatar/*',
-    //         '/academic-activities/*',
-    //         '/academic-activities',
-    //         '/future-students/*',
-    //         '/future-students',
-    //         '/laboratories-research/*',
-    //         '/laboratories-research',
-    //         '/partners-lecturers/*',
-    //         '/partners-lecturers',
-    //         '/potential-candidates/*',
-    //         '/potential-candidates',
-    //         '/program-structure/*',
-    //         '/program-structure',
-    //         '/student-life/*',
-    //         '/student-life',
-    //         '/tuition-scholarships/*',
-    //         '/tuition-scholarships',
-    //         '/vi/*',
-    //         '/vi',
-    //         '/admin/*',
-    //         '/admin',
-    //         '/__nuxt_content/*',
-    //         '/_i18n/*',
-    //         '/dump*',
-    //       ]
-    //     }
-    //   }
-    // }
+  }
 })
