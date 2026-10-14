@@ -39,13 +39,16 @@ All AI coding assistants and developers working on this codebase must adhere to 
 ## 3. Cloudflare Pages Deployment & Build Governance (CRITICAL)
 
 - **Production Cloudflare Build Settings**:
-  - **Build Command**: `npm run build` *(MUST be `npm run build`, NEVER `npx nuxi generate`)*
+  - **Build Command**: `npm run build` *(MUST be `npm run build`)*
   - **Build Output Directory**: `dist`
-- **Why this configuration is required**:
-  - In `nuxt.config.ts`, `$production: { nitro: { preset: 'cloudflare_pages' } }` targets the official Cloudflare Pages pipeline into `dist/`.
-  - `npm run build` runs `nuxt build`, which bundles `_worker.js`, prerenders all 84+ HTML pages, copies all `_nuxt/` CSS and JS files, transfers all `public/` assets (`images/`, `Documents/`, etc.), and outputs all 1,400+ assets into `dist/`.
-  - **Do NOT run `nuxi generate` with the `cloudflare_pages` preset**: In Nitro, `generate` skips Rollup worker compilation and fails to copy `_nuxt/` CSS/JS to `dist/`, causing deployed pages to lose all styles.
-  - **Do NOT manually create `public/_routes.json`**: Nitro's `cloudflare.pages.routes` automatically generates `dist/_routes.json` with clean exclusions, preventing Cloudflare's 100-rule limit error.
+- **Pure Static Site Rendering Architecture (SSG on Cloudflare Pages)**:
+  - In `nuxt.config.ts`, `$production: { nitro: { preset: 'cloudflare_pages' } }` compiles into `dist/`.
+  - `npm run build` runs `nuxt build`, which prerenders all 171+ HTML routes, compiles all `_nuxt/` CSS/JS bundles, and transfers all 1,400+ static assets (`Documents/`, `images/`, `Logo/`, etc.) into `dist/`.
+  - Automatically following `nuxt build`, the `postbuild` script (`scripts/specialize_cloudflare_pages.js`) strips `_worker.js` and `_routes.json` from `dist/`.
+  - **Why this specialization is vital**:
+    - Cloudflare Pages detects that `dist` has no worker code, deploying the entire site as **100% Pure Static Edge CDN Assets**.
+    - Eliminates Cloudflare Worker execution limits, eliminates cold-start delays, and completely prevents the missing D1 database warning (`Deploying to Cloudflare requires using D1 database`).
+    - Every page hit (`/`, `/vi`, `/program-structure`, etc.) is served directly from Cloudflare's global edge cache with sub-20ms TTFB.
 
 ---
 

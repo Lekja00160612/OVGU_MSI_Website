@@ -6,6 +6,7 @@
     "prebuild": "node scripts/generate_sitemap.js",
     "pregenerate": "node scripts/generate_sitemap.js",
     "build": "nuxt build",
+    "postbuild": "node scripts/specialize_cloudflare_pages.js",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

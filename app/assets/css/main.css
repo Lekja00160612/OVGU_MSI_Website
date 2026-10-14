@@ -67,8 +67,15 @@
   --color-primary: #1E3A5F;
   --color-primary-dark: #0F2240;
   --color-primary-light: #2E5280;
-  --color-primary-50: #EEF3FB;
-  --color-primary-100: #CDDAEE;
+
+  --color-msi-navy: #1E3A5F;
+  --color-msi-navy-light: #2E5280;
+  --color-msi-dark: #0F2240;
+  --color-msi-blue-50: #EEF3FB;
+  --color-msi-blue-100: #CDDAEE;
+
+  --color-vgu-orange: #E87722;
+  --color-ovgu-cyan: #009FDF;
 
   --color-accent: #E87722;
   --color-accent-dark: #C95E0A;
