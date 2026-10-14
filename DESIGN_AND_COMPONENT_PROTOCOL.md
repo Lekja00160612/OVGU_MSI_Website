@@ -65,11 +65,11 @@ When dynamically computing inline CSS or SVG stroke/fill properties (e.g. in `st
 
 ### 2.2 Navigation Bar Brand Logo Governance
 - **No Padding Box Rule**: The MSI brand logo in `app/layouts/default.vue` must **never** be enclosed in an artificial card box, border, or padding container (`no px-2 py-1`, `no border-2 border-slate-100`, `no -my-4`).
-- **Full Resolution & Natural Backdrop**: Render `<NuxtImg>` directly within the `<NuxtLink>` against the navbar's semi-transparent backdrop blur (`bg-white/95 backdrop-blur-md`).
-- **Responsive Height Scale**:
-  - Small Mobile (< 640px): `h-10 sm:h-12` (40px–48px) — leaves ample room for language toggle and mobile drawer hamburger.
-  - Tablet (640px – 1024px): `md:h-13` (52px) — sits harmoniously inside the 72px header.
-  - Desktop (≥ 1024px): `lg:h-15` (60px) — perfectly balances the 2-row navigation link layout.
+- **Full Resolution & Tight Bounding Box**: `public/Logo/LOGO_MSI_*.png` are cropped tightly to their active artwork bounding box (3131×1123) with zero dead transparent padding.
+- **Edge-to-Edge Navbar Height Filling Scale**:
+  - Small Mobile (< 640px): `h-12 sm:h-14` (48px–56px) — fills the mobile header cleanly while leaving room for language switch and mobile drawer.
+  - Tablet (640px – 1024px): `md:h-16` (64px) — aligns symmetrically with the centered navigation.
+  - Desktop (≥ 1024px): `lg:h-[66px] xl:h-[70px]` (66px–70px) — fills the ~72px navbar height completely edge-to-edge without excess whitespace.
   - Aspect ratio: Crisp, unclipped vector/PNG with `w-auto object-contain block`.
 
 ---
