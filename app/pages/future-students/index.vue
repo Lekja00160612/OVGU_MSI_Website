@@ -28,6 +28,9 @@ const gatewayCards = computed(() => [
       : 'Compare milestones for Direct Entry candidates and Non-traditional / Bridging applicants.',
     to: localePath('/future-students/pathways'),
     icon: 'i-lucide-git-branch',
+    iconClass: 'bg-sky-50 text-[#009FDF] group-hover:bg-[#009FDF] group-hover:text-white',
+    hoverBorder: 'hover:border-[#009FDF]',
+    arrowColor: 'text-[#009FDF]'
   },
   {
     title: locale.value === 'vi' ? 'Chia Sẻ Cựu Sinh Viên & Việc Làm' : 'Alumni Stories & Career Prospects',
@@ -37,6 +40,9 @@ const gatewayCards = computed(() => [
       : 'Read insights from graduates and discover career paths in semiconductor, automotive, and energy R&D.',
     to: localePath('/future-students/alumni'),
     icon: 'i-lucide-users',
+    iconClass: 'bg-slate-100 text-[#1E3A5F] group-hover:bg-[#1E3A5F] group-hover:text-white',
+    hoverBorder: 'hover:border-[#1E3A5F]',
+    arrowColor: 'text-[#1E3A5F]'
   },
   {
     title: locale.value === 'vi' ? 'Học Phí & Học Bổng Toàn Phần DAAD' : 'Tuition & DAAD Scholarships',
@@ -46,6 +52,9 @@ const gatewayCards = computed(() => [
       : 'Fixed transparent tuition fees and prestigious DAAD Sur-Place scholarships with monthly living stipends.',
     to: localePath('/tuition-scholarships'),
     icon: 'i-lucide-award',
+    iconClass: 'bg-orange-50 text-orange-600 group-hover:bg-orange-500 group-hover:text-white',
+    hoverBorder: 'hover:border-orange-500',
+    arrowColor: 'text-orange-600'
   },
   {
     title: locale.value === 'vi' ? 'Sổ Tay Môn Học & Đề Cương (25+ Môn)' : 'Course Handbook & Syllabi',
@@ -55,6 +64,9 @@ const gatewayCards = computed(() => [
       : 'Browse 15 compulsory core modules and 10+ electives taught in English by visiting German professors.',
     to: localePath('/program-structure/modules'),
     icon: 'i-lucide-book-open',
+    iconClass: 'bg-blue-50 text-[#2E5280] group-hover:bg-[#2E5280] group-hover:text-white',
+    hoverBorder: 'hover:border-[#2E5280]',
+    arrowColor: 'text-[#2E5280]'
   }
 ])
 </script>
@@ -89,25 +101,26 @@ const gatewayCards = computed(() => [
               v-for="gate in gatewayCards"
               :key="gate.to"
               :to="gate.to"
-              class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-500 hover:shadow-primary-500/5 group"
+              class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl group"
+              :class="gate.hoverBorder"
             >
               <div>
                 <div class="flex items-center justify-between gap-2 mb-3">
-                  <span class="size-10 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  <span class="size-10 rounded-2xl flex items-center justify-center transition-colors" :class="gate.iconClass">
                     <UIcon :name="gate.icon" class="size-5" />
                   </span>
                   <UBadge color="neutral" variant="subtle" size="xs" class="font-bold">
                     {{ gate.badge }}
                   </UBadge>
                 </div>
-                <h4 class="text-base font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors leading-snug">
+                <h4 class="text-base font-extrabold text-slate-900 group-hover:text-primary-600 transition-colors leading-snug">
                   {{ gate.title }}
                 </h4>
                 <p class="text-xs text-slate-600 mt-2 leading-relaxed">
                   {{ gate.desc }}
                 </p>
               </div>
-              <div class="pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-orange-600 group-hover:translate-x-1 transition-transform">
+              <div class="pt-3 border-t border-slate-100 flex items-center text-xs font-bold group-hover:translate-x-1 transition-transform" :class="gate.arrowColor">
                 <span>{{ locale === 'vi' ? 'Khám phá ngay' : 'Access guide' }} &rarr;</span>
               </div>
             </NuxtLink>

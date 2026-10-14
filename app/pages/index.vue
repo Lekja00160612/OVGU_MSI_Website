@@ -4,23 +4,18 @@ const localePath = useLocalePath()
 
 const pathPrefix = computed(() => locale.value === 'en' ? '/' : `/${locale.value}`)
 
-const { data: raw, refresh: refreshRaw } = await useAsyncData(`msi-home-page-${locale.value}`, () =>
-  queryCollection('content').path(pathPrefix.value).first()
+const { data: raw } = await useAsyncData(`msi-home-page-${locale.value}`, () =>
+  queryCollection('content').path(pathPrefix.value).first(),
+  { watch: [locale] }
 )
 const { data: allActivities } = await useAsyncData(`msi-all-activities-${locale.value}`, () =>
-  queryCollection('activities').all()
+  queryCollection('activities').all(),
+  { watch: [locale] }
 )
 const { data: allModules } = await useAsyncData(`msi-all-modules-${locale.value}`, () =>
-  queryCollection('modules').all()
+  queryCollection('modules').all(),
+  { watch: [locale] }
 )
-
-// Re-fetch on client-side navigation back to this page (fixes blank page on logo click)
-const route = useRoute()
-watch(() => route.path, async (newPath) => {
-  if (newPath === '/' || newPath === `/${locale.value}`) {
-    await refreshRaw()
-  }
-})
 
 // @nuxt/content v3: pass the full raw document so injected child components
 // (HomeCurriculum, HomeActivities, etc.) can access both .meta and top-level fields.
@@ -64,7 +59,7 @@ provide('pageData', { page, allModules, recentActivities, localePath })
 
 <template>
   <div v-if="raw">
-    <ContentRenderer :key="route?.path" :value="raw" />
+    <ContentRenderer :value="raw" />
   </div>
   <div v-else class="max-w-7xl mx-auto px-4 min-h-[60vh] flex items-center justify-center">
     <p class="text-slate-500 font-medium">{{ t('home.loading') }}</p>

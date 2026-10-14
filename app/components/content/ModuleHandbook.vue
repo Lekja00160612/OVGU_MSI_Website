@@ -345,11 +345,11 @@ watch(() => [route.hash, route.query], () => {
             type="button"
             class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border select-none ml-1"
             :class="onlyGermanLecturer
-              ? 'bg-emerald-50 text-emerald-700 border-emerald-300 ring-1 ring-emerald-400/40'
+              ? 'bg-sky-50 text-sky-700 border-sky-300 ring-1 ring-sky-400/40'
               : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'"
             @click="onlyGermanLecturer = !onlyGermanLecturer"
           >
-            <span class="size-2 rounded-full" :class="onlyGermanLecturer ? 'bg-emerald-500 animate-pulse' : 'bg-slate-300'" />
+            <span class="size-2 rounded-full" :class="onlyGermanLecturer ? 'bg-sky-500 animate-pulse' : 'bg-slate-300'" />
             <span>{{ locale === 'vi' ? 'Giáo sư OVGU' : 'Visiting German Professors' }}</span>
           </button>
 
@@ -404,7 +404,7 @@ watch(() => [route.hash, route.query], () => {
               </span>
               <span
                 v-if="hasGermanLecturer(mod)"
-                class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 tracking-wider"
+                class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-200 tracking-wider"
                 title="Visiting German Professor from OVGU Magdeburg"
               >
                 OVGU
@@ -474,12 +474,12 @@ watch(() => [route.hash, route.query], () => {
               </UBadge>
               <UBadge
                 v-if="hasGermanLecturer(selectedModule)"
-                color="success"
+                color="info"
                 variant="subtle"
                 size="xs"
                 class="font-bold"
               >
-                <UIcon name='i-lucide-plane' class='size-3.5 text-emerald-600 inline mr-1' />
+                <UIcon name='i-lucide-plane' class='size-3.5 text-sky-600 inline mr-1' />
                 {{ locale === 'vi' ? 'Giảng viên từ Đức (OVGU)' : 'Taught by Visiting German Professor' }}
               </UBadge>
             </div>
@@ -616,7 +616,7 @@ watch(() => [route.hash, route.query], () => {
                 </span>
                 <span
                   v-if="hasGermanLecturer(mod)"
-                  class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200"
+                  class="text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-200"
                 >
                   OVGU
                 </span>

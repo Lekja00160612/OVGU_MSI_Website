@@ -354,7 +354,7 @@ const arrowMarkerId = computed(() => {
                   {{ idx + 1 }}
                 </span>
                 <span class="flex-1">{{ step.title }}</span>
-                <span v-if="userChecklist[step.id]" class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full shrink-0">✓ Ready</span>
+                <span v-if="userChecklist[step.id]" class="text-xs font-bold text-sky-700 bg-sky-50 border border-sky-200 px-2 py-0.5 rounded-full shrink-0">✓ Ready</span>
               </summary>
               <div class="pt-4 border-t border-slate-100 mt-3 flex flex-col gap-3 text-xs text-slate-600">
                 <p class="leading-relaxed">{{ step.desc }}</p>

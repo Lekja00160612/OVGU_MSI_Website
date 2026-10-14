@@ -55,7 +55,7 @@ const getAccentGradient = (member: any, group?: any): string => {
     return 'bg-gradient-to-r from-orange-500 via-amber-500 to-[#1E3A5F]'
   }
   if (group?.id === 'invited') {
-    return 'bg-gradient-to-r from-emerald-600 via-teal-500 to-[#009FDF]'
+    return 'bg-gradient-to-r from-[#009FDF] via-sky-400 to-[#1E3A5F]'
   }
   if (group?.id === 'support') {
     return 'bg-gradient-to-r from-slate-600 via-slate-500 to-orange-500'
@@ -176,11 +176,11 @@ watch(() => route.hash, () => {
                   :href="member.institution_link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-colors"
+                  class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold text-sky-800 bg-sky-50 border border-sky-200 hover:bg-sky-100 hover:border-sky-300 transition-colors"
                 >
-                  <UIcon name="i-lucide-building-2" class="size-3.5 text-emerald-600 shrink-0" />
+                  <UIcon name="i-lucide-building-2" class="size-3.5 text-sky-600 shrink-0" />
                   <span>{{ member.institution }}</span>
-                  <UIcon name="i-lucide-external-link" class="size-3 text-emerald-500 shrink-0" />
+                  <UIcon name="i-lucide-external-link" class="size-3 text-sky-500 shrink-0" />
                 </a>
                 <span
                   v-else
@@ -330,11 +330,11 @@ watch(() => route.hash, () => {
                       :href="member.institution_link"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-colors"
+                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold text-sky-800 bg-sky-50 border border-sky-200 hover:bg-sky-100 hover:border-sky-300 transition-colors"
                     >
-                      <UIcon name="i-lucide-building-2" class="size-3.5 text-emerald-600 shrink-0" />
+                      <UIcon name="i-lucide-building-2" class="size-3.5 text-sky-600 shrink-0" />
                       <span>{{ member.institution }}</span>
-                      <UIcon name="i-lucide-external-link" class="size-3 text-emerald-500 shrink-0" />
+                      <UIcon name="i-lucide-external-link" class="size-3 text-sky-500 shrink-0" />
                     </a>
                     <span
                       v-else

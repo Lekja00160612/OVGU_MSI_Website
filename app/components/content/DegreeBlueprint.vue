@@ -26,7 +26,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Nền tảng khoa học vật liệu cơ bản: Vật lý chất rắn, Cơ học môi trường liên tục, Đặc tính vật liệu, Gốm sứ, Kim loại, Polyme.'
       : 'Core scientific foundation: Solid state physics, continuum mechanics, characterization, ceramics, metals, polymers.',
-    bg: 'bg-msi-navy',
+    bg: 'bg-[#1E3A5F]',
     icon: 'i-lucide-book-open'
   },
   {
@@ -35,7 +35,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Chuyên sâu theo định hướng: Cơ học tính toán, Vật liệu nano, Vật liệu y sinh, Cảm biến bán dẫn hoặc Quản trị.'
       : 'Specialization tracks: Computational mechanics, nano-materials, biomaterials, smart sensorics, or management.',
-    bg: 'bg-secondary-500',
+    bg: 'bg-[#009FDF]',
     icon: 'i-lucide-flask-conical'
   },
   {
@@ -44,7 +44,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Thao tác trực tiếp trên 22+ thiết bị phân tích hiện đại tại VGU (SEM, XRD, TGA) và nghiên cứu tài liệu khoa học theo nhóm.'
       : 'Direct hands-on training on 22+ characterization instruments (SEM, XRD, TGA) and collaborative literature research.',
-    bg: 'bg-primary-500',
+    bg: 'bg-[#E87722]',
     icon: 'i-lucide-microscope'
   },
   {
@@ -53,7 +53,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Đề tài nghiên cứu độc lập 6 tháng dưới sự hướng dẫn song phương của giáo sư OVGU Magdeburg và VGU.'
       : '6-month independent capstone research project supervised jointly by OVGU Magdeburg and VGU faculty.',
-    bg: 'bg-primary-700',
+    bg: 'bg-[#2E5280]',
     icon: 'i-lucide-graduation-cap'
   }
 ])
@@ -63,6 +63,7 @@ const semesterRoadmap = computed(() => [
     semester: 'Semester 1',
     credits: '30 ECTS',
     title: locale.value === 'vi' ? 'Nền Tảng Cơ Học & Vật Lý' : 'Mechanics & Physical Foundations',
+    icon: 'i-lucide-atom',
     courses: [
       'Solid State Physics',
       'Continuum Mechanics',
@@ -71,12 +72,16 @@ const semesterRoadmap = computed(() => [
       'Metals & Microstructures'
     ],
     highlight: locale.value === 'vi' ? 'Xây dựng tư duy vật lý và cơ học định lượng' : 'Building rigorous theoretical & quantitative foundations',
-    colorBorder: 'border-l-orange-500'
+    colorBorder: 'border-l-[#1E3A5F]',
+    iconBg: 'bg-blue-50 text-[#1E3A5F]',
+    dotColor: 'text-[#1E3A5F]',
+    highlightColor: 'text-[#1E3A5F]'
   },
   {
     semester: 'Semester 2',
     credits: '30 ECTS',
     title: locale.value === 'vi' ? 'Vật Liệu Nâng Cao & Thực Hành Lab' : 'Advanced Materials & Characterization',
+    icon: 'i-lucide-microscope',
     courses: [
       'Polymers & Soft Matter',
       'Glass & Inorganic Binders',
@@ -85,31 +90,42 @@ const semesterRoadmap = computed(() => [
       'Powder Metallurgy & Sintering'
     ],
     highlight: locale.value === 'vi' ? '100% sinh viên tự tay vận hành thiết bị phân tích' : '100% hands-on equipment operation without outsourcing',
-    colorBorder: 'border-l-msi-navy'
+    colorBorder: 'border-l-[#009FDF]',
+    iconBg: 'bg-sky-50 text-[#009FDF]',
+    dotColor: 'text-[#009FDF]',
+    highlightColor: 'text-[#009FDF]'
   },
   {
     semester: 'Semester 3',
     credits: '30 ECTS',
     title: locale.value === 'vi' ? 'Chuyên Sâu & Trao Đổi Đức (OVGU)' : 'Specialization & Germany Exchange',
+    icon: 'i-lucide-plane-takeoff',
     courses: [
       '3 Elective Specialization Modules (15 ECTS)',
       'Scientific Team Project & Literature (15 ECTS)',
       'Optional: Exchange Semester at OVGU Magdeburg'
     ],
     highlight: locale.value === 'vi' ? 'Cơ hội nhận học bổng DAAD học tại CHLB Đức' : 'DAAD Mobility grant opportunity to study in Germany',
-    colorBorder: 'border-l-sky-500'
+    colorBorder: 'border-l-[#E87722]',
+    iconBg: 'bg-orange-50 text-[#E87722]',
+    dotColor: 'text-[#E87722]',
+    highlightColor: 'text-[#E87722]'
   },
   {
     semester: 'Semester 4',
     credits: '30 ECTS',
     title: locale.value === 'vi' ? 'Luận Văn Thạc Sĩ & Bảo Vệ' : 'Master Thesis & Colloquium',
+    icon: 'i-lucide-graduation-cap',
     courses: [
       'Independent Scientific Research (30 ECTS)',
       'Joint Supervision: OVGU Magdeburg & VGU',
       'Public Defense Colloquium'
     ],
     highlight: locale.value === 'vi' ? 'Công bố bài báo quốc tế hoặc ứng dụng công nghiệp' : 'Publishable scientific papers or industrial innovation',
-    colorBorder: 'border-l-emerald-600'
+    colorBorder: 'border-l-[#2E5280]',
+    iconBg: 'bg-slate-100 text-[#2E5280]',
+    dotColor: 'text-[#2E5280]',
+    highlightColor: 'text-[#2E5280]'
   }
 ])
 
@@ -122,6 +138,9 @@ const gatewayCards = computed(() => [
     to: localePath('/program-structure/modules'),
     badge: 'Core + Electives',
     icon: 'i-lucide-book-open',
+    iconClass: 'bg-slate-100 text-[#1E3A5F] group-hover:bg-[#1E3A5F] group-hover:text-white',
+    hoverBorder: 'hover:border-[#1E3A5F]',
+    arrowColor: 'text-[#1E3A5F]'
   },
   {
     title: locale.value === 'vi' ? 'Thời Khóa Biểu & Lịch Học' : 'Semester Timetable Matrix',
@@ -131,6 +150,9 @@ const gatewayCards = computed(() => [
     to: localePath('/program-structure/timetable'),
     badge: 'WS 26/27 Live',
     icon: 'i-lucide-calendar',
+    iconClass: 'bg-sky-50 text-[#009FDF] group-hover:bg-[#009FDF] group-hover:text-white',
+    hoverBorder: 'hover:border-[#009FDF]',
+    arrowColor: 'text-[#009FDF]'
   },
   {
     title: locale.value === 'vi' ? 'Đề Tài Luận Văn Thạc Sĩ' : 'Master Thesis Topics Portal',
@@ -140,6 +162,9 @@ const gatewayCards = computed(() => [
     to: localePath('/program-structure/thesis'),
     badge: '30 ECTS Capstone',
     icon: 'i-lucide-graduation-cap',
+    iconClass: 'bg-orange-50 text-orange-600 group-hover:bg-orange-500 group-hover:text-white',
+    hoverBorder: 'hover:border-orange-500',
+    arrowColor: 'text-orange-600'
   },
   {
     title: locale.value === 'vi' ? 'Hành Trình Sang Đức (OVGU)' : 'Path to Germany Relocation',
@@ -149,6 +174,9 @@ const gatewayCards = computed(() => [
     to: localePath('/student-life/germany-relocation'),
     badge: 'OVGU Magdeburg',
     icon: 'i-lucide-plane-takeoff',
+    iconClass: 'bg-blue-50 text-[#2E5280] group-hover:bg-[#2E5280] group-hover:text-white',
+    hoverBorder: 'hover:border-[#2E5280]',
+    arrowColor: 'text-[#2E5280]'
   }
 ])
 </script>
@@ -270,21 +298,26 @@ const gatewayCards = computed(() => [
           :class="sem.colorBorder"
         >
           <div>
-            <div class="flex items-center justify-between gap-2 mb-2">
-              <span class="text-xs font-black text-slate-500 uppercase tracking-wider">{{ sem.semester }}</span>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="size-7 rounded-lg flex items-center justify-center shrink-0" :class="sem.iconBg">
+                  <UIcon :name="sem.icon" class="size-4" />
+                </span>
+                <span class="text-xs font-black text-slate-700 uppercase tracking-wider">{{ sem.semester }}</span>
+              </div>
               <UBadge color="neutral" variant="subtle" size="xs" class="font-bold">{{ sem.credits }}</UBadge>
             </div>
             <h3 class="text-base font-extrabold text-slate-900 mb-3 leading-snug">{{ sem.title }}</h3>
             <ul class="space-y-1.5 text-xs text-slate-600 mb-4">
               <li v-for="c in sem.courses" :key="c" class="flex items-start gap-1.5 leading-relaxed">
-                <span class="text-orange-500 font-bold shrink-0">▸</span>
+                <span class="font-bold shrink-0" :class="sem.dotColor">▸</span>
                 <span>{{ c }}</span>
               </li>
             </ul>
           </div>
           <div class="pt-3 border-t border-slate-200/80">
-            <span class="text-[11px] font-bold text-slate-500 block leading-tight">
-              <UIcon name="i-lucide-lightbulb" class="size-4 text-orange-500 inline shrink-0 mr-1" /><span>{{ sem.highlight }}</span>
+            <span class="text-[11px] font-bold text-slate-600 block leading-tight">
+              <UIcon name="i-lucide-lightbulb" class="size-4 inline shrink-0 mr-1" :class="sem.highlightColor" /><span>{{ sem.highlight }}</span>
             </span>
           </div>
         </div>
@@ -297,25 +330,26 @@ const gatewayCards = computed(() => [
         v-for="gate in gatewayCards"
         :key="gate.to"
         :to="gate.to"
-        class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-primary-500 hover:shadow-primary-500/5 group"
+        class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs flex flex-col justify-between gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl group"
+        :class="gate.hoverBorder"
       >
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <span class="size-10 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-colors">
+            <span class="size-10 rounded-2xl flex items-center justify-center transition-colors" :class="gate.iconClass">
               <UIcon :name="gate.icon" class="size-5" />
             </span>
             <UBadge color="neutral" variant="subtle" size="xs" class="font-bold">
               {{ gate.badge }}
             </UBadge>
           </div>
-          <h3 class="text-base font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors leading-snug">
+          <h3 class="text-base font-extrabold text-slate-900 group-hover:text-primary-600 transition-colors leading-snug">
             {{ gate.title }}
           </h3>
           <p class="text-xs text-slate-600 mt-2 leading-relaxed">
             {{ gate.desc }}
           </p>
         </div>
-        <div class="pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-orange-600 group-hover:translate-x-1 transition-transform">
+        <div class="pt-3 border-t border-slate-100 flex items-center text-xs font-bold group-hover:translate-x-1 transition-transform" :class="gate.arrowColor">
           <span>{{ locale === 'vi' ? 'Khám phá ngay' : 'Access resource' }} &rarr;</span>
         </div>
       </NuxtLink>

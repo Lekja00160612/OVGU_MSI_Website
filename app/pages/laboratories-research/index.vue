@@ -25,17 +25,17 @@ useSeoMeta({
     <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-8 flex flex-col gap-10">
 
       <!-- Editorial Intro Card -->
-      <div v-if="page" class="bg-white p-6 sm:p-10 rounded-3xl border border-slate-200 shadow-xs">
+      <div v-if="page && (page.body?.value?.length || page.body?.children?.length)" class="bg-white p-6 sm:p-10 rounded-3xl border border-slate-200 shadow-xs">
         <ContentRenderer :value="page" class="prose max-w-none text-slate-700" />
       </div>
 
       <!-- Core Distinction Highlights -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col gap-3 group">
-          <div class="size-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold ring-1 ring-slate-200/80 group-hover:bg-orange-50 group-hover:text-primary-600 transition-all duration-200">
+          <div class="size-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold ring-1 ring-orange-200/80 group-hover:bg-orange-500 group-hover:text-white transition-all duration-200">
             <UIcon name="i-lucide-microscope" class="size-6" />
           </div>
-          <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-primary-600 transition-colors">
+          <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-orange-600 transition-colors">
             {{ locale === 'vi' ? 'Trực Tiếp Thao Tác (Hands-On)' : '100% Hands-On Operation' }}
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -47,10 +47,10 @@ useSeoMeta({
         </div>
 
         <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col gap-3 group">
-          <div class="size-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold ring-1 ring-slate-200/80 group-hover:bg-orange-50 group-hover:text-primary-600 transition-all duration-200">
+          <div class="size-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold ring-1 ring-sky-200/80 group-hover:bg-sky-600 group-hover:text-white transition-all duration-200">
             <UIcon name="i-lucide-shield-check" class="size-6" />
           </div>
-          <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-primary-600 transition-colors">
+          <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-sky-600 transition-colors">
             {{ locale === 'vi' ? 'Không Thu Phí Đo Mẫu Phụ' : 'Zero Hidden Analysis Fees' }}
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -62,10 +62,10 @@ useSeoMeta({
         </div>
 
         <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col gap-3 group">
-          <div class="size-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold ring-1 ring-slate-200/80 group-hover:bg-orange-50 group-hover:text-primary-600 transition-all duration-200">
+          <div class="size-12 rounded-2xl bg-slate-100 text-[#1E3A5F] flex items-center justify-center font-bold ring-1 ring-slate-200/80 group-hover:bg-[#1E3A5F] group-hover:text-white transition-all duration-200">
             <UIcon name="i-lucide-globe" class="size-6" />
           </div>
-          <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-primary-600 transition-colors">
+          <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-[#1E3A5F] transition-colors">
             {{ locale === 'vi' ? 'Kết Nối Nghiên Cứu Đức' : 'Direct German Supervision' }}
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
