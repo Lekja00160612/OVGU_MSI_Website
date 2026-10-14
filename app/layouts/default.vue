@@ -323,16 +323,19 @@ const scrollToFooter = () => {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 py-2 min-h-[72px]">
 
         <!-- MSI Brand Logo -->
-        <NuxtLink :to="localePath('/')" class="shrink-0 flex items-center" aria-label="MSI Home">
-          <div class="bg-white px-2 py-1 border-2 border-slate-100 rounded-xl shadow-xs hover:border-orange-500 hover:shadow-md transition-all -my-4 z-10">
-            <NuxtImg
-              src="/Logo/LOGO_MSI_Full_color.png"
-              alt="MSI – Materials Science Program"
-              class="h-14 sm:h-16 lg:h-18 w-auto object-contain block"
-              width="210"
-              height="78"
-            />
-          </div>
+        <NuxtLink
+          :to="localePath('/')"
+          class="shrink-0 flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-xl transition-all duration-200 group"
+          aria-label="MSI Home"
+        >
+          <NuxtImg
+            src="/Logo/LOGO_MSI_Full_color.png"
+            alt="MSI – Materials Science Program"
+            class="h-10 sm:h-12 md:h-13 lg:h-15 w-auto object-contain block group-hover:scale-[1.02] transition-transform duration-200"
+            sizes="(max-width: 640px) 150px, (max-width: 1024px) 190px, 230px"
+            loading="eager"
+            fetchpriority="high"
+          />
         </NuxtLink>
 
         <!-- Desktop Navigation: Strictly 2 equal lines, matching logo height -->

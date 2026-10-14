@@ -62,10 +62,10 @@ useSeoMeta({
         </div>
 
         <div class="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col gap-3 group">
-          <div class="size-12 rounded-2xl bg-slate-100 text-[#1E3A5F] flex items-center justify-center font-bold ring-1 ring-slate-200/80 group-hover:bg-[#1E3A5F] group-hover:text-white transition-all duration-200">
+          <div class="size-12 rounded-2xl bg-slate-100 text-msi-navy flex items-center justify-center font-bold ring-1 ring-slate-200/80 group-hover:bg-msi-navy group-hover:text-white transition-all duration-200">
             <UIcon name="i-lucide-globe" class="size-6" />
           </div>
-          <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-[#1E3A5F] transition-colors">
+          <h3 class="text-base sm:text-lg font-black text-slate-900 group-hover:text-msi-navy transition-colors">
             {{ locale === 'vi' ? 'Kết Nối Nghiên Cứu Đức' : 'Direct German Supervision' }}
           </h3>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">

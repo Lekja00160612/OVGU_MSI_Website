@@ -52,15 +52,15 @@ const getAccentGradient = (member: any, group?: any): string => {
     return 'bg-gradient-to-r from-orange-500 via-amber-400 to-orange-600'
   }
   if (group?.id === 'vgu-core') {
-    return 'bg-gradient-to-r from-orange-500 via-amber-500 to-[#1E3A5F]'
+    return 'bg-gradient-to-r from-orange-500 via-amber-500 to-msi-navy'
   }
   if (group?.id === 'invited') {
-    return 'bg-gradient-to-r from-[#009FDF] via-sky-400 to-[#1E3A5F]'
+    return 'bg-gradient-to-r from-secondary-500 via-sky-400 to-msi-navy'
   }
   if (group?.id === 'support') {
     return 'bg-gradient-to-r from-slate-600 via-slate-500 to-orange-500'
   }
-  return 'bg-gradient-to-r from-[#1E3A5F] via-[#009FDF] to-orange-500'
+  return 'bg-gradient-to-r from-msi-navy via-secondary-500 to-primary-500'
 }
 
 // Smooth scroll to targeted faculty member card if hash present
@@ -100,7 +100,7 @@ watch(() => route.hash, () => {
       <div class="flex flex-col gap-2 pb-4 border-b border-slate-200/90">
         <div class="flex items-center gap-3">
           <div class="h-8 w-1.5 rounded-full bg-gradient-to-b from-orange-500 to-amber-500 shrink-0" />
-          <h2 class="text-2xl sm:text-3xl font-black text-[#1E3A5F] tracking-tight">
+          <h2 class="text-2xl sm:text-3xl font-black text-msi-navy tracking-tight">
             {{ group.title }}
           </h2>
         </div>
@@ -152,7 +152,7 @@ watch(() => route.hash, () => {
                   class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-black tracking-wide"
                   :class="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc')
                     ? 'bg-orange-100 text-orange-800 border border-orange-300/80 shadow-2xs'
-                    : 'bg-[#1E3A5F]/10 text-[#1E3A5F] border border-[#1E3A5F]/20 shadow-2xs'"
+                    : 'bg-msi-navy/10 text-msi-navy border border-msi-navy/20 shadow-2xs'"
                 >
                   <UIcon name="i-lucide-shield-check" class="size-3.5 text-orange-600" />
                   <span>{{ member.management_role }}</span>
@@ -160,7 +160,7 @@ watch(() => route.hash, () => {
               </div>
 
               <!-- Full Name -->
-              <h3 class="text-lg sm:text-xl font-black text-[#1E3A5F] group-hover:text-orange-600 transition-colors leading-snug tracking-tight">
+              <h3 class="text-lg sm:text-xl font-black text-msi-navy group-hover:text-orange-600 transition-colors leading-snug tracking-tight">
                 {{ member.name }}
               </h3>
 
@@ -195,7 +195,7 @@ watch(() => route.hash, () => {
               <div v-if="member.email" class="pt-0.5 flex justify-center sm:justify-start">
                 <a
                   :href="`mailto:${member.email}`"
-                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold text-[#1E3A5F] bg-slate-100 hover:bg-orange-500 hover:text-white border border-slate-200/80 hover:border-orange-500 transition-all duration-200 shadow-2xs group/mail"
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold text-msi-navy bg-slate-100 hover:bg-orange-500 hover:text-white border border-slate-200/80 hover:border-orange-500 transition-all duration-200 shadow-2xs group/mail"
                 >
                   <UIcon name="i-lucide-mail" class="size-3.5 text-orange-500 group-hover/mail:text-white transition-colors" />
                   <span>{{ member.email }}</span>
@@ -220,7 +220,7 @@ watch(() => route.hash, () => {
                     class="group/modlink"
                   >
                     <span
-                      class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 hover:bg-[#1E3A5F] hover:text-white border border-slate-200 hover:border-[#1E3A5F] transition-all duration-200 shadow-2xs hover:shadow-xs cursor-pointer"
+                      class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 hover:bg-msi-navy hover:text-white border border-slate-200 hover:border-msi-navy transition-all duration-200 shadow-2xs hover:shadow-xs cursor-pointer"
                     >
                       <span>{{ mod.title }}</span>
                       <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400 group-hover/modlink:text-orange-400 transition-colors" />
@@ -246,7 +246,7 @@ watch(() => route.hash, () => {
           <!-- Subgroup Header -->
           <div class="flex items-center justify-between gap-4 flex-wrap border-b border-slate-200/80 pb-4">
             <div>
-              <h3 class="text-xl sm:text-2xl font-black text-[#1E3A5F] tracking-tight flex items-center gap-2.5">
+              <h3 class="text-xl sm:text-2xl font-black text-msi-navy tracking-tight flex items-center gap-2.5">
                 <div class="size-2.5 rounded-full bg-orange-500 shrink-0" />
                 <span>{{ subgroup.title }}</span>
               </h3>
@@ -306,7 +306,7 @@ watch(() => route.hash, () => {
                       class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-black tracking-wide"
                       :class="member.management_role?.toLowerCase().includes('director') || member.management_role?.toLowerCase().includes('giám đốc')
                         ? 'bg-orange-100 text-orange-800 border border-orange-300/80 shadow-2xs'
-                        : 'bg-[#1E3A5F]/10 text-[#1E3A5F] border border-[#1E3A5F]/20 shadow-2xs'"
+                        : 'bg-msi-navy/10 text-msi-navy border border-msi-navy/20 shadow-2xs'"
                     >
                       <UIcon name="i-lucide-shield-check" class="size-3.5 text-orange-600" />
                       <span>{{ member.management_role }}</span>
@@ -314,7 +314,7 @@ watch(() => route.hash, () => {
                   </div>
 
                   <!-- Full Name -->
-                  <h3 class="text-lg sm:text-xl font-black text-[#1E3A5F] group-hover:text-orange-600 transition-colors leading-snug tracking-tight">
+                  <h3 class="text-lg sm:text-xl font-black text-msi-navy group-hover:text-orange-600 transition-colors leading-snug tracking-tight">
                     {{ member.name }}
                   </h3>
 
@@ -349,7 +349,7 @@ watch(() => route.hash, () => {
                   <div v-if="member.email" class="pt-0.5 flex justify-center sm:justify-start">
                     <a
                       :href="`mailto:${member.email}`"
-                      class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold text-[#1E3A5F] bg-slate-100 hover:bg-orange-500 hover:text-white border border-slate-200/80 hover:border-orange-500 transition-all duration-200 shadow-2xs group/mail"
+                      class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold text-msi-navy bg-slate-100 hover:bg-orange-500 hover:text-white border border-slate-200/80 hover:border-orange-500 transition-all duration-200 shadow-2xs group/mail"
                     >
                       <UIcon name="i-lucide-mail" class="size-3.5 text-orange-500 group-hover/mail:text-white transition-colors" />
                       <span>{{ member.email }}</span>
@@ -374,7 +374,7 @@ watch(() => route.hash, () => {
                         class="group/modlink"
                       >
                         <span
-                          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 hover:bg-[#1E3A5F] hover:text-white border border-slate-200 hover:border-[#1E3A5F] transition-all duration-200 shadow-2xs hover:shadow-xs cursor-pointer"
+                          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-800 bg-slate-50 hover:bg-msi-navy hover:text-white border border-slate-200 hover:border-msi-navy transition-all duration-200 shadow-2xs hover:shadow-xs cursor-pointer"
                         >
                           <span>{{ mod.title }}</span>
                           <UIcon name="i-lucide-arrow-up-right" class="size-3 text-slate-400 group-hover/modlink:text-orange-400 transition-colors" />

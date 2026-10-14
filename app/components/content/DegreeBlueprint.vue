@@ -26,7 +26,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Nền tảng khoa học vật liệu cơ bản: Vật lý chất rắn, Cơ học môi trường liên tục, Đặc tính vật liệu, Gốm sứ, Kim loại, Polyme.'
       : 'Core scientific foundation: Solid state physics, continuum mechanics, characterization, ceramics, metals, polymers.',
-    bg: 'bg-[#1E3A5F]',
+    bg: 'bg-msi-navy',
     icon: 'i-lucide-book-open'
   },
   {
@@ -35,7 +35,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Chuyên sâu theo định hướng: Cơ học tính toán, Vật liệu nano, Vật liệu y sinh, Cảm biến bán dẫn hoặc Quản trị.'
       : 'Specialization tracks: Computational mechanics, nano-materials, biomaterials, smart sensorics, or management.',
-    bg: 'bg-[#009FDF]',
+    bg: 'bg-secondary-500',
     icon: 'i-lucide-flask-conical'
   },
   {
@@ -44,7 +44,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Thao tác trực tiếp trên 22+ thiết bị phân tích hiện đại tại VGU (SEM, XRD, TGA) và nghiên cứu tài liệu khoa học theo nhóm.'
       : 'Direct hands-on training on 22+ characterization instruments (SEM, XRD, TGA) and collaborative literature research.',
-    bg: 'bg-[#E87722]',
+    bg: 'bg-primary-500',
     icon: 'i-lucide-microscope'
   },
   {
@@ -53,7 +53,7 @@ const ectsBreakdown = computed(() => [
     desc: locale.value === 'vi'
       ? 'Đề tài nghiên cứu độc lập 6 tháng dưới sự hướng dẫn song phương của giáo sư OVGU Magdeburg và VGU.'
       : '6-month independent capstone research project supervised jointly by OVGU Magdeburg and VGU faculty.',
-    bg: 'bg-[#2E5280]',
+    bg: 'bg-msi-navy-light',
     icon: 'i-lucide-graduation-cap'
   }
 ])
@@ -72,10 +72,10 @@ const semesterRoadmap = computed(() => [
       'Metals & Microstructures'
     ],
     highlight: locale.value === 'vi' ? 'Xây dựng tư duy vật lý và cơ học định lượng' : 'Building rigorous theoretical & quantitative foundations',
-    colorBorder: 'border-l-[#1E3A5F]',
-    iconBg: 'bg-blue-50 text-[#1E3A5F]',
-    dotColor: 'text-[#1E3A5F]',
-    highlightColor: 'text-[#1E3A5F]'
+    colorBorder: 'border-l-msi-navy',
+    iconBg: 'bg-msi-blue-50 text-msi-navy',
+    dotColor: 'text-msi-navy',
+    highlightColor: 'text-msi-navy'
   },
   {
     semester: 'Semester 2',
@@ -90,10 +90,10 @@ const semesterRoadmap = computed(() => [
       'Powder Metallurgy & Sintering'
     ],
     highlight: locale.value === 'vi' ? '100% sinh viên tự tay vận hành thiết bị phân tích' : '100% hands-on equipment operation without outsourcing',
-    colorBorder: 'border-l-[#009FDF]',
-    iconBg: 'bg-sky-50 text-[#009FDF]',
-    dotColor: 'text-[#009FDF]',
-    highlightColor: 'text-[#009FDF]'
+    colorBorder: 'border-l-secondary-500',
+    iconBg: 'bg-secondary-50 text-secondary-600',
+    dotColor: 'text-secondary-500',
+    highlightColor: 'text-secondary-600'
   },
   {
     semester: 'Semester 3',
@@ -106,10 +106,10 @@ const semesterRoadmap = computed(() => [
       'Optional: Exchange Semester at OVGU Magdeburg'
     ],
     highlight: locale.value === 'vi' ? 'Cơ hội nhận học bổng DAAD học tại CHLB Đức' : 'DAAD Mobility grant opportunity to study in Germany',
-    colorBorder: 'border-l-[#E87722]',
-    iconBg: 'bg-orange-50 text-[#E87722]',
-    dotColor: 'text-[#E87722]',
-    highlightColor: 'text-[#E87722]'
+    colorBorder: 'border-l-primary-500',
+    iconBg: 'bg-primary-50 text-primary-600',
+    dotColor: 'text-primary-500',
+    highlightColor: 'text-primary-600'
   },
   {
     semester: 'Semester 4',
@@ -122,10 +122,10 @@ const semesterRoadmap = computed(() => [
       'Public Defense Colloquium'
     ],
     highlight: locale.value === 'vi' ? 'Công bố bài báo quốc tế hoặc ứng dụng công nghiệp' : 'Publishable scientific papers or industrial innovation',
-    colorBorder: 'border-l-[#2E5280]',
-    iconBg: 'bg-slate-100 text-[#2E5280]',
-    dotColor: 'text-[#2E5280]',
-    highlightColor: 'text-[#2E5280]'
+    colorBorder: 'border-l-msi-navy-light',
+    iconBg: 'bg-slate-100 text-msi-navy-light',
+    dotColor: 'text-msi-navy-light',
+    highlightColor: 'text-msi-navy-light'
   }
 ])
 
@@ -138,9 +138,9 @@ const gatewayCards = computed(() => [
     to: localePath('/program-structure/modules'),
     badge: 'Core + Electives',
     icon: 'i-lucide-book-open',
-    iconClass: 'bg-slate-100 text-[#1E3A5F] group-hover:bg-[#1E3A5F] group-hover:text-white',
-    hoverBorder: 'hover:border-[#1E3A5F]',
-    arrowColor: 'text-[#1E3A5F]'
+    iconClass: 'bg-slate-100 text-msi-navy group-hover:bg-msi-navy group-hover:text-white',
+    hoverBorder: 'hover:border-msi-navy',
+    arrowColor: 'text-msi-navy'
   },
   {
     title: locale.value === 'vi' ? 'Thời Khóa Biểu & Lịch Học' : 'Semester Timetable Matrix',
@@ -150,9 +150,9 @@ const gatewayCards = computed(() => [
     to: localePath('/program-structure/timetable'),
     badge: 'WS 26/27 Live',
     icon: 'i-lucide-calendar',
-    iconClass: 'bg-sky-50 text-[#009FDF] group-hover:bg-[#009FDF] group-hover:text-white',
-    hoverBorder: 'hover:border-[#009FDF]',
-    arrowColor: 'text-[#009FDF]'
+    iconClass: 'bg-secondary-50 text-secondary-600 group-hover:bg-secondary-500 group-hover:text-white',
+    hoverBorder: 'hover:border-secondary-500',
+    arrowColor: 'text-secondary-600'
   },
   {
     title: locale.value === 'vi' ? 'Đề Tài Luận Văn Thạc Sĩ' : 'Master Thesis Topics Portal',
@@ -174,9 +174,9 @@ const gatewayCards = computed(() => [
     to: localePath('/student-life/germany-relocation'),
     badge: 'OVGU Magdeburg',
     icon: 'i-lucide-plane-takeoff',
-    iconClass: 'bg-blue-50 text-[#2E5280] group-hover:bg-[#2E5280] group-hover:text-white',
-    hoverBorder: 'hover:border-[#2E5280]',
-    arrowColor: 'text-[#2E5280]'
+    iconClass: 'bg-msi-blue-50 text-msi-navy-light group-hover:bg-msi-navy-light group-hover:text-white',
+    hoverBorder: 'hover:border-msi-navy-light',
+    arrowColor: 'text-msi-navy-light'
   }
 ])
 </script>

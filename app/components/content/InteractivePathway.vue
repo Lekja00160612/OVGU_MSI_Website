@@ -241,7 +241,7 @@ const layoutArrows = computed(() => {
         type="button"
         class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer shadow-2xs"
         :class="activeTabId === tab.id
-          ? 'bg-[#1E3A5F] text-white shadow-sm ring-1 ring-[#1E3A5F]'
+          ? 'bg-msi-navy text-white shadow-sm ring-1 ring-msi-navy'
           : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200/90'"
         @click="activeTabId = tab.id"
       >

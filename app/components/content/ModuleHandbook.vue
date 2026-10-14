@@ -63,10 +63,10 @@ const getSemester = (mod: any): number => {
 }
 
 const getSemesterColor = (sem: number): string => {
-  if (sem === 1) return '#1E3A5F' // Navy
-  if (sem === 2) return '#009FDF' // Cyan
-  if (sem === 3) return '#E87722' // Orange
-  return '#2E5280' // Deep Navy
+  if (sem === 1) return 'var(--color-msi-navy)' // Navy
+  if (sem === 2) return 'var(--color-secondary-500)' // Cyan
+  if (sem === 3) return 'var(--color-primary-500)' // Orange
+  return 'var(--color-msi-navy-light)' // Deep Navy
 }
 
 const getPdfs = (mod: any) => mod?.pdfs || mod?.meta?.pdfs || []
@@ -381,15 +381,15 @@ watch(() => [route.hash, route.query], () => {
           :class="[
             isMasterThesis(mod)
               ? (selectedModule?.path === mod.path
-                  ? 'bg-gradient-to-br from-[#1E3A5F] via-[#244670] to-[#1E3A5F] text-white ring-2 ring-orange-500 shadow-xl -translate-y-1 scale-[1.01]'
-                  : 'bg-gradient-to-br from-[#1E3A5F] to-[#2E5280] text-white shadow-sm hover:shadow-lg hover:-translate-y-1 border-slate-800')
+                  ? 'bg-gradient-to-br from-msi-navy via-msi-navy-light to-msi-navy text-white ring-2 ring-primary-500 shadow-xl -translate-y-1 scale-[1.01]'
+                  : 'bg-gradient-to-br from-msi-navy to-msi-navy-light text-white shadow-sm hover:shadow-lg hover:-translate-y-1 border-slate-800')
               : (selectedModule?.path === mod.path
                   ? 'bg-white text-slate-900 border-orange-300 ring-2 ring-orange-500 shadow-xl -translate-y-1 scale-[1.01]'
                   : 'bg-white text-slate-900 border-slate-200/90 shadow-sm hover:shadow-lg hover:border-slate-300 hover:-translate-y-1')
           ]"
           :style="{
             borderLeftWidth: selectedModule?.path === mod.path ? '8px' : '6px',
-            borderLeftColor: isMasterThesis(mod) ? '#E87722' : getSemesterColor(getSemester(mod))
+            borderLeftColor: isMasterThesis(mod) ? 'var(--color-primary-500)' : getSemesterColor(getSemester(mod))
           }"
           @click="selectModuleAndSyncHash(mod)"
         >
@@ -484,7 +484,7 @@ watch(() => [route.hash, route.query], () => {
               </UBadge>
             </div>
 
-            <h3 class="text-xl sm:text-2xl font-black text-[#1E3A5F] leading-tight">
+            <h3 class="text-xl sm:text-2xl font-black text-msi-navy leading-tight">
               {{ selectedModule.title }}
             </h3>
           </div>
@@ -559,7 +559,7 @@ watch(() => [route.hash, route.query], () => {
             <NuxtLink
               v-if="getRelatedThesisCount(selectedModule.title) > 0"
               :to="`${localePath('/program-structure/thesis')}#${getModuleSlug(selectedModule)}`"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-[#1E3A5F] hover:bg-[#152a45] transition-all shadow-xs hover:shadow-md cursor-pointer select-none"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-msi-navy hover:bg-msi-dark transition-all shadow-xs hover:shadow-md cursor-pointer select-none"
               :title="`Explore ${getRelatedThesisCount(selectedModule.title)} open thesis projects in ${selectedModule.title}`"
             >
               <UIcon name="i-lucide-graduation-cap" class="size-4 text-orange-400" />
@@ -696,7 +696,7 @@ watch(() => [route.hash, route.query], () => {
             <NuxtLink
               v-if="getRelatedThesisCount(mod.title) > 0"
               :to="`${localePath('/program-structure/thesis')}#${getModuleSlug(mod)}`"
-              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold text-white bg-[#1E3A5F] hover:bg-[#152a45]"
+              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold text-white bg-msi-navy hover:bg-msi-dark"
             >
               <UIcon name="i-lucide-graduation-cap" class="size-3.5 text-orange-400" />
               <span>Thesis ({{ getRelatedThesisCount(mod.title) }})</span>
@@ -873,7 +873,7 @@ watch(() => [route.hash, route.query], () => {
               </div>
               <NuxtLink
                 :to="`${localePath('/program-structure/thesis')}#${getModuleSlug(selectedModule)}`"
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1E3A5F] hover:bg-[#152a45] text-white font-bold text-xs transition-colors shadow-2xs"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-msi-navy hover:bg-msi-dark text-white font-bold text-xs transition-colors shadow-2xs"
                 @click="isDetailModalOpen = false"
               >
                 <span>{{ locale === 'vi' ? 'Xem Đề Tài' : 'View Thesis Topics' }}</span>

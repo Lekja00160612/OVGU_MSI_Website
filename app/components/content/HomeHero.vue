@@ -61,7 +61,7 @@ const displayScholarshipsUrl = computed(() => props.scholarshipsUrl ?? '/tuition
           size="xl"
           color="neutral"
           variant="outline"
-          class="font-bold bg-white/10 hover:bg-white text-white hover:text-[#0F2240] border-2 border-white/40 hover:border-white backdrop-blur-md shadow-md hover:-translate-y-0.5 transition-all px-8 py-3.5 rounded-full cursor-pointer"
+          class="font-bold bg-white/10 hover:bg-white text-white hover:text-msi-dark border-2 border-white/40 hover:border-white backdrop-blur-md shadow-md hover:-translate-y-0.5 transition-all px-8 py-3.5 rounded-full cursor-pointer"
         >
           {{ t('home.view_scholarships') }}
         </UButton>

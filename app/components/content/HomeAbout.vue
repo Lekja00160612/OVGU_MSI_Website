@@ -49,7 +49,7 @@ const displayDegree2Value = computed(() => props.degree2Value ?? t('home.degree2
           variant="outline"
           class="shadow-xl overflow-hidden border border-slate-200/80 rounded-3xl w-full max-w-md"
           :ui="{
-            header: 'bg-[#1E3A5F] p-8 flex items-center justify-center',
+            header: 'bg-msi-navy p-8 flex items-center justify-center',
             body: 'p-6 sm:p-8 flex flex-col gap-5'
           }"
         >
@@ -61,17 +61,17 @@ const displayDegree2Value = computed(() => props.degree2Value ?? t('home.degree2
             <div class="size-3.5 rounded-full bg-sky-500 mt-1 shrink-0 ring-4 ring-sky-100" />
             <div>
               <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">{{ displayDegree1Label }}</div>
-              <div class="text-base font-semibold text-[#1E3A5F] leading-snug">{{ displayDegree1Value }}</div>
+              <div class="text-base font-semibold text-msi-navy leading-snug">{{ displayDegree1Value }}</div>
             </div>
           </div>
 
           <div class="h-px bg-slate-100" />
 
           <div class="flex items-start gap-4">
-            <div class="size-3.5 rounded-full bg-[#E87722] mt-1 shrink-0 ring-4 ring-orange-100" />
+            <div class="size-3.5 rounded-full bg-primary-500 mt-1 shrink-0 ring-4 ring-orange-100" />
             <div>
               <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">{{ displayDegree2Label }}</div>
-              <div class="text-base font-semibold text-[#1E3A5F] leading-snug">{{ displayDegree2Value }}</div>
+              <div class="text-base font-semibold text-msi-navy leading-snug">{{ displayDegree2Value }}</div>
             </div>
           </div>
         </UCard>

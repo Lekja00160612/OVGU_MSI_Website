@@ -28,9 +28,9 @@ const gatewayCards = computed(() => [
       : 'Compare milestones for Direct Entry candidates and Non-traditional / Bridging applicants.',
     to: localePath('/future-students/pathways'),
     icon: 'i-lucide-git-branch',
-    iconClass: 'bg-sky-50 text-[#009FDF] group-hover:bg-[#009FDF] group-hover:text-white',
-    hoverBorder: 'hover:border-[#009FDF]',
-    arrowColor: 'text-[#009FDF]'
+    iconClass: 'bg-secondary-50 text-secondary-600 group-hover:bg-secondary-500 group-hover:text-white',
+    hoverBorder: 'hover:border-secondary-500',
+    arrowColor: 'text-secondary-600'
   },
   {
     title: locale.value === 'vi' ? 'Chia Sẻ Cựu Sinh Viên & Việc Làm' : 'Alumni Stories & Career Prospects',
@@ -40,9 +40,9 @@ const gatewayCards = computed(() => [
       : 'Read insights from graduates and discover career paths in semiconductor, automotive, and energy R&D.',
     to: localePath('/future-students/alumni'),
     icon: 'i-lucide-users',
-    iconClass: 'bg-slate-100 text-[#1E3A5F] group-hover:bg-[#1E3A5F] group-hover:text-white',
-    hoverBorder: 'hover:border-[#1E3A5F]',
-    arrowColor: 'text-[#1E3A5F]'
+    iconClass: 'bg-slate-100 text-msi-navy group-hover:bg-msi-navy group-hover:text-white',
+    hoverBorder: 'hover:border-msi-navy',
+    arrowColor: 'text-msi-navy'
   },
   {
     title: locale.value === 'vi' ? 'Học Phí & Học Bổng Toàn Phần DAAD' : 'Tuition & DAAD Scholarships',
@@ -64,9 +64,9 @@ const gatewayCards = computed(() => [
       : 'Browse 15 compulsory core modules and 10+ electives taught in English by visiting German professors.',
     to: localePath('/program-structure/modules'),
     icon: 'i-lucide-book-open',
-    iconClass: 'bg-blue-50 text-[#2E5280] group-hover:bg-[#2E5280] group-hover:text-white',
-    hoverBorder: 'hover:border-[#2E5280]',
-    arrowColor: 'text-[#2E5280]'
+    iconClass: 'bg-msi-blue-50 text-msi-navy-light group-hover:bg-msi-navy-light group-hover:text-white',
+    hoverBorder: 'hover:border-msi-navy-light',
+    arrowColor: 'text-msi-navy-light'
   }
 ])
 </script>

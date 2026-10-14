@@ -37,29 +37,46 @@ When you are asked to build, modify, or extend any feature, page, or layout on t
 
 ---
 
-## 2. Design System Tokens (Defined in `main.css` & `app.config.ts`)
+## 2. Design System Tokens & Color Governance (Defined in `main.css`)
 
-### Brand Colors
-```css
-/* Primary Brand (Orange): Main CTAs, Highlights, Active States */
---color-primary-500: #E87722;
---color-primary-600: #EA580C;
+### 2.1 Normalized Color Tokens Protocol (MANDATORY)
+> [!IMPORTANT]
+> **Strict Prohibition of Raw Arbitrary Hex Classes**:
+> Future AI coding assistants and developers must **NEVER** write ad-hoc Tailwind arbitrary hex classes such as `bg-[#1E3A5F]`, `text-[#009FDF]`, `border-[#E87722]`, `bg-[#2E5280]`, or `text-[#0F2240]`.
+> All colors must strictly use the repository's normalized design tokens declared in `app/assets/css/main.css` via Tailwind CSS v4 `@theme static`.
 
-/* Secondary Brand (Cyan): OVGU Magdeburg Partnership Accents */
---color-secondary-500: #009FDF;
---color-secondary-600: #0284C7;
+| Design Token | Hex Code | Allowed Tailwind Utility Classes | Institutional & Functional Role |
+| :--- | :--- | :--- | :--- |
+| **`msi-navy`** | `#1E3A5F` | `bg-msi-navy`, `text-msi-navy`, `border-msi-navy`, `border-l-msi-navy`, `ring-msi-navy` | Primary MSI Institutional Navy (Headings, Sem 1, Core badging) |
+| **`msi-navy-light`** | `#2E5280` | `bg-msi-navy-light`, `text-msi-navy-light`, `border-l-msi-navy-light` | Medium Navy Accent (Sem 4, Capstone research cards) |
+| **`msi-dark`** | `#0F2240` | `bg-msi-dark`, `text-msi-dark` | Midnight Navy (Site footer, high-contrast dark hero backdrops) |
+| **`msi-blue-50`** | `#EEF3FB` | `bg-msi-blue-50` | Soft Navy Surface Tint (Icon backgrounds, subtle chips) |
+| **`msi-blue-100`** | `#CDDAEE` | `bg-msi-blue-100`, `border-msi-blue-100` | Subtle Navy Border Divider |
+| **`primary-500`** | `#E87722` | `bg-primary-500`, `text-primary-600`, `border-primary-500`, `border-l-primary-500` | VGU Vibrant Orange (Main CTAs, Active States, Sem 3 highlight) |
+| **`primary-50`** | `#FFF7ED` | `bg-primary-50`, `hover:bg-primary-50`, `bg-orange-50` | Soft Orange Tint (Active tab pills, icon containers) |
+| **`secondary-500`** | `#009FDF` | `bg-secondary-500`, `text-secondary-600`, `border-secondary-500`, `border-l-secondary-500` | OVGU Magdeburg Cyan (German Partnership, Sem 2 lab focus) |
+| **`secondary-50`** | `#F0F9FF` | `bg-secondary-50`, `bg-sky-50` | Soft Cyan Tint (Partnership badges, lab equipment cards) |
 
-/* Neutral Scale: Clean Slate */
---color-neutral-50 to --color-neutral-950 (Slate)
+*Dynamic JS / CSS Style Variables:*
+When dynamically computing inline CSS or SVG stroke/fill properties (e.g. in `style="{ borderLeftColor: ... }"`), always reference CSS variables:
+`var(--color-msi-navy)`, `var(--color-secondary-500)`, `var(--color-primary-500)`, `var(--color-msi-navy-light)`.
 
-/* Institutional Navy */
---color-msi-navy: #1E3A5F;
---color-msi-dark: #0F2240;
-```
+---
 
-### Typography Scale
-- **Font Family**: `'Be Vietnam Pro', system-ui, -apple-system, sans-serif`
-- **Headings**: `h1` to `h6` automatically inherit display styling, deep navy color, and tight letter-spacing.
+### 2.2 Navigation Bar Brand Logo Governance
+- **No Padding Box Rule**: The MSI brand logo in `app/layouts/default.vue` must **never** be enclosed in an artificial card box, border, or padding container (`no px-2 py-1`, `no border-2 border-slate-100`, `no -my-4`).
+- **Full Resolution & Natural Backdrop**: Render `<NuxtImg>` directly within the `<NuxtLink>` against the navbar's semi-transparent backdrop blur (`bg-white/95 backdrop-blur-md`).
+- **Responsive Height Scale**:
+  - Small Mobile (< 640px): `h-10 sm:h-12` (40px–48px) — leaves ample room for language toggle and mobile drawer hamburger.
+  - Tablet (640px – 1024px): `md:h-13` (52px) — sits harmoniously inside the 72px header.
+  - Desktop (≥ 1024px): `lg:h-15` (60px) — perfectly balances the 2-row navigation link layout.
+  - Aspect ratio: Crisp, unclipped vector/PNG with `w-auto object-contain block`.
+
+---
+
+### 2.3 Typography Scale
+- **Font Family**: `'Be Vietnam Pro', system-ui, -apple-system, sans-serif` served locally with zero layout shifts via `@nuxt/fonts`.
+- **Headings**: `h1` to `h6` automatically inherit display styling, deep navy color (`msi-navy`), and tight letter-spacing.
 
 ---
 
