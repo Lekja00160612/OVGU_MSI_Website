@@ -25,7 +25,7 @@ All AI coding assistants and developers working on this codebase must adhere to 
 ## 2. Technical Stack & Environment
 
 - **Framework**: Nuxt 4 (Nuxt 4.6.1, Nitro 2.13.4, Vite 8.3.4, Vue 3.5.44, `@nuxt/content` 3.16.2)
-- **UI & Icons**: `@nuxt/ui` 4.11.3 (Tailwind CSS v4) with local Lucide icon bundle (`icon.serverBundle.collections: ['lucide']`)
+- **UI & Icons**: `@nuxt/ui` 4.11.3 (Tailwind CSS v4) with `@iconify-json/lucide` compiled directly into client bundle via `icon.clientBundle: { scan: true }` for pure static SSG on Cloudflare Pages (zero `/api/_nuxt_icon` server runtime dependency).
 - **Typography & Fonts**: `@nuxt/fonts` 1.0.1 serving `Be Vietnam Pro` locally with zero CLS layout shifting
 - **Node Environment**: Node.js `24.15.0` (pinned via [`.node-version`](file:///d:/OVGU/OVGU_MSI_Website/.node-version) and [`.nvmrc`](file:///d:/OVGU/OVGU_MSI_Website/.nvmrc))
 - **Styling Architecture**:

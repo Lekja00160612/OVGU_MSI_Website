@@ -60,8 +60,13 @@ export default defineNuxtConfig({
     }
   },
   icon: {
-    serverBundle: {
-      collections: ['lucide']
+    provider: 'iconify',
+    serverBundle: false,
+    clientBundle: {
+      scan: {
+        globInclude: ['**/*.{vue,jsx,tsx,md,mdc,mdx,yml,yaml,ts,js}']
+      },
+      sizeLimitKb: 1024
     }
   },
   i18n: {
