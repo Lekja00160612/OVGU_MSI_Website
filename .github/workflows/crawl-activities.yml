@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: '.node-version'
           cache: 'npm'
 
       - name: Install Dependencies
@@ -28,13 +28,15 @@ jobs:
       - name: Run Crawler
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: node scripts/crawl_activities.js
+        run: |
+          node scripts/crawl_activities.js
+          node scripts/generate_sitemap.js
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/_activities/ public/images/academic_activities/ scripts/activities_cache.json content/_modules/
+          git add content/_activities/ public/images/academic_activities/ scripts/activities_cache.json content/_modules/ public/sitemap.xml
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else

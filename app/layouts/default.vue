@@ -320,19 +320,19 @@ const scrollToFooter = () => {
 
     <!-- === SECTION: Sticky Header & Navigation === -->
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-      <div class="max-w-7xl mx-auto px-3 sm:px-6 flex items-center justify-between gap-3 sm:gap-4 py-1 sm:py-1.5 min-h-[72px]">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 flex items-center justify-between gap-3 sm:gap-4 py-0.5 sm:py-1 min-h-[64px] sm:min-h-[72px] lg:min-h-[78px] xl:min-h-[82px]">
 
         <!-- MSI Brand Logo (fills navbar height edge-to-edge) -->
         <NuxtLink
           :to="localePath('/')"
-          class="shrink-0 flex items-center py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-xl transition-all duration-200 group"
+          class="shrink-0 flex items-center py-0 self-stretch focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-xl transition-all duration-200 group"
           aria-label="MSI Home"
         >
           <NuxtImg
             src="/Logo/LOGO_MSI_Full_color.png"
             alt="MSI – Materials Science Program"
-            class="h-12 sm:h-14 md:h-16 lg:h-[66px] xl:h-[70px] w-auto object-contain block group-hover:scale-[1.02] transition-transform duration-200"
-            sizes="(max-width: 640px) 160px, (max-width: 1024px) 200px, 240px"
+            class="h-14 sm:h-16 md:h-[68px] lg:h-[74px] xl:h-[80px] w-auto object-contain block group-hover:scale-[1.02] transition-transform duration-200"
+            sizes="(max-width: 640px) 180px, (max-width: 1024px) 240px, 300px"
             loading="eager"
             fetchpriority="high"
           />

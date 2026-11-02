@@ -880,7 +880,7 @@ async function main() {
     const formStart = html.indexOf('id="A3331:frm"');
     if (formStart === -1) {
       console.error('Form A3331:frm not found on page!');
-      return;
+      process.exit(1);
     }
     const formEnd = html.indexOf('</form>', formStart);
     const formHtml = html.substring(formStart, formEnd);
@@ -890,7 +890,7 @@ async function main() {
                            /name="javax\.faces\.ViewState"\s+value="([^"]+)"/.exec(formHtml);
     if (!viewStateMatch) {
       console.error('ViewState not found inside A3331:frm!');
-      return;
+      process.exit(1);
     }
     const viewState = viewStateMatch[1];
     console.log('ViewState for A3331:frm:', viewState);
@@ -899,7 +899,7 @@ async function main() {
     const encodedUrlMatch = /name="javax\.faces\.encodedURL"\s+value="([^"]+)"/.exec(formHtml);
     if (!encodedUrlMatch) {
       console.error('javax.faces.encodedURL not found inside A3331:frm!');
-      return;
+      process.exit(1);
     }
     const encodedUrlVal = encodedUrlMatch[1].replace(/&amp;/g, '&');
     console.log('javax.faces.encodedURL value:', encodedUrlVal);
@@ -908,7 +908,7 @@ async function main() {
     const preciseMatch = /rmXemChiTiet_(CmsHienThiBaiViet_WAR_cmsportlet_INSTANCE_[a-zA-Z0-9_]+)=function\(a,b\)\{PrimeFaces\.ab\(\{s:"([^"]+)",f:"([^"]+)",[^}]+u:"([^"]+)"/.exec(html);
     if (!preciseMatch) {
       console.error('Could not find PrimeFaces.ab config for CmsHienThiBaiViet.');
-      return;
+      process.exit(1);
     }
     const sourceId = preciseMatch[2];
     const formId = preciseMatch[3];
@@ -1097,6 +1097,7 @@ ${markdownBody}
     }
   } catch (err) {
     console.error('An error occurred during crawling:', err);
+    process.exit(1);
   }
 }
 

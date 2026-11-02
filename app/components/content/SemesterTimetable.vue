@@ -5,7 +5,7 @@
   Nuxt UI Primitives: UButton, UBadge.
 -->
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const { locale } = useI18n()
 const isVi = computed(() => locale.value === 'vi')
@@ -26,7 +26,7 @@ const intakes: Intake[] = [
 const selectedIntakeId = ref<string>('intake-2026')
 const activeModuleId = ref<string | null>(null)
 
-// ── Course Module Schedule Data ──────────────────────────────────────────────
+// ── Course Module Schedule Data (Official Winter Semester 2026/2027) ─────────
 interface ScheduleModule {
   id: string
   intake_id: string
@@ -38,141 +38,147 @@ interface ScheduleModule {
   display_date: string
   is_semester_long?: boolean
   lecturers: string[]
-  notes?: string
+  notes_en?: string
+  notes_vi?: string
 }
 
 const allScheduleModules: ScheduleModule[] = [
   // Intake 2026 (Winter Semester 2026/2027 — Semester 1)
+  {
+    id: 'i26-solid-state-phys',
+    intake_id: 'intake-2026',
+    slug: 'solid-state-physics',
+    title_en: 'Solid-State Physics',
+    title_vi: 'Vật Lý Chất Rắn',
+    start_date: '2026-09-18',
+    end_date: '2026-10-11',
+    display_date: '18.09.2026 – 11.10.2026',
+    lecturers: ['Prof. Dr. rer. nat. Jürgen Christen', 'apl. Prof. Dr. rer. nat. habil. Frank Bertram']
+  },
+  {
+    id: 'i26-polymers',
+    intake_id: 'intake-2026',
+    slug: 'polymers',
+    title_en: 'Polymers',
+    title_vi: 'Vật Liệu Polyme',
+    start_date: '2026-10-24',
+    end_date: '2026-11-11',
+    display_date: '24.10.2026 – 11.11.2026',
+    lecturers: ['Dr. rer. nat. Sven Henning'],
+    notes_en: 'Shared lecture block with Intake 2025',
+    notes_vi: 'Học chung với Khóa 2025'
+  },
   {
     id: 'i26-continuum-mech',
     intake_id: 'intake-2026',
     slug: 'continuum-mechanics',
     title_en: 'Continuum Mechanics',
     title_vi: 'Cơ Học Môi Trường Liên Tục',
-    start_date: '2026-09-07',
-    end_date: '2026-09-19',
-    display_date: '07.09.2026 – 19.09.2026',
-    lecturers: ['Prof. Dr.-Ing. Manja Krüger', 'Dr. Nguyen Van A'],
-    notes: 'Shared lecture block with Intake 2025'
+    start_date: '2026-11-20',
+    end_date: '2026-12-08',
+    display_date: '20.11.2026 – 08.12.2026',
+    lecturers: ['Prof. Dr.-Ing. Daniel Juhre', 'Marc Ulrich'],
+    notes_en: 'Shared lecture block with Intake 2025',
+    notes_vi: 'Học chung với Khóa 2025'
   },
   {
-    id: 'i26-mat-model-sim',
+    id: 'i26-micro-nano-fab',
     intake_id: 'intake-2026',
-    slug: 'material-modelling-and-simulation',
-    title_en: 'Material Modelling and Simulation',
-    title_vi: 'Mô Hình Hóa & Mô Phỏng Vật Liệu',
-    start_date: '2026-09-28',
-    end_date: '2026-10-10',
-    display_date: '28.09.2026 – 10.10.2026',
-    lecturers: ['Prof. Dr. Thorsten Halle', 'VGU Lab Team']
+    slug: 'micro-nano-fabrication-technology',
+    title_en: 'Micro-Nano Fabrication Technology',
+    title_vi: 'Công Nghệ Chế Tạo Vi Mô & Nano',
+    start_date: '2026-12-18',
+    end_date: '2027-01-04',
+    display_date: '18.12.2026 – 04.01.2027',
+    lecturers: ['Dr.-Ing. Tong Duy Hien']
   },
   {
-    id: 'i26-mat-char',
+    id: 'i26-fracture-mech',
     intake_id: 'intake-2026',
-    slug: 'materials-characterization',
-    title_en: 'Materials Characterization',
-    title_vi: 'Đặc Tính Hóa Vật Liệu',
-    start_date: '2026-10-19',
-    end_date: '2026-10-31',
-    display_date: '19.10.2026 – 31.10.2026',
-    lecturers: ['Prof. Dr. Michael Scheffler', 'Dr. Le Thi B']
+    slug: 'mechanics-of-materials-and-fracture-mechanics',
+    title_en: 'Mechanics of Materials & Fracture Mechanics',
+    title_vi: 'Cơ Học Vật Liệu & Phá Hủy',
+    start_date: '2027-01-08',
+    end_date: '2027-01-24',
+    display_date: '08.01.2027 – 24.01.2027',
+    lecturers: ['Prof. Dr.-Ing. habil. Dr. h. c. mult. Holm Altenbach']
   },
   {
-    id: 'i26-solid-state-phys',
+    id: 'i26-eng-ceramics',
     intake_id: 'intake-2026',
-    slug: 'solid-state-physics',
-    title_en: 'Solid State Physics',
-    title_vi: 'Vật Lý Chất Rắn',
-    start_date: '2026-11-09',
-    end_date: '2026-11-21',
-    display_date: '09.11.2026 – 21.11.2026',
-    lecturers: ['Prof. Dr. Jan Wiersig', 'OVGU Guest Lecturer']
-  },
-  {
-    id: 'i26-team-proj',
-    intake_id: 'intake-2026',
-    slug: 'team-project',
-    title_en: 'Team Project',
-    title_vi: 'Dự Án Nhóm Nghiên Cứu',
-    start_date: '2026-10-01',
-    end_date: '2027-01-30',
-    display_date: 'October 2026 – January 2027 (Parallel)',
-    is_semester_long: true,
-    lecturers: ['MSI Academic Coordinators', 'Faculty Advisors']
+    slug: 'engineering-ceramics',
+    title_en: 'Engineering Ceramics',
+    title_vi: 'Gốm Kỹ Thuật',
+    start_date: '2027-02-19',
+    end_date: '2027-03-16',
+    display_date: '19.02.2027 – 16.03.2027',
+    lecturers: ['Prof. Dr. rer. nat. Michael Scheffler', 'Dr. rer. nat. Ulf Betke']
   },
 
   // Intake 2025 (Winter Semester 2026/2027 — Semester 3)
   {
-    id: 'i25-adv-simulation-fem',
+    id: 'i25-glass',
     intake_id: 'intake-2025',
-    slug: 'advanced-simulation-fem-application-and-numerical-simulation',
-    title_en: 'Advanced Simulation: FEM & Numerical Simulation',
-    title_vi: 'Mô Phỏng Nâng Cao: Ứng Dụng FEM & Mô Phỏng Số',
-    start_date: '2026-09-07',
-    end_date: '2026-09-19',
-    display_date: '07.09.2026 – 19.09.2026',
-    lecturers: ['Prof. Dr. Daniel Juhre', 'Dr. Tran Van C'],
-    notes: 'Shared lecture block with Intake 2026'
+    slug: 'glass',
+    title_en: 'Glass',
+    title_vi: 'Vật Liệu Thủy Tinh',
+    start_date: '2026-09-28',
+    end_date: '2026-10-16',
+    display_date: '28.09.2026 – 16.10.2026',
+    lecturers: ['Dr. Dang Cuong Phan']
   },
   {
-    id: 'i25-additive-mfg',
+    id: 'i25-polymers',
     intake_id: 'intake-2025',
-    slug: 'additive-manufacturing',
-    title_en: 'Additive Manufacturing',
-    title_vi: 'Sản Xuất Đắp Dần (In 3D Kim Loại)',
-    start_date: '2026-10-05',
-    end_date: '2026-10-17',
-    display_date: '05.10.2026 – 17.10.2026',
-    lecturers: ['Prof. Dr. Thorsten Halle', 'Additive Lab Faculty']
+    slug: 'polymers',
+    title_en: 'Polymers',
+    title_vi: 'Vật Liệu Polyme',
+    start_date: '2026-10-24',
+    end_date: '2026-11-11',
+    display_date: '24.10.2026 – 11.11.2026',
+    lecturers: ['Dr. rer. nat. Sven Henning'],
+    notes_en: 'Shared lecture block with Intake 2026',
+    notes_vi: 'Học chung với Khóa 2026'
   },
   {
-    id: 'i25-mech-materials-fracture',
+    id: 'i25-continuum-mech',
     intake_id: 'intake-2025',
-    slug: 'mechanics-of-materials-and-fracture-mechanics',
-    title_en: 'Mechanics of Materials & Fracture Mechanics',
-    title_vi: 'Cơ Học Vật Liệu & Cơ Học Phá Hủy',
-    start_date: '2026-10-26',
-    end_date: '2026-11-07',
-    display_date: '26.10.2026 – 07.11.2026',
-    lecturers: ['Prof. Dr.-Ing. Manja Krüger', 'Dr. Pham Van D']
+    slug: 'continuum-mechanics',
+    title_en: 'Continuum Mechanics',
+    title_vi: 'Cơ Học Môi Trường Liên Tục',
+    start_date: '2026-11-20',
+    end_date: '2026-12-08',
+    display_date: '20.11.2026 – 08.12.2026',
+    lecturers: ['Prof. Dr.-Ing. Daniel Juhre', 'Marc Ulrich'],
+    notes_en: 'Shared lecture block with Intake 2026',
+    notes_vi: 'Học chung với Khóa 2026'
   },
   {
-    id: 'i25-inorganic-binders',
+    id: 'i25-team-proj',
     intake_id: 'intake-2025',
-    slug: 'inorganic-non-metallic-binders',
-    title_en: 'Inorganic Non-Metallic Binders',
-    title_vi: 'Chất Kết Dính Vô Cơ Phi Kim',
-    start_date: '2026-11-16',
-    end_date: '2026-11-28',
-    display_date: '16.11.2026 – 28.11.2026',
-    lecturers: ['Prof. Dr. Michael Scheffler', 'Industry Specialists']
-  },
-  {
-    id: 'i25-research-lab-testing',
-    intake_id: 'intake-2025',
-    slug: 'research-lab-properties-testing-and-analytics',
-    title_en: 'Research Lab: Properties Testing & Analytics',
-    title_vi: 'Phòng Thí Nghiệm Nghiên Cứu: Đo Kiểm & Phân Tích',
+    slug: 'team-project',
+    title_en: 'Team Project',
+    title_vi: 'Dự Án Nhóm Nghiên Cứu',
     start_date: '2026-10-01',
-    end_date: '2027-01-30',
-    display_date: 'October 2026 – January 2027 (Parallel)',
+    end_date: '2027-02-28',
+    display_date: 'October 2026 – February 2027 (Entire Semester)',
     is_semester_long: true,
-    lecturers: ['Central Labs Team', 'Prof. Dr. Thorsten Halle']
+    lecturers: ['Dr.-Ing. Georg Hasemann', 'Prof. Dr.-Ing. Thorsten Halle', 'Prof. Dr.-Ing. Daniel Juhre'],
+    notes_en: 'Parallel scientific project across the semester',
+    notes_vi: 'Dự án nghiên cứu song song suốt học kỳ'
   }
 ]
 
 // Distinct color assignments for modules
 const moduleColorMap: Record<string, string> = {
-  'continuum-mechanics': '#1E3A5F',
-  'material-modelling-and-simulation': '#E87722',
-  'materials-characterization': '#009FDF',
   'solid-state-physics': '#2563EB',
-  'team-project': '#059669',
-  'advanced-simulation-fem-application-and-numerical-simulation': '#7C3AED',
-  'additive-manufacturing': '#DC2626',
-  'mechanics-of-materials-and-fracture-mechanics': '#D97706',
-  'inorganic-non-metallic-binders': '#475569',
-  'research-lab-properties-testing-and-analytics': '#0891B2'
+  'polymers': '#D97706',
+  'continuum-mechanics': '#1E3A5F',
+  'micro-nano-fabrication-technology': '#059669',
+  'mechanics-of-materials-and-fracture-mechanics': '#7C3AED',
+  'engineering-ceramics': '#DC2626',
+  'glass': '#0891B2',
+  'team-project': '#E87722'
 }
 
 function getModColor(slug: string): string {
@@ -187,6 +193,10 @@ const activeModules = computed(() => {
   return allScheduleModules.filter(m => m.intake_id === selectedIntakeId.value)
 })
 
+const semesterLongModules = computed(() => {
+  return activeModules.value.filter(m => m.is_semester_long)
+})
+
 function getModuleTitle(mod: ScheduleModule): string {
   const baseTitle = isVi.value ? (mod.title_vi || mod.title_en) : mod.title_en
   if (selectedIntakeId.value === 'all') {
@@ -196,21 +206,61 @@ function getModuleTitle(mod: ScheduleModule): string {
   return baseTitle
 }
 
+function getModNotes(mod: ScheduleModule): string | undefined {
+  return isVi.value ? (mod.notes_vi || mod.notes_en) : mod.notes_en
+}
+
 function toggleModule(id: string) {
   activeModuleId.value = activeModuleId.value === id ? null : id
 }
 
 // ── Calendar Month View State ────────────────────────────────────────────────
-const currentYear = ref(2026)
-const currentMonth = ref(8) // 8 = September (0-indexed)
-
 const semesterMonths = [
   { year: 2026, month: 8, label: '09/2026' },
   { year: 2026, month: 9, label: '10/2026' },
   { year: 2026, month: 10, label: '11/2026' },
   { year: 2026, month: 11, label: '12/2026' },
-  { year: 2027, month: 0, label: '01/2027' }
+  { year: 2027, month: 0, label: '01/2027' },
+  { year: 2027, month: 1, label: '02/2027' },
+  { year: 2027, month: 2, label: '03/2027' }
 ]
+
+const today = ref(new Date())
+
+function getInitialMonth(): { year: number, month: number } {
+  const now = new Date()
+  const y = now.getFullYear()
+  const m = now.getMonth()
+  const match = semesterMonths.find(sm => sm.year === y && sm.month === m)
+  if (match) {
+    return { year: y, month: m }
+  }
+  if (y < 2026 || (y === 2026 && m < 8)) {
+    return { year: 2026, month: 8 }
+  }
+  return { year: 2027, month: 2 }
+}
+
+const initial = getInitialMonth()
+const currentYear = ref(initial.year)
+const currentMonth = ref(initial.month)
+
+onMounted(() => {
+  today.value = new Date()
+  const init = getInitialMonth()
+  currentYear.value = init.year
+  currentMonth.value = init.month
+})
+
+const todayStr = computed(() => formatIso(today.value))
+
+const todayFormatted = computed(() => {
+  const d = today.value
+  const day = String(d.getDate()).padStart(2, '0')
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const year = d.getFullYear()
+  return isVi.value ? `${day}/${month}/${year}` : `${day}.${month}.${year}`
+})
 
 const currentMonthLabel = computed(() => {
   const date = new Date(currentYear.value, currentMonth.value, 1)
@@ -241,6 +291,12 @@ function prevMonth() {
 function jumpToMonth(year: number, month: number) {
   currentYear.value = year
   currentMonth.value = month
+}
+
+function jumpToToday() {
+  today.value = new Date()
+  currentYear.value = today.value.getFullYear()
+  currentMonth.value = today.value.getMonth()
 }
 
 // ── Calendar Grid Generation ─────────────────────────────────────────────────
@@ -299,7 +355,6 @@ function formatIso(d: Date): string {
 
 function makeDay(date: Date, isCurrentMonth: boolean): DayCell {
   const dateStr = formatIso(date)
-  const todayStr = formatIso(new Date())
 
   const mods = activeModules.value.filter(m => {
     if (m.is_semester_long) return false
@@ -310,7 +365,7 @@ function makeDay(date: Date, isCurrentMonth: boolean): DayCell {
     dateStr,
     dayNumber: date.getDate(),
     isCurrentMonth,
-    isToday: dateStr === todayStr,
+    isToday: dateStr === todayStr.value,
     modules: mods
   }
 }
@@ -418,10 +473,18 @@ const weekDayLabels = [
     <!-- === SECTION 4: Interactive Monthly Calendar Matrix === -->
     <div class="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden mb-8">
       <!-- Calendar Nav Header -->
-      <div class="bg-slate-50/80 px-4 sm:px-6 py-3.5 border-b border-slate-200 flex items-center justify-between gap-4">
-        <h3 class="text-base sm:text-lg font-bold text-msi-navy tracking-tight">
-          {{ currentMonthLabel }}
-        </h3>
+      <div class="bg-slate-50/80 px-4 sm:px-6 py-3.5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3 flex-wrap">
+          <h3 class="text-base sm:text-lg font-bold text-msi-navy tracking-tight">
+            {{ currentMonthLabel }}
+          </h3>
+          <!-- Current Live Date Indicator -->
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-100/80 text-orange-800 border border-orange-200/70">
+            <span class="size-1.5 rounded-full bg-orange-500 animate-pulse" />
+            <span>{{ isVi ? 'Hôm nay:' : 'Today:' }} {{ todayFormatted }}</span>
+          </span>
+        </div>
+
         <div class="flex items-center gap-1.5">
           <UButton
             size="xs"
@@ -437,7 +500,7 @@ const weekDayLabels = [
             size="xs"
             color="primary"
             variant="subtle"
-            @click="jumpToMonth(2026, 8)"
+            @click="jumpToToday"
           >
             {{ isVi ? 'Hôm Nay' : 'Today' }}
           </UButton>
@@ -470,14 +533,14 @@ const weekDayLabels = [
           class="min-h-[105px] sm:min-h-[120px] p-1.5 sm:p-2 border-b border-r border-slate-200 last:border-r-0 flex flex-col gap-1 transition-colors"
           :class="[
             !day.isCurrentMonth ? 'bg-slate-50/40 text-slate-400' : 'bg-white text-slate-800',
-            day.isToday ? 'bg-orange-50/20' : ''
+            day.isToday ? 'bg-orange-50/30' : ''
           ]"
         >
           <!-- Day Number -->
           <div class="flex justify-end">
             <span
               class="text-xs font-semibold px-1.5 py-0.5 rounded-full"
-              :class="day.isToday ? 'bg-orange-500 text-white font-bold' : ''"
+              :class="day.isToday ? 'bg-orange-500 text-white font-bold ring-2 ring-orange-300' : ''"
             >
               {{ day.dayNumber }}
             </span>
@@ -498,6 +561,20 @@ const weekDayLabels = [
             </button>
           </div>
         </div>
+      </div>
+
+      <!-- Semester-long modules banner (e.g. Team Project) -->
+      <div v-if="semesterLongModules.length" class="p-3 bg-slate-50/90 border-t border-slate-200 flex flex-wrap items-center gap-2 text-xs">
+        <span class="font-bold text-slate-700">{{ isVi ? 'Môn học nghiên cứu song song học kỳ:' : 'Semester-long research project:' }}</span>
+        <span
+          v-for="mod in semesterLongModules"
+          :key="mod.id"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-white font-medium shadow-2xs"
+          :style="{ backgroundColor: getModColor(mod.slug) }"
+        >
+          <UIcon name="i-lucide-layers" class="size-3.5" />
+          <span>{{ getModuleTitle(mod) }} ({{ mod.display_date }})</span>
+        </span>
       </div>
     </div>
 
@@ -538,7 +615,7 @@ const weekDayLabels = [
               <!-- Scheduled Dates -->
               <td class="py-3.5 px-4 text-slate-700">
                 <span class="font-semibold text-orange-600">{{ mod.display_date }}</span>
-                <div v-if="mod.notes" class="text-xs text-slate-500 mt-0.5">{{ mod.notes }}</div>
+                <div v-if="getModNotes(mod)" class="text-xs text-slate-500 mt-0.5">{{ getModNotes(mod) }}</div>
               </td>
 
               <!-- Lecturers -->
@@ -557,7 +634,7 @@ const weekDayLabels = [
         {{ isVi ? 'Kế hoạch học tập có thể có điều chỉnh nhỏ theo thông báo của Ban Điều phối Đào tạo.' : 'Schedule is subject to minor adjustments by academic coordinators.' }}
       </p>
       <UButton
-        href="/Documents/Semester Plan/Semester_Plan_Template_Guide.xlsx"
+        href="/Documents/Semester Plan/SemesterPlanung 26_27.xlsx"
         download
         target="_blank"
         external
@@ -567,7 +644,7 @@ const weekDayLabels = [
         size="md"
         class="font-bold rounded-xl shadow-xs shrink-0 cursor-pointer"
       >
-        Download Semester Schedule Guide (XLSX)
+        {{ isVi ? 'Tải Kế Hoạch Học Tập (XLSX)' : 'Download Semester Schedule (XLSX)' }}
       </UButton>
     </div>
   </section>
