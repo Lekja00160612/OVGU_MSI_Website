@@ -51,6 +51,7 @@ MANUAL_OVERRIDES = {
     "daad-scholarships.md": "Achievements & Events",
     "gyss-2026.md": "Achievements & Events",
     "biocalorimetry-for-the-biotechnological-use-of-natural-and-synthetic-macromolecules.md": "Achievements & Events",
+    "vgu-ovgu-cooperation-agreement-2026.md": "Achievements & Events",
 
     "construction-materials-trip.md": "Industrial Visits",
     "knauf-trip.md": "Industrial Visits",

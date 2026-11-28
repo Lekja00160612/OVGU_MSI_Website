@@ -40,7 +40,7 @@ const targetLink = computed(() => props.to || props.href || '#')
   <!-- === VARIANT: Institutional Navy Gradient === -->
   <div
     v-if="variant === 'navy'"
-    class="relative overflow-hidden rounded-3xl text-white p-6 sm:p-8 md:p-10 shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6 group"
+    class="not-prose relative overflow-hidden rounded-3xl text-white p-6 sm:p-8 md:p-10 shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-6 group"
     :class="[
       'bg-gradient-to-br from-msi-navy via-msi-navy-light/90 to-msi-navy',
       borderAccent ? 'border-l-8 border-l-primary-500' : 'border border-white/10'
@@ -91,7 +91,7 @@ const targetLink = computed(() => props.to || props.href || '#')
   <!-- === VARIANT: Floating Clean White Card === -->
   <div
     v-else
-    class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 md:p-10 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-6 group"
+    class="not-prose bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 md:p-10 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-6 group"
   >
     <!-- Left: Highlighted Leading Icon & Text -->
     <div class="flex items-start gap-4 sm:gap-5">
